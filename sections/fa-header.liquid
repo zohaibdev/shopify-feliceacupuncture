@@ -1,0 +1,606 @@
+{%- comment -%}
+  Felice Acupuncture header: top info bar + logo / nav / Book Now.
+  Figma navigation 2519:3714 ("Design V1", 08-10): desktop bar 2519:3716, nav 2519:3765 with the Services / Education
+  dropdowns open in 2519:3783 / 2519:3808; mobile bar 2519:3936, nav 2519:3955, menu expanded 2519:3964 and collapsed
+  2519:4079. Items with sub-links get a dropdown (desktop, opens on hover or with the chevron button) and an accordion
+  in the menu panel below 1100px. Items come from a Shopify menu when one is chosen, otherwise from the link blocks
+  (sub-links as "Label | URL" lines). Markup per item: snippets/fa-header-item.liquid.
+  Homepage V5 (2612:3077, 11-10-2026) top bar: 14px text (mobile keeps 12), "Call or text" before the phone,
+  Facebook / Instagram / Substack (no X); icons via snippets/fa-header-social.liquid.
+{%- endcomment -%}
+{{ 'fa-header.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign phone_digits = section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
+  # A 10-digit US number gets the +1 country code so tel: links dial correctly from abroad and on every device.
+  assign phone_first = phone_digits | slice: 0
+  if phone_digits.size == 10 and phone_first != '+'
+    assign phone_digits = phone_digits | prepend: '+1'
+  endif
+  assign book_url = section.settings.button_link | default: '#'
+  # "Layout: PPC landing page" (Figma 3014:4054 / 3031:4731): logo + wordmark and one CTA, no navigation or menu.
+  assign is_ppc = false
+  if section.settings.variant == 'ppc'
+    assign is_ppc = true
+  endif
+  assign menu = section.settings.menu
+  assign use_menu = false
+  if menu != blank and menu.links.size > 0
+    assign use_menu = true
+  endif
+-%}
+
+<header class="fa-section fa-header{% if is_ppc %} fa-header--ppc{% endif %}" data-fa-header>
+  {%- if section.settings.show_bar -%}
+    {%- liquid
+      # Mobile shows the address, phone and hours: without any of them, the bar is hidden there instead of an empty strip.
+      assign bar_start_empty = false
+      if section.settings.address == blank and section.settings.phone == blank and section.settings.hours == blank
+        assign bar_start_empty = true
+      endif
+    -%}
+    <div class="fa-header__bar{% if bar_start_empty %} fa-header__bar--no-start{% endif %}">
+      <div class="fa-header__bar-inner">
+        <ul class="fa-header__bar-group" role="list">
+          {%- if section.settings.address != blank -%}
+            <li class="fa-header__bar-item">
+              {% render 'fa-icon', icon: 'store' %}
+              {%- if section.settings.address_link != blank -%}
+                <a href="{{ section.settings.address_link }}"{% render 'fa-link-target', url: section.settings.address_link %} class="fa-trim">{{ section.settings.address }}</a>
+              {%- else -%}
+                <span class="fa-trim">{{ section.settings.address }}</span>
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+          {%- if section.settings.phone != blank -%}
+            <li class="fa-header__bar-item">
+              {% render 'fa-icon', icon: 'phone' %}
+              {%- comment -%} Figma V5: one text "Call or text (424) 478-0019"; the label is dropped up to 899px (mobile bar). {%- endcomment -%}
+              <a href="tel:{{ phone_digits }}" class="fa-trim fa-header__phone">
+                {%- if section.settings.phone_label != blank -%}<span class="fa-header__phone-label">{{ section.settings.phone_label | escape }} </span>{%- endif -%}
+                {{- section.settings.phone -}}
+              </a>
+            </li>
+          {%- endif -%}
+        </ul>
+
+        <ul class="fa-header__bar-group fa-header__bar-group--end" role="list">
+          {%- if section.settings.hours != blank -%}
+            <li class="fa-header__bar-item">
+              {% render 'fa-icon', icon: 'clock' %}
+              <span class="fa-trim">{{ section.settings.hours }}</span>
+            </li>
+          {%- endif -%}
+          {%- comment -%}
+            Figma draws every shown icon: a link when a URL is set, otherwise a non-interactive icon. X and Substack
+            have show switches (V4 drew X; V5 drops it and adds Substack after Instagram).
+          {%- endcomment -%}
+          <li class="fa-header__bar-item fa-header__social">
+            {%- if section.settings.show_x -%}
+              {%- render 'fa-header-social', icon: 'x', url: section.settings.x_url, label: 'X (Twitter)' -%}
+            {%- endif -%}
+            {%- render 'fa-header-social', icon: 'facebook', url: section.settings.facebook_url, label: 'Facebook' -%}
+            {%- render 'fa-header-social', icon: 'instagram', url: section.settings.instagram_url, label: 'Instagram' -%}
+            {%- if section.settings.show_substack -%}
+              {%- render 'fa-header-social', icon: 'substack', url: section.settings.substack_url, label: 'Substack' -%}
+            {%- endif -%}
+          </li>
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="fa-header__main" style="--fa-header-texture: url('{{ 'fa-texture-header.jpg' | asset_url }}'); --fa-header-menu-bg: url('{{ 'fa-header-menu-bg.jpg' | asset_url }}'); --fa-header-dropdown-bg: url('{{ 'fa-header-dropdown-bg.jpg' | asset_url }}');">
+    <div class="fa-header__row">
+      <a href="{{ routes.root_url }}" class="fa-header__logo">
+        <span class="fa-header__seal">
+          {%- if section.settings.logo != blank -%}
+            {{ section.settings.logo | image_url: width: 180 | image_tag: widths: '68, 120, 180', sizes: '60px', alt: shop.name, loading: 'eager', class: 'fa-header__logo-img' }}
+          {%- else -%}
+            <img src="{{ 'fa-logo.png' | asset_url }}" alt="{{ shop.name }}" width="256" height="256" class="fa-header__logo-img fa-header__logo-img--crop" loading="eager">
+          {%- endif -%}
+        </span>
+        {%- comment -%} Mobile V1 2794:1127: the "Felice Acupuncture" wordmark beside the seal (phones only). {%- endcomment -%}
+        <img src="{{ 'fa-header-wordmark.png' | asset_url }}" alt="" width="535" height="37" class="fa-header__wordmark" loading="eager">
+      </a>
+
+      {%- unless is_ppc -%}
+      <nav class="fa-header__nav" aria-label="Main">
+        <ul class="fa-header__nav-list" role="list">
+          {%- if use_menu -%}
+            {%- for link in menu.links -%}
+              {%- assign item_id = section.id | append: '-m' | append: forloop.index -%}
+              {%- render 'fa-header-item', variant: 'nav', label: link.title, url: link.url, menu_link: link, item_id: item_id -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              {%- if block.settings.label == blank -%}{%- continue -%}{%- endif -%}
+              {%- render 'fa-header-item', variant: 'nav', label: block.settings.label, url: block.settings.link, children_text: block.settings.sub_links, item_id: block.id, attrs: block.shopify_attributes -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </nav>
+      {%- endunless -%}
+
+      <div class="fa-header__actions">
+        {%- if section.settings.button_label != blank -%}
+          {%- liquid
+            # "Book now" dropdown (live site): "Label | URL" lines; empty = a plain button as in Figma.
+            assign book_lines = section.settings.button_sub_links | newline_to_br | split: '<br />'
+            assign book_has_menu = false
+            for line in book_lines
+              assign line_label = line | split: '|' | first | strip
+              if line_label != blank
+                assign book_has_menu = true
+                break
+              endif
+            endfor
+          -%}
+          {%- if book_has_menu -%}
+            <div class="fa-header__nav-item fa-header__nav-item--parent fa-header__book" data-fa-dropdown>
+              <a href="{{ book_url }}"{% render 'fa-link-target', url: book_url %} class="fa-btn fa-btn--primary fa-header__cta">{{ section.settings.button_label }}</a>
+              <button type="button" class="fa-header__book-toggle" aria-expanded="false" aria-controls="FaHeaderDrop-book" aria-label="{{ section.settings.button_label | escape }} submenu" data-fa-dropdown-toggle>
+                {%- render 'fa-header-caret', size: 'nav' -%}
+              </button>
+              <div class="fa-header__dropdown" id="FaHeaderDrop-book">
+                <ul class="fa-header__dropdown-list" role="list">
+                  {%- for line in book_lines -%}
+                    {%- assign parts = line | split: '|' -%}
+                    {%- assign item_label = parts[0] | strip -%}
+                    {%- if item_label == blank -%}{%- continue -%}{%- endif -%}
+                    {%- assign item_url = parts[1] | strip | split: '?view=' | first | default: '#' -%}
+                    {%- assign item_host = item_url | split: '//' | last | split: '/' | first -%}
+                    <li>
+                      <a href="{{ item_url }}" class="fa-header__nav-sublink"{% if item_url contains '://' and item_host != request.host %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item_label | escape }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          {%- elsif is_ppc -%}
+            <a href="{{ book_url }}"{% render 'fa-link-target', url: book_url %} class="fa-btn fa-btn--primary fa-header__cta">
+              <span class="fa-header__cta-label{% if section.settings.button_label_mobile != blank %} fa-header__cta-label--desktop{% endif %}">{{ section.settings.button_label }}</span>
+              {%- if section.settings.button_label_mobile != blank -%}<span class="fa-header__cta-label fa-header__cta-label--mobile">{{ section.settings.button_label_mobile }}</span>{%- endif -%}
+            </a>
+          {%- else -%}
+            <a href="{{ book_url }}"{% render 'fa-link-target', url: book_url %} class="fa-btn fa-btn--primary fa-header__cta">{{ section.settings.button_label }}</a>
+          {%- endif -%}
+        {%- endif -%}
+        {%- unless is_ppc -%}
+        <button
+          type="button"
+          class="fa-header__toggle"
+          aria-expanded="false"
+          aria-controls="FaHeaderMenu-{{ section.id }}"
+          data-fa-menu-toggle
+        >
+          <span class="fa-header__toggle-open">{% render 'fa-icon', icon: 'menu' %}</span>
+          {%- comment -%} Figma 2519:3964: two 13.87px strokes crossed at 45deg (a 9.8px square), 1.74px, round caps. {%- endcomment -%}
+          <span class="fa-header__toggle-close"><svg class="fa-icon fa-icon--close" viewBox="0 0 11.55 11.55" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M0.87 0.87L10.68 10.68M10.68 0.87L0.87 10.68" stroke="currentColor" stroke-width="1.7411" stroke-linecap="round"/></svg></span>
+          <span class="fa-visually-hidden">Menu</span>
+        </button>
+        {%- endunless -%}
+      </div>
+    </div>
+    {%- unless is_ppc -%}
+
+    <nav class="fa-header__menu" id="FaHeaderMenu-{{ section.id }}" aria-label="Main" data-fa-menu hidden>
+      <ul class="fa-header__menu-list" role="list">
+        {%- if section.settings.show_home_link and section.settings.home_label != blank -%}
+          <li class="fa-header__menu-item">
+            <a href="{{ routes.root_url }}" class="fa-header__menu-link"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>{{ section.settings.home_label | escape }}</a>
+          </li>
+        {%- endif -%}
+        {%- if use_menu -%}
+          {%- for link in menu.links -%}
+            {%- assign item_id = section.id | append: '-m' | append: forloop.index -%}
+            {%- render 'fa-header-item', variant: 'menu', label: link.title, url: link.url, menu_link: link, item_id: item_id -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.label == blank -%}{%- continue -%}{%- endif -%}
+            {%- render 'fa-header-item', variant: 'menu', label: block.settings.label, url: block.settings.link, children_text: block.settings.sub_links, item_id: block.id -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ book_url }}"{% render 'fa-link-target', url: book_url %} class="fa-btn fa-btn--primary fa-header__menu-cta">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </nav>
+    {%- endunless -%}
+  </div>
+</header>
+
+<script>
+  /* Menu panel (< 1100px), desktop dropdowns and menu accordions. One set of document listeners for every header
+     instance (Theme Editor re-renders); each header root is initialised once, here and again on shopify:section:load
+     (in case the editor does not run re-rendered inline scripts). While the panel is open the page is scroll-locked,
+     so Tab / Shift+Tab cycle through the header's visible controls, and Escape, a click outside the header or focus
+     leaving it closes the panel. Dropdowns open on hover (CSS; one at a time, Escape dismisses until the pointer
+     leaves) or with their chevron button (click / Enter / Space); Escape, a click elsewhere or focus leaving the item
+     closes an open one. Accordions toggle their sub-list. */
+  (() => {
+    if (!window.faHeader) {
+      let openRoot = null;
+      const toggleOf = (root) => root.querySelector('[data-fa-menu-toggle]');
+      const menuOf = (root) => root.querySelector('[data-fa-menu]');
+      const setOpen = (root, open) => {
+        const toggle = toggleOf(root);
+        const menu = menuOf(root);
+        if (!toggle || !menu) return;
+        if (open) {
+          if (openRoot && openRoot !== root) setOpen(openRoot, false);
+          // The panel may scroll inside the viewport below the header row (the page itself is locked).
+          const top = menu.parentElement.getBoundingClientRect().bottom;
+          menu.style.setProperty('--fa-menu-top', `${Math.max(0, Math.round(top))}px`);
+        }
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.hidden = !open;
+        root.classList.toggle('is-menu-open', open);
+        if (open) openRoot = root;
+        else if (openRoot === root) openRoot = null;
+        document.documentElement.classList.toggle('fa-scroll-lock', Boolean(openRoot));
+      };
+      const focusables = (root) =>
+        [...root.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')].filter(
+          (el) => el.getClientRects().length > 0 && !el.closest('[hidden]')
+        );
+      /* Sticky header: the top bar scrolls away and the nav row stays. CSS pulls the sticky section up by the bar's
+         height (--fa-header-bar-h) and offsets anchors / sticky sidebars by the row's (--fa-header-main-h); both are
+         measured here because the bar's height changes with the breakpoint and the merchant's text. */
+      const syncHeights = (root) => {
+        const bar = root.querySelector('.fa-header__bar');
+        const main = root.querySelector('.fa-header__main');
+        const doc = document.documentElement.style;
+        doc.setProperty('--fa-header-bar-h', `${bar && bar.offsetParent ? bar.offsetHeight : 0}px`);
+        if (main) doc.setProperty('--fa-header-main-h', `${main.offsetHeight}px`);
+      };
+
+      const init = (root) => {
+        if (!root || root.dataset.faReady) return;
+        syncHeights(root);
+        if ('ResizeObserver' in window) new ResizeObserver(() => syncHeights(root)).observe(root);
+        const toggle = toggleOf(root);
+        const menu = menuOf(root);
+        if (!toggle || !menu) return;
+        root.dataset.faReady = 'true';
+        toggle.addEventListener('click', () => setOpen(root, toggle.getAttribute('aria-expanded') !== 'true'));
+        menu.addEventListener('click', (event) => {
+          if (event.target.closest('a')) setOpen(root, false);
+          const acc = event.target.closest('[data-fa-accordion-toggle]');
+          if (acc) setAccordion(acc, acc.getAttribute('aria-expanded') !== 'true');
+        });
+        root.querySelectorAll('[data-fa-dropdown]').forEach((item) => {
+          item.querySelectorAll('[data-fa-dropdown-toggle]').forEach((t) =>
+            t.addEventListener('click', () => {
+              const open = !item.classList.contains('is-open');
+              closeDropdowns(item);
+              setDropdown(item, open);
+            })
+          );
+          item.addEventListener('focusout', (event) => {
+            if (!item.contains(event.relatedTarget)) setDropdown(item, false);
+          });
+          // Hover (CSS) shows one dropdown at a time: entering an item closes one opened by click / keyboard.
+          // Escape hides a hover-opened dropdown until the pointer leaves the item.
+          item.addEventListener('pointerenter', (event) => {
+            if (event.pointerType === 'mouse') closeDropdowns(item);
+          });
+          item.addEventListener('pointerleave', () => item.classList.remove('is-dismissed'));
+        });
+      };
+      const setDropdown = (item, open) => {
+        if (!item) return;
+        item.classList.toggle('is-open', open);
+        item.querySelectorAll('[data-fa-dropdown-toggle]').forEach((t) => t.setAttribute('aria-expanded', String(open)));
+      };
+      const closeDropdowns = (except) =>
+        document.querySelectorAll('[data-fa-dropdown].is-open').forEach((item) => item !== except && setDropdown(item, false));
+      const setAccordion = (toggle, open) => {
+        const list = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (!list) return;
+        toggle.setAttribute('aria-expanded', String(open));
+        list.hidden = !open;
+      };
+
+      const close = (refocus) => {
+        const root = openRoot;
+        if (!root) return;
+        setOpen(root, false);
+        if (refocus) toggleOf(root).focus();
+      };
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          const item = document.querySelector('[data-fa-dropdown].is-open');
+          if (item) {
+            const refocus = item.contains(document.activeElement);
+            setDropdown(item, false);
+            if (item.matches(':hover')) item.classList.add('is-dismissed');
+            if (refocus) item.querySelector('[data-fa-dropdown-toggle]').focus();
+            return;
+          }
+          const hovered = document.querySelector('[data-fa-dropdown]:hover:not(.is-dismissed)');
+          if (hovered && window.matchMedia('(min-width: 1100px)').matches) {
+            hovered.classList.add('is-dismissed');
+            return;
+          }
+        }
+        if (!openRoot) return;
+        if (event.key === 'Escape') {
+          const inside = openRoot.contains(document.activeElement) || document.activeElement === document.body;
+          close(inside);
+        } else if (event.key === 'Tab') {
+          const items = focusables(openRoot);
+          if (!items.length) return;
+          const first = items[0];
+          const last = items[items.length - 1];
+          const active = document.activeElement;
+          if (!openRoot.contains(active)) {
+            event.preventDefault();
+            (event.shiftKey ? last : first).focus();
+          } else if (event.shiftKey && active === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && active === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+      document.addEventListener('click', (event) => {
+        if (openRoot && !openRoot.contains(event.target)) close(false);
+        closeDropdowns(event.target.closest && event.target.closest('[data-fa-dropdown]'));
+      });
+      document.addEventListener('focusin', (event) => {
+        if (openRoot && !openRoot.contains(event.target)) close(false);
+      });
+      window.matchMedia('(min-width: 1100px)').addEventListener('change', (event) => {
+        if (event.matches) close(false);
+        else closeDropdowns();
+      });
+
+      // Theme Editor: re-initialise re-rendered headers, drop the scroll lock with the old markup, and open the
+      // panel while a menu link block is selected below 1100px (the nav row is hidden there).
+      document.addEventListener('shopify:section:load', (event) => event.target.querySelectorAll('[data-fa-header]').forEach(init));
+      document.addEventListener('shopify:section:unload', (event) => {
+        if (openRoot && event.target.contains(openRoot)) setOpen(openRoot, false);
+      });
+      document.addEventListener('shopify:block:select', (event) => {
+        const root = event.target.closest('[data-fa-header]');
+        if (!root) return;
+        if (toggleOf(root).getClientRects().length) {
+          setOpen(root, true);
+          // A parent item's block also expands its accordion in the panel (same item id, FaHeaderSub-…).
+          const drop = event.target.querySelector('.fa-header__dropdown');
+          const acc = drop && root.querySelector(`[aria-controls="${CSS.escape(drop.id.replace('FaHeaderDrop-', 'FaHeaderSub-'))}"]`);
+          if (acc) setAccordion(acc, true);
+        } else if (event.target.matches('[data-fa-dropdown]')) {
+          closeDropdowns(event.target);
+          setDropdown(event.target, true);
+        }
+      });
+      document.addEventListener('shopify:block:deselect', (event) => {
+        const root = event.target.closest('[data-fa-header]');
+        if (root && root === openRoot) setOpen(root, false);
+        if (event.target.matches && event.target.matches('[data-fa-dropdown]')) setDropdown(event.target, false);
+      });
+
+      window.faHeader = { init };
+    }
+    document.querySelectorAll('[data-fa-header]').forEach(window.faHeader.init);
+  })();
+</script>
+
+{%- if section.settings.sticky_bar -%}
+  {%- comment -%} Dev notes 2728:741: mobile-only booking bar fixed to the bottom of the screen. {%- endcomment -%}
+  {%- assign sticky_book = section.settings.sticky_book_link | default: section.settings.button_link -%}
+  <div class="fa-sticky-book" role="region" aria-label="{{ section.settings.sticky_book_label | escape }}">
+    {%- if section.settings.phone != blank -%}
+      <a class="fa-btn fa-btn--light fa-sticky-book__btn" href="tel:{{ phone_digits }}">{{ section.settings.sticky_call_label | escape }}</a>
+    {%- endif -%}
+    <a class="fa-btn fa-btn--primary fa-sticky-book__btn" href="{{ sticky_book | default: '#' }}"{% render 'fa-link-target', url: sticky_book %}>{{ section.settings.sticky_book_label | escape }}</a>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Felice header",
+  "tag": "div",
+  "class": "fa-header-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bar",
+      "label": "Show top bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "8526 Washington Blvd, Culver City"
+    },
+    {
+      "type": "url",
+      "id": "address_link",
+      "label": "Address link",
+      "info": "e.g. a Google Maps link"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "(424) 478-0019"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Text before the phone number",
+      "info": "e.g. \"Call or text\". Desktop and tablet only (from 900px)."
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Hours",
+      "default": "Open 7 days"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_x",
+      "label": "Show X (Twitter) icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "x_url",
+      "label": "X (Twitter) link"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook link"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_substack",
+      "label": "Show Substack icon",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "substack_url",
+      "label": "Substack link",
+      "info": "Icons without a link are shown as plain icons."
+    },
+    {
+      "type": "header",
+      "content": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Optional. When chosen, its links (and their sub-links, shown as dropdowns) replace the menu link blocks."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_home_link",
+      "label": "Show Home link in the mobile menu",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home link label",
+      "default": "Home"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Layout",
+      "options": [
+        { "value": "standard", "label": "Standard (navigation)" },
+        { "value": "ppc", "label": "PPC landing page (logo + one button)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Square mark. Defaults to the Felice seal."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Book Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_mobile",
+      "label": "Button label (mobile)",
+      "info": "PPC layout only: a shorter label for phones. Empty = the button label."
+    },
+    {
+      "type": "textarea",
+      "id": "button_sub_links",
+      "label": "Button dropdown links",
+      "info": "One per line: Label | URL. Shows a dropdown under the button on desktop (hover, or the arrow key toggle). Leave empty for a plain button."
+    },
+    {
+      "type": "header",
+      "content": "Mobile booking bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_bar",
+      "label": "Show a booking bar at the bottom on phones",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "sticky_call_label",
+      "label": "Call button label",
+      "default": "Call or text"
+    },
+    {
+      "type": "text",
+      "id": "sticky_book_label",
+      "label": "Book button label",
+      "default": "Book now"
+    },
+    {
+      "type": "url",
+      "id": "sticky_book_link",
+      "label": "Book button link",
+      "info": "Blank uses the header button link."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Menu link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "textarea",
+          "id": "sub_links",
+          "label": "Sub-links",
+          "info": "Optional dropdown (desktop) and accordion (mobile). One link per line: Label | URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

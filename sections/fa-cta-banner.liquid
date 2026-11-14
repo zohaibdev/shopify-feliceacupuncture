@@ -1,0 +1,289 @@
+{%- comment -%}
+  Felice CTA banner — full-bleed interior photo with centred white heading, text and a linen button.
+  Figma: desktop 414:763 (background 414:764, content 414:766); mobile 414:1237 (background), 414:1239 (content).
+  The bundled photos already carry Figma's darkening; the shade setting adds an extra overlay for your own photos.
+  Services page "Concierge care" (v2, file B4Qc…: desktop 2263:2846, mobile 2265:8299): bundled photo "concierge"
+  (desktop 1440 photo center-cropped to the 667 band; its own mobile photo = Figma export of 2265:8300 below 750px;
+  750–899px use the whole live-site original of that photo (1600px), same 41% darkening, so the wider box isn't an
+  upscale of the crop),
+  layout "tall" (179px / 105px paddings, 914px text) and two paragraphs (one per text line).
+  Homepage V3 "Latest version" (2612:3077, band 6865–7457, group 2612:3589): no text, layout "spacious" (heading 210px
+  below the top, button 44px under it and 189px above the bottom — the band keeps its height), and botanicals
+  (show_botanicals): 2612:3389 rising 205px into the band above (top left) and 2612:3698 spilling 109px into the
+  band below (bottom right) — the section then stacks above its neighbours.
+  Blog page V1 "Ready to start your care?" (2719:19947, 1440 x 524): bundled photo "treatment" (Figma export, darkening
+  baked in), layout "buttons" (two-line title, one text line, a garnet and a linen button side by side).
+{%- endcomment -%}
+{{ 'fa-cta-banner.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign layout = section.settings.layout | default: 'standard'
+  assign bundled = section.settings.bundled_photo | default: 'studio'
+  if bundled == 'acupuncture'
+    assign bg_file = 'fa-cta-banner-acupuncture'
+    assign bg_height = 713
+    assign bg_mobile_height = 713
+  elsif bundled == 'treatment'
+    assign bg_file = 'fa-cta-banner-treatment'
+    assign bg_height = 524
+    assign bg_mobile_height = 524
+  elsif bundled == 'concierge'
+    assign bg_file = 'fa-cta-banner-concierge'
+    assign bg_height = 764
+    assign bg_mobile_height = 1038
+    assign bg_wide = 'fa-cta-banner-concierge-wide.jpg'
+  else
+    assign bg_file = 'fa-cta-banner-bg'
+    assign bg_height = 592
+    assign bg_mobile_height = 814
+  endif
+  assign bg_desktop = bg_file | append: '.jpg'
+  assign bg_2x = bg_file | append: '-2x.jpg'
+  assign bg_mobile = bg_file | append: '-mobile.jpg'
+  if bundled == 'acupuncture'
+    # Our Approach V3 2669:35885: one 1440 file with Figma's darkening baked in (no 2x / mobile file yet).
+    assign bg_2x = bg_desktop
+    assign bg_mobile = bg_desktop
+  elsif bundled == 'treatment'
+    assign bg_mobile = bg_desktop
+  endif
+  assign button_class = 'fa-btn--light'
+  if section.settings.button_style == 'primary'
+    assign button_class = 'fa-btn--primary'
+  endif
+-%}
+<section class="fa-section fa-cta-banner{% if layout != 'standard' %} fa-cta-banner--{{ layout }}{% endif %}{% if section.settings.show_botanicals %} fa-cta-banner--botanicals{% endif %}{% if section.settings.mobile_style == 'compact' %} fa-cta-banner--mobile-compact{% endif %}{% if section.settings.button_narrow %} fa-cta-banner--button-narrow{% endif %}" id="fa-cta-banner-{{ section.id }}"{% if section.settings.heading != blank %} aria-labelledby="fa-cta-banner-title-{{ section.id }}"{% endif %} style="--fa-cta-shade: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --fa-cta-offset: {{ section.settings.content_offset | default: 0 }}px;">
+  <div class="fa-bg fa-cta-banner__media" aria-hidden="true">
+    <picture>
+      {%- if section.settings.image_mobile != blank -%}
+        <source media="(max-width: 899px)" srcset="{{ section.settings.image_mobile | image_url: width: 750 }} 750w, {{ section.settings.image_mobile | image_url: width: 1125 }} 1125w" sizes="100vw">
+      {%- elsif section.settings.image == blank -%}
+        {%- comment -%}
+          The 750px mobile photo is only used where it stays sharp (<= 749px). From 750px the wide band takes a wide
+          photo instead of upscaling the tall mobile crop: concierge has its own wide original, studio uses the
+          desktop photo below.
+        {%- endcomment -%}
+        {%- if bg_wide -%}
+          <source media="(min-width: 750px) and (max-width: 899px)" srcset="{{ bg_wide | asset_url }}" width="1600" height="1067">
+          <source media="(max-width: 899px)" srcset="{{ bg_mobile | asset_url }}" width="750" height="{{ bg_mobile_height }}">
+        {%- else -%}
+          <source media="(max-width: 749px)" srcset="{{ bg_mobile | asset_url }}" width="750" height="{{ bg_mobile_height }}">
+        {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 2880 | image_tag: widths: '750, 1080, 1440, 1920, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+      {%- else -%}
+        <img src="{{ bg_desktop | asset_url }}" srcset="{{ bg_desktop | asset_url }} 1440w, {{ bg_2x | asset_url }} 2880w" sizes="100vw" alt="" width="1440" height="{{ bg_height }}" loading="lazy">
+      {%- endif -%}
+    </picture>
+    <div class="fa-cta-banner__shade"></div>
+  </div>
+
+  {%- if section.settings.show_botanicals -%}
+    <img class="fa-deco fa-cta-banner__botanical fa-cta-banner__botanical--top" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+    <img class="fa-deco fa-cta-banner__botanical fa-cta-banner__botanical--bottom" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+  {%- endif -%}
+
+  <div class="fa-container fa-cta-banner__inner" data-fa-reveal="up" data-fa-reveal-stagger>
+    {%- if section.settings.glyph_image != blank -%}
+      {{ section.settings.glyph_image | image_url: width: 240 | image_tag: class: 'fa-cta-banner__glyph', loading: 'lazy', alt: '' }}
+    {%- elsif section.settings.glyph_asset != blank -%}
+      {%- comment -%} Our Approach V3 2669:35890: white brush characters, 56.4 x 124. {%- endcomment -%}
+      <img class="fa-cta-banner__glyph" src="{{ section.settings.glyph_asset | asset_url }}" width="56" height="124" loading="lazy" alt="" aria-hidden="true">
+    {%- endif -%}
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-cta-banner__copy">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-cta-banner__title" id="fa-cta-banner-title-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="fa-cta-banner__subheading">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          {%- comment -%} One paragraph per line of the text setting. {%- endcomment -%}
+          {%- assign paragraphs = section.settings.text | escape | newline_to_br | split: '<br />' -%}
+          {%- for paragraph in paragraphs -%}
+            {%- assign paragraph_text = paragraph | strip -%}
+            {%- if paragraph_text != blank -%}
+              <p class="fa-cta-banner__text">{{ paragraph_text }}</p>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+      <div class="fa-cta-banner__buttons">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn {{ button_class }} fa-cta-banner__button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link_2 %} class="fa-btn fa-btn--light fa-cta-banner__button">{{ section.settings.button_label_2 | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice CTA banner",
+  "tag": "div",
+  "class": "fa-cta-banner-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_style",
+      "label": "Mobile style",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "compact", "label": "Compact (Our Approach mobile)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Full width, 1440 x 592 on desktop. Uses the bundled photo below when empty."
+    },
+    {
+      "type": "select",
+      "id": "bundled_photo",
+      "label": "Bundled photo",
+      "info": "Used when no background image is selected.",
+      "options": [
+        { "value": "studio", "label": "Studio" },
+        { "value": "concierge", "label": "Living room (concierge)" },
+        { "value": "acupuncture", "label": "Acupuncture (darkened)" },
+        { "value": "treatment", "label": "Treatment room (darkened, blog page)" }
+      ],
+      "default": "studio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image (optional)",
+      "info": "375 x 407 slot."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Extra shade behind text",
+      "info": "The bundled photo already includes its darkening. Add shade when using your own photo.",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "tall", "label": "Tall with wide text" },
+        { "value": "spacious", "label": "Spacious (heading and button)" },
+        { "value": "feature", "label": "Feature (characters, subheading, text)" },
+        { "value": "buttons", "label": "Heading, text and two buttons" }
+      ],
+      "default": "standard",
+      "info": "Spacious: more room above and below, and a wider gap before the button — for a banner without text."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_botanicals",
+      "label": "Show botanical illustrations",
+      "info": "Top left, rising into the section above, and bottom right, spilling into the section below (mobile: top left only).",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "glyph_image",
+      "label": "Characters image",
+      "info": "Optional artwork above the heading (light on transparent)."
+    },
+    {
+      "type": "text",
+      "id": "glyph_asset",
+      "label": "Bundled characters file",
+      "info": "Theme asset used when no characters image is picked, e.g. fa-cta-banner-glyph-acupuncture.svg."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Shown between the heading and the text."
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your first step toward lasting balance.",
+      "info": "A line break is kept (e.g. Ready to / start your care?)."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "info": "Optional. Each line becomes its own paragraph."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Book your first visit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button colour",
+      "options": [
+        { "value": "light", "label": "Linen" },
+        { "value": "primary", "label": "Garnet" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_narrow",
+      "label": "Narrower button (32px sides)",
+      "info": "Spacious layout, desktop: In-Clinic Services and Blog draw the button 265px wide; Home and Concierge 289px.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_offset",
+      "label": "Move content down (desktop)",
+      "min": -40,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "info": "Layout \"Heading, text and two buttons\" only; the band keeps its height."
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second button label",
+      "info": "Optional linen button next to the first."
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice CTA banner"
+    }
+  ]
+}
+{% endschema %}

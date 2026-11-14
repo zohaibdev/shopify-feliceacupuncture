@@ -1,0 +1,12 @@
+{%- comment -%}
+  Eyebrow label above a section title: Felice seal + short uppercase label (Figma "hero-badge", 394:3308).
+  Usage: {% render 'fa-eyebrow', text: section.settings.eyebrow, class: 'fa-conditions__eyebrow' %}
+  Optional tone: 'light' for dark/moss backgrounds (Figma brightens the seal there, e.g. 394:3469).
+  Renders nothing when text is blank.
+{%- endcomment -%}
+{%- if text != blank -%}
+  <p class="fa-eyebrow{% if tone == 'light' %} fa-eyebrow--light{% endif %}{% if class != blank %} {{ class }}{% endif %}">
+    <img class="fa-eyebrow__seal" src="{{ 'fa-eyebrow-seal.png' | asset_url }}" alt="" aria-hidden="true" width="13" height="14" loading="lazy">
+    <span>{{ text | escape }}</span>
+  </p>
+{%- endif -%}

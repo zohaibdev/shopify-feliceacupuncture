@@ -1,0 +1,206 @@
+/* Felice link gallery — "Our Approach" v1, "What the evidence says".
+   Figma desktop 2267:16180 band 4111–4930: 120px padding, heading 775 wide (title 60/56 -4%, intro 16/27, 24px apart),
+   cards 40px below: 326 x 428 photos 12px apart, centred on the middle card and cut by the screen edges; garnet bar
+   290 x 44 (18px in from the photo sides, 18.8px below the photo; padding 10/14, label Marisa 20, 24px beige arrow).
+   Mobile 2305:4556 band 4013–4710: 60px padding, title 32/28 -4% in a 259px box, intro 14/22, 16px apart, cards
+   24px below: 304 x 398, bar 268 x 40 (18 in / 18 below, padding 10, label 18, 20px arrow), centred card at x 36. */
+
+.fa-link-gallery {
+  --fa-lg-card-w: 326px;
+  --fa-lg-card-h: 428px;
+  --fa-lg-bar-inset: 18px;
+  --fa-lg-bar-drop: 18.8px;
+  background-color: #bb9e6b; /* mean of the bundled texture, shown until it loads */
+  color: var(--fa-garnet);
+}
+
+.fa-link-gallery__title { line-height: 56px; }
+
+.fa-link-gallery__text { max-width: var(--fa-lg-text-w, 775px); }
+
+/* ---------- Card row (assets/fa-link-gallery.js) ----------
+   The track is the full-bleed scroll container; the list inside is as wide as its cards plus the gutters and centres
+   itself while everything fits (auto margins drop to 0 once it overflows, so the row then scrolls edge to edge). */
+
+.fa-link-gallery__carousel { display: block; }
+
+/* Heading to cards: 40px (mobile 24); a gallery without a heading starts at the section padding. */
+.fa-container + .fa-link-gallery__carousel { margin-top: 40px; }
+
+.fa-link-gallery__track {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fa-link-gallery__track::-webkit-scrollbar { display: none; }
+
+.fa-link-gallery__track:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: -2px;
+}
+
+.fa-link-gallery__list {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  margin: 0 auto;
+  padding: 0 var(--fa-gutter);
+  list-style: none;
+}
+
+.fa-link-gallery__item {
+  flex: none;
+  scroll-snap-align: center;
+}
+
+.fa-link-gallery__card {
+  position: relative;
+  display: block;
+  width: var(--fa-lg-card-w);
+  padding-bottom: var(--fa-lg-bar-drop);
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fa-link-gallery__media {
+  width: 100%;
+  height: var(--fa-lg-card-h);
+  overflow: hidden;
+  background: #d9d9d9; /* empty photo slot keeps its box */
+}
+
+.fa-link-gallery__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-lg-focal, center);
+  -webkit-user-drag: none;
+}
+
+.fa-link-gallery__bar {
+  position: absolute;
+  inset-inline: var(--fa-lg-bar-inset);
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 14px;
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+}
+
+.fa-link-gallery__label {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1; /* Figma's 58px line box is trimmed to the caps; 1.1 only matters if a long label wraps */
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-wrap: balance;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-link-gallery__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--fa-beige);
+  color: var(--fa-garnet);
+}
+
+/* Figma's chevron_backward (20.31 in a 24 frame), mirrored to point right — same drawing as the team cards. */
+.fa-link-gallery__arrow .fa-icon {
+  width: 84.6%;
+  height: 84.6%;
+  transform: scaleX(-1);
+}
+
+/* Mouse drag (JS sets the attributes): grab cursor only while the row overflows; snapping pauses mid-drag. */
+.fa-link-gallery__carousel[data-overflow] .fa-link-gallery__track { cursor: grab; }
+
+.fa-link-gallery__carousel[data-dragging] .fa-link-gallery__track {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+/* ---------- Mobile (<= 899): the 375 frame ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-link-gallery {
+    --fa-lg-card-w: 304px;
+    --fa-lg-card-h: 398px;
+    --fa-lg-bar-drop: 18px;
+    padding-block: var(--fa-lg-pad-m, 60px);
+  }
+
+  .fa-link-gallery__heading { gap: 16px; }
+
+  .fa-link-gallery__title {
+    max-width: var(--fa-lg-title-w-m, 259px);
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-link-gallery__text { max-width: 363px; }
+
+  .fa-container + .fa-link-gallery__carousel { margin-top: 24px; }
+
+  .fa-link-gallery__track { scroll-snap-type: x mandatory; }
+
+  /* Half-screen side padding so every card, the first and last included, can snap to the centre (Figma: card 3
+     centred at x 36 with 24px of its neighbours showing). */
+  .fa-link-gallery__list { padding-inline: calc(50% - var(--fa-lg-card-w) / 2); }
+
+  .fa-link-gallery__bar {
+    min-height: 40px;
+    padding: 10px;
+  }
+
+  .fa-link-gallery__label { font-size: 18px; }
+
+  .fa-link-gallery__arrow {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Linked cards: on hover or keyboard focus the photo zooms slightly inside its frame, the arrow turns white and its
+   chevron slides right (as on the team cards). Focus also draws a linen ring inside the photo (the track clips
+   anything outside the card). */
+
+.fa-link-gallery__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+.fa-link-gallery__arrow { transition: background-color var(--fa-dur-hover) var(--fa-ease-out); }
+
+.fa-link-gallery__arrow .fa-icon { transition: transform var(--fa-dur-ui) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  a.fa-link-gallery__card:hover .fa-link-gallery__media img { transform: scale(var(--fa-zoom)); }
+  a.fa-link-gallery__card:hover .fa-link-gallery__arrow { background: var(--fa-white); }
+  /* the glyph is mirrored (scaleX(-1)), so a negative x moves it right */
+  a.fa-link-gallery__card:hover .fa-link-gallery__arrow .fa-icon { transform: scaleX(-1) translateX(calc(var(--fa-nudge) / -2)); }
+}
+
+.fa-link-gallery__card:focus-visible { outline: none; }
+
+.fa-link-gallery__card:focus-visible .fa-link-gallery__media {
+  outline: 2px solid var(--fa-linen);
+  outline-offset: -6px;
+}
+
+.fa-link-gallery__card:focus-visible .fa-link-gallery__media img { transform: scale(var(--fa-zoom)); }
+.fa-link-gallery__card:focus-visible .fa-link-gallery__arrow { background: var(--fa-white); }
+.fa-link-gallery__card:focus-visible .fa-link-gallery__arrow .fa-icon { transform: scaleX(-1) translateX(calc(var(--fa-nudge) / -2)); }

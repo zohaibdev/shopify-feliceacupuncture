@@ -1,0 +1,197 @@
+/*
+  Felice comparison — "How it works, in two languages": heading + side-by-side photo / title / quote columns on a moss
+  botanical texture.
+  Figma desktop (Our Approach v1, 2267:16180, band y 3145–4111): background 2267:16580 1440 x 966; content 2267:16581
+  120px below the band top: heading (title 60/54, 24px, intro 16/27), 36px, then two 608px columns 32px apart
+  (2267:18656, centred in the 1340 container): photo 608 x 454 r8, 30px, title Marisa 32/39 -4%, 24px, quotes
+  Libre Caslon 20/32 24px apart (hand-set wrap widths 554 / 618, centred on the column). All text linen.
+  Botanical 2267:16751 (image 61 = fa-first-visit-botanical.png, 80%): 220.6 x 345.5 rotated -145.5deg (CSS), its box
+  centre 52.8px below the band top and 623.25px right of the page centre, so it rises 152px into the band above.
+  Desktop only (>= 1100).
+  Figma mobile (2305:4556, band y 2757–4013): padding 60; heading (title 32/28 -4% in a 259px box, 16px, intro 14/22),
+  24px, columns stacked 24px apart: photo 351 x 340 r8, 20px, title 26/24 -4% (column 1 box 317px), 20px, quotes
+  14/22 -1% 18px apart. No botanical.
+*/
+
+.fa-comparison {
+  --fa-cmp-gap: 32px; /* Figma 2267:18656 column gap; titles and quotes may run into it (Figma: 644 / 618px boxes) */
+  padding-block: var(--fa-section-pad);
+  color: var(--fa-linen);
+  overflow-x: clip; /* the botanical rises into the band above but never widens the page */
+}
+
+/* Anchored to the centre line (like the heading it sits beside), not the screen edge, so it never runs into the
+   title on narrower desktops: unrotated box left = 1232.95 at 1440 = 50% + 512.95px. */
+.fa-comparison__botanical {
+  top: -119.95px;
+  left: calc(50% + 512.95px);
+  width: 220.6px;
+  opacity: 0.8;
+  transform: rotate(-145.5deg);
+}
+
+.fa-comparison__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+/* ---------- Heading (2267:16582): 24px title -> intro (fa-heading default) ---------- */
+
+.fa-comparison__heading-title { line-height: 54px; }
+
+/* ---------- Columns ---------- */
+
+/* A wrapping flex row (not a grid) so a short last row (four or five columns) stays centred like the first. */
+.fa-comparison__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: var(--fa-cmp-gap);
+  row-gap: 48px; /* not drawn (Figma has one row): used when more than three columns wrap */
+  width: 100%;
+}
+
+.fa-comparison__column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  flex: 0 1 calc((100% - (var(--fa-cmp-cols, 2) - 1) * var(--fa-cmp-gap)) / var(--fa-cmp-cols, 2));
+  min-width: 0;
+  max-width: 608px;
+}
+
+.fa-comparison__media {
+  position: relative;
+  align-self: stretch;
+  aspect-ratio: 608 / 454;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgb(0 0 0 / 0.1);
+}
+
+.fa-comparison__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-cmp-focal, center);
+}
+
+.fa-comparison__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* a text box wider than the column overflows it evenly on both sides, as in Figma */
+  gap: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.fa-comparison__title {
+  width: calc(100% + var(--fa-cmp-gap));
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-comparison__text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(var(--fa-cmp-text-w, 576px), 100% + var(--fa-cmp-gap) / 2); /* quotes of neighbouring columns stay a half gap apart */
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+
+.fa-comparison__text p {
+  margin: 0;
+  text-box: trim-both cap alphabetic;
+}
+
+/* ---------- Tablet (900–1099, not drawn): narrower columns, smaller column titles ---------- */
+
+@media screen and (max-width: 1099px) {
+  /* Not drawn for tablet; beside the centred 48px title it would only show as a sliver at the screen edge. */
+  .fa-comparison__botanical { display: none; }
+
+  .fa-comparison__heading-title { line-height: 44px; }
+
+  .fa-comparison__title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+/* Narrower columns (900–1279) wrap the titles: balance the lines. */
+@media screen and (min-width: 900px) and (max-width: 1279px) {
+  .fa-comparison__title { text-wrap: balance; }
+}
+
+/* ---------- Mobile (<= 899): Figma 2305:4772 / 2305:4776, columns stacked ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-comparison {
+    padding-block: 60px;
+  }
+
+  .fa-comparison__inner { gap: 24px; }
+
+  .fa-comparison__heading { gap: 16px; }
+
+  .fa-comparison__heading-title {
+    max-width: var(--fa-cmp-heading-w-m, 259px);
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  /* One column; wider phones keep a 560px measure instead of a screen-wide photo. */
+  .fa-comparison__grid {
+    row-gap: 24px;
+    max-width: 560px;
+  }
+
+  .fa-comparison__column {
+    flex-basis: 100%;
+    gap: 20px;
+    max-width: none;
+  }
+
+  .fa-comparison__media { aspect-ratio: 351 / 340; }
+
+  .fa-comparison__body { gap: 20px; }
+
+  .fa-comparison__title {
+    width: auto;
+    max-width: var(--fa-cmp-title-w-m, 351px);
+    font-size: 26px;
+    line-height: 24px;
+  }
+
+  .fa-comparison__text {
+    gap: 18px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Hover: the column photo zooms slightly inside its rounded frame. */
+
+.fa-comparison__photo { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-comparison__column:hover .fa-comparison__photo { transform: scale(var(--fa-zoom)); }
+}

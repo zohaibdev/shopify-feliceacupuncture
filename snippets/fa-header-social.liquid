@@ -1,0 +1,24 @@
+{%- comment -%}
+  One top-bar social icon in fa-header. Figma draws every icon: a link (new tab) when a URL is set, otherwise a
+  non-interactive icon hidden from assistive tech.
+
+  Accepts:
+  - icon: 'facebook' | 'instagram' | 'x' (snippets/fa-icon) or 'substack'
+  - url: optional link
+  - label: accessible name of the link
+
+  Substack: Figma V5 2612:3077 draws the mark as a white raster mask (11.43 x 13.14 frame, glyph 10.55 x 12 inset
+  0.42 / 0.55); traced with the official Substack path, the viewBox reproduces that frame.
+{%- endcomment -%}
+{%- capture fa_social_svg -%}
+  {%- if icon == 'substack' -%}
+    <svg class="fa-icon fa-icon--substack" viewBox="-17.7 -23.2 487.1 560.2" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h448v62.804H0zm0 119.775h448v62.804H0zm0 119.776v271.92l224-124.48 224 124.48v-271.92z" fill="currentColor"/></svg>
+  {%- else -%}
+    {%- render 'fa-icon', icon: icon -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- if url != blank -%}
+  <a href="{{ url }}"{% render 'fa-link-target', url: url %} aria-label="{{ label | escape }}">{{ fa_social_svg }}</a>
+{%- else -%}
+  <span aria-hidden="true">{{ fa_social_svg }}</span>
+{%- endif -%}

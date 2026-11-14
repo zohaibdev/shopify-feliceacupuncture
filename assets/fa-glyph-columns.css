@@ -1,0 +1,288 @@
+/* Felice glyph columns — Our Approach V3 "Our philosophy" (file B4QcctWXiG9ywP3uRA3coG, band 2669:35822 1440 x 658):
+   padding 120 / 130; heading 539 wide (title 60 / 56 -4%, intro 18 / 29, garnet, 24 apart), 32px; columns 354 / 354
+   / 368 wide, 48 apart, centred: 99 x 99 character, 24px, title (Marisa 34, -3%) 8px above the text (18 / 30), all
+   in the column colour; 37px; note bar 1202 x 48 (white 36%, radius 2, 16 / 24 padding, Marisa 17 -5% #61603A).
+   No mobile frame: columns stack below 900px. */
+
+.fa-glyph-columns {
+  position: relative;
+  overflow-x: clip;
+  padding-block: var(--fa-gc-pad-top, 120px) var(--fa-gc-pad-bottom, 130px);
+  color: var(--fa-garnet);
+  background: #e3d2bb; /* mean of the bundled texture, shown while it loads */
+}
+
+.fa-glyph-columns__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fa-glyph-columns__heading { max-width: 539px; }
+
+.fa-glyph-columns .fa-heading__title { line-height: 56px; }
+
+.fa-glyph-columns__intro {
+  font-size: 18px;
+  line-height: 29px;
+}
+
+.fa-glyph-columns__list {
+  display: flex;
+  justify-content: space-between; /* Figma 2669:35831: 1232px row, columns 78px apart */
+  gap: 32px;
+  width: min(1232px, 100%);
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-glyph-columns__item {
+  display: flex;
+  flex: 0 1 var(--fa-gc-w, 354px);
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  color: var(--fa-gc-color, var(--fa-garnet));
+  text-align: center;
+}
+
+.fa-glyph-columns__glyph {
+  display: block;
+  width: 99px;
+  height: 99px;
+  margin-bottom: 24px;
+  background: currentColor;
+  -webkit-mask: var(--fa-gc-glyph) center / contain no-repeat;
+  mask: var(--fa-gc-glyph) center / contain no-repeat;
+}
+
+.fa-glyph-columns__item-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 32px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.fa-glyph-columns__text {
+  margin: 8px 0 0;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.fa-glyph-columns__note {
+  width: min(1202px, 100%);
+  margin: 37px 0 0;
+  padding: 16px 24px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.36);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 16px;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #61603a;
+}
+
+@media screen and (max-width: 899px) {
+  .fa-glyph-columns { padding-block: 60px; }
+
+  .fa-glyph-columns .fa-heading__title { line-height: 29px; }
+
+  .fa-glyph-columns__intro { font-size: 14px; line-height: 22px; }
+
+  .fa-glyph-columns__list {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .fa-glyph-columns__item { flex-basis: auto; max-width: 363px; }
+
+  .fa-glyph-columns__glyph { width: 72px; height: 72px; margin-bottom: 16px; }
+
+  .fa-glyph-columns__item-title { font-size: 24px; line-height: 24px; }
+
+  .fa-glyph-columns__text { font-size: 14px; line-height: 22px; }
+
+  .fa-glyph-columns__note { font-size: 14px; line-height: 18px; }
+}
+
+/* ---------- Style "Numbered" (Concierge V1 2644:17793, band 1440 x 591, padding 120 / 142) ----------
+   Title 60/58 garnet on one line, 60px, four 283px columns spread over 1264: number (Marisa 71, garnet), 28px, a 1px
+   clay rule, 14px, title (Marisa 24/26 -3%), 14px, check list (16 apart: 18px clay check + 10px + LCC 17/27 clay,
+   text trimmed so the check lines up with the capitals). Figma sets the numbers in Marisa Regular, which the hosted
+   font file does not include (they render in Marisa Bold). Botanical 2644:15546: the first-visit botanical at -165deg,
+   x 0.396 (origin 1433 / 1513), 80%, rising 173px into the band above and cut by the page edge (rendered 216 x 383). */
+.fa-glyph-columns__botanical {
+  top: -173px;
+  right: 0;
+  z-index: 1;
+  width: 216px;
+  opacity: 0.8;
+}
+
+.fa-glyph-columns--numbered .fa-glyph-columns__heading { max-width: none; }
+
+.fa-glyph-columns--numbered .fa-heading__title { line-height: 58px; }
+
+.fa-glyph-columns--numbered .fa-glyph-columns__list {
+  width: min(1264px, 100%);
+  margin-top: 60px;
+  gap: 24px;
+}
+
+.fa-glyph-columns--numbered .fa-glyph-columns__item {
+  flex: 0 1 283px;
+  align-items: stretch;
+  text-align: left;
+}
+
+.fa-glyph-columns__number {
+  margin: 0 0 14px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--fa-clay);
+  font-family: var(--fa-font-display);
+  font-weight: 400;
+  font-size: 71px;
+  line-height: normal;
+  color: var(--fa-garnet);
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-glyph-columns--numbered .fa-glyph-columns__item-title {
+  font-size: 24px;
+  line-height: 26px;
+  color: var(--fa-garnet);
+}
+
+.fa-glyph-columns__checks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-glyph-columns__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 17px;
+  line-height: 27px;
+  color: var(--fa-clay);
+}
+
+.fa-glyph-columns__check::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url('fa-glyph-columns-check.png') center / contain no-repeat;
+  mask: url('fa-glyph-columns-check.png') center / contain no-repeat;
+}
+
+.fa-glyph-columns__check span { text-box: trim-both cap alphabetic; }
+
+@media screen and (max-width: 1099px) {
+  .fa-glyph-columns--numbered .fa-glyph-columns__list { flex-wrap: wrap; justify-content: center; row-gap: 40px; }
+  .fa-glyph-columns--numbered .fa-glyph-columns__item { flex: 0 1 calc(50% - 12px); }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-glyph-columns--numbered .fa-heading__title { line-height: 29px; }
+  .fa-glyph-columns--numbered .fa-glyph-columns__list { margin-top: 32px; }
+  .fa-glyph-columns--numbered .fa-glyph-columns__item { flex-basis: auto; width: 100%; max-width: 363px; }
+  .fa-glyph-columns__number { font-size: 48px; padding-bottom: 18px; }
+  .fa-glyph-columns__botanical { top: -100px; width: 110px; }
+}
+
+/* "Mobile style: Compact" = Our Approach mobile 2821:6541 "Our philosophy" (458–1251): title 32 / 28 (-4%), 14px,
+   intro in a 271px box; 32px; three items 20px apart: 57px character, 8px, title (Marisa 24, 23 tall), 6px, text
+   14 / 22; 32px; note 12 / 16 padding, Marisa 16 / 17 (-5%). */
+@media screen and (max-width: 899px) {
+  .fa-glyph-columns--mobile-compact .fa-heading__title {
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-glyph-columns--mobile-compact .fa-glyph-columns__intro {
+    max-width: 271px;
+    margin-inline: auto;
+  }
+
+  .fa-glyph-columns--mobile-compact .fa-glyph-columns__list { gap: 20px; }
+
+  .fa-glyph-columns--mobile-compact .fa-glyph-columns__glyph {
+    width: 57px;
+    height: 57px;
+    margin-bottom: 8px;
+  }
+
+  .fa-glyph-columns--mobile-compact .fa-glyph-columns__item-title { line-height: 23px; }
+  .fa-glyph-columns--mobile-compact .fa-glyph-columns__text { margin-top: 6px; }
+
+  .fa-glyph-columns--mobile-compact .fa-glyph-columns__note {
+    margin-top: 32px;
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 17px;
+  }
+}
+
+/* "Mobile style: Compact" + numbered = Concierge mobile 2857:23149 "What your membership includes" (1283-1798):
+   title 32 / 28 (-4%); 32px; 2 x 2 grid (171px columns 9px apart, rows 34 apart): number Marisa 38, 14px, rule,
+   12px, title Marisa 14 / 16 (-3%), 8px, checks 10px apart (12px check, 5px, LCC 11 / 15 -2%). */
+@media screen and (max-width: 899px) {
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-heading__title {
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 34px 9px;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__item {
+    width: auto;
+    max-width: none;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__number {
+    margin-bottom: 12px;
+    font-size: 38px;
+    padding-bottom: 14px;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__item-title {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__checks {
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__check {
+    gap: 5px;
+    font-size: 11px;
+    line-height: 15px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-glyph-columns--numbered.fa-glyph-columns--mobile-compact .fa-glyph-columns__check::before {
+    width: 12px;
+    height: 12px;
+  }
+}

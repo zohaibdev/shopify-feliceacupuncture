@@ -1,0 +1,718 @@
+/* Felice photo gallery — homepage V5 (file B4Qc…, frame 2612:3077).
+   Carousel "Inside the clinic" 2615:9410, band 4166–5252 (1086): padding 120 / 120, title 60/50 -4%, intro 16/27 in
+   460px, 24 apart; photos 32 below: active 360 x 620, neighbours 300 x 560, outer 300 x 520, 20 apart, vertically
+   centred, the middle one centred on the screen; controls 32 below: a 1312px row centred in the container (42px garnet
+   circles with Figma's linen chevron_backward 35.5 / 42), follow block 250 x 69 (40px r8 garnet squares 10 apart,
+   linen glyphs; label Marisa 18 / 17 box, 12 below).
+   Strip "Our gallery" 2619:10663 on linen 2618:10341, band 10511–11234 (723): padding 110 / 90, title then the strip
+   with no gap: 322 x 424 photos 10 apart, centred; linen ellipses 2688 x 460 (centre 189px above the strip top) and
+   2688 x 470 (centre 623px below it) cut curved top / bottom edges; follow block directly under the photos.
+   No mobile frame: mobile (<= 899) scales the photos to the 375 patterns (carousel 240 / 200, strip 200 x 263),
+   60px padding, 24px gaps (carousel), 32px squares / arrows, 14px label. Tablet (900–1099) = desktop at 80%. */
+
+.fa-photo-gallery {
+  /* carousel */
+  --fa-pg-w: 300px;
+  --fa-pg-w-active: 360px;
+  --fa-pg-h: 520px;
+  --fa-pg-h-near: 560px;
+  --fa-pg-h-active: 620px;
+  --fa-pg-gap: 20px;
+  /* strip */
+  --fa-pg-strip-w: 322px;
+  --fa-pg-strip-h: 424px;
+  --fa-pg-strip-gap: 10px;
+  /* both */
+  --fa-pg-row-gap: 32px; /* heading -> photos -> controls */
+  --fa-pg-arrow: 42px;
+  --fa-pg-square: 40px;
+  --fa-pg-square-r: 8px;
+  --fa-pg-glyph: 20px;
+  --fa-pg-glyph-fb: 18px;
+  --fa-pg-label: 18px;
+  --fa-pg-label-lh: 17px;
+  --fa-pg-follow-gap: 12px;
+  --fa-pg-slide: calc(var(--fa-dur-ui) * 1.6); /* 0.56s; 0 with reduced motion */
+  overflow-x: clip;
+  padding-block: var(--fa-pg-pad-top, 120px) var(--fa-pg-pad-bottom, 120px);
+  color: var(--fa-garnet);
+}
+
+.fa-photo-gallery--bg-texture { background-color: #d2c1a6; /* mean of the bundled texture, shown until it loads */ }
+
+.fa-photo-gallery--bg-linen { background-color: var(--fa-linen); }
+
+.fa-photo-gallery--strip {
+  --fa-pg-row-gap: 0px;
+}
+
+/* ---------- Botanical (setting "Bottom right"): Figma 2612:3388, 80% opacity, turned 165deg, 224.5 x 351.5 drawing
+   whose centre sits 40.8px below the band and 84.1px in from the right edge; it runs past the screen edge (clipped)
+   and over the next section, so the section is lifted (z-index 1: an earlier spilling section uses 2). ---------- */
+
+.fa-photo-gallery--flower-bottom { z-index: 1; }
+
+.fa-photo-gallery__flower {
+  right: -28.14px;
+  bottom: -216.54px;
+  width: 224.48px;
+  opacity: 0.8;
+  transform: rotate(-165deg);
+}
+
+.fa-photo-gallery__text { max-width: var(--fa-pg-text-w, 460px); }
+
+.fa-photo-gallery__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fa-pg-row-gap);
+}
+
+.fa-container + .fa-photo-gallery__gallery { margin-top: var(--fa-pg-row-gap); }
+
+/* ---------- Photos ---------- */
+
+.fa-photo-gallery__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-photo-gallery__item { flex: none; }
+
+.fa-photo-gallery__media {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f6f0e8; /* Figma's frame fill under the photo; an empty block keeps its box */
+}
+
+.fa-photo-gallery__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-pg-focal, center);
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Homepage V6 2669:25257: block "Photo shade" (20% / 30% black over each clip). */
+.fa-photo-gallery__media--shade { position: relative; }
+
+.fa-photo-gallery__media--shade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / var(--fa-pg-shade, 0));
+  pointer-events: none;
+}
+
+/* Block "Video" (V6): the clip covers the photo; pause + sound buttons 12px in from the bottom-right corner, 8px apart:
+   32px circles (42px on the middle carousel photo) of 22% white with a background blur (Figma 12.24 / 16.06 radius),
+   white 16/42 glyphs. */
+.fa-photo-gallery__media:has(.fa-photo-gallery__video) { position: relative; }
+
+.fa-photo-gallery__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-pg-focal, center);
+}
+
+.fa-photo-gallery__video-controls {
+  --fa-pg-vbtn: 32px;
+  --fa-pg-vblur: 6.12px;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1;
+  display: flex;
+  gap: 8px;
+}
+
+.fa-photo-gallery--carousel .fa-photo-gallery__item[data-distance="0"] .fa-photo-gallery__video-controls {
+  --fa-pg-vbtn: 42px;
+  --fa-pg-vblur: 8.03px;
+}
+
+.fa-photo-gallery__video-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--fa-pg-vbtn);
+  height: var(--fa-pg-vbtn);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.22);
+  -webkit-backdrop-filter: blur(var(--fa-pg-vblur));
+  backdrop-filter: blur(var(--fa-pg-vblur));
+  color: var(--fa-white);
+  cursor: pointer;
+}
+
+.fa-photo-gallery__video-btn .fa-icon {
+  width: calc(var(--fa-pg-vbtn) * 16 / 42);
+  height: calc(var(--fa-pg-vbtn) * 16 / 42);
+}
+
+.fa-photo-gallery__video-btn:focus-visible {
+  outline: 2px solid var(--fa-white);
+  outline-offset: 2px;
+}
+
+[data-video-controls][data-paused] .fa-icon--pause,
+[data-video-controls]:not([data-paused]) .fa-icon--play,
+[data-video-mute][aria-pressed="true"] .fa-icon--volume-off,
+[data-video-mute]:not([aria-pressed="true"]) .fa-icon--volume-on { display: none; }
+
+/* Carousel: the list starts at the middle of the screen and slides left by the active photo's offset, so the
+   active photo is always centred; JS (or Liquid for the start state) sets --fa-pg-active and data-distance. */
+/* overflow: clip (hidden as the fallback) so nothing (scrollIntoView, find-in-page, the Theme Editor scrolling a
+   selected block into view) can scroll the row and push the active photo off centre. */
+.fa-photo-gallery--carousel .fa-photo-gallery__viewport {
+  height: var(--fa-pg-h-active);
+  overflow: hidden;
+  overflow: clip;
+  touch-action: pan-y; /* horizontal swipes go to the script */
+}
+
+.fa-photo-gallery--carousel .fa-photo-gallery__list {
+  position: relative;
+  left: 50%;
+  align-items: center;
+  gap: var(--fa-pg-gap);
+  width: max-content;
+  height: 100%;
+  transform: translateX(calc(-1 * (var(--fa-pg-active, 0) * (var(--fa-pg-w) + var(--fa-pg-gap)) + var(--fa-pg-w-active) / 2)));
+}
+
+.fa-photo-gallery--carousel .fa-photo-gallery__item {
+  width: var(--fa-pg-w);
+  height: var(--fa-pg-h);
+}
+
+.fa-photo-gallery--carousel .fa-photo-gallery__item[data-distance="1"] { height: var(--fa-pg-h-near); }
+
+.fa-photo-gallery--carousel .fa-photo-gallery__item[data-distance="0"] {
+  width: var(--fa-pg-w-active);
+  height: var(--fa-pg-h-active);
+}
+
+/* Side photos can be clicked to bring them to the middle (pointer convenience; the arrows do the same). */
+fa-photo-gallery:defined[data-layout="carousel"] .fa-photo-gallery__item:not([data-distance="0"]) { cursor: pointer; }
+
+/* Strip: a native scroll row that starts centred (JS); the curved edges are a mask on the row itself, so the photos
+   scroll under fixed curves. Ellipse geometry scales with the strip height (Figma: radii 1344 / 93.33% of the width
+   x 230 and 235, centres 189 above and 623 below the strip top at 424 tall). */
+/* Desktop / tablet scroll freely (snapping would pull the centred row, a gap between two photos as drawn, onto
+   a photo); mobile snaps photos to the centre (below). */
+.fa-photo-gallery--strip .fa-photo-gallery__viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fa-photo-gallery--strip .fa-photo-gallery__viewport::-webkit-scrollbar { display: none; }
+
+.fa-photo-gallery--strip .fa-photo-gallery__list {
+  gap: var(--fa-pg-strip-gap);
+  width: max-content;
+  margin-inline: auto;
+  padding-inline: var(--fa-gutter);
+}
+
+.fa-photo-gallery--strip .fa-photo-gallery__item {
+  width: var(--fa-pg-strip-w);
+  height: var(--fa-pg-strip-h);
+  scroll-snap-align: center;
+}
+
+.fa-photo-gallery--curved .fa-photo-gallery__viewport {
+  --fa-pg-mask:
+    radial-gradient(93.333% calc(var(--fa-pg-strip-h) * 0.5425) at 50% calc(var(--fa-pg-strip-h) * -0.4458), transparent 99.5%, #000 100%),
+    radial-gradient(93.333% calc(var(--fa-pg-strip-h) * 0.5542) at 50% calc(var(--fa-pg-strip-h) * 1.4693), transparent 99.5%, #000 100%);
+  -webkit-mask-image: var(--fa-pg-mask);
+  mask-image: var(--fa-pg-mask);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.fa-photo-gallery--strip .fa-photo-gallery__viewport:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: -2px;
+}
+
+/* The curved mask would also cut the row's own focus ring (only its side edges stayed visible), so the curved
+   strip draws the ring on an unmasked layer over the row. */
+.fa-photo-gallery--curved .fa-photo-gallery__gallery { position: relative; }
+
+.fa-photo-gallery--curved .fa-photo-gallery__gallery:has(> .fa-photo-gallery__viewport:focus-visible)::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: var(--fa-pg-strip-h);
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: -2px;
+  pointer-events: none;
+}
+
+.fa-photo-gallery__gallery[data-overflow] .fa-photo-gallery__viewport { cursor: grab; }
+
+.fa-photo-gallery__gallery[data-dragging] .fa-photo-gallery__viewport {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+/* ---------- Controls: arrows + follow line ---------- */
+
+.fa-photo-gallery__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1312px;
+  margin-inline: auto;
+}
+
+.fa-photo-gallery__controls:not(:has(.fa-photo-gallery__arrow)) { justify-content: center; }
+
+.fa-photo-gallery__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--fa-pg-arrow);
+  height: var(--fa-pg-arrow);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+  cursor: pointer;
+}
+
+.fa-photo-gallery__arrow .fa-icon {
+  width: 84.6%;
+  height: 84.6%;
+}
+
+.fa-photo-gallery__arrow--next .fa-icon { transform: scaleX(-1); }
+
+/* Figma draws both arrows solid at rest; at an end the arrow keeps its look and only loses the pointer / hover. */
+.fa-photo-gallery__arrow:disabled { cursor: default; }
+
+/* No script (yet / at all), or a strip with nothing to scroll: no arrows (their space stays, the follow line keeps
+   its place). */
+fa-photo-gallery:not(:defined) .fa-photo-gallery__arrow,
+fa-photo-gallery[data-layout="strip"]:not([data-overflow]) .fa-photo-gallery__arrow { visibility: hidden; }
+
+.fa-photo-gallery__follow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fa-pg-follow-gap);
+  min-width: 0;
+}
+
+.fa-photo-gallery__social {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-photo-gallery__social-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--fa-pg-square);
+  height: var(--fa-pg-square);
+  border-radius: var(--fa-pg-square-r);
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+}
+
+.fa-photo-gallery__social .fa-icon {
+  width: var(--fa-pg-glyph);
+  height: var(--fa-pg-glyph);
+}
+
+.fa-photo-gallery__social .fa-icon--facebook-f {
+  width: var(--fa-pg-glyph-fb);
+  height: var(--fa-pg-glyph-fb);
+}
+
+.fa-photo-gallery__follow-label {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: var(--fa-pg-label);
+  line-height: var(--fa-pg-label-lh);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: underline transparent;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  color: inherit;
+}
+
+/* ---------- Homepage V6 strip (2669:25760): square photos, follow line at the left edge ---------- */
+
+/* "Square": 424 x 424 photos 20px apart, the follow line 40px below them (desktop). */
+@media screen and (min-width: 1100px) {
+  .fa-photo-gallery--strip.fa-photo-gallery--strip-square {
+    --fa-pg-strip-w: 424px;
+    --fa-pg-strip-h: 424px;
+    --fa-pg-strip-gap: 20px;
+    --fa-pg-row-gap: 40px;
+  }
+
+  /* "Left, 10px from the screen edge": Figma's 250px follow block at x = 10 (outside the 50px gutter, as drawn). */
+  .fa-photo-gallery__edge { padding-inline: 10px; }
+
+  .fa-photo-gallery--follow-edge .fa-photo-gallery__controls {
+    justify-content: flex-start;
+    max-width: none;
+  }
+
+  .fa-photo-gallery--follow-edge .fa-photo-gallery__follow { min-width: 250px; }
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-photo-gallery__edge { padding-inline: var(--fa-gutter); }
+}
+
+/* ---------- Tablet (900–1099): the desktop layout at 80% ---------- */
+
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-photo-gallery {
+    --fa-pg-w: 240px;
+    --fa-pg-w-active: 288px;
+    --fa-pg-h: 416px;
+    --fa-pg-h-near: 448px;
+    --fa-pg-h-active: 496px;
+    --fa-pg-gap: 16px;
+    --fa-pg-strip-w: 258px;
+    --fa-pg-strip-h: 340px;
+    --fa-pg-strip-gap: 8px;
+    padding-block: calc(var(--fa-pg-pad-top, 120px) * 0.8) calc(var(--fa-pg-pad-bottom, 120px) * 0.8);
+  }
+
+  .fa-photo-gallery--carousel { --fa-pg-row-gap: 28px; }
+}
+
+/* ---------- Mobile (<= 899): derived from the 375 patterns (no mobile frame) ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-photo-gallery {
+    --fa-pg-w: 200px;
+    --fa-pg-w-active: 240px;
+    --fa-pg-h: 347px;
+    --fa-pg-h-near: 373px;
+    --fa-pg-h-active: 413px;
+    --fa-pg-gap: 12px;
+    --fa-pg-strip-w: 200px;
+    --fa-pg-strip-h: 263px;
+    --fa-pg-strip-gap: 8px;
+    --fa-pg-arrow: 32px;
+    --fa-pg-square: 32px;
+    --fa-pg-square-r: 6.4px;
+    --fa-pg-glyph: 16px;
+    --fa-pg-glyph-fb: 14.4px;
+    --fa-pg-label: 14px;
+    --fa-pg-label-lh: 13px;
+    --fa-pg-follow-gap: 10px;
+    padding-block: var(--fa-pg-pad-m, 60px);
+  }
+
+  .fa-photo-gallery--carousel { --fa-pg-row-gap: 24px; }
+
+  .fa-photo-gallery__controls { gap: 8px; }
+
+  /* No mobile frame: the V4 mobile size and place of this drawing (services top flower, 2264:2420: 106.4px wide,
+     its top 100px above the next band, 23px past the right edge). */
+  .fa-photo-gallery__flower {
+    right: -23.15px;
+    bottom: -66.57px;
+    width: 106.4px;
+  }
+
+  .fa-photo-gallery--strip .fa-photo-gallery__viewport { scroll-snap-type: x proximity; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Carousel: the row slides and the photos resize together (0.56s, instant with reduced motion). Arrows darken and
+   their chevron slides in its direction on hover; social squares darken; the label fades an underline in. */
+
+.fa-photo-gallery--carousel .fa-photo-gallery__list { transition: transform var(--fa-pg-slide) var(--fa-ease-out); }
+
+.fa-photo-gallery--carousel .fa-photo-gallery__item { transition: width var(--fa-pg-slide) var(--fa-ease-out), height var(--fa-pg-slide) var(--fa-ease-out); }
+
+/* Mid-swipe / drag the slide waits for the release. */
+.fa-photo-gallery__gallery[data-dragging] .fa-photo-gallery__list { transition: none; }
+
+.fa-photo-gallery__arrow,
+.fa-photo-gallery__social-item {
+  transition: background-color var(--fa-dur-hover) var(--fa-ease-out), transform 0.15s var(--fa-ease-out);
+}
+
+.fa-photo-gallery__arrow .fa-icon { transition: transform var(--fa-dur-ui) var(--fa-ease-out); }
+
+.fa-photo-gallery__follow-label { transition: text-decoration-color var(--fa-dur-hover) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-photo-gallery__arrow:not(:disabled):hover,
+  a.fa-photo-gallery__social-item:hover { background: var(--fa-garnet-dark); }
+  .fa-photo-gallery__arrow--prev:not(:disabled):hover .fa-icon { transform: translateX(calc(var(--fa-nudge) / -2)); }
+  .fa-photo-gallery__arrow--next:not(:disabled):hover .fa-icon { transform: scaleX(-1) translateX(calc(var(--fa-nudge) / -2)); }
+  a.fa-photo-gallery__follow-label:hover { text-decoration-color: currentColor; }
+}
+
+.fa-photo-gallery__arrow:not(:disabled):active { transform: scale(0.94); }
+
+a.fa-photo-gallery__follow-label:focus-visible { text-decoration-color: currentColor; }
+
+/* Two-tone ring as on the buttons (fa-base.css .fa-btn:focus-visible). */
+.fa-photo-gallery__arrow:focus-visible,
+a.fa-photo-gallery__social-item:focus-visible,
+a.fa-photo-gallery__follow-label:focus-visible {
+  outline: 2px solid var(--fa-garnet-dark);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--fa-linen);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-photo-gallery__arrow:not(:disabled):active { transform: none; }
+}
+
+/* ---------- Desktop motion (900px+; the attributes below are only ever set there, mobile is untouched) ----------
+   Loop: the jump back to the matching original photo after a slide happens with transitions off. Ticker: the strip's
+   scroll row becomes a clipped track moved by the script (same photo sizes, gaps and start position). Larger view:
+   photos become buttons (zoom cursor, inset two-tone focus ring, as the row clips anything outside). */
+
+fa-photo-gallery[data-instant] .fa-photo-gallery__list,
+fa-photo-gallery[data-instant] .fa-photo-gallery__item { transition: none; }
+
+@media screen and (min-width: 900px) {
+  fa-photo-gallery[data-ticker] .fa-photo-gallery__viewport {
+    overflow: hidden;
+    overflow: clip;
+    touch-action: pan-y;
+  }
+
+  fa-photo-gallery[data-ticker] .fa-photo-gallery__list {
+    position: relative;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  fa-photo-gallery[data-lightbox-ready] .fa-photo-gallery__item {
+    position: relative;
+    cursor: zoom-in;
+  }
+
+  fa-photo-gallery[data-lightbox-ready][data-dragging] .fa-photo-gallery__item { cursor: grabbing; }
+
+  fa-photo-gallery[data-lightbox-ready] .fa-photo-gallery__item:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  fa-photo-gallery[data-lightbox-ready] .fa-photo-gallery__item:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 2px var(--fa-garnet-dark), inset 0 0 0 5px var(--fa-linen);
+    pointer-events: none;
+  }
+}
+
+html[data-fa-lightbox] {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.fa-photo-gallery__lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.fa-photo-gallery__lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fa-pg-lightbox-in var(--fa-dur-ui) var(--fa-ease-out);
+}
+
+.fa-photo-gallery__lightbox::backdrop { background: rgb(29 14 18 / 0.86); }
+
+.fa-photo-gallery__lightbox-figure {
+  display: flex;
+  margin: 0;
+}
+
+/* The whole photo, never cropped, stretched or enlarged past its own size. */
+.fa-photo-gallery__lightbox-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 176px);
+  max-height: calc(100vh - 112px);
+  object-fit: contain;
+  cursor: default;
+}
+
+.fa-photo-gallery__lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+  cursor: pointer;
+  transition: background-color var(--fa-dur-hover) var(--fa-ease-out);
+}
+
+.fa-photo-gallery__lightbox-close .fa-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (hover: hover) {
+  .fa-photo-gallery__lightbox-close:hover { background: var(--fa-garnet-dark); }
+}
+
+.fa-photo-gallery__lightbox-close:focus-visible {
+  outline: 2px solid var(--fa-linen);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--fa-garnet-dark);
+}
+
+@keyframes fa-pg-lightbox-in {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-photo-gallery__lightbox[open] { animation: none; }
+}
+
+/* ---------- Reviews line + "Square, 12px apart" (Our Team V3 2701:7855: 105px padding, line 20px above the strip,
+   424px photos 12 apart, arrows + follow 20px below) ---------- */
+.fa-photo-gallery__reviews {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding-inline: var(--fa-gutter);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 23px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+}
+
+.fa-photo-gallery__reviews-stars {
+  display: flex;
+  color: var(--fa-clay);
+}
+
+.fa-photo-gallery__reviews-stars .fa-icon {
+  width: 22.8px;
+  height: 22px;
+  padding: 2px 1.5px;
+}
+
+.fa-photo-gallery__reviews-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 1100px) {
+  .fa-photo-gallery--strip.fa-photo-gallery--strip-tight {
+    --fa-pg-strip-gap: 12px;
+    --fa-pg-row-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-photo-gallery__reviews { flex-wrap: wrap; gap: 8px; font-size: 16px; line-height: 18px; }
+}
+
+/* Setting "Space between photos and controls" (homepage 2026-10-14: 32px). */
+@media screen and (min-width: 1100px) {
+  .fa-photo-gallery[style*='--fa-pg-row-gap-set'] { --fa-pg-row-gap: var(--fa-pg-row-gap-set); }
+}
+
+/* Homepage mobile V1 2794:1089: the clinic carousel (4011–4817) — active card 302 x 520, its neighbours 246 x 460,
+   the outer ones 242 x 420, 16px apart, controls 24px below — and the square strip (8588–9119): 334px squares 10px
+   apart, controls 24px below. */
+@media screen and (max-width: 899px) {
+  .fa-photo-gallery {
+    --fa-pg-w: 242px;
+    --fa-pg-w-active: 302px;
+    --fa-pg-h: 420px;
+    --fa-pg-h-near: 460px;
+    --fa-pg-h-active: 520px;
+    --fa-pg-gap: 16px;
+  }
+
+  .fa-photo-gallery--strip.fa-photo-gallery--strip-square {
+    --fa-pg-strip-w: 334px;
+    --fa-pg-strip-h: 334px;
+    --fa-pg-strip-gap: 10px;
+    --fa-pg-row-gap: 24px;
+  }
+}
+
+/* QA 2026-10-14: mobile V1 "Inside the clinic" title 32 / 28 at -4%. */
+@media screen and (max-width: 899px) {
+  .fa-photo-gallery__title { letter-spacing: -0.04em; }
+}
+
+/* "Square photos on mobile: Small" — homepage mobile V1 (updated frame) gallery (10151–10519): 171px squares 6px
+   apart, controls 24px below. */
+@media screen and (max-width: 899px) {
+  .fa-photo-gallery--strip.fa-photo-gallery--strip-square.fa-photo-gallery--mobile-small {
+    --fa-pg-strip-w: 171px;
+    --fa-pg-strip-h: 171px;
+    --fa-pg-strip-gap: 6px;
+  }
+}
+
+/* Review 2026-10-21: "Follow @…" gets a 44px tall tap area without moving it. */
+@media screen and (max-width: 899px) {
+  /* The link box itself is 44px tall; the negative margins keep the label where Figma has it. */
+  a.fa-photo-gallery__follow-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-block: -15.5px;
+  }
+}

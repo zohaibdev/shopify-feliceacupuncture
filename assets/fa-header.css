@@ -1,0 +1,784 @@
+/* Felice header — Figma navigation 2519:3714 (desktop bar 2519:3716 + nav 2519:3765 / dropdowns 2519:3783, 2519:3808;
+   mobile bar 2519:3936 + nav 2519:3955 / menu 2519:3964, 2519:4079) */
+
+.fa-header {
+  position: relative;
+  z-index: 20;
+}
+
+/* Sticky header (client request 2026-10-14): the section sticks with its top bar above the viewport, so only the
+   nav row (logo, menu, Book Now) stays on screen. Heights come from the header script; the fallbacks are the
+   desktop sizes (38px bar, 85px row). Anchor jumps land below the row. */
+.fa-header-section {
+  position: sticky;
+  top: calc(var(--fa-header-bar-h, 38px) * -1);
+  z-index: 20;
+}
+
+html { scroll-padding-top: calc(var(--fa-header-main-h, 85px) + 16px); }
+
+/* ---------- Top bar ---------- */
+
+.fa-header__bar {
+  background: var(--fa-garnet);
+  color: var(--fa-white);
+  padding: 9px 12px;
+  /* Figma V5 2637:14885 (2026-10-12): Libre Caslon Condensed Medium 14 / 120%, -3% (was Futura; the in-progress
+     mobile frame 2632:10962 uses it too) */
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 14px; /* V4 / the navigation frame: 12px, kept on mobile */
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.fa-header__bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fa-header__bar-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-header__bar-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* 1px white rule between items, as in the frame */
+.fa-header__bar-item + .fa-header__bar-item::before {
+  content: '';
+  width: 1px;
+  height: 12px;
+  background: currentColor;
+  margin-right: 8px;
+}
+
+/* Figma's 12px icon frames (the clock's viewBox is its 12px frame, so no override is needed). */
+.fa-header__bar-item .fa-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* The underline is always there but transparent; hover fades it in (Motion block below). */
+.fa-header__bar a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+}
+
+.fa-header__social { gap: 12px; }
+
+/* Figma: the rule before the social icons is followed by the 12px icon gap only (it matches the item rule above,
+   so it needs the same selector weight). */
+.fa-header__bar-item + .fa-header__social::before { margin-right: 0; }
+
+/* Figma's phone text box is 78px wide (the number itself ~73px); the mobile bar centres the group with that box. */
+.fa-header__phone { min-width: 78px; }
+
+.fa-header__social > * { display: block; }
+
+.fa-header__social .fa-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Figma V5: the Substack mark's 11.43 x 13.14 frame (the 14px row centres it, 9.4px from the bar top). */
+.fa-header__social .fa-icon--substack {
+  width: 11.43px;
+  height: 13.14px;
+}
+
+/* ---------- Main row ---------- */
+
+/* The 80% texture sits on the page colour under the transparent "Nav web" component: paper (#f6f0e8, the V5 homepage
+   frame 2612:3390) from 900px, white below (the mobile navigation frame 2519:3955). Both match their render within
+   1 level. */
+.fa-header__main {
+  position: relative;
+  background-color: var(--fa-white);
+}
+
+@media screen and (min-width: 900px) {
+  .fa-header__main { background-color: var(--fa-paper); }
+}
+
+.fa-header__main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--fa-header-texture) center / cover no-repeat;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.fa-header__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 24px; /* keeps a long merchant menu clear of the logo and Book Now (the nav wraps instead) */
+  align-items: center;
+  max-width: calc(var(--fa-container) + var(--fa-gutter) * 2);
+  min-height: 85px;
+  margin-inline: auto;
+  padding: 12px var(--fa-gutter);
+}
+
+.fa-header__logo {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.fa-header__seal {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 59px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.fa-header__wordmark { display: none; }
+
+.fa-header__logo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* The bundled seal PNG carries transparent padding; Figma crops it (116.5% x 115.4%). */
+.fa-header__logo-img--crop {
+  position: absolute;
+  left: -8.25%;
+  top: -7.69%;
+  width: 116.5%;
+  height: 115.38%;
+  max-width: none;
+}
+
+.fa-header__nav-list {
+  display: flex;
+  flex-wrap: wrap; /* only when more items than fit (up to 8 blocks): a second centred line, never overlapping */
+  justify-content: center;
+  align-items: center;
+  gap: 0 35px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-header__nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Figma 2519:3765: label → chevron */
+}
+
+.fa-header__nav-link {
+  display: block;
+  padding: 8px 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  text-decoration: none;
+  white-space: nowrap;
+  background: linear-gradient(currentColor, currentColor) left calc(100% - 4px) / 0 1px no-repeat;
+}
+
+/* Items with sub-links: a chevron button after the label (or one button holding both when the item has no link). */
+.fa-header__nav-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.fa-header__nav-caret {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fa-garnet);
+  cursor: pointer;
+}
+
+/* 44px tap target around the 9px chevron without changing the layout */
+.fa-header__nav-caret::after {
+  content: '';
+  position: absolute;
+  inset: -20px -12px;
+}
+
+.fa-header__caret {
+  display: block;
+  flex: none;
+  margin: -0.75px; /* the viewBox pads the 1.5px stroke: the path itself sits on Figma's 8px gap / right edge */
+  color: var(--fa-garnet);
+}
+
+.fa-header__nav-item.is-open .fa-header__caret { transform: scaleY(-1); }
+
+/* Figma 2519:3783 / 2519:3808: the open item's label carries a 0.2px garnet stroke. */
+.fa-header__nav-item.is-open > .fa-header__nav-link,
+.fa-header__nav-item.is-open > .fa-header__nav-toggle > span { -webkit-text-stroke: 0.2px currentColor; }
+
+.fa-header__nav-caret:focus-visible,
+.fa-header__nav-toggle:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 4px;
+}
+
+/* ---------- Desktop dropdown (Figma 2519:3783 / 2519:3808) ----------
+   A 121 x 86 panel (5px corners; Figma's boolean fill #d9c39c + the texture at 22%, baked into the jpg) whose centre sits under the item, its top 33.5px
+   below the label's text top, with a 17px triangle rising 10px above it; items 18px apart, 17px padding. */
+.fa-header__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 2;
+  padding-top: 9px; /* panel top 68px below the row top (the hover bridge between label and panel) */
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.fa-header__dropdown-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 17px;
+  list-style: none;
+  border-radius: 5px;
+  background: #d9c39c var(--fa-header-dropdown-bg) center / 100% 100% no-repeat;
+}
+
+/* Figma's 17 x 17 triangle is unioned with the panel 10px below its apex: only its top 10 x 10 shows. */
+.fa-header__dropdown-list::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  background: #d9c39c var(--fa-header-dropdown-bg) center top / 121px 86px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.fa-header__nav-sublink {
+  display: block;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 17px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--fa-garnet);
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) left 100% / 0 1px no-repeat;
+}
+
+.fa-header__nav-item.is-open > .fa-header__dropdown {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (hover: hover) and (min-width: 1100px) {
+  .fa-header__nav-item--parent:hover:not(.is-dismissed) > .fa-header__dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .fa-header__nav-item--parent:hover:not(.is-dismissed) .fa-header__caret { transform: scaleY(-1); }
+
+  .fa-header__nav-item--parent:hover:not(.is-dismissed) > .fa-header__nav-link,
+  .fa-header__nav-item--parent:hover:not(.is-dismissed) > .fa-header__nav-toggle > span { -webkit-text-stroke: 0.2px currentColor; }
+}
+
+.fa-header__actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Figma 414:581: 32px x 19px padding around the 10px cap-trimmed label = 48px tall */
+.fa-section .fa-header__cta {
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 32px;
+}
+
+.fa-header__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fa-radius);
+  background: var(--fa-garnet);
+  color: var(--fa-white);
+  cursor: pointer;
+  position: relative;
+}
+
+/* Figma draws a 32x28 button; extend the tap target to 44px without changing the visual */
+.fa-header__toggle::after {
+  content: '';
+  position: absolute;
+  inset: -8px -6px;
+}
+
+/* Figma 414:999: 15.61 x 12.33 glyph centred in a 20 x 18 frame inside the 32 x 28 button */
+.fa-header__toggle .fa-icon--menu {
+  width: 15.6116px;
+  height: 12.3331px;
+}
+
+/* Figma 2519:3964: the crossed strokes span a 9.8px square (+ the 1.74px round caps) */
+.fa-header__toggle .fa-icon--close {
+  width: 11.55px;
+  height: 11.55px;
+}
+
+.fa-header__toggle-close { display: none; }
+.is-menu-open .fa-header__toggle-open { display: none; }
+.is-menu-open .fa-header__toggle-close { display: block; }
+
+.fa-header__toggle:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 2px;
+}
+
+/* ---------- Collapsed menu panel (< 1100px) ---------- */
+
+.fa-header__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  /* The page is scroll-locked while the panel is open: it scrolls itself within the viewport below the header row
+     (--fa-menu-top = the row's bottom edge, set by the header script when the panel opens). */
+  max-height: calc(100vh - var(--fa-menu-top, 0px));
+  max-height: calc(100dvh - var(--fa-menu-top, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Figma 2519:3964: the panel fills the screen below the header row (#d9c39c + texture at 22% multiply); the first
+     link's text starts 22px down (9px + the row's 13px), Book Now sits 11px above the bottom. */
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--fa-menu-top, 0px));
+  height: calc(100dvh - var(--fa-menu-top, 0px));
+  padding: 9px var(--fa-gutter) 11px;
+  background: #d9c39c var(--fa-header-menu-bg) center top / cover no-repeat;
+}
+
+.fa-header__menu[hidden] { display: none; }
+
+.fa-header__menu-list {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Rows: 19px text, 13px above and below, a 1px rule (black at 10%) between rows. */
+.fa-header__menu-item { padding: 13px 0; }
+
+/* Figma's rule is a 0-height line on the row boundary, so it takes no space (inset shadow, not a border). */
+.fa-header__menu-item + .fa-header__menu-item { box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1); }
+
+.fa-header__menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 19px;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The current page reads in moss (Figma: Home on the homepage). */
+.fa-header__menu-link[aria-current='page'] { color: var(--fa-moss); }
+
+.fa-header__menu-link:focus-visible,
+.fa-header__menu-sublink:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 2px;
+}
+
+.fa-header__menu-parent[aria-expanded='true'] .fa-header__caret { transform: scaleY(-1); }
+
+/* Accordion: numbered sub-links (Marisa Medium 18, -2%, 80% opacity), 14px under the parent, 16px apart. */
+.fa-header__submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: fa-sub;
+}
+
+.fa-header__submenu[hidden] { display: none; }
+
+.fa-header__submenu > li { counter-increment: fa-sub; }
+
+.fa-header__menu-sublink {
+  display: block;
+  font-family: var(--fa-font-display);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 17px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.fa-header__menu-sublink::before { content: counter(fa-sub) '. '; }
+
+.fa-header__menu-sublink[aria-current='page'] { color: var(--fa-moss); }
+
+/* Tap targets: rows and sub-links take the full row pitch (45 / 33px) without changing the layout. */
+.fa-header__menu-link,
+.fa-header__menu-sublink { position: relative; }
+
+.fa-header__menu-link::after,
+.fa-header__menu-sublink::after {
+  content: '';
+  position: absolute;
+  inset: -13px 0;
+}
+
+.fa-header__menu-sublink::after { inset: -8px 0; }
+
+/* Book Now: full width at the foot of the panel (Figma 351 x 48, 19 / 32 padding). */
+.fa-section .fa-header__menu-cta {
+  width: 100%;
+  min-height: 48px;
+  margin-top: auto;
+  padding: 0 32px;
+  font-size: 20px; /* Figma: the desktop 20px label (mobile page buttons are 14px) */
+  letter-spacing: -0.03em;
+}
+
+html.fa-scroll-lock { overflow: hidden; }
+
+@media screen and (min-width: 1100px) {
+  .fa-header__menu { display: none; }
+
+  /* Figma V6 2669:25486: 38px bar (the 14px row 12px from top and bottom); the phone link is underlined at rest. */
+  .fa-header__bar { padding-block: 12px; }
+  .fa-header__bar .fa-header__phone { text-decoration-color: currentColor; }
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-header__nav { display: none; }
+  .fa-header__toggle { display: inline-flex; }
+  .fa-header__row { grid-template-columns: auto 1fr; }
+}
+
+/* Small desktop (1100–1279): Figma's 35px nav gaps (702px nav incl. the chevrons) would run into Book Now at 1100. */
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-header__nav-list { column-gap: 20px; }
+}
+
+/* Tablet (900–1099) keeps the Book Now button in the header row, so the menu panel doesn't repeat it. */
+@media screen and (min-width: 900px) {
+  .fa-header__menu .fa-header__menu-cta { display: none; }
+}
+
+@media screen and (max-width: 899px) {
+  /* Mobile V1 2794:1090 (375 x 44): 9 / 14px padding; address, "Call or text" + number and hours, each a 2-line
+     Libre Caslon 10 / 14 (-3%) box (78 / 53 / 74 wide) 7px right of its 12px icon, with 1px rules between them.
+     The social icons stay on desktop. */
+  .fa-header__bar {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 9px 14px;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.03em;
+  }
+
+  .fa-header__bar-inner { flex: 1; justify-content: space-between; }
+  .fa-header__bar-group { display: contents; }
+  .fa-header__social { display: none; }
+  .fa-header__bar-item { gap: 7px; white-space: normal; }
+  .fa-header__bar-item + .fa-header__bar-item::before,
+  .fa-header__bar-group--end .fa-header__bar-item:first-child::before {
+    content: '';
+    align-self: center;
+    width: 1px;
+    height: 12px;
+    margin-right: 18px;
+    background: currentColor;
+  }
+  .fa-header__bar-item .fa-trim { display: block; }
+  .fa-header__bar-item:nth-child(1) .fa-trim { width: 78px; }
+  .fa-header__phone { min-width: 0; width: 53px; }
+  .fa-header__bar .fa-header__phone { text-decoration-color: currentColor; } /* underlined at rest, as drawn */
+  .fa-header__bar-group--end .fa-trim { width: 74px; }
+  .fa-header__bar--no-start { display: none; }
+
+  /* Nav row 2794:1127: 53px, 6 / 12px padding; seal 22 x 22, the wordmark (181 x 12) 13px right of it, menu 32 x 28. */
+  .fa-header__row {
+    min-height: 53px;
+    padding: 6px var(--fa-gutter);
+  }
+
+  .fa-header__seal {
+    width: 22px;
+    height: 22px;
+  }
+
+  .fa-header__wordmark {
+    display: block;
+    width: 181px;
+    height: auto;
+  }
+
+  /* The whole Book Now item goes: its dropdown, centred on the hidden button, would overflow the viewport. */
+  .fa-header__cta,
+  .fa-header__book { display: none; }
+}
+
+/* Small phones (320px): the three bar items and the wordmark need the 375 frame's width */
+@media screen and (max-width: 359px) {
+  .fa-header__bar { padding-inline: 8px; }
+  .fa-header__bar-item + .fa-header__bar-item::before,
+  .fa-header__bar-group--end .fa-header__bar-item:first-child::before { margin-right: 8px; }
+  .fa-header__wordmark { width: 150px; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ---------- */
+
+.fa-header__bar a,
+.fa-header__social a {
+  transition: text-decoration-color var(--fa-dur-hover) var(--fa-ease-out), opacity var(--fa-dur-hover) var(--fa-ease-out);
+}
+
+/* Nav: the 1px underline draws from the left (hover / keyboard focus). */
+.fa-header__nav-link { transition: background-size var(--fa-dur-ui) var(--fa-ease-out); }
+
+.fa-header__nav-link:focus-visible { background-size: 100% 1px; }
+
+.fa-header__toggle { transition: background-color var(--fa-dur-hover) var(--fa-ease-out); }
+
+.fa-header__menu-link,
+.fa-header__menu-sublink { transition: opacity var(--fa-dur-hover) var(--fa-ease-out); }
+
+.fa-header__caret { transition: transform var(--fa-dur-ui) var(--fa-ease-out); }
+
+.fa-header__nav-sublink { transition: background-size var(--fa-dur-ui) var(--fa-ease-out); }
+
+.fa-header__nav-sublink:focus-visible { background-size: 100% 1px; outline: none; }
+
+/* Dropdown: fades in and settles 4px; the visibility delay keeps it hoverable while it fades out. */
+.fa-header__dropdown {
+  translate: 0 4px;
+  transition:
+    opacity var(--fa-dur-ui) var(--fa-ease-out),
+    translate var(--fa-dur-ui) var(--fa-ease-out),
+    visibility 0s linear var(--fa-dur-ui);
+}
+
+.fa-header__nav-item.is-open > .fa-header__dropdown {
+  translate: 0 0;
+  transition-delay: 0s;
+}
+
+@media (hover: hover) and (min-width: 1100px) {
+  .fa-header__nav-item--parent:hover:not(.is-dismissed) > .fa-header__dropdown {
+    translate: 0 0;
+    transition-delay: 0s;
+  }
+}
+
+@media (hover: hover) {
+  .fa-header__bar a:hover { text-decoration-color: currentColor; }
+  .fa-header__social a:hover { opacity: 0.8; }
+  .fa-header__nav-link:hover { background-size: 100% 1px; }
+  .fa-header__toggle:hover { background: var(--fa-garnet-dark); }
+  .fa-header__menu-link:hover,
+  .fa-header__menu-sublink:hover { opacity: 0.75; }
+  .fa-header__nav-sublink:hover { background-size: 100% 1px; }
+  .fa-header__nav-caret:hover { opacity: 0.8; }
+}
+
+/* Menu panel (< 1100px): fades in and settles 8px when it opens, reverses when it closes. The `hidden` attribute
+   stays the source of truth (toggle, Escape and focus handling are unchanged); the discrete display transition
+   keeps the panel painted until its fade-out ends. Browsers without @starting-style just show / hide it. */
+.fa-header__menu {
+  transition:
+    opacity var(--fa-dur-ui) var(--fa-ease-out),
+    transform var(--fa-dur-ui) var(--fa-ease-out),
+    display var(--fa-dur-ui) allow-discrete;
+}
+
+.fa-header__menu[hidden] {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0);
+}
+
+@starting-style {
+  .fa-header__menu:not([hidden]) {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+/* No JavaScript (< 1100px): the toggle can't work, so the menu panel is shown in the flow under the header row. */
+@media screen and (max-width: 1099px) and (scripting: none) {
+  .fa-header__toggle { display: none; }
+
+  .fa-header__menu[hidden] {
+    display: flex;
+    position: relative; /* in the flow, above the row's texture layer */
+    top: auto;
+    height: auto;
+    max-height: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Sub-links stay listed (the accordion buttons can't work) and their chevrons are hidden. */
+  .fa-header__submenu[hidden] { display: flex; }
+  .fa-header__menu-parent .fa-header__caret { display: none; }
+}
+
+/* No JavaScript (desktop): keyboard focus inside an item opens its dropdown (hover works without JS). */
+@media screen and (min-width: 1100px) and (scripting: none) {
+  .fa-header__nav-item--parent:focus-within > .fa-header__dropdown {
+    visibility: visible;
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ---------- Mobile booking bar (dev notes 2728:741) ---------- */
+.fa-sticky-book { display: none; }
+
+@media screen and (max-width: 899px) {
+  .fa-sticky-book {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 30;
+    display: flex;
+    gap: 8px;
+    padding: 8px var(--fa-gutter) calc(8px + env(safe-area-inset-bottom));
+    background: var(--fa-paper);
+    box-shadow: 0 -1px 0 rgb(146 32 57 / 0.15);
+  }
+
+  .fa-sticky-book__btn { flex: 1 1 0; min-width: 0; }
+
+  body:has(.fa-sticky-book) { padding-bottom: calc(55px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------- "Book now" dropdown (live site: In-Clinic / Concierge under the button; the shared nav dropdown panel).
+   Opens on hover like the live site; the visually hidden toggle after the button opens it from the keyboard. ---------- */
+.fa-header__book { gap: 0; }
+
+.fa-header__book > .fa-header__dropdown { padding-top: 12px; }
+
+.fa-header__book-toggle {
+  position: absolute;
+  right: 6px;
+  bottom: -14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+  background: none;
+  color: var(--fa-garnet);
+}
+
+.fa-header__book-toggle:focus-visible {
+  width: 16px;
+  height: 12px;
+  overflow: visible;
+  clip: auto;
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 2px;
+}
+
+/* ---------- "Layout: PPC landing page" (PPC Landing Page 3014:4054 desktop / 3031:4731 mobile) ----------
+   Desktop row 84 tall: seal 59 x 60 at 50px, the wordmark (375 x 26) 12px right of it, one 290 x 48 garnet button
+   (Marisa 20, -3%, linen) at the right edge; no navigation. Mobile row 50 tall (6 / 12px): seal 17 x 18, wordmark
+   154 x 11 8px right of it, a 109 x 29 button (11 / 12px, Marisa 14 -3%, white) "Book · $150". */
+.fa-header--ppc .fa-header__row { grid-template-columns: auto 1fr; }
+.fa-header--ppc .fa-header__actions { justify-self: end; }
+.fa-header--ppc .fa-header__logo { gap: 12px; }
+.fa-header--ppc .fa-header__wordmark { display: block; width: 375px; height: auto; }
+.fa-header--ppc .fa-header__cta-label--mobile { display: none; }
+.fa-section.fa-header--ppc .fa-header__cta { min-width: 290px; } /* Figma's fixed 290 x 48 */
+
+@media screen and (max-width: 899px) {
+  .fa-header--ppc .fa-header__row { min-height: 50px; padding: 6px 12px; }
+  .fa-header--ppc .fa-header__logo { gap: 8px; }
+
+  .fa-header--ppc .fa-header__seal {
+    width: 17px;
+    height: 18px;
+  }
+
+  .fa-header--ppc .fa-header__wordmark { width: min(154px, calc(100vw - 172px)); } /* 154 = Figma; a few px less on 320px phones so the CTA fits */
+
+  .fa-section.fa-header--ppc .fa-header__cta {
+    display: inline-flex;
+    min-width: 109px; /* Figma's fixed 109 x 29 */
+    min-height: 29px;
+    padding: 0 12px;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+    color: var(--fa-white);
+  }
+
+  .fa-header--ppc .fa-header__cta-label--desktop { display: none; }
+  .fa-header--ppc .fa-header__cta-label--mobile { display: inline; }
+}

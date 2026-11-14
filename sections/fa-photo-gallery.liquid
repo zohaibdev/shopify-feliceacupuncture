@@ -1,0 +1,600 @@
+{%- comment -%}
+  Felice photo gallery — centred heading (+ optional intro), a full-bleed row of photos, then a social "follow" line
+  (Facebook / Instagram squares + label) with optional prev / next arrows on either side. Two layouts:
+  - "carousel" (homepage "Inside the clinic"): the active photo is the largest, its neighbours step down in height;
+    the arrows, a swipe / mouse drag or a click on a side photo move it (assets/fa-photo-gallery.js). The start
+    state is rendered by Liquid (middle or first photo), so no-JS visitors and the Theme Editor see the Figma row.
+  - "strip" (homepage "Our gallery"): equal photos in a native scroll row that starts centred; optional curved top
+    and bottom edges (two linen ellipses in Figma, drawn here as a CSS mask on the row).
+  Social icons render as drawn: a link when the URL is set, otherwise a decorative square. The label links to the
+  Instagram URL when one is set.
+  Figma (file B4Qc…, homepage "V3 - Latest version" 2612:3077): carousel 2615:9410 (band 4166–5252), strip
+  2619:10663 + background 2618:10341 (band 10511–11234). No mobile frame: mobile follows the established patterns.
+{%- endcomment -%}
+{{ 'fa-photo-gallery.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fa-photo-gallery.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign layout = section.settings.layout | default: 'carousel'
+  assign heading = section.settings.heading
+  assign count = section.blocks.size
+  assign active = 0
+  if section.settings.start != 'start' and count > 0
+    assign active = count | minus: 1 | divided_by: 2
+  endif
+  assign gallery_label = heading
+  if gallery_label == blank
+    assign gallery_label = 'general.slider.name' | t
+  endif
+  assign instagram_url = section.settings.instagram_url
+  assign facebook_url = section.settings.facebook_url
+  assign show_arrows = false
+  assign arrow_class = ''
+  if section.settings.show_arrows and count > 1
+    assign show_arrows = true
+  elsif section.settings.show_arrows_mobile and count > 1
+    comment
+      Our Approach mobile 2821:6541: arrows on phones only (the desktop frame has none).
+    endcomment
+    assign show_arrows = true
+    assign arrow_class = ' fa-hide-desktop'
+  endif
+  assign show_social = section.settings.show_social
+  assign follow_label = section.settings.follow_label | escape
+  assign curved = false
+  assign lightbox = false
+  assign image_sizes = '(max-width: 899px) 240px, 360px'
+  if layout == 'strip'
+    if section.settings.lightbox and count > 0
+      assign lightbox = true
+    endif
+    assign image_sizes = '(max-width: 899px) 200px, 322px'
+    if section.settings.curved_edges
+      assign curved = true
+    endif
+    if section.settings.strip_shape == 'square' or section.settings.strip_shape == 'square_tight'
+      assign image_sizes = '(max-width: 899px) 200px, 424px'
+    endif
+  endif
+  assign follow_edge = false
+  if section.settings.follow_position == 'edge_start'
+    assign follow_edge = true
+  endif
+-%}
+<section
+  class="fa-section fa-photo-gallery fa-photo-gallery--{{ layout }}{% if curved %} fa-photo-gallery--curved{% endif %} fa-photo-gallery--bg-{{ section.settings.background_style }}{% if section.settings.botanical == 'bottom_right' %} fa-photo-gallery--flower-bottom{% endif %}{% if layout == 'strip' and section.settings.strip_shape == 'square' %} fa-photo-gallery--strip-square{% elsif layout == 'strip' and section.settings.strip_shape == 'square_tight' %} fa-photo-gallery--strip-square fa-photo-gallery--strip-tight{% endif %}{% if follow_edge %} fa-photo-gallery--follow-edge{% endif %}{% if section.settings.mobile_photo_size == 'small' %} fa-photo-gallery--mobile-small{% endif %}"
+  id="{% if section.settings.anchor_id != blank %}{{ section.settings.anchor_id | handleize }}{% else %}fa-photo-gallery-{{ section.id }}{% endif %}"
+  {% if heading != blank %}aria-labelledby="fa-photo-gallery-title-{{ section.id }}"{% endif %}
+  style="--fa-pg-pad-top: {{ section.settings.padding_top }}px; --fa-pg-pad-bottom: {{ section.settings.padding_bottom }}px; --fa-pg-pad-m: {{ section.settings.padding_mobile }}px; --fa-pg-text-w: {{ section.settings.text_width }}px;{% if section.settings.row_gap != 'auto' and section.settings.row_gap != blank %} --fa-pg-row-gap-set: {{ section.settings.row_gap }}px;{% endif %}"
+>
+  {%- if section.settings.background_style == 'texture' or section.settings.background != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      {%- comment -%}
+        Bundled texture = Figma 2615:9411 (linen + botanical print 12% + #a18350 30%), mobile file 750 wide. A picked
+        desktop image is used on mobile too unless a mobile image is picked.
+      {%- endcomment -%}
+      <picture>
+        {%- if section.settings.background_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+        {%- elsif section.settings.background == blank -%}
+          <source media="(max-width: 899px)" srcset="{{ 'fa-photo-gallery-bg-mobile.jpg' | asset_url }}" width="750" height="1700">
+        {%- endif -%}
+        {%- if section.settings.background != blank -%}
+          {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- else -%}
+          <img src="{{ 'fa-photo-gallery-bg.jpg' | asset_url }}" width="1440" height="1086" loading="lazy" alt="">
+        {%- endif -%}
+      </picture>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.botanical == 'bottom_right' -%}
+    {%- comment -%} Same chrysanthemum drawing as fa-services (bundled there, reused here). {%- endcomment -%}
+    <img class="fa-deco fa-photo-gallery__flower" src="{{ 'fa-services-flower.png' | asset_url }}" alt="" aria-hidden="true" width="506" height="792" loading="lazy">
+  {%- endif -%}
+
+  {%- if heading != blank or section.settings.text != blank -%}
+    <div class="fa-container">
+      <div class="fa-heading fa-photo-gallery__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if heading != blank -%}
+          <h2 class="fa-heading__title fa-photo-gallery__title" id="fa-photo-gallery-title-{{ section.id }}">{{ heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-photo-gallery__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+    {%- if section.settings.review_label != blank -%}
+      {%- comment -%} Our Team V3 2701:7859: five clay stars, 12px, a garnet link (Marisa 24, -4%), 20px above the photos. {%- endcomment -%}
+      <p class="fa-photo-gallery__reviews" data-fa-reveal="up">
+        <span class="fa-photo-gallery__reviews-stars" aria-hidden="true">
+          {%- for i in (1..5) -%}{% render 'fa-icon', icon: 'star-pointed' %}{%- endfor -%}
+        </span>
+        {%- if section.settings.review_link != blank -%}
+          <a class="fa-photo-gallery__reviews-link" href="{{ section.settings.review_link }}"{% render 'fa-link-target', url: section.settings.review_link %}>{{ section.settings.review_label | escape }}</a>
+        {%- else -%}
+          <span class="fa-photo-gallery__reviews-link">{{ section.settings.review_label | escape }}</span>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+  <fa-photo-gallery
+    class="fa-photo-gallery__gallery"
+    data-layout="{{ layout }}"
+    data-active="{{ active }}"
+    {%- if section.settings.loop %} data-loop{% endif %}
+    {%- if section.settings.autoplay %} data-autoplay data-interval="{{ section.settings.autoplay_interval | times: 1000 }}" data-speed="{{ section.settings.autoplay_speed }}"{% endif %}
+    {%- if lightbox %} data-lightbox{% endif %}
+    data-label-of="{{ 'general.slider.of' | t | escape }}"
+    style="--fa-pg-active: {{ active }};"
+  >
+    {%- if count > 0 -%}
+      <div
+        class="fa-photo-gallery__viewport"
+        data-viewport
+        role="region"
+        aria-label="{{ gallery_label | escape }}"
+        {% if layout == 'carousel' %}aria-roledescription="carousel"{% else %}tabindex="0"{% endif %}
+        data-fa-reveal="up"
+      >
+        <ul class="fa-photo-gallery__list" role="list">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign distance = forloop.index0 | minus: active | abs
+              if distance > 2
+                assign distance = 2
+              endif
+              assign alt = block.settings.alt | escape
+              assign full_src = blank
+              if lightbox
+                if block.settings.image != blank
+                  assign full_src = block.settings.image | image_url: width: 2400
+                elsif block.settings.fallback_asset != blank
+                  assign full_src = block.settings.fallback_asset | asset_url
+                endif
+              endif
+            -%}
+            <li
+              class="fa-photo-gallery__item"
+              data-index="{{ forloop.index0 }}"
+              {% if full_src != blank %}data-full="{{ full_src }}"{% endif %}
+              {% if layout == 'carousel' %}data-distance="{{ distance }}"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {%- assign shade = block.settings.shade | default: 0 -%}
+              <div class="fa-photo-gallery__media fa-media{% if shade > 0 %} fa-photo-gallery__media--shade{% endif %}"{% if shade > 0 %} style="--fa-pg-shade: {{ shade | divided_by: 100.0 }};"{% endif %}>
+                {%- if block.settings.image != blank -%}
+                  {%- liquid
+                    assign image_alt = block.settings.image.alt | escape | default: alt
+                    assign focal = block.settings.image.presentation.focal_point | default: 'center'
+                    assign focal_style = '--fa-pg-focal: ' | append: focal
+                  -%}
+                  {{ block.settings.image | image_url: width: 1080 | image_tag: widths: '240, 360, 480, 720, 1080', sizes: image_sizes, loading: 'lazy', alt: image_alt, style: focal_style, draggable: 'false' }}
+                {%- elsif block.settings.fallback_asset != blank -%}
+                  {%- comment -%} Size hints only: CSS sets the box and cover-crops the photo. {%- endcomment -%}
+                  {%- if layout == 'strip' -%}
+                    <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ alt }}" width="322" height="424" loading="lazy" draggable="false">
+                  {%- else -%}
+                    <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ alt }}" width="360" height="620" loading="lazy" draggable="false">
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if block.settings.video != blank -%}
+                  {%- comment -%}
+                    Figma V6 2669:25257: each clip plays muted and looped with a pause + mute pair 12px in from the
+                    bottom-right corner (32px glass circles, 42px on the middle photo). The photo above is the still
+                    shown before the video loads and with reduced motion (fa-photo-gallery.js does not autoplay then).
+                  {%- endcomment -%}
+                  {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, preload: 'metadata', class: 'fa-photo-gallery__video', data-fa-video: '' }}
+                  <div class="fa-photo-gallery__video-controls" data-video-controls data-paused>
+                    <button type="button" class="fa-photo-gallery__video-btn" data-video-play aria-label="Play video">
+                      {%- render 'fa-icon', icon: 'play' -%}{%- render 'fa-icon', icon: 'pause' -%}
+                    </button>
+                    <button type="button" class="fa-photo-gallery__video-btn" data-video-mute aria-pressed="false" aria-label="Sound">
+                      {%- render 'fa-icon', icon: 'volume-off' -%}{%- render 'fa-icon', icon: 'volume-on' -%}
+                    </button>
+                  </div>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- if layout == 'carousel' -%}
+        <p class="visually-hidden" data-status aria-live="polite" aria-atomic="true"></p>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if lightbox -%}
+      {%- comment -%} Larger view (desktop, 900px+): the script fills the figure with the clicked photo. {%- endcomment -%}
+      <dialog class="fa-photo-gallery__lightbox" data-lightbox-dialog aria-label="{{ gallery_label | escape }}">
+        <button type="button" class="fa-photo-gallery__lightbox-close" data-lightbox-close aria-label="{{ 'accessibility.close' | t | escape }}">
+          {%- render 'fa-icon', icon: 'close' -%}
+        </button>
+        <figure class="fa-photo-gallery__lightbox-figure" data-lightbox-figure></figure>
+      </dialog>
+    {%- endif -%}
+
+    {%- if show_arrows or show_social -%}
+      <div class="{% if follow_edge %}fa-photo-gallery__edge{% else %}fa-container{% endif %}">
+        <div class="fa-photo-gallery__controls" data-fa-reveal="fade">
+          {%- if show_arrows -%}
+            <button type="button" class="fa-photo-gallery__arrow fa-photo-gallery__arrow--prev{{ arrow_class }}" data-prev aria-label="{{ 'general.slider.previous_slide' | t | escape }}">
+              {%- render 'fa-icon', icon: 'chevron' -%}
+            </button>
+          {%- endif -%}
+          {%- if show_social -%}
+            <div class="fa-photo-gallery__follow">
+              <ul class="fa-photo-gallery__social" role="list">
+                <li>
+                  {%- if facebook_url != blank -%}
+                    <a class="fa-photo-gallery__social-item" href="{{ facebook_url }}"{% render 'fa-link-target', url: facebook_url %} aria-label="Facebook">{% render 'fa-icons-footer', icon: 'facebook' %}</a>
+                  {%- else -%}
+                    <span class="fa-photo-gallery__social-item" aria-hidden="true">{% render 'fa-icons-footer', icon: 'facebook' %}</span>
+                  {%- endif -%}
+                </li>
+                <li>
+                  {%- if instagram_url != blank -%}
+                    <a class="fa-photo-gallery__social-item" href="{{ instagram_url }}"{% render 'fa-link-target', url: instagram_url %} aria-label="Instagram">{% render 'fa-icons-footer', icon: 'instagram' %}</a>
+                  {%- else -%}
+                    <span class="fa-photo-gallery__social-item" aria-hidden="true">{% render 'fa-icons-footer', icon: 'instagram' %}</span>
+                  {%- endif -%}
+                </li>
+              </ul>
+              {%- if follow_label != blank -%}
+                {%- if instagram_url != blank -%}
+                  <a class="fa-photo-gallery__follow-label" href="{{ instagram_url }}"{% render 'fa-link-target', url: instagram_url %}>{{ follow_label }}</a>
+                {%- else -%}
+                  <p class="fa-photo-gallery__follow-label">{{ follow_label }}</p>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if show_arrows -%}
+            <button type="button" class="fa-photo-gallery__arrow fa-photo-gallery__arrow--next{{ arrow_class }}" data-next aria-label="{{ 'general.slider.next_slide' | t | escape }}">
+              {%- render 'fa-icon', icon: 'chevron' -%}
+            </button>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </fa-photo-gallery>
+</section>
+
+{% schema %}
+{
+  "name": "Felice photo gallery",
+  "tag": "div",
+  "class": "fa-photo-gallery-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_photo_size",
+      "label": "Square photos on mobile",
+      "options": [
+        { "value": "large", "label": "Large (334px)" },
+        { "value": "small", "label": "Small (171px)" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "carousel", "label": "Carousel (large middle photo)" },
+        { "value": "strip", "label": "Photo strip" }
+      ],
+      "default": "carousel",
+      "info": "Carousel: the active photo is the largest and visitors step through with the arrows or a swipe. Photo strip: equal photos in a row that visitors swipe or drag."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Intro width (desktop)",
+      "min": 300,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 460,
+      "info": "Maximum line length of the intro on screens 900px and wider."
+    },
+    {
+      "type": "text",
+      "id": "review_label",
+      "label": "Reviews line",
+      "info": "Shown with five stars above the photos, e.g. 5.0 on Google · Read our reviews →"
+    },
+    {
+      "type": "url",
+      "id": "review_link",
+      "label": "Reviews line link"
+    },
+    {
+      "type": "select",
+      "id": "start",
+      "label": "Photo row starts at",
+      "options": [
+        { "value": "center", "label": "Middle photo (centred)" },
+        { "value": "start", "label": "First photo" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true,
+      "info": "Previous / next buttons on either side of the follow line."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows_mobile",
+      "label": "Show arrows on mobile only",
+      "default": false,
+      "info": "Used when \"Show arrows\" is off."
+    },
+    {
+      "type": "checkbox",
+      "id": "curved_edges",
+      "label": "Curved top and bottom edges",
+      "default": true,
+      "info": "Photo strip layout only."
+    },
+    {
+      "type": "select",
+      "id": "strip_shape",
+      "label": "Strip photo shape",
+      "options": [
+        { "value": "portrait", "label": "Portrait (322 x 424, 10px apart)" },
+        { "value": "square", "label": "Square (424 x 424, 20px apart)" },
+        { "value": "square_tight", "label": "Square (424 x 424, 12px apart)" }
+      ],
+      "default": "portrait",
+      "info": "Photo strip layout, desktop."
+    },
+    {
+      "type": "select",
+      "id": "row_gap",
+      "label": "Space between photos and controls (desktop)",
+      "options": [
+        { "value": "auto", "label": "Layout default" },
+        { "value": "20", "label": "20px" },
+        { "value": "32", "label": "32px" },
+        { "value": "40", "label": "40px" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "header",
+      "content": "Desktop motion",
+      "info": "Screens 900px and wider; the mobile layout is unchanged. Autoplay stays off for visitors who ask for reduced motion."
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop endlessly",
+      "default": false,
+      "info": "The photos repeat, so the row never runs out at either end."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false,
+      "info": "Carousel: moves to the next photo on a timer and pauses while hovered. Photo strip: drifts continuously."
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Carousel: seconds per photo",
+      "min": 2,
+      "max": 10,
+      "step": 0.5,
+      "unit": "s",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Photo strip: drift speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30,
+      "info": "Pixels per second."
+    },
+    {
+      "type": "checkbox",
+      "id": "lightbox",
+      "label": "Open photos in a larger view",
+      "default": false,
+      "info": "Photo strip layout only: a click shows the whole photo; close with the button, Escape or a click outside it."
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Lets links jump to this section, e.g. \"gallery\" for /#gallery."
+    },
+    {
+      "type": "header",
+      "content": "Follow line"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons and label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "follow_label",
+      "label": "Label",
+      "default": "Follow @feliceacupuncture",
+      "info": "Links to the Instagram URL when one is set."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "info": "Without a URL the icon is shown but not linked."
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL",
+      "info": "Without a URL the icon is shown but not linked."
+    },
+    {
+      "type": "select",
+      "id": "follow_position",
+      "label": "Follow line position",
+      "options": [
+        { "value": "center", "label": "Centred" },
+        { "value": "edge_start", "label": "Left, 10px from the screen edge" }
+      ],
+      "default": "center",
+      "info": "Desktop. Without arrows only."
+    },
+    {
+      "type": "header",
+      "content": "Background and spacing"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background",
+      "options": [
+        { "value": "texture", "label": "Tan botanical texture" },
+        { "value": "linen", "label": "Plain linen" }
+      ],
+      "default": "texture"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background image",
+      "info": "Optional. Replaces the background above."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background image (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the bundled mobile texture."
+    },
+    {
+      "type": "select",
+      "id": "botanical",
+      "label": "Botanical illustration",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "bottom_right", "label": "Bottom right, over the next section" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 120,
+      "info": "Screens 1100px and wider; tablets use 80%."
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 120,
+      "info": "Screens 1100px and wider; tablets use 80%."
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 60,
+      "info": "Up to 899px."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Portrait works best (carousel up to 360 x 620, strip 322 x 424). Set a focal point to control the crop."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no photo is selected."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Photo description",
+          "info": "For screen readers. A picked photo's own alt text wins."
+        },
+        {
+          "type": "range",
+          "id": "shade",
+          "label": "Photo shade",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Plays muted and looped with pause and sound buttons; the photo is shown until it loads."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice photo gallery",
+      "settings": {
+        "heading": "Inside the clinic",
+        "text": "<p>A look inside our Culver City clinic: real treatments, our practitioners, and what our patients have to say.</p>"
+      },
+      "blocks": [
+        { "type": "photo", "settings": { "fallback_asset": "fa-photo-gallery-clinic.jpg" } },
+        { "type": "photo", "settings": { "fallback_asset": "fa-photo-gallery-clinic.jpg" } },
+        { "type": "photo", "settings": { "fallback_asset": "fa-photo-gallery-clinic.jpg" } },
+        { "type": "photo", "settings": { "fallback_asset": "fa-photo-gallery-clinic.jpg" } },
+        { "type": "photo", "settings": { "fallback_asset": "fa-photo-gallery-clinic.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

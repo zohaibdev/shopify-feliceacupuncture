@@ -1,0 +1,85 @@
+{%- comment -%}
+  Felice image + text — a photo beside a title, a short text and up to two buttons (light + outline), on a texture.
+  Figma: E-Books V2 "From Exhausted to Energized" (file B4QcctWXiG9ywP3uRA3coG, frame 2792:3796, band 2792:3797).
+{%- endcomment -%}
+
+{{ 'fa-media-text.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign default_id = 'fa-media-text-' | append: section.id
+  assign title_id = 'fa-media-text-title-' | append: section.id
+  assign bg = section.settings.background_asset
+-%}
+<section
+  class="fa-section fa-media-text{% if section.settings.image_position == 'right' %} fa-media-text--media-right{% endif %}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if bg != blank -%}
+    {%- assign bg_2x = bg | replace: '.jpg', '-2x.jpg' -%}
+    <div class="fa-bg" aria-hidden="true"><img src="{{ bg | asset_url }}"{% if bg == 'fa-membership-bg.jpg' %} srcset="{{ bg | asset_url }} 1440w, {{ bg_2x | asset_url }} 2880w" sizes="100vw"{% endif %} width="1440" height="689" loading="lazy" alt=""></div>
+  {%- endif -%}
+
+  <div class="fa-container fa-media-text__inner">
+    <div class="fa-media-text__media fa-media" data-fa-reveal="up">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1162 | image_tag: widths: '581, 900, 1162', sizes: '(min-width: 1100px) 581px, calc(100vw - 2 * var(--fa-gutter))', loading: 'lazy', class: 'fa-media-text__photo', alt: section.settings.image_alt }}
+      {%- elsif section.settings.fallback_asset != blank -%}
+        <img class="fa-media-text__photo" src="{{ section.settings.fallback_asset | asset_url }}" width="1162" height="922" loading="lazy" alt="{{ section.settings.image_alt | escape }}">
+      {%- endif -%}
+    </div>
+
+    <div class="fa-media-text__body" data-fa-reveal="up" data-fa-reveal-stagger>
+      <div class="fa-media-text__copy">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-media-text__title" id="{{ title_id }}">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-media-text__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+        <div class="fa-media-text__buttons">
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--light fa-media-text__button">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link_2 %} class="fa-btn fa-media-text__button fa-media-text__button--outline">{{ section.settings.button_label_2 | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice image + text",
+  "tag": "div",
+  "class": "fa-media-text-wrapper",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "info": "Optional, for in-page links." },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback image (bundled file)", "default": "fa-media-text-course.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image description" },
+    { "type": "text", "id": "background_asset", "label": "Background (bundled file)", "default": "fa-membership-bg.jpg" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "From Exhausted to Energized" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "button_label_2", "label": "Outline button label" },
+    { "type": "url", "id": "button_link_2", "label": "Outline button link" }
+  ],
+  "presets": [{ "name": "Felice image + text" }]
+}
+{% endschema %}

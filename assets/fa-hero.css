@@ -1,0 +1,492 @@
+/* Felice hero — Figma 414:632 / 414:636 (desktop), 414:1011 / 414:1012 (mobile) */
+
+.fa-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 825px;
+  padding: 120px var(--fa-gutter) 80px;
+  overflow: hidden;
+  color: var(--fa-white);
+  background: #d9d9d9;
+}
+
+.fa-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fa-hero__img {
+  position: relative;
+  min-width: 0;
+  background: #d9d9d9;
+}
+
+.fa-hero__img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Figma noise effect on each photo (25% black grain, sub-pixel): a tiled black-alpha texture that darkens
+   by ~13% on average, measured against Figma's own export. */
+.fa-hero__img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--fa-hero-grain) repeat 0 0 / 128px 128px;
+  pointer-events: none;
+}
+
+/* Figma 414:635: rgba(0,0,0,.44) band over the lower 422px (1443px wide), blurred 52px.
+   A pseudo-element, not an empty div: Dawn's base.css hides div:empty. */
+.fa-hero__media::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: -3px;
+  top: 48.85%;
+  bottom: 0;
+  background: rgba(0, 0, 0, var(--fa-hero-shade, 0.44));
+  filter: blur(52px);
+}
+
+.fa-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 658px;
+  text-align: center;
+}
+
+.fa-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.05em;
+}
+
+.fa-hero__meta > li {
+  display: flex;
+  align-items: center;
+}
+
+/* Figma draws the separators as zero-width lines with a centred 1px stroke, 8px from each neighbour. */
+.fa-hero__meta > li + li::before {
+  content: '';
+  width: 1px;
+  height: 11px;
+  margin-inline: -0.5px 7.5px;
+  background: currentColor;
+}
+
+.fa-hero__rating { gap: 4px; }
+
+/* Eyebrow (V5 2612:3465): Libre Caslon 16 / 20, -1%, 28px above the title like the rating line. */
+.fa-hero__eyebrow {
+  margin: 0 0 28px;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Figma's 13 x 12 star, 3px after the text before it, sitting on the baseline (cap-high). */
+.fa-hero__eyebrow-star {
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.fa-hero__eyebrow-star .fa-icon {
+  display: block;
+  width: 13px;
+  height: 12.3px;
+}
+
+/* Figma V6 2669:25448: an 88 x 18 row of five clay stars (15px star in a 17.6 x 18 cell), 5px before the text,
+   which sits centred on the row. */
+.fa-hero__eyebrow--stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  line-height: 18px;
+  text-box: none;
+}
+
+.fa-hero__eyebrow-stars {
+  display: flex;
+  flex: none;
+  color: var(--fa-clay);
+}
+
+.fa-hero__eyebrow-stars .fa-icon {
+  display: block;
+  width: 17.6px;
+  height: 18px;
+  padding: 1.5px 1.3px;
+}
+
+.fa-hero__stars {
+  display: flex;
+  gap: 2px;
+}
+
+/* Figma: 16.84 x 16 star cells, 2px apart; the star path (15.16 x 14.32 + stroke) sits centred in each cell. */
+.fa-hero__stars .fa-icon {
+  width: 16.84px;
+  height: 16px;
+  padding: 0.54px;
+}
+
+.fa-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fa-hero__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 60px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+  /* Figma breaks "Healing that / starts at the root." (desktop and mobile). Marisa's width forces that break
+     in the 658px box; balanced lines give the same break with the narrower stand-in and at every width. */
+  text-wrap: balance;
+}
+
+.fa-hero__text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 28px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-hero__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-hero { min-height: 720px; }
+  .fa-hero__title { font-size: 58px; line-height: 52px; }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-hero {
+    min-height: 536px;
+    padding: 96px var(--fa-gutter) 24px;
+  }
+
+  .fa-hero__media { grid-template-columns: 1fr; }
+  .fa-hero__img--left { display: none; }
+
+  .fa-hero__media::after {
+    inset: 0;
+    filter: none;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 43.42%, rgba(0, 0, 0, 0.41) 57.04%);
+  }
+
+  .fa-hero__content { max-width: 348px; }
+
+  .fa-hero__meta {
+    margin-bottom: 16px;
+    font-size: 12px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-hero__meta > li + li::before { height: 10px; }
+
+  /* No V5 mobile frame: the eyebrow takes the mobile rating line's 12px size and 16px gap; the star scales with it. */
+  .fa-hero__eyebrow {
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .fa-hero__eyebrow-star { margin-left: 2px; }
+
+  /* No V6 mobile frame: the star row scales with the 12px eyebrow (x 0.75). */
+  .fa-hero__eyebrow--stars { gap: 4px; line-height: 13.5px; }
+
+  .fa-hero__eyebrow-stars .fa-icon {
+    width: 13.2px;
+    height: 13.5px;
+    padding: 1.1px 1px;
+  }
+
+  .fa-hero__eyebrow-star .fa-icon {
+    width: 9.75px;
+    height: 9.2px;
+  }
+
+  /* Figma: 12 x 11 star cells (10.8 x 9.84 star), 2px apart. */
+  .fa-hero__stars .fa-icon {
+    width: 12px;
+    height: 11px;
+    padding: 0.3px;
+  }
+
+  .fa-hero__copy { gap: 16px; }
+
+  .fa-hero__title {
+    font-size: 40px;
+    line-height: 35px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-hero__text {
+    max-width: 346px;
+    margin-inline: auto;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+    text-wrap: pretty; /* no one-word last line on narrow phones */
+  }
+
+  .fa-hero__buttons {
+    width: 100%;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .fa-section .fa-hero__buttons .fa-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 37px;
+  }
+}
+
+/* Below Figma's 375 frame the rating line no longer fits on one row: put the stars on their own line
+   instead of letting a separator start the second line. */
+@media screen and (max-width: 359px) {
+  .fa-hero__rating {
+    flex-basis: 100%;
+    justify-content: center;
+  }
+
+  .fa-hero__meta > .fa-hero__rating + li::before { display: none; }
+}
+
+/* ---------- Layout "Home, centred copy" (homepage V5 2612:3390, 11-10-2026) ----------
+   Desktop / tablet: the photos fill a 714px band (Figma 116–830) and the 658px copy column is centred in it (214 /
+   215px above / below at 1440). The 44% shade 3461 is a 1443 x 825 rectangle at the band's top-left with a 104 layer
+   blur (CSS 52px), so it covers the whole band and runs 111px past its bottom (clipped). Up to 899px the layout is
+   the Home layout (no V5 mobile frame: copy at the bottom, gradient). */
+@media screen and (min-width: 900px) {
+  .fa-hero--centered {
+    justify-content: center;
+    min-height: 714px;
+    padding-block: 96px;
+  }
+
+  .fa-hero--centered .fa-hero__media::after {
+    top: 0;
+    bottom: -111px;
+  }
+}
+
+/* Mobile V1 2794:1089 (homepage): a 375 x 495 band, an even 27% black shade over the photo (Rectangle 24) and the
+   217px copy block centred in it (139px above and below). */
+@media screen and (max-width: 899px) {
+  .fa-hero--centered {
+    justify-content: center;
+    min-height: 495px;
+    padding-block: 24px;
+  }
+
+  .fa-hero--centered .fa-hero__media::after { background: rgba(0, 0, 0, 0.27); }
+}
+
+/* ---------- Layout "Page" (services page v2: Figma 2263:2286 desktop, 2264:6705 mobile) ----------
+   Desktop: Figma draws a 488px frame; the stats bar covers its bottom 7px, so the section is 481px and the photos
+   keep Figma's crop by anchoring to the top. Copy starts 144px down (same inner spacing as the home hero); the 658px
+   copy column is centred (2478 / 2480 at x 391).
+   2440: #0d0103 at 35% ("Shade behind text"), 1775 x 785 at -167 / -78, layer blur 104 (CSS blur 52px).
+   Mobile 6738: one 375 x 422 photo (the "Mobile photo" setting picks the left one) with an even #0d0103 shade
+   ("Shade behind text (mobile)", 26%) + the noise; copy 24px above the bottom as on the home hero. Figma's mobile
+   gradient fill sits under the opaque photo, so it is not visible and not reproduced.
+   Settings (custom properties on the section): "Space above content (desktop)" --fa-hero-pad-top (services 144,
+   approach 130), "Space below content (mobile)" --fa-hero-pad-bottom-mobile (services 24, approach 14) and "Photo
+   vertical position" --fa-hero-photo-y (services 0%; approach 47% = Figma's crop of the 3:4 photo, 2270:17268).
+   The heading + text column keeps Figma's 544px box (2270:17272 / 17309), so a two-line intro breaks as drawn. */
+
+.fa-hero--page {
+  justify-content: flex-start;
+  min-height: var(--fa-hero-min-h, 481px); /* setting "Minimum height (desktop)": approach V3 488 */
+  padding-top: var(--fa-hero-pad-top, 144px);
+}
+
+.fa-hero--page .fa-hero__img img { object-position: 50% var(--fa-hero-photo-y, 0%); }
+
+@media screen and (min-width: 900px) {
+  .fa-hero--page .fa-hero__copy { max-width: var(--fa-hero-copy-w, 544px); } /* setting; Our Team V3 698 */
+  /* a copy width above the 658px content box widens the box too (services V5 668: the one-line title) */
+  .fa-hero--page .fa-hero__content { max-width: max(658px, var(--fa-hero-copy-w, 544px)); }
+}
+
+/* "Desktop photos: One" — the right slot alone fills the frame (approach page 2270:17268). */
+.fa-hero--single .fa-hero__media { grid-template-columns: 1fr; }
+
+.fa-hero--page .fa-hero__media::after {
+  inset: -78px -168px -226px -167px;
+  background: rgba(13, 1, 3, var(--fa-hero-shade, 0.35));
+}
+
+@media screen and (max-width: 899px) {
+  .fa-hero--page {
+    justify-content: flex-end;
+    min-height: 422px;
+    padding-top: 48px;
+    padding-bottom: var(--fa-hero-pad-bottom-mobile, 24px);
+  }
+
+  .fa-hero--page .fa-hero__media::after {
+    inset: 0;
+    background: rgba(13, 1, 3, var(--fa-hero-shade-mobile, var(--fa-hero-shade, 0.35)));
+  }
+}
+
+/* ---------- Motion (tokens + rules: fa-base.css "Motion") ----------
+   On-load entrance: the copy rises 16px and fades in with a short cascade (starts immediately, done by ~1s).
+   The photos are not animated: they are the LCP image, and a transform animation on them left Chrome drawing the
+   page's text with greyscale instead of subpixel anti-aliasing after it ended (resting state != Figma render).
+   Only under html.fa-motion (not in the Theme Editor / with reduced motion / without JS). */
+
+@keyframes fa-hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.fa-motion :is(.fa-hero__meta, .fa-hero__eyebrow, .fa-hero__title, .fa-hero__text, .fa-hero__buttons) {
+    animation: fa-hero-rise 0.7s var(--fa-ease-out) 0.05s backwards;
+  }
+
+  html.fa-motion .fa-hero__title { animation-delay: 0.13s; }
+  html.fa-motion .fa-hero__text { animation-delay: 0.21s; }
+  html.fa-motion .fa-hero__buttons { animation-delay: 0.29s; }
+}
+
+/* "Tagline" (Our Team V3 2669:33526): Marisa 20 / 25, -4%, uppercase, 666px, 24px below the text. */
+.fa-hero__tagline {
+  max-width: 666px;
+  margin: 24px auto 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@media screen and (max-width: 899px) {
+  .fa-hero__tagline { margin-top: 16px; font-size: 14px; line-height: 18px; }
+}
+
+/* ---------- Background video (setting "Video file" / "Or video URL"): spans both photo slots; the grain, the
+   dark band and the copy layer stay as they are ---------- */
+.fa-hero__img--video { grid-column: 1 / -1; }
+
+.fa-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% var(--fa-hero-photo-y, 50%);
+  display: block;
+}
+
+.fa-hero__video-toggle {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.22);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--fa-white);
+  cursor: pointer;
+}
+
+.fa-hero__video-toggle .fa-icon { width: 16px; height: 16px; }
+
+.fa-hero__video-toggle:focus-visible { outline: 2px solid var(--fa-white); outline-offset: 2px; }
+
+.fa-hero[data-video-paused] .fa-hero__video-toggle .fa-icon--pause,
+.fa-hero:not([data-video-paused]) .fa-hero__video-toggle .fa-icon--play { display: none; }
+
+/* The garnet hero button label is white (Figma "Latest pages" 2993:8: Home, Our Approach, Our Team, E-Courses, desktop
+   and mobile). Setting "Linen button label (desktop)": Blog listing desktop draws it linen. */
+.fa-hero__buttons .fa-btn--primary { color: var(--fa-white); }
+
+@media screen and (min-width: 900px) {
+  .fa-hero--label-linen .fa-hero__buttons .fa-btn--primary { color: var(--fa-linen); }
+}
+
+/* QA 2026-10-14, homepage mobile V1: eyebrow tracked -5% (0.6px at 12px). */
+@media screen and (max-width: 899px) {
+  .fa-hero__eyebrow { letter-spacing: -0.05em; }
+}
+
+/* "Mobile style: Compact" = Our Approach mobile 2821:6541 hero (97–457): 360 tall, the 182px copy block 89px from the
+   top and bottom (bottom = "Space below content (mobile)" 89), rating line 18px above the title. */
+@media screen and (max-width: 899px) {
+  .fa-hero--page.fa-hero--mobile-compact { min-height: 360px; }
+  .fa-hero--mobile-compact .fa-hero__eyebrow { margin-bottom: 19px; } /* 18px under the 14px star row; the line box is 13.5 */
+}
+
+/* Compact = Our Team mobile 2821:4461 too: no tagline line in the mobile hero (copy block 82px from the top, 74 from
+   the bottom). */
+@media screen and (max-width: 899px) {
+  .fa-hero--mobile-compact .fa-hero__tagline { display: none; }
+
+  /* E-Courses mobile 2860:26195: a lone button is 164 wide, centred (not stretched). */
+  .fa-hero--mobile-compact .fa-hero__buttons { justify-content: center; }
+  .fa-section.fa-hero--mobile-compact .fa-hero__buttons .fa-btn:only-child {
+    flex: 0 0 auto;
+    min-width: 164px;
+  }
+}
+
+/* Review 2026-10-21: Figma "Latest pages" desktop heroes set the rating line at 16 / 20 (the star row had forced 18);
+   2px less gap below keeps the title where Figma has it. */
+@media screen and (min-width: 900px) {
+  .fa-hero__eyebrow--stars {
+    margin-bottom: 26px;
+    line-height: 20px;
+  }
+}

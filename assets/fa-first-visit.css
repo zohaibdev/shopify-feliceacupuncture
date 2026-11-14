@@ -1,0 +1,552 @@
+/* Felice first visit — Figma 414:419 / 414:495 / 414:563 (desktop), 414:1131 / 414:1133 / 414:1132 (mobile) */
+
+.fa-first-visit {
+  position: relative;
+  overflow-x: clip; /* the botanical may rise into the previous section, but never widens the page */
+  color: var(--fa-garnet);
+  background: var(--fa-linen);
+}
+
+.fa-first-visit .fa-bg img { object-position: center bottom; }
+
+/* Desktop padding from the section settings (default 120 / 120 = --fa-section-pad; Our Approach 2275:19321 draws
+   125 / 115). Tablet and mobile keep their own padding (below / fa-base.css). */
+@media screen and (min-width: 1100px) {
+  .fa-first-visit { padding-block: var(--fa-fv-pad-top, var(--fa-section-pad)) var(--fa-fv-pad-bottom, var(--fa-section-pad)); }
+}
+
+/* image 61 — rotated 15deg and mirrored vertically in Figma, 80% opacity */
+.fa-first-visit__botanical {
+  top: -221.1px;
+  left: -47px;
+  width: 339.55px;
+  height: 531.79px;
+  opacity: 0.8;
+  transform: rotate(-15deg) scaleY(-1);
+}
+
+/* "Small, mirrored (right)" (services page v2 2845, 382.3 x 493.9 box at x 1129, 225px above the band): the same
+   drawing at 82.11%, mirrored horizontally and anchored to the right edge (it runs 71px past it, clipped). */
+.fa-first-visit__botanical--right {
+  top: -196.36px;
+  left: auto;
+  right: -19.57px;
+  width: 278.81px;
+  height: 436.66px;
+  transform: scaleX(-1) rotate(-15deg) scaleY(-1);
+}
+
+/* "Small (left)" (Our Approach 2275:19390: 312.2 x 403.4 box at x -50.8, 104.7px above the band): the standard
+   drawing at 67.06%, same rotation and flip. */
+.fa-first-visit__botanical--small {
+  top: -81.31px;
+  left: -8.49px;
+  width: 227.69px;
+  height: 356.61px;
+}
+
+/* "Top right and bottom left" (homepage V3 2612:3077), both the same drawing at 80%, Figma relativeTransforms:
+   2612:3387 — 267.5 x 418.9 turned -165deg (= the "right" style's turn), centre 98.1px below the band top and
+   113.4px in from the right edge (rises 139px into the previous section, runs 70px past the right edge);
+   2615:9705 — 232.1 x 363.4 with the standard turn and flip, centre 111.1px from the left edge and 21.6px BELOW
+   the band, so it spills 227px into the next section. The section therefore stacks above the following one
+   (z-index 2: a following section may itself be lifted to 1 for its own spilling botanical). */
+.fa-first-visit--spill { z-index: 2; }
+
+.fa-first-visit__botanical--corner-top {
+  top: -111.34px;
+  left: auto;
+  right: -20.36px;
+  width: 267.5px;
+  height: 418.9px;
+  transform: rotate(-165deg);
+}
+
+.fa-first-visit__botanical--corner-bottom {
+  top: auto;
+  bottom: -203.28px;
+  left: -4.91px;
+  width: 232.1px;
+  height: 363.4px;
+}
+
+/* "Show botanical on" (900px is the mobile / tablet boundary, as everywhere). */
+@media screen and (min-width: 900px) {
+  .fa-first-visit__botanical--mobile-only { display: none; }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-first-visit__botanical--desktop-only { display: none; }
+}
+
+.fa-first-visit__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+}
+
+/* Heading / intro widths come from the section settings (defaults 668 / 592px, Figma's text boxes). */
+.fa-first-visit__heading { max-width: var(--fa-fv-heading-w, 668px); }
+.fa-first-visit .fa-heading__title { color: inherit; }
+.fa-first-visit .fa-heading__text { max-width: var(--fa-fv-intro-w, 592px); }
+
+/* Optional eyebrow (unused in Figma v2): a brighter red than the garnet heading, as on the v1 services page. */
+.fa-first-visit__eyebrow { color: #bd213f; }
+
+/* ---------- Step cards ---------- */
+/* Grid: .fa-card-row (fa-base.css) — Figma row 414:499 is 3 x 438 + 2 x 12 = 1338, centred. */
+
+/* Tan paper card (438 x 668) with a 12px margin to the garnet inner frame */
+.fa-first-visit__card {
+  display: flex;
+  padding: 12px;
+  background: #c9a96e var(--fa-first-visit-paper) center / cover no-repeat;
+}
+
+.fa-first-visit__frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-height: 644px;
+  border: 1px solid var(--fa-garnet);
+}
+
+.fa-first-visit__media {
+  position: relative;
+  align-self: stretch;
+  aspect-ratio: 412 / 362;
+  border-bottom: 1px solid var(--fa-garnet);
+  background: #b89a66;
+  overflow: hidden;
+}
+
+.fa-first-visit__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Numbered circle sitting on the photo's bottom edge */
+.fa-first-visit__badge {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-top: -23px;
+  border: 1px solid var(--fa-garnet);
+  border-radius: 50%;
+  background: #d8c3a5 var(--fa-first-visit-badge) center / cover no-repeat;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.fa-first-visit__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 23px 14.5px 18px; /* title 42px below the photo (23px below the badge); 383px text column */
+  text-align: center;
+}
+
+/* No badge: the title keeps its place 42px below the photo */
+.fa-first-visit__media + .fa-first-visit__body { padding-top: 42px; }
+
+.fa-first-visit__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-first-visit__part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.fa-first-visit__title + .fa-first-visit__part { margin-top: 26px; }
+
+.fa-first-visit__duration {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-first-visit__text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Figma narrows a duration-less closing note to 331px */
+.fa-first-visit__part--plain .fa-first-visit__text { max-width: 331px; }
+
+/* Step tag (homepage V3 2615:9348 / 9370 / 9395): a 236 x 21 tan tab hanging from the frame's top edge, centred, over
+   the photo — covers the frame's 1px top border (top: -1px), garnet sides and bottom, 14px side padding. Its Marisa
+   17px caps (8px) sit 2px under the top and 10px above the bottom rule, as drawn. All three tabs are 236px wide in
+   Figma whatever the label length (min-width; longer labels grow up to the frame width minus 12px a side). */
+.fa-first-visit__tag {
+  position: absolute;
+  z-index: 1;
+  top: -1px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  min-width: min(13.882em, 100% - 24px); /* 236px at 17px, scales with the tablet / mobile tag size */
+  max-width: calc(100% - 24px);
+  margin: 0 auto;
+  padding: 2px 14px 10px;
+  border: 1px solid var(--fa-garnet);
+  border-top: 0;
+  background: #ba9c6a;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.fa-first-visit__tag span {
+  display: block;
+  text-box: trim-both cap alphabetic;
+}
+
+/* "Even" card text spacing (homepage V3 9351 / 9373 / 9398): title 414px below the card top (badge 352 + 42, then
+   20px; cards 2–3 — card 1 is drawn 10px lower, not copied), duration → text 17px, 26px between parts, closing note
+   across the full 381px column. Mobile keeps the established mobile card spacing. */
+@media screen and (min-width: 900px) {
+  .fa-first-visit--even .fa-first-visit__badge + .fa-first-visit__body { padding-top: 20px; }
+
+  .fa-first-visit--even .fa-first-visit__part {
+    gap: 17px;
+    margin-top: 26px;
+  }
+
+  .fa-first-visit--even .fa-first-visit__part--plain .fa-first-visit__text { max-width: none; }
+}
+
+/* ---------- Tablet ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-first-visit__inner { gap: 40px; }
+
+  .fa-first-visit__botanical {
+    top: -133px;
+    left: -28px;
+    width: 204px;
+    height: 319px;
+  }
+
+  /* scaled like the standard botanical (x 0.6) */
+  .fa-first-visit__botanical--right {
+    top: -117.82px;
+    left: auto;
+    right: -11.74px;
+    width: 167.29px;
+    height: 262px;
+  }
+
+  .fa-first-visit__botanical--small {
+    top: -48.79px;
+    left: -5.09px;
+    width: 136.61px;
+    height: 213.96px;
+  }
+
+  .fa-first-visit__botanical--corner-top {
+    top: -66.8px;
+    left: auto;
+    right: -12.22px;
+    width: 160.5px;
+    height: 251.34px;
+  }
+
+  .fa-first-visit__botanical--corner-bottom {
+    top: auto;
+    bottom: -121.97px;
+    left: -2.95px;
+    width: 139.26px;
+    height: 218.04px;
+  }
+
+  .fa-first-visit__tag { font-size: 15px; }
+
+  .fa-first-visit__frame { min-height: 0; }
+  .fa-first-visit__title { font-size: 28px; }
+  .fa-first-visit__duration { font-size: 22px; }
+}
+
+/* Tablet and small-desktop columns are narrower than Figma's: avoid one-word last lines. At 1440+ the lines are
+   Figma's (card 1 ends on "symptom." as drawn). */
+@media screen and (min-width: 900px) and (max-width: 1439px) {
+  .fa-first-visit__text { text-wrap: pretty; }
+}
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 899px) {
+  /* Padding and heading gap from the section settings (homepage 50 / 14px; services v2 6870 / 6872: 60 / 16px). */
+  .fa-first-visit { padding-block: var(--fa-fv-pad-m, var(--fa-section-pad)); }
+  .fa-first-visit__heading { gap: var(--fa-fv-text-gap-m, 14px); }
+
+  .fa-first-visit__inner { gap: 24px; }
+
+  /* image 61 (homepage V4 mobile 2264:1513: 148.1 x 191.3 box at x -36, 119px above the band) */
+  .fa-first-visit__botanical {
+    top: -107.92px;
+    left: -15.95px;
+    width: 108px;
+    height: 169.14px;
+  }
+
+  /* services v2 mobile 6977: 145.9 x 188.5 box at x 272, 113px above the band (runs 43px past the right edge) */
+  .fa-first-visit__botanical--right {
+    top: -102.07px;
+    left: auto;
+    right: -23.15px;
+    width: 106.4px;
+    height: 166.63px;
+  }
+
+  /* Not drawn on mobile (Our Approach hides it there): the desktop box scaled like the standard one (x 0.318). */
+  .fa-first-visit__botanical--small {
+    top: -25.86px;
+    left: -2.7px;
+    width: 72.42px;
+    height: 113.42px;
+  }
+
+  /* "Top right and bottom left" (no mobile frame for homepage V3): the top drawing as the designed mobile "right"
+     style above; the lower one is desktop / tablet only (mobile sections show one botanical each, V4 pattern). */
+  .fa-first-visit__botanical--corner-top {
+    top: -102.07px;
+    left: auto;
+    right: -23.15px;
+    width: 106.4px;
+    height: 166.63px;
+  }
+
+  .fa-first-visit__botanical--corner-bottom { display: none; }
+
+  /* Tag at the mobile type scale (no mobile frame): 12px caps, 10px sides, frame top border covered as on desktop. */
+  .fa-first-visit__tag {
+    max-width: calc(100% - 16px);
+    padding: 1px 10px 6px;
+    border-width: 0.571px;
+    border-top: 0;
+    font-size: 12px;
+  }
+
+  .fa-first-visit__heading {
+    max-width: none;
+    margin-inline: -4px;
+  }
+
+  .fa-first-visit .fa-heading__title {
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-first-visit .fa-heading__text { max-width: 342px; }
+
+  /* Figma 414:1192: the mobile button label is white (desktop 414:562 is Warm Linen) — same as services. */
+  .fa-first-visit__button { color: var(--fa-white); }
+
+  .fa-first-visit__steps {
+    --fa-swipe-item: 266px;
+    --fa-swipe-gap: 8px;
+  }
+
+  .fa-first-visit__card { padding: 4px; }
+  .fa-first-visit__frame { min-height: 429px; }
+  .fa-first-visit__media { aspect-ratio: 256 / 224; }
+
+  .fa-first-visit__badge {
+    width: 24px;
+    height: 24px;
+    margin-top: -14px;
+    border-width: 0.571px;
+    font-size: 16px;
+  }
+
+  .fa-first-visit__body { padding: 14px 7px 10px; }
+  .fa-first-visit__media + .fa-first-visit__body { padding-top: 24px; }
+
+  .fa-first-visit__title {
+    font-size: 20px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-first-visit__part {
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .fa-first-visit__title + .fa-first-visit__part { margin-top: 14px; }
+  .fa-first-visit__part--plain { margin-top: 24px; }
+
+  .fa-first-visit__duration { font-size: 16px; }
+
+  .fa-first-visit__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .fa-first-visit__part--plain .fa-first-visit__text { max-width: none; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Hover: the step photo zooms slightly inside its framed box (the badge and borders stay put). */
+
+.fa-first-visit__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-first-visit__card:hover .fa-first-visit__media img { transform: scale(var(--fa-zoom)); }
+}
+
+/* V6 / V3 pages (layout "even"): tab labels -2% (Figma -0.34px at 17px), step texts at 80% (Figma 2669:25356). */
+@media screen and (min-width: 900px) {
+  .fa-first-visit--even .fa-first-visit__tag { letter-spacing: -0.02em; }
+  .fa-first-visit--even .fa-first-visit__text { opacity: 0.8; }
+}
+
+/* ---------- Card style "Moss" (Concierge V1 2644:18160): 438 x 580 olive card (texture export 2644:18163), 1px linen
+   frame at 50% 12px in (414 x 555), photo 412 x 361 straight across the top (no rule under it), a linen tag with a moss
+   rule (178 min, 24 tall, Marisa 12/22 -6%) straddling the photo's bottom edge, title 40px below the photo, then the
+   duration (Marisa 18 -6%) and text 16/22 in a 347px column, all linen. ---------- */
+.fa-first-visit--moss .fa-first-visit__card {
+  background: #7c7049 var(--fa-first-visit-moss) center / cover no-repeat;
+  color: var(--fa-linen);
+}
+
+.fa-first-visit--moss .fa-first-visit__frame {
+  min-height: 555px;
+  border-color: rgb(238 225 209 / 0.5);
+}
+
+.fa-first-visit--moss .fa-first-visit__media {
+  aspect-ratio: 412 / 361;
+  border-bottom: 0;
+}
+
+.fa-first-visit--moss .fa-first-visit__tag {
+  position: relative;
+  top: auto;
+  order: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  min-width: min(178px, 100% - 24px);
+  margin: -12px auto -12px;
+  padding: 0 8px;
+  border: 1px solid var(--fa-moss);
+  background: var(--fa-linen);
+  color: var(--fa-moss);
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+}
+
+.fa-first-visit--moss .fa-first-visit__body {
+  order: 2;
+  padding: 40px 14.5px 33px;
+}
+
+.fa-first-visit--moss .fa-first-visit__duration {
+  font-size: 18px;
+  letter-spacing: -0.06em;
+}
+
+.fa-first-visit--moss .fa-first-visit__text { max-width: 347px; }
+
+@media screen and (max-width: 899px) {
+  .fa-first-visit--moss .fa-first-visit__frame { min-height: 0; }
+  .fa-first-visit--moss .fa-first-visit__body { padding: 28px 12px 24px; }
+  .fa-first-visit--moss .fa-first-visit__tag { font-size: 11px; }
+}
+
+/* ---------- "Steps on mobile: Stacked cards" (homepage mobile V1 2794:1089, band 2355–4011) ----------
+   Full-width 351 x 440 cards 8px apart; the frame sits 8px in (photo 335 x 225 under the 236px tag: Marisa 14, 14px
+   sides); badge 24px on the photo edge; title Marisa 24 (-4%) 32px below the photo, duration Marisa 18 14px under it,
+   text Libre Caslon 13 / 18 12px below; 24px to the 165 x 39 button. */
+@media screen and (max-width: 899px) {
+  .fa-first-visit--mobile-stack .fa-first-visit__steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .fa-first-visit--mobile-stack .fa-first-visit__card { padding: 8px; }
+  .fa-first-visit--mobile-stack .fa-first-visit__frame { min-height: 424px; }
+  .fa-first-visit--mobile-stack .fa-first-visit__media { aspect-ratio: 335 / 225; }
+
+  .fa-first-visit--mobile-stack .fa-first-visit__tag {
+    padding-inline: 14px;
+    font-size: 14px;
+  }
+
+  .fa-first-visit--mobile-stack .fa-first-visit__title { font-size: 24px; }
+  .fa-first-visit--mobile-stack .fa-first-visit__duration { font-size: 18px; }
+
+  .fa-first-visit--mobile-stack .fa-first-visit__text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .fa-first-visit--mobile-stack .fa-first-visit__body { padding: 14px 8px 16px; }
+  .fa-first-visit--mobile-stack .fa-first-visit__media + .fa-first-visit__body { padding-top: 32px; }
+}
+
+/* Stacked + "Moss" = Concierge mobile 2857:23149 "What to expect" (3115-4662): 351 x 411 cards 8px apart, photo
+   335 x 225 8px in, the tag (Marisa 12 -6%, 8px sides) on its edge; title 35px below the photo, duration 24px under
+   it, text 14 / 21 12px below, centred in the 315px column. */
+@media screen and (max-width: 899px) {
+  .fa-first-visit--moss.fa-first-visit--mobile-stack .fa-first-visit__frame { min-height: 395px; }
+
+  .fa-first-visit--moss.fa-first-visit--mobile-stack .fa-first-visit__tag {
+    padding-inline: 8px;
+    font-size: 12px;
+  }
+
+  .fa-first-visit--moss.fa-first-visit--mobile-stack .fa-first-visit__body { padding: 35px 10px 24px; }
+  .fa-first-visit--moss.fa-first-visit--mobile-stack .fa-first-visit__duration {
+    margin-top: 10px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-first-visit--moss.fa-first-visit--mobile-stack .fa-first-visit__text {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}

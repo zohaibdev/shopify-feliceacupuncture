@@ -1,0 +1,54 @@
+/*
+  Felice botanical overlay (sections/fa-botanical.liquid): a zero-height section between two sections; the drawing
+  is placed on a centred 1440 frame with the Figma layer's top-left corner, size, rotation and flip (transform origin
+  = that corner, as in Figma). The clip reaches 400px above and below the boundary and hides what runs past the
+  window sides. Zoom scales the image up from the bottom-left corner of its box (Figma crop fills).
+*/
+
+.fa-botanical {
+  position: relative;
+  z-index: 3;
+  height: 0;
+  pointer-events: none;
+}
+
+.fa-botanical__clip {
+  position: absolute;
+  inset: -400px 0;
+  overflow: hidden;
+}
+
+.fa-botanical__frame {
+  position: absolute;
+  top: 400px;
+  left: calc(50% - 720px);
+  width: 1440px;
+  height: 0;
+}
+
+.fa-botanical__item {
+  position: absolute;
+  top: var(--fa-bot-y, 0);
+  left: var(--fa-bot-x, 0);
+  display: block;
+  width: var(--fa-bot-w, 200px);
+  height: var(--fa-bot-h, 300px);
+  overflow: hidden;
+  opacity: var(--fa-bot-opacity, 0.8);
+  transform-origin: 0 0;
+  transform: rotate(var(--fa-bot-rotate, 0deg)) scaleY(var(--fa-bot-flip, 1));
+}
+
+.fa-botanical__item img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: calc(100% * var(--fa-bot-zoom, 1));
+  max-width: none;
+  height: auto;
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-botanical { display: none; }
+}

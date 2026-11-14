@@ -1,0 +1,519 @@
+/* Felice services — Figma 414:417 / 414:681 / 414:564 / 414:565 (desktop), 414:1005 / 414:1193 (mobile);
+   price list layout (services page, Figma v2 file B4Qc…) 2263:2528 (desktop), 2264:7630 (mobile) */
+
+.fa-services {
+  position: relative;
+  overflow-x: clip;
+  color: var(--fa-garnet);
+  background: #c9a877;
+}
+
+/* ---------- Botanicals (rotated cut-outs, 80% opacity) ---------- */
+
+/* 414:564 — spills 233px up over the previous section, mostly past the right edge. */
+.fa-services__flower {
+  opacity: 0.8;
+}
+
+.fa-services__flower--top {
+  top: -207px;
+  right: -33.5px;
+  width: 252.93px;
+  transform: rotate(-165deg);
+}
+
+/* 414:565 — bottom-left; its lower tip tucks under the next section. */
+.fa-services__flower--bottom {
+  left: -11.6px;
+  bottom: -24.6px;
+  width: 159.03px;
+  transform: rotate(15deg);
+}
+
+/* ---------- Layout ---------- */
+
+.fa-services__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.fa-services__heading {
+  width: 100%;
+  max-width: 619px;
+}
+
+.fa-services .fa-heading__title {
+  line-height: 56px;
+  color: var(--fa-garnet);
+}
+
+.fa-services .fa-heading__text { max-width: 489px; }
+
+.fa-services__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 17px;
+  row-gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-services__item {
+  display: flex;
+  min-width: 0;
+}
+
+/* ---------- Card ---------- */
+
+.fa-services__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  padding: 14px 18px 28px; /* Figma 438 x 561 at 1440: the height comes from the content, rows equalise via the grid */
+  color: var(--fa-linen);
+  text-align: center;
+  text-decoration: none;
+  background-color: rgb(115 109 70);
+  background-image: var(--fa-services-card-bg);
+  background-size: cover;
+  background-position: center;
+}
+
+a.fa-services__card:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 3px;
+}
+
+/* Photo with rectangular notches cut from each corner (Figma boolean "Subtract" 414:691 / 414:1202):
+   on the 400 x 418.1 desktop frame the notches are 11 wide on the left, 12 on the right, 16.03 tall at the
+   top and 19.74 at the bottom. The mobile 264 x 254.36 frame uses the same proportions, so one % polygon fits both. */
+.fa-services__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 400 / 418.1;
+  overflow: hidden;
+  background: rgb(0 0 0 / 0.15);
+  clip-path: polygon(
+    2.75% 0, 97% 0, 97% 3.835%, 100% 3.835%,
+    100% 95.279%, 97% 95.279%, 97% 100%, 2.75% 100%,
+    2.75% 95.279%, 0 95.279%, 0 3.835%, 2.75% 3.835%
+  );
+}
+
+.fa-services__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-services-focal, center);
+  display: block;
+}
+
+.fa-services__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.fa-services__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  /* Figma 58px (desktop and mobile). One trimmed line is the cap height whatever the line-height, so Figma's
+     single-line titles are unchanged; a title that wraps (narrow columns, longer copy) keeps its lines together. */
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-services__text {
+  max-width: 349px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Figma sets the shorter descriptions (Tui Na, Herbal Wellness) in a 254px box. */
+.fa-services__text--narrow { max-width: 254px; }
+
+/* "Custom" width (homepage V3 3549 / 3562 / 3574 / 3586: 412 / 368 / 380 / 396px boxes, centred on the card): the
+   Cupping box is 412px in the 400px column, 6px into the card padding either side — never more than that. */
+.fa-services__text--custom {
+  width: min(var(--fa-sv-text-w, 350px), 100% + 12px);
+  max-width: none;
+}
+
+/* Below 1440 the column is narrower than the hand-set box: avoid one-word last lines ("pull.""). */
+@media screen and (min-width: 1100px) and (max-width: 1439px) {
+  .fa-services__text--custom { text-wrap: pretty; }
+}
+
+/* ---------- Tablet ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-services .fa-heading__title { line-height: 44px; }
+
+  .fa-services__title { font-size: 28px; }
+
+  .fa-services__text {
+    font-size: 17px;
+    line-height: 26px;
+  }
+}
+
+/* Tablet columns are narrower than Figma's: avoid one-word last lines. */
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-services__text { text-wrap: pretty; }
+}
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-services {
+    --fa-swipe-item: 276px;
+    --fa-swipe-gap: 8px;
+  }
+
+  /* Section setting (default 50 = the mobile section padding; homepage V4 2264:2375: 60). The menu layout keeps its own. */
+  .fa-services { padding-block: var(--fa-sv-pad-m, var(--fa-section-pad)); }
+
+  /* Homepage V4 2264:2420: only the top botanical, 145.9 x 188.5 box at x 272, 111px above the band — the drawing at
+     106.4 x 166.65 (same turn as desktop), running 23px past the right edge (clipped). */
+  .fa-services__flower { display: none; }
+
+  .fa-services__flower--top {
+    display: block;
+    top: -100.08px;
+    right: -23.15px;
+    width: 106.4px;
+  }
+
+  .fa-services__inner { gap: 24px; }
+
+  /* Room for the cards' focus ring (2px + 3px offset) inside the scroll row, which clips vertically too;
+     the negative margin keeps every card where it was. */
+  .fa-services__list {
+    padding-block: 5px;
+    margin-block: -5px;
+  }
+
+  .fa-services__heading { gap: 16px; }
+
+  .fa-services .fa-heading__title {
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-services .fa-heading__text { max-width: 351px; }
+
+  .fa-services__card {
+    gap: 17px;
+    min-height: 352px;
+    padding: 6px 6px 17px;
+  }
+
+  .fa-services__media { aspect-ratio: 264 / 254.36; }
+
+  .fa-services__body { gap: 12px; }
+
+  .fa-services__title { font-size: 20px; }
+
+  .fa-services__text,
+  .fa-services__text--narrow,
+  .fa-services__text--custom {
+    width: auto;
+    max-width: 250px;
+    font-size: 14px;
+    line-height: 24px;
+    text-wrap: pretty; /* the 250px column would leave "relaxation." alone on the last line */
+  }
+
+  /* Figma 414:1236: the mobile button label is white (desktop 414:762 is Warm Linen). */
+  .fa-services__button { color: var(--fa-white); }
+}
+
+/* ---------- Price list layout (.fa-services--menu) ----------
+   Services page "Jump to a treatment", Figma v2 2263:2528 (1440 x 1435, standard 120px section padding):
+   heading, 3 x 2 grid of 436 x 491 cards 16px apart, 14px card inset (21 at the bottom), 408 x 322 notched photo,
+   title, then "Starting from" / "Session" rows: label, dotted rule (2 on / 2 off) filling the gap, outlined pill.
+   Mobile: Figma v2 2264:7630 (see the mobile block below). Tablet (900-1099) is derived. */
+
+.fa-services__facts {
+  --fa-fact-gap: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+}
+
+.fa-services__fact {
+  display: flex;
+  align-items: center;
+  gap: var(--fa-fact-gap);
+}
+
+.fa-services__fact-label {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: var(--fa-fact-gap);
+  min-width: 0;
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 46px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-align: start;
+}
+
+.fa-services__fact-label span,
+.fa-services__pill span {
+  display: block;
+  text-box: trim-both cap alphabetic;
+}
+
+/* A label longer than the row (merchant copy) wraps once the rule is down to its minimum instead of running
+   into the pill; Figma's 46px line-height (invisible on one trimmed line) would split the lines too far apart. */
+.fa-services__fact-label span { line-height: 1.15; }
+
+/* Figma "Vector 4": 1px line, dash 2 / gap 2, Warm Linen. */
+.fa-services__fact-label::after {
+  content: '';
+  flex: 1 1 0;
+  min-width: 12px;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 4px);
+}
+
+/* Figma "Desktop buttons": 27px tall, 12px side padding, 0.7px inside stroke (inset shadow: a 0.7px border would
+   round up to 1px and widen the pill), radius 18.2. */
+.fa-services__pill {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 27px;
+  margin: 0;
+  padding: 0 12px;
+  border-radius: 18.2px;
+  box-shadow: inset 0 0 0 0.7px currentColor;
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.fa-services--menu .fa-services__card {
+  gap: 22px;
+  padding: 14px 14px 21px;
+  border-radius: var(--fa-radius);
+}
+
+/* Notches of the 408 x 322 photo (Subtract 2263:2540): 11.22 / 12.24 wide, 14.23 tall at the top, 14.64 at the
+   bottom. Mobile keeps the homepage card's 264 x 254.36 photo and notches (Subtract 2264:7946). */
+@media screen and (min-width: 900px) {
+  .fa-services--menu .fa-services__media {
+    aspect-ratio: 408 / 322;
+    clip-path: polygon(
+      2.75% 0, 97% 0, 97% 4.419%, 100% 4.419%,
+      100% 95.453%, 97% 95.453%, 97% 100%, 2.75% 100%,
+      2.75% 95.453%, 0 95.453%, 0 4.419%, 2.75% 4.419%
+    );
+  }
+}
+
+/* The body fills the card so the rows line up across a grid row when a title wraps (tablet / small desktop). */
+.fa-services--menu .fa-services__body {
+  flex: 1 1 auto;
+  gap: 26px;
+}
+
+.fa-services--menu .fa-services__facts { margin-top: auto; }
+
+@media screen and (min-width: 900px) {
+  .fa-services--menu .fa-services__heading { gap: 20px; }
+
+  .fa-services--menu .fa-heading__text { max-width: none; }
+
+  .fa-services--menu .fa-services__list {
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+}
+
+/* Small desktop: cards are narrower than Figma's 436px, keep a visible rule between label and pill. */
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-services__facts { --fa-fact-gap: 16px; }
+
+  .fa-services__fact-label { font-size: 17px; }
+}
+
+/* Tablet (derived): 240-306px inner card width (rule stays >= 30px at 900). */
+@media screen and (max-width: 1099px) {
+  .fa-services--menu .fa-services__body { gap: 20px; }
+
+  .fa-services__facts {
+    --fa-fact-gap: 12px;
+    gap: 12px;
+  }
+
+  .fa-services__fact-label { font-size: 14px; }
+
+  .fa-services__pill {
+    height: 24px;
+    padding-inline: 9px;
+    font-size: 12px;
+  }
+}
+
+/* Mobile (Figma v2 2264:7631 / 7942): heading 12px title-to-intro; swipe row of 276 x 384 cards (6px inset,
+   15.64 at the bottom = 384 - 6 - 362.36), body 6px further in (252 wide), 16px rhythm photo / title / rows;
+   rows 25 tall: 14px label, 12px either side of the dotted rule, 25px pill with 10px side padding. */
+@media screen and (max-width: 899px) {
+  /* The band shows 645px (535-1180): content 60 below its top, the treatments band starts 53 below the button
+     (Figma's texture runs 7px further, under the treatments background). */
+  .fa-services--menu { padding-block: 60px 53px; }
+
+  .fa-services--menu .fa-services__heading { gap: 12px; }
+
+  .fa-services--menu .fa-services__card {
+    gap: 16px;
+    min-height: 0;
+    padding: 6px 6px 15.64px;
+  }
+
+  .fa-services--menu .fa-services__body {
+    gap: 16px;
+    padding-inline: 6px;
+  }
+
+  .fa-services__facts {
+    --fa-fact-gap: 12px;
+    gap: 16px;
+  }
+
+  .fa-services__fact-label {
+    font-size: 14px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-services__pill {
+    height: 25px;
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Hover: the photo zooms slightly inside the notched frame (the clip-path box stays fixed, only the image
+   scales); linked cards also brighten a touch. Keyboard focus on a linked card does the same. */
+
+.fa-services__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+a.fa-services__card { transition: filter var(--fa-dur-ui) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-services__card:hover .fa-services__media img { transform: scale(var(--fa-zoom)); }
+  a.fa-services__card:hover { filter: brightness(1.06); }
+}
+
+a.fa-services__card:focus-visible .fa-services__media img { transform: scale(var(--fa-zoom)); }
+
+/* Setting "Intro text size" (V6 / V3 Figma: 16 / 25 on the homepage and Our Approach, 18 / 29 on Our Team). Desktop. */
+@media screen and (min-width: 900px) {
+  .fa-services--intro-tight .fa-heading__text { font-size: 16px; line-height: 25px; }
+  .fa-services--intro-large .fa-heading__text { font-size: 18px; line-height: 29px; }
+}
+
+/* QA 2026-10-14, homepage mobile V1 "Our services" (4817–5469): 275 x 384 cards 12px apart; photo 250 x 243 inset
+   15 / 12.5px; 24px; title Marisa 32 / 22 (-4%); 16px; text 16 / 20 in 250px. */
+@media screen and (max-width: 899px) {
+  .fa-services {
+    --fa-swipe-item: 275px;
+    --fa-swipe-gap: 12px;
+  }
+
+  .fa-services__card {
+    gap: 24px;
+    min-height: 384px;
+    padding: 15px 12.5px 38px;
+  }
+
+  .fa-services__media { aspect-ratio: 250 / 243; }
+  .fa-services__body { gap: 16px; }
+
+  .fa-services__button {
+    min-width: 0;
+    padding-inline: 12px; /* mobile V1 "View services" hugs its label: 139 x 39 */
+  }
+
+  .fa-services__title {
+    font-size: 32px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-services__text,
+  .fa-services__text--narrow,
+  .fa-services__text--custom {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+/* "Cards on mobile: Two-column grid" — homepage mobile V1 (updated frame) "Our services" (5024–6009): 173 x 235
+   cards 6px apart both ways, 24px under the intro; photo 158 x 154 inset 6 / 7px; 10px; title Marisa 16 / 15 (-5%);
+   8px; text 10 / 14 (-1%); the button 20px below. */
+@media screen and (max-width: 899px) {
+  .fa-services--mobile-grid .fa-services__inner { gap: 24px; }
+
+  .fa-services--mobile-grid .fa-services__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding-block: 0;
+    margin-block: 0;
+  }
+
+  .fa-services--mobile-grid .fa-services__card {
+    gap: 10px;
+    min-height: 235px;
+    padding: 6px 7px 12px;
+  }
+
+  .fa-services--mobile-grid .fa-services__media { aspect-ratio: 158 / 154; }
+  .fa-services--mobile-grid .fa-services__body { gap: 8px; }
+
+  .fa-services--mobile-grid .fa-services__title {
+    font-size: 16px;
+    line-height: 15px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-services--mobile-grid .fa-services__text,
+  .fa-services--mobile-grid .fa-services__text--narrow,
+  .fa-services--mobile-grid .fa-services__text--custom {
+    max-width: none;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .fa-services--mobile-grid .fa-services__button { margin-top: -4px; } /* 24px column gap - 4 = Figma's 20 */
+}

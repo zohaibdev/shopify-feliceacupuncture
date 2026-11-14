@@ -1,0 +1,652 @@
+/* Felice feature cards — Our Approach "The four pillars of healing" (file B4QcctWXiG9ywP3uRA3coG):
+   desktop 2270:17607 (1440 x 814: 120px padding, heading 810 wide, 40px gap, 4 x 326 x 437 cards 12px apart),
+   mobile 2305:4694 / 2305:4696 (375 x 676: 60px padding, 16px title-to-intro, 24px gap, swipe row of 314 x 417 cards).
+   Homepage V5 "The truth about Traditional Chinese Medicine" 2615:8811 (1440 x 700, desktop only): "Linen" card
+   style + linen heading — see the end of the Card block and "Mobile". */
+
+.fa-feature-cards {
+  position: relative;
+  overflow-x: clip;
+  color: var(--fa-garnet);
+  background: #b29460; /* average of the bundled tan texture, shown while it loads or when cleared */
+}
+
+/* ---------- Layout ---------- */
+
+.fa-feature-cards__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.fa-feature-cards__heading {
+  width: 100%;
+  max-width: var(--fa-fc-heading-w, 810px); /* section setting "Heading width" (pillars 810, truth 2615:8816: 882) */
+}
+
+/* section setting "Heading line height" (pillars 2270:17614: 56, truth 2615:8817: 58) */
+.fa-feature-cards .fa-heading__title { line-height: var(--fa-fc-title-lh, 56px); }
+
+/* "Heading colour: Linen" (truth 2615:8817 #EEE1D1 on the olive band); the band colour is the average of the olive
+   texture, shown while it loads. */
+.fa-feature-cards--heading-linen {
+  background: #82774d;
+}
+
+.fa-feature-cards--heading-linen .fa-feature-cards__heading { color: var(--fa-linen); }
+
+/* Figma 2270:17614: 18 / 29, the full 810px measure. */
+.fa-feature-cards .fa-heading__text {
+  font-size: 18px;
+  line-height: 29px;
+}
+
+.fa-feature-cards__list {
+  display: grid;
+  grid-template-columns: repeat(var(--fa-fc-cols, 4), minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-feature-cards__item {
+  display: flex;
+  min-width: 0;
+}
+
+/* ---------- Card ----------
+   Figma "Review 8" 2270:17894: radius 8, paper texture under 80% moss (same recipe as the fa-services cards, baked
+   into fa-feature-cards-card-bg.jpg), photo across the top, then title / text / tag 20px in from each side. */
+
+.fa-feature-cards__card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding-bottom: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 8px;
+  color: var(--fa-white);
+  text-align: center;
+  text-decoration: none;
+  background-color: rgb(128 117 76); /* the composited moss surface */
+  background-image: var(--fa-fc-card-bg, none);
+  background-size: cover;
+  background-position: center;
+}
+
+a.fa-feature-cards__card:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 3px;
+}
+
+/* 326 x 271 (mobile 314 x 261: the same ratio). #f0f0f0 = Figma's image frame fill, kept for an empty block. */
+.fa-feature-cards__media {
+  position: relative;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 326 / 271;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.fa-feature-cards__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-fc-focal, center);
+  display: block;
+}
+
+.fa-feature-cards__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 20px;
+}
+
+.fa-feature-cards__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Figma sets each text in its own centred box: 274px, or 306px for the longer texts (block "Text width"), which
+   runs 10px into the side insets — a centred flex item wider than the body overflows evenly on both sides. */
+.fa-feature-cards__text {
+  flex: none;
+  width: min(var(--fa-fc-text-w, 274px), 100% + 20px);
+  margin: 0;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* Figma 2270:18130: 286 wide (the body width), 5px top / bottom, Warm Linen 20%, radius 3; Marisa 15 / 19, two lines
+   in a 256px measure. Pushed to the bottom so the tags line up when the texts differ in length. */
+.fa-feature-cards__tag {
+  align-self: stretch;
+  margin: auto 0 0;
+  padding: 5px 15px;
+  border-radius: 3px;
+  background: rgb(238 225 209 / 0.2);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* "Linen" card style (truth "Review 21–25" 2615:9122…9133): 326 x 332, Warm Linen #EEE1D1, radius 2 (V6 2669:25127; V5 12), photo
+   326 x 210 across the top, garnet title (24, 22px lines when it wraps), text 14 / 21 at 80%, 12px apart. The text
+   column is 306 wide (Figma 2615:9104 / 9136), so the block "Text width" 306 no longer overflows. Phones centre the
+   text below the photo; desktop / tablet follow Figma's placement (see below). */
+.fa-feature-cards--linen .fa-feature-cards__card {
+  gap: 0;
+  padding-bottom: 0;
+  border-radius: 2px;
+  color: var(--fa-garnet);
+  background-color: var(--fa-linen);
+  background-image: none;
+}
+
+.fa-feature-cards--linen .fa-feature-cards__media { aspect-ratio: 326 / 210; }
+
+.fa-feature-cards--linen .fa-feature-cards__body {
+  justify-content: center;
+  padding: 17px 10px;
+}
+
+.fa-feature-cards--linen .fa-feature-cards__title { line-height: 22px; }
+
+.fa-feature-cards--linen .fa-feature-cards__text {
+  width: min(var(--fa-fc-text-w, 274px), 100%);
+  line-height: 21px;
+  opacity: 0.8;
+}
+
+/* Not in the truth design (no tag lines there): a tag on a linen card gets a faint garnet panel, as the moss cards'
+   linen-tinted one would vanish. */
+.fa-feature-cards--linen .fa-feature-cards__tag { background: rgb(146 32 57 / 0.08); }
+
+/* Desktop / tablet: Figma's text placement below the photo. The tallest text (2615:9104, two-line title) sits 18px
+   below the photo and 16px above the card edge; Figma hand-sets the shorter ones lower (photo-to-title gap 24 instead
+   of 18 for the 66px texts 9124 / 9117), i.e. 3 / 11 of their spare height goes above the text and 8 / 11 below. */
+@media screen and (min-width: 900px) {
+  .fa-feature-cards--linen .fa-feature-cards__body {
+    justify-content: flex-start;
+    gap: 0;
+    padding: 18px 10px 16px;
+  }
+
+  .fa-feature-cards--linen .fa-feature-cards__body::before,
+  .fa-feature-cards--linen .fa-feature-cards__body::after {
+    content: '';
+    flex: 3 1 0;
+  }
+
+  .fa-feature-cards--linen .fa-feature-cards__body::after { flex-grow: 8; }
+
+  .fa-feature-cards--linen .fa-feature-cards__body > * + * { margin-top: 12px; }
+}
+
+/* Small desktop / tablet: narrower cards, so a long title may wrap; Figma's 58px line-height (invisible on one
+   trimmed line) would split the lines apart. */
+@media screen and (min-width: 900px) and (max-width: 1279px) {
+  .fa-feature-cards__title { line-height: 1.1; }
+}
+
+/* Figma's four-up row wraps the tags greedily (kept); wider 2- / 3-up cards balance them instead of leaving one
+   word on the last line. */
+@media screen and (min-width: 900px) {
+  .fa-feature-cards--cols-2 .fa-feature-cards__tag,
+  .fa-feature-cards--cols-3 .fa-feature-cards__tag { text-wrap: balance; }
+}
+
+/* ---------- Tablet (900–1099, not drawn) ---------- */
+
+@media screen and (max-width: 1099px) {
+  /* balance: a long heading (truth) would otherwise leave one word on its last line */
+  .fa-feature-cards .fa-heading__title { line-height: 44px; text-wrap: balance; }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  /* Four 200px cards would squeeze the texts: 2 x 2 instead, at most 438px wide (the site's tablet card column). */
+  .fa-feature-cards--cols-4 .fa-feature-cards__list {
+    grid-template-columns: repeat(2, minmax(0, var(--fa-card-col)));
+    justify-content: center;
+  }
+
+  .fa-feature-cards__text { text-wrap: pretty; }
+
+  .fa-feature-cards__tag { text-wrap: balance; }
+}
+
+/* ---------- Our Approach V3 (frame 2669:35779) ---------- */
+
+/* "Heading colour: Moss" (science 2669:35905: #736D46 title and intro). */
+.fa-feature-cards--heading-moss .fa-feature-cards__heading { color: var(--fa-moss); }
+
+/* "Moss, larger text" (pillars 2669:35864): 24px side / 22px bottom inset, title and text 10px apart, text 16 / 22 at
+   80%. */
+/* Review 2026-10-14: square corners on the pillar cards (Figma r8). */
+.fa-feature-cards--moss-large .fa-feature-cards__card {
+  padding-bottom: 22px;
+  border-radius: var(--fa-radius);
+}
+
+.fa-feature-cards--moss-large .fa-feature-cards__body {
+  gap: 10px;
+  padding-inline: 24px;
+}
+
+.fa-feature-cards--moss-large .fa-feature-cards__text {
+  font-size: 16px;
+  line-height: 22px;
+  opacity: 0.8;
+}
+
+/* "Plain moss, rounded photo" (science 2669:35910): 328 x 366, flat #80764D with a 1px rim of the same colour,
+   radius 9; the 328 x 241 photo keeps its own 8px corners; 18px; title 24 / 23 (two lines) and text 14 / 20 at 80%,
+   16px apart, in a 273px column. Cards 10.5px apart across the 1343px row. */
+.fa-feature-cards--moss-photo .fa-feature-cards__list { gap: 10.47px; }
+
+.fa-feature-cards--moss-photo .fa-feature-cards__card {
+  gap: 18px;
+  padding-bottom: 25px;
+  border-radius: 9px;
+  color: var(--fa-linen);
+  background: #80764d;
+}
+
+.fa-feature-cards--moss-photo .fa-feature-cards__media {
+  aspect-ratio: 328 / 241;
+  border-radius: 8px;
+}
+
+.fa-feature-cards--moss-photo .fa-feature-cards__body {
+  gap: 16px;
+  padding-inline: 27px;
+}
+
+.fa-feature-cards--moss-photo .fa-feature-cards__title { line-height: 23px; }
+
+.fa-feature-cards--moss-photo .fa-feature-cards__text {
+  width: min(var(--fa-fc-text-w, 273px), 100%);
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.8;
+}
+
+/* "Moss, icon and button" (Our Team V3 "More ways to start your care" 2669:34131): 3 x 436 x 315 cards 16px apart,
+   moss texture, r2, padding 18 / 14 / 14; 52px linen icon, 24px, title (Marisa 28), 12px, meta (Marisa Medium 18, -4%),
+   20px, text 16 / 22 (+2%), left-aligned; a full-width linen "Book now" button (moss label) at the foot. */
+.fa-feature-cards--moss-icon .fa-feature-cards__list { gap: 16px; }
+
+.fa-feature-cards--moss-icon .fa-heading__text {
+  font-size: 16px;
+  line-height: 27px;
+}
+
+.fa-feature-cards--moss-icon .fa-feature-cards__card {
+  gap: 0;
+  padding: 18px 14px 14px;
+  border-radius: 2px;
+  text-align: left;
+  color: var(--fa-linen);
+}
+
+.fa-feature-cards__icon {
+  display: block;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  background: currentColor;
+  margin-bottom: 24px;
+  -webkit-mask: var(--fa-fc-icon) center / contain no-repeat;
+  mask: var(--fa-fc-icon) center / contain no-repeat;
+}
+
+.fa-feature-cards--moss-icon .fa-feature-cards__body {
+  align-items: flex-start;
+  gap: 0;
+  padding: 0 0 14px;
+}
+
+.fa-feature-cards--moss-icon .fa-feature-cards__title {
+  font-size: 28px;
+  line-height: 29px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-feature-cards__meta {
+  margin: 12px 0 0;
+  font-family: var(--fa-font-display);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.fa-feature-cards--moss-icon .fa-feature-cards__text {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+}
+
+.fa-feature-cards__card-button {
+  width: 100%;
+  margin-top: auto;
+  color: var(--fa-moss);
+}
+
+/* QA 2026-10-14: Figma 2669:34131 "Book now" is 408 x 52 (the shared button is 54 tall). */
+@media screen and (min-width: 900px) {
+  .fa-feature-cards__card-button { min-height: 52px; }
+}
+
+/* ---------- Mobile (Figma 2305:4694 / 2305:4696) ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-feature-cards {
+    --fa-swipe-item: 314px;
+    --fa-swipe-gap: 12px;
+    padding-block: var(--fa-fc-pad-m, 60px);
+  }
+
+  .fa-feature-cards__inner { gap: 24px; }
+
+  /* Figma's 351px heading frame (2305:4697), also on wider phones. */
+  .fa-feature-cards__heading {
+    max-width: 351px;
+    gap: 16px;
+  }
+
+  /* 2305:4699: 32 / 28, -4%, two lines in a 259px box ("The four pillars / of healing"); balance gives the same
+     break without a fixed width. */
+  .fa-feature-cards .fa-heading__title {
+    line-height: 28px;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .fa-feature-cards .fa-heading__text {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .fa-feature-cards__card {
+    gap: 18px;
+    padding-bottom: 18px;
+  }
+
+  .fa-feature-cards__title {
+    font-size: 20px;
+    line-height: 52px;
+  }
+
+  .fa-feature-cards__text {
+    width: 100%;
+    line-height: 20px;
+  }
+
+  /* 2305:4723: the longer "Food as medicine" text is set at 13px to stay on two lines (block setting). */
+  .fa-feature-cards__item--text-sm .fa-feature-cards__text { font-size: 13px; }
+
+  /* Linen cards (no mobile design): the moss cards' mobile type — 20px title, 14 / 20 text across the card — on the
+     314px card; the photo keeps the 326 x 210 ratio (314 x 202). */
+  .fa-feature-cards--linen .fa-feature-cards__text {
+    width: 100%;
+    line-height: 20px;
+  }
+
+  .fa-feature-cards__tag {
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+/* Linen cards on phones = homepage mobile V1 2794:1089 "The truth about TCM" (1771–2355): title 32 / 30 (-7%) in the
+   351px box, 30px above a row of 306 x 358 cards 13px apart; photo 306 x 201; the title (Marisa 24) 24px below it
+   and the text (14 / 21) 12px under the title, both 24px from the card sides. */
+@media screen and (max-width: 899px) {
+  .fa-feature-cards--linen {
+    --fa-swipe-item: 306px;
+    --fa-swipe-gap: 13px;
+  }
+
+  .fa-feature-cards--linen .fa-feature-cards__inner { gap: 30px; }
+
+  .fa-feature-cards--linen .fa-heading__title {
+    line-height: 30px;
+    letter-spacing: -0.07em;
+    text-wrap: wrap;
+  }
+
+  .fa-feature-cards--linen .fa-feature-cards__card { min-height: 358px; }
+  .fa-feature-cards--linen .fa-feature-cards__media { aspect-ratio: 306 / 201; }
+
+  .fa-feature-cards--linen .fa-feature-cards__body {
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 24px;
+  }
+
+  .fa-feature-cards--linen .fa-feature-cards__title {
+    font-size: 24px;
+    line-height: 22px;
+  }
+
+  .fa-feature-cards--linen .fa-feature-cards__text { line-height: 21px; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   As fa-services: the photo zooms slightly inside its frame on hover; linked cards also brighten a touch.
+   Keyboard focus on a linked card does the same. */
+
+.fa-feature-cards__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+a.fa-feature-cards__card { transition: filter var(--fa-dur-ui) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-feature-cards__card:hover .fa-feature-cards__media img { transform: scale(var(--fa-zoom)); }
+  a.fa-feature-cards__card:hover { filter: brightness(1.06); }
+}
+
+a.fa-feature-cards__card:focus-visible .fa-feature-cards__media img { transform: scale(var(--fa-zoom)); }
+
+/* "Cards on mobile: Two-column grid" — homepage mobile V1 (updated frame) "The truth about TCM" (1769–2562):
+   171px cards, 8px apart across and 13px down, 24px under the title; photo 171 x 166; 16px; the 156px text column
+   (title Marisa 18 / 20, -5%; 8px; text 12 / 16, -2%), 14px above the card foot. */
+@media screen and (max-width: 899px) {
+  .fa-feature-cards--mobile-grid .fa-feature-cards__inner { gap: 24px; }
+
+  .fa-feature-cards--mobile-grid .fa-feature-cards__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 8px;
+  }
+
+  .fa-feature-cards--mobile-grid .fa-feature-cards__card {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .fa-feature-cards--mobile-grid .fa-feature-cards__media { aspect-ratio: 171 / 166; }
+
+  .fa-feature-cards--mobile-grid .fa-feature-cards__body {
+    gap: 8px;
+    padding: 16px 7.5px 14px;
+  }
+
+  .fa-feature-cards--mobile-grid .fa-feature-cards__title {
+    font-size: 18px;
+    line-height: 15px; /* Figma's two-line titles (18 / 15); one-line titles (18 / 20) are trimmed to the same box */
+    letter-spacing: -0.05em;
+  }
+
+  .fa-feature-cards--mobile-grid .fa-feature-cards__text {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Grid + moss cards = Our Approach mobile 2821:6541. Heading: title 32 / 30 (-7%), 14px, intro 14 / 20 (-2%).
+   Pillars (1251–1934): 171 x 210 cards 8px apart, photo 171 x 134, 14px, 156px column (title 16 / 20 -3%, 8px,
+   text 12 / 17 -2%), 12px foot. Science (3393–4094): 30px under the heading, 171 x 216 cards r2, photo 171 x 134, 12px,
+   162px column (title 14 / 13 -3%, 6px, text 10 / 14 -2%), 12px foot. */
+@media screen and (max-width: 899px) {
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-feature-cards__heading { gap: 14px; }
+
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-heading__title {
+    line-height: 30px;
+    letter-spacing: -0.07em;
+  }
+
+  /* Science: Figma breaks "The science behind / acupuncture" (balance would move "behind" down). */
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-heading__title { text-wrap: wrap; }
+
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-heading__text {
+    line-height: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Figma's mobile intro runs on (no break after the first sentence; the text keeps a space before its <br>). */
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-heading__text br { display: none; }
+
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-feature-cards__list { gap: 8px; }
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-feature-cards__media { aspect-ratio: 171 / 134; }
+  .fa-feature-cards--mobile-grid:is(.fa-feature-cards--moss-large, .fa-feature-cards--moss-photo) .fa-feature-cards__text { width: 100%; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-large .fa-feature-cards__card {
+    gap: 14px;
+    padding-bottom: 12px;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-large .fa-feature-cards__body { padding: 0 7.5px; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-large .fa-feature-cards__title {
+    font-size: 16px;
+    letter-spacing: -0.03em;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-large .fa-feature-cards__text { line-height: 17px; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-feature-cards__inner { gap: 30px; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-feature-cards__card {
+    gap: 12px;
+    padding-bottom: 12px;
+    border-radius: var(--fa-radius);
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-feature-cards__media { border-radius: 0; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-feature-cards__body {
+    gap: 6px;
+    padding: 0 4.5px;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-feature-cards__title {
+    font-size: 14px;
+    line-height: 13px;
+    letter-spacing: -0.03em;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-photo .fa-feature-cards__text {
+    font-size: 10px;
+    line-height: 14px;
+  }
+}
+
+/* Grid + "Moss, icon and button" = Our Team mobile 2821:4461 "More ways to start your care" (8207–9123): heading
+   title 32 / 30 (-7%), 14px, intro 14 / 20 (-2%); 24px; 171 x 225 cards 5px apart across, 8 down, 8px padding;
+   24px icon, 12px, title Marisa 18 (-4%), 8px, meta Marisa Medium 14 (-4%), 8px, text 11 / 14 (-2%); the 32px
+   button (14px label, -3%) at the foot. */
+@media screen and (max-width: 899px) {
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__heading { gap: 14px; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-heading__title {
+    line-height: 30px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-heading__text {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__list { gap: 8px 5px; }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__card {
+    min-height: 225px;
+    padding: 8px;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 12px;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__body {
+    gap: 0; /* the spacing is the meta / text margins (the truth grid's 8px body gap would double it) */
+    padding: 0 0 12px;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__title {
+    font-size: 18px;
+    line-height: 17px;
+    letter-spacing: -0.04em;
+  }
+
+  /* Figma's meta and text boxes are cap-trimmed (2-line meta 26 tall, 2-line text 22). */
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__meta {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 17px;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__text {
+    margin-top: 8px;
+    font-size: 11px;
+    line-height: 14px;
+    letter-spacing: -0.02em;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-icon .fa-feature-cards__card-button {
+    min-width: 0;
+    min-height: 32px;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Mobile style re-check: Approach 2821:6541 pillar cards set the title and text in linen (#EEE1D1), not white. */
+@media screen and (max-width: 899px) {
+  .fa-feature-cards--mobile-grid.fa-feature-cards--moss-large :is(.fa-feature-cards__title, .fa-feature-cards__text) { color: var(--fa-linen); }
+}
+
+/* Bundled photo with a phone crop: the <picture> wrapper lays out as if the img were the media's own child. */
+.fa-feature-cards__media picture { display: contents; }

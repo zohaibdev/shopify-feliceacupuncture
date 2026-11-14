@@ -1,0 +1,97 @@
+{%- comment -%}
+  One header menu item, rendered twice by fa-header: in the desktop nav (variant 'nav') and in the menu panel below
+  1100px (variant 'menu'). Children come from a Shopify menu link (menu_link.links) or from "Label | URL" lines
+  (children_text); an item with children gets a dropdown (nav) or an accordion (menu).
+
+  Accepts:
+  - variant: 'nav' | 'menu'
+  - label, url: the item
+  - children_text: optional "Label | URL" lines
+  - menu_link: optional Shopify link object (its .links are the children)
+  - item_id: unique id fragment for aria-controls
+  - attrs: block.shopify_attributes (nav only, so Theme Editor block selection maps to the visible nav)
+{%- endcomment -%}
+{%- liquid
+  # Links saved with a "?view=" template suffix: the pages render their template without it.
+  assign url = url | split: '?view=' | first
+  assign item_path = url | split: '?' | first
+  assign is_current = false
+  if url != blank and item_path != blank and item_path == request.path
+    unless url contains '#'
+      assign is_current = true
+    endunless
+  endif
+
+  assign child_lines = children_text | newline_to_br | split: '<br />'
+  assign has_children = false
+  if menu_link != blank
+    if menu_link.links.size > 0
+      assign has_children = true
+    endif
+  else
+    for line in child_lines
+      assign line_label = line | split: '|' | first | strip
+      if line_label != blank
+        assign has_children = true
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- capture children_html -%}
+  {%- if menu_link != blank -%}
+    {%- for child in menu_link.links -%}
+      {%- assign child_href = child.url | split: '?view=' | first -%}
+      {%- assign child_path = child_href | split: '?' | first -%}
+      <li>
+        <a href="{{ child_href }}"{% render 'fa-link-target', url: child_href %} class="fa-header__{{ variant }}-sublink"{% if child_path == request.path %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    {%- for line in child_lines -%}
+      {%- assign parts = line | split: '|' -%}
+      {%- assign child_label = parts[0] | strip -%}
+      {%- if child_label == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign child_url = parts[1] | strip | split: '?view=' | first | default: '#' -%}
+      {%- assign child_path = child_url | split: '?' | first -%}
+      <li>
+        <a href="{{ child_url }}"{% render 'fa-link-target', url: child_url %} class="fa-header__{{ variant }}-sublink"{% if child_url != '#' and child_path == request.path %} aria-current="page"{% endif %}>{{ child_label | escape }}</a>
+      </li>
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if variant == 'nav' -%}
+  <li class="fa-header__nav-item{% if has_children %} fa-header__nav-item--parent{% endif %}"{% if has_children %} data-fa-dropdown{% endif %} {{ attrs }}>
+    {%- if has_children and url == blank -%}
+      <button type="button" class="fa-header__nav-link fa-header__nav-toggle" aria-expanded="false" aria-controls="FaHeaderDrop-{{ item_id }}" data-fa-dropdown-toggle>
+        <span>{{ label | escape }}</span>
+        {%- render 'fa-header-caret', size: 'nav' -%}
+      </button>
+    {%- else -%}
+      <a href="{{ url | default: '#' }}"{% render 'fa-link-target', url: url %} class="fa-header__nav-link"{% if is_current %} aria-current="page"{% endif %}>{{ label | escape }}</a>
+      {%- if has_children -%}
+        <button type="button" class="fa-header__nav-caret" aria-expanded="false" aria-controls="FaHeaderDrop-{{ item_id }}" aria-label="{{ label | escape }} submenu" data-fa-dropdown-toggle>
+          {%- render 'fa-header-caret', size: 'nav' -%}
+        </button>
+      {%- endif -%}
+    {%- endif -%}
+    {%- if has_children -%}
+      <div class="fa-header__dropdown" id="FaHeaderDrop-{{ item_id }}">
+        <ul class="fa-header__dropdown-list" role="list">{{ children_html }}</ul>
+      </div>
+    {%- endif -%}
+  </li>
+{%- else -%}
+  <li class="fa-header__menu-item">
+    {%- if has_children -%}
+      <button type="button" class="fa-header__menu-link fa-header__menu-parent" aria-expanded="false" aria-controls="FaHeaderSub-{{ item_id }}" data-fa-accordion-toggle>
+        <span>{{ label | escape }}</span>
+        {%- render 'fa-header-caret', size: 'menu' -%}
+      </button>
+      <ol class="fa-header__submenu" id="FaHeaderSub-{{ item_id }}" hidden>{{ children_html }}</ol>
+    {%- else -%}
+      <a href="{{ url | default: '#' }}"{% render 'fa-link-target', url: url %} class="fa-header__menu-link"{% if is_current %} aria-current="page"{% endif %}>{{ label | escape }}</a>
+    {%- endif -%}
+  </li>
+{%- endif -%}

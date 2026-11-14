@@ -1,0 +1,270 @@
+{%- comment -%}
+  Felice article — the article page body: header (eyebrow · author, title, optional subtitle, byline · date · read
+  time, photo), then the article text beside a sidebar ("In this article" from the text's H2 / H3 headings, a booking box),
+  a mid-article e-book form and share links.
+  Figma: Article V2 (file B4QcctWXiG9ywP3uRA3coG, frame 2719:22580): band 2719:22581 (1440 x 2982), header 2719:22646,
+  text 2719:22657, sidebar 2719:22693, e-book 2719:22666, share 2760:2933.
+  Subtitle: article metafield custom.subtitle (single line text); without it the line is left out.
+  The e-book form is Shopify's customer form (marketing consent + tags), as on the blog page.
+{%- endcomment -%}
+{{ 'fa-inquiry.css' | asset_url | stylesheet_tag }}
+{{ 'fa-article.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign a_content = article.content
+  assign words_per_minute = 200
+  assign word_count = a_content | strip_html | split: ' ' | size
+  assign minutes = word_count | plus: words_per_minute | minus: 1 | divided_by: words_per_minute | floor | at_least: 1
+  assign subtitle = article.metafields.custom.subtitle.value | default: article.metafields.custom.subtitle
+  assign ebook_before = section.settings.ebook_before | plus: 0
+  assign anchor_prefix = 'section-'
+
+  # Posts imported from the old site open with their subtitle as an H2 and use H3s for the sections. Without a
+  # subtitle metafield, a leading H2 becomes the subtitle (Figma: clay line under the title), and when the rest has
+  # no H2 the H3s are the sections: Figma's 42px heading style, and the e-book counts them.
+  assign a_content = a_content | strip
+  assign lead = a_content | slice: 0, 3
+  if subtitle == blank and lead == '<h2'
+    assign lead_h2 = a_content | split: '</h2>' | first
+    assign subtitle = lead_h2 | append: '</h2>' | strip_html | strip
+    assign a_content = a_content | remove_first: lead_h2 | remove_first: '</h2>'
+  endif
+  assign content_parts = a_content | split: '<h2'
+  assign h3_sections = false
+  assign h3_count = 0
+  if content_parts.size == 1 and a_content contains '<h3'
+    assign h3_sections = true
+    assign h3_count = a_content | split: '<h3' | size | minus: 1
+  endif
+  assign share_url = shop.url | append: article.url
+  assign share_url_encoded = share_url | url_encode
+  assign bg = section.settings.background_asset
+  assign form_id = 'fa-article-ebook-' | append: section.id
+-%}
+
+{%- capture ebook_html -%}
+  {%- if ebook_before > 0 -%}
+    <aside class="fa-article__ebook" aria-labelledby="{{ form_id }}-title">
+      <div class="fa-article__ebook-bg" aria-hidden="true"><img src="{{ 'fa-blog-posts-bg.jpg' | asset_url }}" width="1440" height="778" loading="lazy" alt=""></div>
+      <div class="fa-article__ebook-inner">
+        <div class="fa-article__ebook-head">
+          <h2 class="fa-article__ebook-title" id="{{ form_id }}-title">{{ section.settings.ebook_heading | escape }}</h2>
+          {%- if section.settings.ebook_text != blank -%}<p class="fa-article__ebook-text">{{ section.settings.ebook_text | escape }}</p>{%- endif -%}
+        </div>
+        {%- form 'customer', id: form_id, class: 'fa-article__ebook-form' -%}
+          <input type="hidden" name="contact[tags]" value="{{ section.settings.ebook_tags | escape }}">
+          {%- if form.posted_successfully? -%}
+            <p class="fa-inquiry__status" role="status" tabindex="-1" autofocus>{{ section.settings.ebook_success | escape }}</p>
+          {%- elsif form.errors -%}
+            <div class="fa-inquiry__status fa-inquiry__status--error" role="alert" tabindex="-1" autofocus>{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="fa-inquiry__fields">
+            <div class="fa-inquiry__row">
+              <div class="fa-inquiry__field">
+                <label class="fa-inquiry__label" for="{{ form_id }}-first">First name*</label>
+                <input class="fa-inquiry__input" type="text" id="{{ form_id }}-first" name="contact[first_name]" autocomplete="given-name" required>
+              </div>
+              <div class="fa-inquiry__field">
+                <label class="fa-inquiry__label" for="{{ form_id }}-last">Last name*</label>
+                <input class="fa-inquiry__input" type="text" id="{{ form_id }}-last" name="contact[last_name]" autocomplete="family-name" required>
+              </div>
+            </div>
+            <div class="fa-inquiry__field">
+              <label class="fa-inquiry__label" for="{{ form_id }}-email">Email*</label>
+              <input class="fa-inquiry__input" type="email" id="{{ form_id }}-email" name="contact[email]" autocomplete="email" spellcheck="false" autocapitalize="off" required>
+            </div>
+          </div>
+          <button type="submit" class="fa-btn fa-btn--primary">{{ section.settings.ebook_button | default: 'Sign me up' | escape }}</button>
+        {%- endform -%}
+      </div>
+    </aside>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- comment -%}
+  Headings get anchors: H2 = section-N, H3 = section-N-M (N = H2 count so far, 0 before the first H2). The contents
+  box lists H2s with their H3s nested; an article with no H2 lists its H3s at the top level.
+{%- endcomment -%}
+{%- capture toc_html -%}
+  {%- for part in content_parts -%}
+    {%- assign sub_parts = part | split: '<h3' -%}
+    {%- capture sub_toc -%}
+      {%- for sub in sub_parts -%}
+        {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+        {%- assign h3_text = '<h3' | append: sub | split: '</h3>' | first | strip_html | strip -%}
+        {%- if h3_text != blank -%}<li><a href="#{{ anchor_prefix }}{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}">{{ h3_text }}</a></li>{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if forloop.first -%}{{ sub_toc }}{%- continue -%}{%- endif -%}
+    {%- assign h2_text = '<h2' | append: sub_parts.first | split: '</h2>' | first | strip_html | strip -%}
+    {%- if h2_text != blank -%}
+      <li><a href="#{{ anchor_prefix }}{{ forloop.index0 }}">{{ h2_text }}</a>{%- if sub_toc != blank -%}<ol>{{ sub_toc }}</ol>{%- endif -%}</li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- liquid
+  # Posts without any H2 / H3 (e.g. imported plain-paragraph posts): no sections to count, so the e-book goes after
+  # the Nth paragraph (setting) instead of at the very end — Figma places it after the opening section.
+  assign no_headings = false
+  if content_parts.size == 1 and h3_sections == false
+    assign no_headings = true
+    assign plain_after = section.settings.ebook_after_paragraph | default: 5
+    assign para_parts = a_content | split: '</p>'
+  endif
+-%}
+{%- capture body_html -%}
+  {%- if no_headings -%}
+    {%- for chunk in para_parts -%}
+      {{- chunk -}}{%- unless forloop.last -%}</p>{%- endunless -%}
+      {%- if ebook_before > 0 and forloop.index == plain_after and forloop.last == false -%}{{ ebook_html }}{%- endif -%}
+    {%- endfor -%}
+    {%- if ebook_before > 0 and para_parts.size <= plain_after -%}{{ ebook_html }}{%- endif -%}
+  {%- else -%}
+  {%- for part in content_parts -%}
+    {%- if forloop.index0 == ebook_before -%}{{ ebook_html }}{%- endif -%}
+    {%- assign sub_parts = part | split: '<h3' -%}
+    {%- for sub in sub_parts -%}
+      {%- if h3_sections and forloop.index0 == ebook_before -%}{{ ebook_html }}{%- endif -%}
+      {%- if forloop.first -%}
+        {%- if forloop.parentloop.first -%}{{ sub }}{%- continue -%}{%- endif -%}
+        {%- assign h_open = '<h2 id="' | append: anchor_prefix | append: forloop.parentloop.index0 | append: '"' -%}
+      {%- else -%}
+        {%- assign h_open = '<h3 id="' | append: anchor_prefix | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 | append: '"' -%}
+      {%- endif -%}
+      {{- h_open }}{{ sub -}}
+    {%- endfor -%}
+  {%- endfor -%}
+  {%- if h3_sections -%}
+    {%- if ebook_before > 0 and h3_count < ebook_before -%}{{ ebook_html }}{%- endif -%}
+  {%- elsif ebook_before > 0 and content_parts.size <= ebook_before -%}{{ ebook_html }}{%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<article class="fa-section fa-article" id="fa-article-{{ section.id }}">
+  {%- if bg != blank -%}
+    <div class="fa-bg" aria-hidden="true"><img src="{{ bg | asset_url }}" width="1440" height="2982" alt=""></div>
+  {%- endif -%}
+
+  <div class="fa-container fa-article__inner">
+    <header class="fa-article__header">
+      <div class="fa-article__heading">
+        <p class="fa-article__eyebrow">
+          {{- section.settings.eyebrow_label | escape -}}
+          {%- if article.author != blank -%}<span aria-hidden="true"> · </span><span class="fa-article__accent">{{ article.author | escape }}</span>{%- endif -%}
+        </p>
+        <div class="fa-article__titles">
+          <h1 class="fa-article__title">{{ article.title | escape }}</h1>
+          {%- if subtitle != blank -%}<p class="fa-article__subtitle">{{ subtitle | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+      <div class="fa-article__lead">
+        <p class="fa-article__meta">
+          {%- if section.settings.byline != blank -%}{{ section.settings.byline | escape }}<span aria-hidden="true">&nbsp;&nbsp; · &nbsp;&nbsp;</span>{%- endif -%}
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %-d, %Y' }}</time><span aria-hidden="true">&nbsp;&nbsp; · &nbsp;&nbsp;</span>{{ minutes }} min read
+        </p>
+        <div class="fa-article__image">
+          {%- if article.image != blank -%}
+            {{ article.image | image_url: width: 2400 | image_tag: widths: '600, 900, 1200, 1800, 2400', sizes: '(min-width: 1440px) 1200px, calc(100vw - 2 * var(--fa-gutter))', alt: article.image.alt, fetchpriority: 'high' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </header>
+
+    <div class="fa-article__layout">
+      <div class="fa-article__main">
+        <div class="fa-article__content{% if h3_sections %} fa-article__content--h3-sections{% endif %}">{{ body_html }}</div>
+
+        <div class="fa-article__share">
+          <p class="fa-article__share-label">{{ section.settings.share_label | escape }}</p>
+          <ul class="fa-article__share-list" role="list">
+            <li><a class="fa-article__share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url_encoded }}" target="_blank" rel="noopener noreferrer"><span class="fa-article__share-icon" style="--fa-share-icon: url('{{ 'fa-article-share-facebook.png' | asset_url }}');" aria-hidden="true"></span>Facebook</a></li>
+            <li><a class="fa-article__share-link" href="https://twitter.com/intent/tweet?url={{ share_url_encoded }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener noreferrer"><span class="fa-article__share-icon" style="--fa-share-icon: url('{{ 'fa-article-share-x.png' | asset_url }}');" aria-hidden="true"></span>X - Twitter</a></li>
+            <li><a class="fa-article__share-link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url_encoded }}" target="_blank" rel="noopener noreferrer"><span class="fa-article__share-icon fa-article__share-icon--small" style="--fa-share-icon: url('{{ 'fa-article-share-linkedin.png' | asset_url }}');" aria-hidden="true"></span>LinkedIn</a></li>
+            <li><button type="button" class="fa-article__share-link" data-fa-copy-link="{{ share_url | escape }}"><span class="fa-article__share-icon" style="--fa-share-icon: url('{{ 'fa-article-share-copy.png' | asset_url }}');" aria-hidden="true"></span><span data-fa-copy-label>Copy link</span></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="fa-article__sidebar">
+        {%- if toc_html != blank -%}
+          <nav class="fa-article__toc" aria-labelledby="fa-article-toc-{{ section.id }}">
+            <h2 class="fa-article__box-title" id="fa-article-toc-{{ section.id }}">{{ section.settings.toc_title | escape }}</h2>
+            <ol class="fa-article__toc-list">{{ toc_html }}</ol>
+          </nav>
+        {%- endif -%}
+        {%- if section.settings.booking_title != blank -%}
+          <div class="fa-article__booking">
+            <div class="fa-article__booking-head">
+              <h2 class="fa-article__box-title">{{ section.settings.booking_title | escape }}</h2>
+              {%- if section.settings.booking_text != blank -%}<p class="fa-article__booking-text">{{ section.settings.booking_text | escape }}</p>{%- endif -%}
+            </div>
+            <div class="fa-article__booking-actions">
+              {%- if section.settings.booking_button != blank -%}
+                <a class="fa-article__booking-button" href="{{ section.settings.booking_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.booking_link %}>{{ section.settings.booking_button | escape }}</a>
+              {%- endif -%}
+              {%- if section.settings.booking_note != blank -%}
+                {%- if section.settings.booking_note_link != blank -%}
+                  <a class="fa-article__booking-note" href="{{ section.settings.booking_note_link }}">{{ section.settings.booking_note | escape }}</a>
+                {%- else -%}
+                  <p class="fa-article__booking-note">{{ section.settings.booking_note | escape }}</p>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</article>
+
+<script>
+  (() => {
+    document.querySelectorAll('[data-fa-copy-link]').forEach((button) => {
+      if (button.dataset.faCopyReady) return;
+      button.dataset.faCopyReady = 'true';
+      button.addEventListener('click', async () => {
+        const label = button.querySelector('[data-fa-copy-label]');
+        try {
+          await navigator.clipboard.writeText(button.dataset.faCopyLink);
+          label.textContent = 'Link copied';
+        } catch (e) {
+          label.textContent = 'Copy failed';
+        }
+        setTimeout(() => { label.textContent = 'Copy link'; }, 2000);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Felice article",
+  "tag": "div",
+  "class": "fa-article-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow_label", "label": "Eyebrow", "default": "Blog", "info": "Shown before the author's name." },
+    { "type": "text", "id": "byline", "label": "Byline", "default": "Felice Acupuncture", "info": "Shown before the date and read time." },
+    { "type": "paragraph", "content": "Subtitle: the article metafield custom.subtitle (single line text)." },
+    { "type": "header", "content": "Sidebar" },
+    { "type": "text", "id": "toc_title", "label": "Contents title", "default": "In this article", "info": "Lists the article's H2 headings." },
+    { "type": "text", "id": "booking_title", "label": "Booking title", "default": "Book your first visit" },
+    { "type": "text", "id": "booking_text", "label": "Booking text", "default": "Your initial visit is 75 minutes." },
+    { "type": "text", "id": "booking_button", "label": "Booking button", "default": "Book your first visit" },
+    { "type": "url", "id": "booking_link", "label": "Booking link" },
+    { "type": "text", "id": "booking_note", "label": "Note under the button", "default": "or call or text (424) 478-0019" },
+    { "type": "text", "id": "booking_note_link", "label": "Note link", "info": "e.g. tel:+14244780019" },
+    { "type": "header", "content": "E-book form" },
+    { "type": "range", "id": "ebook_before", "label": "Show before heading", "min": 0, "max": 6, "step": 1, "default": 2, "info": "Placed before the article's Nth section heading (H2, or H3 when the article has no H2; 0 hides it; a short article gets it at the end)." },
+    { "type": "range", "id": "ebook_after_paragraph", "label": "Posts without headings: show after paragraph", "min": 1, "max": 12, "step": 1, "default": 5 },
+    { "type": "text", "id": "ebook_heading", "label": "Heading", "default": "Free: Gut Health E-book" },
+    { "type": "text", "id": "ebook_text", "label": "Text", "default": "Fill this form out to receive the Gut Health E-book, get yours now!" },
+    { "type": "text", "id": "ebook_button", "label": "Button label", "default": "Sign me up" },
+    { "type": "text", "id": "ebook_tags", "label": "Customer tags", "default": "newsletter, ebook-gut-health" },
+    { "type": "text", "id": "ebook_success", "label": "Thank-you message", "default": "Thank you! Check your inbox for the e-book." },
+    { "type": "header", "content": "Share" },
+    { "type": "text", "id": "share_label", "label": "Share label", "default": "Share:" },
+    { "type": "header", "content": "Background" },
+    { "type": "text", "id": "background_asset", "label": "Bundled background file", "default": "fa-team-bg.jpg" }
+  ]
+}
+{% endschema %}

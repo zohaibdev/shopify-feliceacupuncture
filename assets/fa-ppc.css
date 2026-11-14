@@ -1,0 +1,809 @@
+/*
+  PPC Landing Page sections (sections/fa-ppc-hero, fa-ppc-offer, fa-ppc-pricing) — Figma "LP" section 3014:4049:
+  desktop 3014:4054 (1440), mobile 3031:4731 (375). Template: templates/page.ppc.json; header: fa-header "Layout: PPC".
+*/
+
+/* Figma sets the struck regular price in the hero and the strip in Libre Caslon Text (not the condensed body face). */
+@font-face {
+  font-family: 'Libre Caslon Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fa-libre-caslon-text-400.woff2') format('woff2');
+}
+
+/* ---------- Shared: price row + badge ---------- */
+
+.fa-ppc-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+}
+
+.fa-ppc-price__now {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.fa-ppc-price__was {
+  font-family: var(--fa-font-body);
+  font-weight: 400;
+  line-height: 1;
+  text-decoration-thickness: 1px;
+}
+
+/* Figma: "Save $100" pill — Libre Caslon, fully rounded, 8 / 16 padding. */
+.fa-ppc-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.fa-ppc-badge--light {
+  background: var(--fa-linen);
+  color: var(--fa-garnet);
+}
+
+/* ---------- Hero (3014:4054 121–804) ----------
+   683px band (texture + leaves + moss 80%, baked into the bundled file); 1271px row: the 773px copy column and the
+   454 x 543 photo (r10) 44px right of it, photo 70px from the band top and bottom, copy 54px lower. Rating: five
+   18px clay stars, 5px, LCC 16 / 20 (-1%) white; 30px; title Marisa 70 / 60 (-4%) linen; 20px; intro LCC 24 / 40
+   linen; 6px; price row 18px apart ($150 Marisa 64 #932039, $250 LCC 34 struck, badge LCC 20); 12px; 290 x 54
+   button (Marisa 20 -3%) and, 26px right, "or call or text" LCC 24 (-2%). */
+.fa-ppc-hero {
+  padding-block: 70px;
+  color: var(--fa-linen);
+  background: #7e7650; /* mean of the bundled texture */
+}
+
+.fa-ppc-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 773fr) minmax(0, 454fr);
+  align-items: start;
+  column-gap: 44px;
+  max-width: calc(1271px + var(--fa-gutter) * 2);
+}
+
+.fa-ppc-hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 54px;
+}
+
+.fa-ppc-hero__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  color: var(--fa-white);
+}
+
+.fa-ppc-hero__stars {
+  display: flex;
+  color: var(--fa-clay);
+}
+
+.fa-ppc-hero__stars .fa-icon {
+  display: block;
+  width: 17.6px;
+  height: 18px;
+  padding: 1.5px 1.3px;
+}
+
+.fa-ppc-hero__title {
+  margin: 30px 0 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 60px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--fa-linen);
+  text-box: trim-both cap alphabetic; /* Figma's 95px two-line box */
+}
+
+.fa-ppc-hero__text {
+  margin-top: 20px;
+  font-size: 24px;
+  line-height: 40px;
+}
+
+.fa-ppc-hero__text p { margin: 0; }
+
+.fa-ppc-hero__price {
+  gap: 18px;
+  margin-top: 6px;
+}
+
+.fa-ppc-hero__price .fa-ppc-price__now {
+  font-size: 64px;
+  line-height: 90px;
+  letter-spacing: 0;
+  color: #932039;
+}
+
+.fa-ppc-hero__price .fa-ppc-price__was,
+.fa-ppc-offer--strip .fa-ppc-price__was { font-family: 'Libre Caslon Text', var(--fa-font-body); }
+
+.fa-ppc-hero__price .fa-ppc-price__was { font-size: 34px; }
+
+.fa-ppc-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 26px;
+  margin-top: 12px;
+}
+
+.fa-section .fa-ppc-hero__button {
+  min-width: 290px;
+  color: var(--fa-linen);
+}
+
+.fa-ppc-hero__call {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--fa-linen);
+  text-decoration: none;
+}
+
+a.fa-ppc-hero__call:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.fa-ppc-hero__figure { margin: 0; }
+
+.fa-ppc-hero__media {
+  aspect-ratio: 454 / 543;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--fa-linen);
+}
+
+.fa-ppc-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fa-ppc-hero__caption { display: none; }
+
+/* Tablet (900–1099, not drawn): smaller title, photo column keeps its ratio. */
+@media screen and (max-width: 1099px) {
+  .fa-ppc-hero__title { font-size: 52px; line-height: 48px; }
+  .fa-ppc-hero__text { font-size: 20px; line-height: 32px; }
+}
+
+/* Mobile 3031:4731 94–750: 30px top, 37 bottom; centred copy — five 14px stars + LCC 10 / 20 (-2%); 13px; title
+   Marisa 34 / 32 (-7%); 14px; intro 14 / 22 (-1%); 20px; price row ($150 Marisa 50 -5%, 3px, $250 LCC 24, 8px,
+   badge LCC 14); 18px; full-width 45px button (Marisa 18, white); 6px; call line LCC 14; 15px; photo 351 x 269 r4;
+   8px; caption LCC 12 / 19 (-2%). */
+@media screen and (max-width: 899px) {
+  .fa-ppc-hero { padding-block: 30px 37px; }
+
+  .fa-ppc-hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 15px;
+    padding-inline: 12px;
+  }
+
+  .fa-ppc-hero__copy {
+    align-items: center;
+    padding-top: 0;
+    text-align: center;
+  }
+
+  .fa-ppc-hero__rating {
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-ppc-hero__stars .fa-icon {
+    width: 14px;
+    height: 14px;
+    padding: 1.1px 1px;
+  }
+
+  .fa-ppc-hero__title {
+    margin-top: 13px;
+    font-size: 34px;
+    line-height: 32px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-ppc-hero__text {
+    text-box: trim-both cap alphabetic; /* Figma's 33px two-line box */
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .fa-ppc-hero__price {
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .fa-ppc-hero__price .fa-ppc-price__now {
+    margin-right: -5px; /* 3px to the regular price */
+    font-size: 50px;
+    line-height: 27px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-ppc-hero__price .fa-ppc-price__was { font-size: 24px; }
+
+  .fa-ppc-hero__price .fa-ppc-badge {
+    font-size: 14px;
+    line-height: 11px;
+  }
+
+  .fa-ppc-hero__actions {
+    flex-direction: column;
+    align-self: stretch;
+    gap: 6px;
+    margin-top: 18px;
+  }
+
+  .fa-section .fa-ppc-hero__button {
+    width: 100%;
+    min-width: 0;
+    min-height: 45px;
+    font-size: 18px;
+    color: var(--fa-white);
+  }
+
+  .fa-ppc-hero__call {
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .fa-ppc-hero__media {
+    aspect-ratio: 351 / 269;
+    border-radius: 4px;
+  }
+
+  .fa-ppc-hero__caption {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 19px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--fa-linen);
+  }
+}
+
+/* ---------- Offer: "Strip" (3014:4054 804–923) ----------
+   #932039, 32 / 42 padding; a 1090px row: eyebrow LCC 18 / 20, 16px, title Marisa 51 (-4%) at the left; at the right
+   a light badge (LCC 18), 8px, struck $250 LCC 28, 8px, $150 Marisa 50 (-4%), 18px, a 290 x 54 linen button
+   (garnet label). Flower crops (80%) at both edges. */
+.fa-ppc-offer {
+  overflow: hidden;
+  color: var(--fa-linen);
+}
+
+.fa-ppc-offer--strip {
+  padding-block: 32px;
+  background: #932039;
+}
+
+.fa-ppc-offer--strip .fa-ppc-offer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 46px;
+  max-width: calc(1090px + var(--fa-gutter) * 2);
+}
+
+.fa-ppc-offer__head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fa-ppc-offer__eyebrow {
+  margin: 0;
+  font-size: 18px;
+  line-height: 20px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-ppc-offer__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 51px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-ppc-offer__deal {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.fa-ppc-offer__price { gap: 8px; }
+.fa-ppc-offer--strip .fa-ppc-badge { font-size: 18px; line-height: 18px; }
+.fa-ppc-offer--strip .fa-ppc-price__was { font-size: 28px; }
+
+.fa-ppc-offer--strip .fa-ppc-price__now {
+  font-size: 50px;
+  line-height: 1;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-section .fa-ppc-offer__button {
+  min-width: 290px;
+  color: var(--fa-garnet);
+}
+
+.fa-ppc-offer__flower {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: auto;
+}
+
+.fa-ppc-offer__flower--left { left: 0; }
+.fa-ppc-offer__flower--right { right: 0; }
+
+.fa-ppc-offer__small { margin: 0; }
+
+@media screen and (max-width: 1279px) {
+  .fa-ppc-offer__flower { display: none; }
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-ppc-offer--strip .fa-ppc-offer__inner { flex-direction: column; text-align: center; }
+  .fa-ppc-offer--strip .fa-ppc-offer__deal { flex-wrap: wrap; justify-content: center; }
+}
+
+/* Mobile 3031:4731 750–884: 18px padding; row: eyebrow LCC 12, 15px, title Marisa 30 (-4%) | right column: badge
+   (LCC 10, 4 / 7 padding), 10px, $150 Marisa 32 (-4%) + 5px + struck $250 LCC 16; 17px; full-width 40px linen
+   button (Marisa 16, -3%). */
+@media screen and (max-width: 899px) {
+  .fa-ppc-offer--strip { padding: 18px 0; }
+
+  .fa-ppc-offer--strip .fa-ppc-offer__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 17px 12px;
+    padding-inline: 17px 11px;
+    text-align: left;
+  }
+
+  .fa-ppc-offer--strip .fa-ppc-offer__head { gap: 15px; }
+  .fa-ppc-offer--strip .fa-ppc-offer__eyebrow { font-size: 12px; }
+  .fa-ppc-offer--strip .fa-ppc-offer__title { font-size: 30px; }
+  .fa-ppc-offer--strip .fa-ppc-offer__deal { display: contents; }
+
+  .fa-ppc-offer--strip .fa-ppc-offer__price {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: end;
+    align-items: baseline;
+    gap: 10px 5px;
+  }
+
+  .fa-ppc-offer--strip .fa-ppc-badge {
+    grid-column: 1 / -1;
+    padding: 4px 7px;
+    font-size: 10px;
+    line-height: 8px;
+  }
+
+  .fa-ppc-offer--strip .fa-ppc-price__now { order: 1; font-size: 32px; }
+  .fa-ppc-offer--strip .fa-ppc-price__was { order: 2; font-size: 16px; }
+
+  .fa-ppc-offer--strip .fa-ppc-offer__button.fa-btn {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    font-size: 16px;
+  }
+}
+
+/* ---------- Offer: "Photo banner" (3014:4054 8484–8961) ----------
+   477px band, 133px padding, darkened photo (39% black, baked into the bundled file); centred 501px column: title
+   Marisa 70 / 60 (-4%) white; 35px; row: $150 Marisa 55.7 + 6px + struck $250 Marisa 37 + 9px + "Regular" LCC 12.7,
+   15px, a 193 x 47 linen button (Marisa 20, -2%, 42px sides); 14px; small print LCC 14 (+3%) white. */
+.fa-ppc-offer--banner {
+  padding-block: 138px 137px; /* Figma's text sits 138px down; 137px under the small print */
+  color: var(--fa-white);
+  background: #3c352c;
+  text-align: center;
+}
+
+.fa-ppc-offer--banner .fa-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / var(--fa-ppc-shade, 0));
+}
+
+.fa-ppc-offer--banner .fa-ppc-offer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(501px + var(--fa-gutter) * 2);
+}
+
+.fa-ppc-offer--banner .fa-ppc-offer__title {
+  font-size: 70px;
+  line-height: 60px;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Figma 2147256069: a fixed 476px row, price at the left edge and the 193px button at the right (space-between). */
+.fa-ppc-offer--banner .fa-ppc-offer__deal {
+  justify-content: space-between;
+  gap: 15px;
+  width: min(476px, 100%);
+  margin-top: 26px; /* title box to the price row */
+}
+
+.fa-ppc-offer--banner .fa-ppc-offer__price {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.fa-ppc-offer--banner .fa-ppc-price__now { order: -1; text-box: trim-both cap alphabetic; }
+
+.fa-ppc-offer--banner .fa-ppc-price__now {
+  font-size: 55.7px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.fa-ppc-offer--banner .fa-ppc-price__was {
+  font-family: var(--fa-font-display);
+  font-size: 37px;
+}
+
+.fa-ppc-offer--banner .fa-ppc-price__note {
+  margin-left: 3px;
+  font-size: 12.7px;
+  line-height: 18px;
+}
+
+.fa-ppc-offer--banner .fa-ppc-offer__button.fa-btn {
+  min-width: 193px;
+  min-height: 47px;
+  padding-inline: 42px;
+  letter-spacing: -0.02em;
+}
+
+.fa-ppc-offer--banner .fa-ppc-offer__small {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+/* Mobile 3031:4731 9278–9514: the same layout at 0.62 — 236px band, 65 / 46px padding; title 43.5 / 37; 21.7px;
+   $150 34.6, $250 23.1, "Regular" 7.9; a 120 x 29 button (Marisa 12.4, 26px sides); 8.7px; small print 8.7. */
+@media screen and (max-width: 899px) {
+  .fa-ppc-offer--banner { padding-block: 65px 46px; }
+  .fa-ppc-offer--banner .fa-ppc-offer__title { font-size: 43.5px; line-height: 37px; }
+  .fa-ppc-offer--banner .fa-ppc-offer__deal { gap: 9.3px; width: min(295.5px, 100%); margin-top: 17px; }
+  .fa-ppc-offer--banner .fa-ppc-offer__price { gap: 3.9px; }
+  .fa-ppc-offer--banner .fa-ppc-price__now { font-size: 34.6px; }
+  .fa-ppc-offer--banner .fa-ppc-price__was { font-size: 23.1px; }
+  .fa-ppc-offer--banner .fa-ppc-price__note { font-size: 12px; line-height: 14px; } /* 12px minimum (review 2026-10-21; Figma 7.9) */
+
+  .fa-ppc-offer--banner .fa-ppc-offer__button.fa-btn {
+    min-width: 120px;
+    min-height: 29px;
+    padding-inline: 26px;
+    font-size: 12.4px;
+  }
+
+  .fa-ppc-offer--banner .fa-ppc-offer__small {
+    margin-top: 8.7px;
+    font-size: 12px; /* 12px minimum (review 2026-10-21; Figma 8.7) */
+    line-height: 16px;
+  }
+}
+
+/* ---------- Pricing (3014:4054 3559–4320) ----------
+   761px light band, 110px padding; heading (title Marisa 60 / 50 -4% garnet, 20px, intro LCC 16 / 27 garnet); 42px;
+   1079 x 397 card: the 456px offer panel (header texture, 36px padding: light badge LCC 18, 27px, offer name Marisa
+   36 (-4%) linen, 27px, $150 Marisa 86 + 8px + "Regular" LCC 16 / 23 over struck $250 Marisa 29.5; at the foot the
+   note LCC 19, 14px, a 329 x 67 linen button (Marisa 22.7, -3%)); the 623px details: linen box (r2, 32 / 39 padding:
+   "What's included" Marisa 36 (-2%) garnet, 19px, ✓ items LCC 22.7 / 1.4 garnet 12.5 apart) over an 85px textured
+   moss strip (16 / 32 padding: "Regular pricing" Marisa 24 -5% linen, 8px, items LCC 18 -3% spread across). */
+.fa-ppc-pricing {
+  padding-block: 130px;
+  color: var(--fa-garnet);
+  background: #e6d6c0;
+}
+
+.fa-ppc-pricing__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+}
+
+.fa-ppc-pricing__heading { gap: 20px; }
+
+.fa-ppc-pricing__card {
+  display: grid;
+  grid-template-columns: minmax(0, 456fr) minmax(0, 623fr);
+  width: min(1079px, 100%);
+}
+
+.fa-ppc-pricing__offer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px;
+  background: #d8c3a5 var(--fa-ppc-panel-bg) center / cover;
+  color: var(--fa-linen);
+}
+
+.fa-ppc-pricing__offer-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 27px;
+}
+
+.fa-ppc-pricing .fa-ppc-badge {
+  padding: 9px 16px;
+  font-size: 18px;
+  line-height: 14px;
+}
+
+.fa-ppc-pricing__offer-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 36.3px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-ppc-pricing__price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.fa-ppc-pricing__now {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 86.2px;
+  line-height: 1;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-ppc-pricing__regular {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.fa-ppc-pricing__note {
+  font-size: 15.9px;
+  line-height: 23px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-ppc-pricing__was {
+  font-family: var(--fa-font-display);
+  font-weight: 400;
+  font-size: 29.5px;
+  line-height: 1;
+  text-decoration-thickness: 1px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-ppc-pricing__offer-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.fa-ppc-pricing__offer-text {
+  margin: 0;
+  font-size: 19.3px;
+  line-height: 27px;
+}
+
+.fa-section .fa-ppc-pricing__button {
+  min-width: 329px;
+  min-height: 67px;
+  padding-inline: 36px;
+  font-size: 22.7px;
+  color: var(--fa-garnet);
+}
+
+.fa-ppc-pricing__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.fa-ppc-pricing__included {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding: 32px 38px 32px 40px;
+  border-radius: 2px;
+  background: var(--fa-linen);
+}
+
+.fa-ppc-pricing__included-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 36.3px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+}
+
+.fa-ppc-pricing__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12.5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 22.7px;
+  line-height: 1.4;
+}
+
+.fa-ppc-pricing__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 8px; /* Figma's two spaces after the tick */
+}
+
+.fa-ppc-pricing__list li::before { content: '\2713'; }
+
+.fa-ppc-pricing__regular-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 32px;
+  background: #736d46 var(--fa-ppc-strip-bg) center / cover;
+  color: var(--fa-linen);
+}
+
+.fa-ppc-pricing__regular-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 23px;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.fa-ppc-pricing__regular-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.03em;
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-ppc-pricing__card { grid-template-columns: minmax(0, 1fr); max-width: 623px; }
+}
+
+/* Mobile 3031:4731 3719–4473: 60px padding; heading 307px (32 / 28 -4%, 14px, 14 / 22); 24px; stacked 351px card:
+   offer panel 21 / 11px padding (badge LCC 12 6 / 12, 12px, name Marisa 32 / 28 -7%, 20px, $150 49.4 + "Regular"
+   11.3 / 16 over $250 21; 45px; note LCC 14, 14px, full-width 49px button Marisa 20); linen box (23 / 18 padding,
+   title Marisa 26, 16px, items LCC 16 / 22 8 apart); moss strip 11 / 16 padding, centred title Marisa 15, 8px, items
+   LCC 12 (-4%). */
+@media screen and (max-width: 899px) {
+  .fa-ppc-pricing { padding-block: 60px; }
+  .fa-ppc-pricing__inner { gap: 24px; }
+  .fa-ppc-pricing__heading { max-width: 307px; }
+
+  .fa-ppc-pricing__title {
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-ppc-pricing__card { max-width: 351px; }
+
+  .fa-ppc-pricing__offer {
+    gap: 45px;
+    padding: 21px 11px;
+  }
+
+  .fa-ppc-pricing__offer-head { gap: 12px; }
+
+  .fa-ppc-pricing .fa-ppc-badge {
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 9px;
+  }
+
+  .fa-ppc-pricing__offer-title {
+    margin-bottom: 8px; /* 20px to the price */
+    font-size: 32px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-ppc-pricing__price { gap: 5.6px; }
+  .fa-ppc-pricing__now { font-size: 49.4px; }
+  .fa-ppc-pricing__regular { gap: 8px; }
+  .fa-ppc-pricing__note { font-size: 12px; line-height: 16px; } /* 12px minimum (review 2026-10-22; Figma 11.3) */
+  .fa-ppc-pricing__was { font-size: 21px; }
+  .fa-ppc-pricing__offer-foot { align-items: stretch; }
+  .fa-ppc-pricing__offer-text { font-size: 14px; line-height: 20px; text-box: trim-both cap alphabetic; }
+
+  .fa-section .fa-ppc-pricing__button {
+    width: 100%;
+    min-width: 0;
+    min-height: 49px;
+    font-size: 20px;
+  }
+
+  .fa-ppc-pricing__included {
+    gap: 16px;
+    padding: 23px 18px;
+  }
+
+  .fa-ppc-pricing__included-title { font-size: 26px; line-height: 26px; text-box: trim-both cap alphabetic; }
+
+  .fa-ppc-pricing__list {
+    gap: 8px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .fa-ppc-pricing__regular-box {
+    padding: 11px 12px;
+    text-align: center;
+  }
+
+  .fa-ppc-pricing__regular-title { font-size: 15px; line-height: 14px; }
+
+  .fa-ppc-pricing__regular-list {
+    gap: 4px 12px;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.04em;
+  }
+}

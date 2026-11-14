@@ -1,0 +1,422 @@
+/* Felice testimonials — Figma 414:257 / 414:873 (desktop), 414:1006 / 414:1360 (mobile);
+   services page v2 2263:2861 / 2264:7058 (same layout, small botanical, 60px mobile padding) */
+
+.fa-testimonials {
+  position: relative;
+  overflow-x: clip;
+  color: var(--fa-linen);
+  background: var(--fa-moss);
+}
+
+.fa-testimonials .fa-bg picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Figma 414:873 (rotated 70.9deg, pre-rendered upright): 441.6 x 353.7 box, 121px above the
+   section top and 82.8px past the left edge, spilling up into the team section. */
+.fa-testimonials__flower {
+  top: -121px;
+  left: -82.8px;
+  width: 441.6px;
+}
+
+/* Services v2 2263:3019: the same drawing at 286.3px, 45px past the left edge and 80.8px above the band
+   (desktop and tablet; the double class keeps it clear of the tablet size below). */
+.fa-testimonials__flower.fa-testimonials__flower--small {
+  top: -80.8px;
+  left: -45px;
+  width: 286.3px;
+}
+
+/* "Let the botanical rise into the section above" off (Our Approach mobile 2305:4850: drawn under the band above,
+   so only the part inside this section shows). */
+.fa-testimonials--botanical-inside { overflow: clip; }
+
+/* "Show botanical on" (900px is the mobile / tablet boundary, as everywhere). */
+@media screen and (min-width: 900px) {
+  .fa-testimonials__flower--mobile-only { display: none; }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-testimonials__flower--desktop-only { display: none; }
+}
+
+.fa-testimonials__heading {
+  gap: 20px;
+  max-width: 723px;
+}
+
+.fa-testimonials__heading .fa-heading__title {
+  line-height: 58px; /* Figma 414:263 */
+  color: var(--fa-linen);
+}
+
+/* Figma V4 2237:311 intro box (desktop and tablet). Phones keep the shared 363px intro measure (fa-base.css), like the
+   other sections' intros. */
+@media screen and (min-width: 900px) {
+  .fa-testimonials__heading .fa-heading__text { max-width: 635px; }
+}
+
+/* ---------- Carousel ---------- */
+
+.fa-testimonials__carousel {
+  position: relative;
+  display: block;
+}
+
+/* Figma 40px heading → cards gap (none when the heading and text are blank). */
+.fa-testimonials__heading + .fa-testimonials__carousel { margin-top: 40px; }
+
+.fa-testimonials__track {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fa-testimonials__track::-webkit-scrollbar { display: none; }
+
+.fa-testimonials__track:focus-visible {
+  outline: 2px solid var(--fa-linen);
+  outline-offset: 4px;
+}
+
+/* safe center: fewer cards than fit are centred under the heading; an overflowing row starts at the edge. */
+.fa-testimonials__list {
+  display: flex;
+  justify-content: safe center;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-testimonials__item {
+  display: flex;
+  flex: 0 0 calc((100% - 39px) / 4);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* ---------- Card ---------- */
+
+.fa-testimonials__card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--fa-linen);
+}
+
+.fa-testimonials__user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.fa-testimonials__avatar {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #811ea1;
+}
+
+/* No photo: the reviewer's initial on the purple disc, as Google shows it. */
+.fa-testimonials__initial {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--fa-white);
+  font-family: var(--fa-font-body);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.fa-testimonials__widget { position: relative; }
+
+.fa-testimonials__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fa-testimonials__meta {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fa-testimonials__name {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  overflow-wrap: anywhere;
+}
+
+.fa-testimonials__date {
+  margin: 0;
+  font-size: 15px;
+  line-height: 15px;
+  color: var(--fa-clay);
+}
+
+/* margin-inline-start: auto keeps the mark at the card edge when a review has no name or date (the empty meta
+   div is hidden by Dawn's div:empty rule). */
+.fa-testimonials__source {
+  display: block;
+  flex: none;
+  margin-inline-start: auto;
+  width: 24px;
+  height: 24px;
+}
+
+.fa-testimonials__source .fa-icon {
+  width: 100%;
+  height: 100%;
+}
+
+a.fa-testimonials__source:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Rating + review text. Desktop: same 16px rhythm as the card; mobile: a tighter 6px group. */
+.fa-testimonials__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fa-testimonials__rating {
+  display: flex;
+  gap: 4px;
+  color: var(--fa-garnet);
+}
+
+.fa-testimonials__star .fa-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.fa-testimonials__star--empty { opacity: 0.25; }
+
+/* "Square corners, clay stars" (homepage V6 2669:25161): radius 2, Canyon Clay stars. Desktop / tablet only. */
+@media screen and (min-width: 900px) {
+  .fa-testimonials--cards-square .fa-testimonials__card { border-radius: 2px; }
+  .fa-testimonials--cards-square .fa-testimonials__rating { color: var(--fa-clay); }
+}
+
+.fa-testimonials__text {
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--fa-moss);
+  text-wrap: pretty; /* card widths change with the viewport: no one-word last line */
+}
+
+.fa-testimonials__text p { margin: 0; }
+
+/* ---------- Arrows (Figma: 32px garnet circles, 18px / 21px outside the card row) ---------- */
+
+.fa-testimonials__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+  cursor: pointer;
+}
+
+.fa-testimonials__arrow .fa-icon {
+  width: 84.6%;
+  height: 84.6%;
+}
+
+.fa-testimonials__arrow--prev { left: -18px; }
+
+.fa-testimonials__arrow--next { right: -21px; }
+
+.fa-testimonials__arrow--next .fa-icon { transform: scaleX(-1); }
+
+/* "Carousel arrow size: Large" (homepage V5 2615:10073 / 2612:3177): 38.3px circles on the same centre line,
+   26px / 23px outside the card row; the chevron keeps its 84.6% box. Mobile keeps the 32px arrows. */
+@media screen and (min-width: 900px) {
+  .fa-testimonials--arrows-large .fa-testimonials__arrow {
+    width: 38.3px;
+    height: 38.3px;
+    margin-top: -19.15px;
+  }
+
+  .fa-testimonials--arrows-large .fa-testimonials__arrow--prev { left: -26px; }
+
+  .fa-testimonials--arrows-large .fa-testimonials__arrow--next { right: -23px; }
+}
+
+.fa-testimonials__arrow:focus-visible {
+  outline: 2px solid var(--fa-linen);
+  outline-offset: 2px;
+}
+
+/* Figma draws both desktop arrows as solid garnet with a full linen chevron at rest (the start position),
+   so a disabled arrow looks identical; it only loses the pointer and hover state. Mobile hides it (below). */
+.fa-testimonials__arrow:disabled { cursor: default; }
+
+/* Nothing to scroll, or no script (yet / at all): hide the controls; the track still scrolls natively. */
+.fa-testimonials__carousel[data-static] .fa-testimonials__arrow,
+fa-testimonials-carousel:not(:defined) .fa-testimonials__arrow { display: none; }
+
+/* Small desktop (1100-1279): four cards per view squeeze the names and dates onto two lines, so show three. */
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-testimonials__item { flex-basis: calc((100% - 26px) / 3); }
+}
+
+/* ---------- Tablet ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-testimonials__flower {
+    top: -86px;
+    left: -58px;
+    width: 310px;
+  }
+
+  .fa-testimonials__arrow--next { right: -18px; }
+}
+
+/* Tablet (900-1099): three cards per view like small desktop; a slightly tighter card and Figma's mobile 20px
+   name keep the name and date on one line each in the 270-336px cards. */
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-testimonials__item { flex-basis: calc((100% - 26px) / 3); }
+  .fa-testimonials__card { padding: 20px; }
+  .fa-testimonials__user { gap: 12px; }
+  .fa-testimonials__name { font-size: 20px; }
+}
+
+/* ---------- Mobile (Figma 414:1360) ---------- */
+
+@media screen and (max-width: 899px) {
+  /* Section setting (homepage V4 2264:2515 and services v2 band 2264:7058 draw 60; the schema default 50 = the
+     mobile section padding). */
+  .fa-testimonials { padding-block: var(--fa-tm-pad-mobile, var(--fa-section-pad)); }
+
+  /* Both styles draw the same mobile botanical: 155.2px wide, 28px past the edge, 56px up (services v2 2264:7059,
+     homepage V4 2264:2702). */
+  .fa-testimonials__flower,
+  .fa-testimonials__flower.fa-testimonials__flower--small {
+    top: -56px;
+    left: -28px;
+    width: 155.2px;
+  }
+
+  .fa-testimonials__heading { gap: 16px; }
+
+  .fa-testimonials__heading .fa-heading__title { line-height: 29px; } /* Figma 414:1364 (undoes the desktop 58) */
+
+  .fa-testimonials__heading + .fa-testimonials__carousel { margin-top: 30px; }
+
+  /* Cards bleed to the screen edge like the other mobile swipe rows. */
+  .fa-testimonials__track {
+    margin-inline: calc(var(--fa-gutter) * -1);
+    padding-inline: var(--fa-gutter);
+    scroll-padding-inline: var(--fa-gutter);
+  }
+
+  /* Size the list to its cards so the track's end padding lands after the last card (12px right gutter). */
+  .fa-testimonials__list { width: max-content; }
+
+  .fa-testimonials__item { flex-basis: 284px; }
+
+  .fa-testimonials__card {
+    gap: 10px;
+    padding: 16px 14px;
+    border-radius: 8px;
+  }
+
+  .fa-testimonials__user { gap: 10px; }
+
+  .fa-testimonials__avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .fa-testimonials__meta { gap: 1px; }
+
+  .fa-testimonials__name {
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .fa-testimonials__date { font-size: 12px; }
+
+  .fa-testimonials__rating { gap: 2.33px; }
+
+  .fa-testimonials__star .fa-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Figma 414:1381: stars and text form one group with a 6px gap. */
+  .fa-testimonials__body { gap: 6px; }
+
+  .fa-testimonials__text {
+    font-size: 14px;
+    line-height: 20px; /* mobile frames 2794:1089 / 2821:6541: 14 / 20 */
+  }
+
+  /* Only the forward arrow is drawn on mobile (6px from the screen edge); prev appears once scrolled. */
+  .fa-testimonials__arrow--prev { left: -6px; }
+
+  .fa-testimonials__arrow--next { right: -6px; }
+
+  .fa-testimonials__arrow:disabled { display: none; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Arrows darken and their chevron slides in its direction on hover (not when disabled); the Google mark grows a
+   touch. Prev / next scroll smoothly (the script picks the behaviour; reduced motion jumps). The cards
+   themselves are static: the track is a scroll container, so a lift or shadow would be clipped at its edges. */
+
+.fa-testimonials__arrow {
+  transition: background-color var(--fa-dur-hover) var(--fa-ease-out), opacity var(--fa-dur-hover) var(--fa-ease-out), transform 0.15s var(--fa-ease-out);
+}
+
+.fa-testimonials__arrow .fa-icon,
+.fa-testimonials__source .fa-icon { transition: transform var(--fa-dur-ui) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-testimonials__arrow:not(:disabled):hover { background: var(--fa-garnet-dark); }
+  .fa-testimonials__arrow--prev:not(:disabled):hover .fa-icon { transform: translateX(calc(var(--fa-nudge) / -2)); }
+  .fa-testimonials__arrow--next:not(:disabled):hover .fa-icon { transform: scaleX(-1) translateX(calc(var(--fa-nudge) / -2)); }
+  a.fa-testimonials__source:hover .fa-icon { transform: scale(1.1); }
+}
+
+.fa-testimonials__arrow:not(:disabled):active { transform: scale(0.94); }
+
+@media (prefers-reduced-motion: reduce) {
+  a.fa-testimonials__source .fa-icon,
+  .fa-testimonials__arrow:not(:disabled):active { transform: none; }
+}

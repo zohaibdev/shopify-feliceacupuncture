@@ -1,0 +1,304 @@
+/* Felice blog posts — homepage "Chinese medicine, explained" (file B4QcctWXiG9ywP3uRA3coG, V3 latest 2620:10728):
+   1440 x 778 band, padding 110 / 50 / 120, heading 755 wide (title 60 / 58, intro 16 / 27, 20px apart), 48px gap,
+   3 x 437 x 438 cards 14px apart (linen, 1px #d7c4a4 inside stroke, radius 12; photo 240 tall, body 18 / 28 / 28 / 24 — the link sits 27px
+   above the card edge, as the body overruns the 438px card by 1px).
+   No mobile frame: mobile follows the swipe-row pattern of fa-feature-cards (60px padding, 16 / 24 gaps, 314px cards). */
+
+.fa-blog-posts {
+  position: relative;
+  overflow-x: clip;
+  padding-block: 110px var(--fa-bp-pad-bottom, 120px); /* setting "Bottom padding (desktop)" */
+  color: var(--fa-linen);
+  background: #80764d; /* average of the bundled moss texture, shown while it loads or when cleared */
+}
+
+/* ---------- Layout ---------- */
+
+.fa-blog-posts__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px; /* V6 2669:25803: heading, cards and button 38 apart (V5: 48) */
+}
+
+.fa-blog-posts__heading {
+  gap: 20px;
+  width: 100%;
+  max-width: 755px;
+}
+
+.fa-blog-posts .fa-heading__title { line-height: 58px; }
+
+/* Figma 2620:10758: a fixed 635px box. */
+.fa-blog-posts .fa-heading__text { max-width: 635px; }
+
+/* Three per row; a shorter last row (1, 2, 4 or 5 articles) stays centred under the heading. */
+.fa-blog-posts__list {
+  --fa-bp-gap: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--fa-bp-gap);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-blog-posts__item {
+  display: flex;
+  flex: 0 0 calc((100% - var(--fa-bp-gap) * 2) / 3);
+  min-width: 0;
+}
+
+/* ---------- Card ---------- */
+
+.fa-blog-posts__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 2px; /* V6 2669:25809: radius 2, no stroke (V5: r12, 1px #d7c4a4) */
+  background: var(--fa-linen);
+}
+
+/* 435 x 240 inside the stroke at 1440 (Figma's 437 x 240 photo runs under the right stroke). */
+.fa-blog-posts__media {
+  position: relative;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 437 / 240;
+  overflow: hidden;
+  background: #d9cbb8;
+}
+
+.fa-blog-posts__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-bp-focal, center);
+  display: block;
+}
+
+.fa-blog-posts__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 28px 24px 24px; /* V6: 437 x 440 card, 200px body */
+}
+
+.fa-blog-posts__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: stretch;
+}
+
+/* Figma 2620:10764: Libre Caslon Condensed 16 / auto (20), -3%, title case, moss. */
+.fa-blog-posts__meta {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  text-transform: capitalize;
+  color: var(--fa-moss);
+}
+
+/* Figma 2620:10735: Marisa 26 / 28, -1%, uppercase, garnet. */
+.fa-blog-posts__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--fa-moss); /* V6 2669:25809 (V5: garnet) */
+  overflow-wrap: anywhere;
+}
+
+/* Figma 2620:10761: Marisa 20 / 28, -4%, underlined; garnet #922039 in "Latest pages" (every page; was moss).
+   Pushed to the card foot so the links line up. */
+.fa-blog-posts__link {
+  margin-top: auto;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  text-decoration: underline;
+  text-decoration-thickness: 0.065em;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: none;
+}
+
+/* The link covers the whole card (one tab stop); the ring goes around the card. */
+a.fa-blog-posts__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+a.fa-blog-posts__link:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 4px;
+}
+
+@supports selector(:has(*)) {
+  /* the card ring replaces the link's own ring and Dawn's focus glow (base.css *:focus-visible) */
+  a.fa-blog-posts__link:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .fa-blog-posts__card:has(a.fa-blog-posts__link:focus-visible) {
+    outline: 2px solid var(--fa-linen);
+    outline-offset: 3px;
+  }
+}
+
+/* Small desktop (1100–1279): the cards narrow to 324px, so the 26px titles would run to five lines. */
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-blog-posts__title { font-size: 22px; line-height: 26px; }
+}
+
+/* ---------- Tablet (900–1099, not drawn) ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-blog-posts { padding-block: var(--fa-section-pad); }
+
+  .fa-blog-posts__inner { gap: 40px; }
+
+  .fa-blog-posts .fa-heading__title { line-height: 44px; }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-blog-posts__list { --fa-bp-gap: 12px; }
+
+  .fa-blog-posts__body { padding: 16px 20px 22px; gap: 12px; }
+
+  .fa-blog-posts__text { gap: 6px; }
+
+  .fa-blog-posts__meta { font-size: 14px; line-height: 18px; }
+
+  .fa-blog-posts__title { font-size: 20px; line-height: 24px; }
+
+  .fa-blog-posts__link { font-size: 18px; line-height: 24px; }
+}
+
+/* ---------- Mobile (<= 899, no Figma frame: fa-feature-cards / V4 mobile patterns) ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-blog-posts {
+    --fa-swipe-item: 314px;
+    --fa-swipe-gap: 12px;
+    padding-block: var(--fa-bp-pad-m, 60px);
+  }
+
+  .fa-blog-posts__inner { gap: 24px; }
+
+  .fa-blog-posts__heading {
+    max-width: 351px;
+    gap: 16px;
+  }
+
+  .fa-blog-posts .fa-heading__title {
+    line-height: 29px;
+    text-wrap: balance;
+  }
+
+  .fa-blog-posts .fa-heading__text { max-width: 363px; }
+
+  .fa-blog-posts__body {
+    padding: 14px 18px 20px;
+    gap: 10px;
+  }
+
+  .fa-blog-posts__text { gap: 6px; }
+
+  .fa-blog-posts__meta {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .fa-blog-posts__title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .fa-blog-posts__link {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* room for the card focus ring (3px offset + 2px) inside the scroll row, which clips it */
+  .fa-section .fa-blog-posts__list {
+    flex-wrap: nowrap;
+    padding-block: 6px;
+    margin-block: -6px;
+  }
+}
+
+/* ---------- Motion (tokens + .fa-arrow-nudge: fa-base.css "Motion") ----------
+   Hover anywhere on a linked card (or keyboard focus on its link): the photo zooms slightly inside its frame, the
+   link dims a little and its arrow slides right. */
+
+.fa-blog-posts__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+.fa-blog-posts__link { transition: opacity var(--fa-dur-hover) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-blog-posts__card--linked:hover .fa-blog-posts__media img { transform: scale(var(--fa-zoom)); }
+  .fa-blog-posts__card--linked:hover .fa-blog-posts__link { opacity: 0.75; }
+}
+
+.fa-blog-posts__card:has(a.fa-blog-posts__link:focus-visible) .fa-blog-posts__media img { transform: scale(var(--fa-zoom)); }
+
+/* Homepage mobile V1 2794:1771 "Chinese medicine, explained" (9119–9789): title 32 / 28 (-7%), intro 14 / 20 (-2%) in
+   285px, 24px to a row of 317 x 374 cards 12px apart (photo 206 tall; body 20 / 16px padding: meta, 8px, title
+   Marisa 20 / 20 (-1%), 18px, "Read article"), 24px to the 170 x 39 button. */
+@media screen and (max-width: 899px) {
+  .fa-blog-posts { --fa-swipe-item: 317px; }
+  .fa-blog-posts__media { aspect-ratio: 317 / 206; }
+
+  .fa-blog-posts .fa-heading__title {
+    line-height: 28px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-blog-posts .fa-heading__text {
+    max-width: 285px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-blog-posts__body {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .fa-blog-posts__text { gap: 8px; }
+
+  .fa-blog-posts__title {
+    line-height: 20px;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Homepage mobile V1: "Read article" Marisa 18 in garnet. */
+@media screen and (max-width: 899px) {
+  .fa-blog-posts__link {
+    font-size: 18px;
+    line-height: 25px;
+    color: var(--fa-garnet);
+  }
+}

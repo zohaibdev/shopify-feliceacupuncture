@@ -1,0 +1,379 @@
+/* Felice book a visit — Figma 414:875 upper part (desktop), 414:1464 (mobile).
+   Paper texture is shared with fa-footer: this section pins the upper half of the Figma texture to its bottom
+   edge, the footer pins the lower half to its top edge (same width in both), so the seam is invisible. */
+
+.fa-book-visit {
+  position: relative;
+  z-index: 1; /* lets the botanical overlap the footer that follows */
+  overflow-x: clip;
+  padding: 50px 0 var(--fa-bv-pad-bottom, 0px);
+  background: #c4a26c;
+  color: var(--fa-garnet);
+}
+
+.fa-book-visit__bg picture { display: contents; }
+
+.fa-book-visit .fa-book-visit__bg img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: max(1440px, 100%);
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.fa-book-visit__flower {
+  top: 257px;
+  right: -103px;
+  width: 359px;
+  opacity: 0.82;
+}
+
+.fa-book-visit__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 478px;
+  align-items: center;
+  column-gap: 38px;
+}
+
+/* Figma 414:875 sets the whole book-a-visit / footer group 1px in from the 50px gutter (map 823px at x = 51;
+   the footer logo, social squares and newsletter also start at 51 — see fa-footer.css). */
+@media screen and (min-width: 1100px) {
+  .fa-book-visit__inner { padding-left: calc(var(--fa-gutter) + 1px); }
+}
+
+/* ---------- Map ---------- */
+
+/* Figma 414:880: the box is sized by the layout (full grid track × Figma height per breakpoint); the live
+   map iframe fills it absolutely, so there is no inline baseline gap and the radius clips its corners.
+   The background is the old static map's tone, shown while the iframe loads. */
+.fa-book-visit__map {
+  position: relative;
+  align-self: start;
+  height: 420px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--fa-radius); /* QA 2026-10-14: Figma V6 Rectangle 63 r2 (V4: r10) */
+  background: #e9e6da;
+}
+
+.fa-book-visit__map iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------- Details ---------- */
+
+.fa-book-visit__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 52px;
+  min-width: 0;
+  padding: 18px 10px 8px 0;
+}
+
+.fa-book-visit__details {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.fa-book-visit__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Optional eyebrow (not drawn for this section in Figma): left-aligned above the title. */
+.fa-book-visit__eyebrow { align-self: flex-start; }
+
+.fa-book-visit__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 58px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-book-visit__text {
+  margin: 0;
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: -0.04em;
+  opacity: 0.8;
+}
+
+.fa-book-visit__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-book-visit__contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.fa-book-visit__contact .fa-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.fa-book-visit__contact .fa-icon--phone-solid {
+  width: 18px;
+  height: 18px;
+}
+
+/* Optional clock (not drawn here in Figma — the hours row uses the mail icon): the 12px-frame clock
+   inset 0.5px so its glyph is 18px, like the 20px-frame pin/mail glyphs. */
+.fa-book-visit__contact .fa-icon--clock {
+  width: 20px;
+  height: 20px;
+  padding: 0.5px;
+}
+
+.fa-book-visit__contact-text {
+  color: inherit;
+  text-decoration: none;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Links carry a transparent underline that hover fades in (Motion block at the end). Setting "Contact line
+   underline": --underline-links shows it on links at rest, --underline-all on every line (V5 2620:10864 underlines
+   all four rows, the plain-text hours row too). */
+a.fa-book-visit__contact-text,
+.fa-book-visit--underline-all .fa-book-visit__contact-text {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+
+/* Figma draws a continuous line (no gaps at descenders) ~4px under the baseline. */
+.fa-book-visit--underline-links a.fa-book-visit__contact-text,
+.fa-book-visit--underline-all .fa-book-visit__contact-text {
+  text-decoration-color: currentColor;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 4px;
+}
+
+/* Block "No underline at rest" (V6 2669:25894: the address is drawn without a line). */
+.fa-book-visit .fa-book-visit__contact--plain .fa-book-visit__contact-text { text-decoration-color: transparent; }
+
+/* ---------- Button ---------- */
+
+.fa-book-visit__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 213px;
+  padding: 16px 22px;
+  border-radius: 0; /* QA 2026-10-14: Figma V6 button frame r0 (client review: no corner radius) */
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Same two-tone ring as .fa-btn (fa-base.css): garnet-dark ring inside a linen halo, replacing Dawn's default shadow. */
+.fa-book-visit__button:focus-visible {
+  outline: 2px solid var(--fa-garnet-dark);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--fa-linen);
+}
+
+.fa-book-visit__button .fa-icon {
+  width: 19px;
+  height: 20px;
+}
+
+.fa-book-visit__button-label { text-box: trim-both cap alphabetic; }
+
+/* ---------- Tablet ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-book-visit { padding-top: 40px; }
+
+  .fa-book-visit .fa-book-visit__bg img { width: 100%; }
+
+  .fa-book-visit__flower { display: none; }
+}
+
+/* Tablet (900-1099, not drawn in Figma): the desktop side-by-side layout with a narrower details column and a
+   36px title (one line in it), so the map keeps at least ~400px of width. */
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-book-visit__inner {
+    grid-template-columns: minmax(0, 1fr) 400px;
+    column-gap: 32px;
+  }
+
+  .fa-book-visit__info { padding: 0; }
+
+  .fa-book-visit__title { font-size: 36px; line-height: 1.2; }
+}
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-book-visit { padding-top: 22px; }
+
+  .fa-book-visit__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 32px;
+  }
+
+  /* Figma 414:1465: full container width × 323 at 375; wider phones grow it (46vw) up to the desktop 420 so the
+     box doesn't turn into a thin strip. */
+  .fa-book-visit__map {
+    height: clamp(323px, 46vw, 420px);
+    border-radius: 6px;
+  }
+
+  /* Setting "Mobile map height: Compact": the Footer mobile component (2519:4184 map 351 x 248, growing from
+     709px), which also sets the map 24px above the details (the standard layout keeps 32). */
+  .fa-book-visit--map-compact .fa-book-visit__inner { row-gap: 24px; }
+
+  .fa-book-visit--map-compact .fa-book-visit__map { height: clamp(248px, 35vw, 315px); }
+
+  .fa-book-visit__info {
+    gap: 24px;
+    padding: 0;
+  }
+
+  .fa-book-visit__details { gap: 26px; }
+
+  .fa-book-visit__title {
+    font-size: 32px;
+    line-height: 29px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-book-visit__text {
+    max-width: 320px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0;
+    opacity: 1;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .fa-book-visit__contacts { gap: 20px; }
+
+  .fa-book-visit__contact {
+    font-size: 16px;
+  }
+
+  .fa-book-visit__contact .fa-icon,
+  .fa-book-visit__contact .fa-icon--clock {
+    width: 16px;
+    height: 16px;
+  }
+
+  .fa-book-visit__contact .fa-icon--phone-solid {
+    width: 14px;
+    height: 14px;
+  }
+
+  .fa-book-visit__button {
+    gap: 5px;
+    min-width: 182px;
+    padding: 14px 12px;
+    font-family: var(--fa-font-display);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  /* Figma 414:1495: the mobile arrow is its own 8×8 vector. */
+  .fa-book-visit__button .fa-icon {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ---------- */
+
+a.fa-book-visit__contact-text {
+  transition: text-decoration-color var(--fa-dur-hover) var(--fa-ease-out), text-underline-offset var(--fa-dur-hover) var(--fa-ease-out);
+}
+
+.fa-book-visit__button {
+  transition: background-color var(--fa-dur-hover) var(--fa-ease-out), transform 0.15s var(--fa-ease-out);
+}
+
+@media (hover: hover) {
+  a.fa-book-visit__contact-text:hover,
+  .fa-book-visit .fa-book-visit__contact--plain a.fa-book-visit__contact-text:hover { text-decoration-color: currentColor; }
+
+  /* links that are already underlined at rest: the line drops slightly instead */
+  .fa-book-visit--underline-links a.fa-book-visit__contact-text:hover,
+  .fa-book-visit--underline-all a.fa-book-visit__contact-text:hover { text-underline-offset: 6px; }
+  .fa-book-visit__button:hover { background: var(--fa-garnet-dark); }
+}
+
+a.fa-book-visit__contact-text:focus-visible { text-decoration-color: currentColor; }
+
+.fa-book-visit--underline-links a.fa-book-visit__contact-text:focus-visible,
+.fa-book-visit--underline-all a.fa-book-visit__contact-text:focus-visible { text-underline-offset: 6px; }
+
+.fa-book-visit__button:active { transform: scale(var(--fa-press)); }
+
+/* Button row: the maps button, plus (phones only) the linen "Book now" 8px to its right (homepage mobile V1). */
+.fa-book-visit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fa-book-visit__button--light {
+  background: var(--fa-linen);
+  color: var(--fa-garnet);
+}
+
+@media screen and (max-width: 899px) {
+  .fa-book-visit__button--light { min-width: 152px; }
+}
+
+@media (hover: hover) {
+  .fa-book-visit__button--light:hover { background: var(--fa-white); }
+}
+
+/* "Mobile map height: Page mobile" = Our Approach mobile 2821:6541 / homepage mobile 2794:1089: the 351 x 323 map
+   24px above the details; title Marisa 28 / 28 (-7%), 14px, intro 12 / 22. */
+@media screen and (max-width: 899px) {
+  .fa-book-visit--map-page .fa-book-visit__inner { row-gap: 24px; }
+
+  .fa-book-visit--map-page .fa-book-visit__title {
+    font-size: 28px;
+    line-height: 28px;
+  }
+
+  .fa-book-visit--map-page .fa-book-visit__text {
+    max-width: none; /* Figma's one 328px line */
+    margin-top: -4px; /* 14px under the title (the standard heading gap is 18) */
+    font-size: 12px;
+  }
+}

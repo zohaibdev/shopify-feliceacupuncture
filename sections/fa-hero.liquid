@@ -1,0 +1,563 @@
+{%- comment -%}
+  Felice hero — split photography with a soft dark band behind centred copy.
+  Figma: desktop 414:632 (images) + 414:636 (content), mobile 414:1011 + 414:1012.
+  Mobile shows a single image (the right-hand image unless a mobile image is set).
+  Every photo gets Figma's noise effect (fa-hero-grain.png); the dark band / mobile gradient is .fa-hero__media::after
+  (a pseudo-element, because Dawn hides empty divs).
+  Layout "Page" (services page v2, Figma 2263:2438–2484 / mobile 2264:6738 + 7459): 488px-tall frame whose bottom 7px
+  sit under the stats bar (so the section is 481px), copy 144px from the top, and a full-width blurred shade (2440)
+  instead of the band; mobile 422px with an even shade ("Shade behind text (mobile)").
+  Our Approach page (Figma 2270:17266 / mobile 2305:4586): "Desktop photos" One = the right image across the full
+  width, "Photo vertical position" = Figma's crop, a separate mobile theme asset, copy 130px from the top on desktop
+  and 14px above the bottom on mobile (two spacing settings; their defaults are the services page values).
+  Layout "Home, centred copy" (homepage V5 2612:3390, 11-10-2026): 714px tall, copy centred, the 44% shade (blurred
+  52px) over the whole band; up to 899px it is the Home layout (no V5 mobile frame). Optional eyebrow line (★ = star).
+{%- endcomment -%}
+{{ 'fa-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign rating_count = section.settings.stars | plus: 0
+  # The rating item / line render only with content (no empty item, so no separator before Detail 1).
+  assign has_rating = false
+  if rating_count > 0 or section.settings.rating_text != blank
+    assign has_rating = true
+  endif
+  assign has_meta = has_rating
+  if section.settings.meta_1 != blank or section.settings.meta_2 != blank
+    assign has_meta = true
+  endif
+  assign is_page = false
+  if section.settings.layout == 'page'
+    assign is_page = true
+  endif
+  # Eyebrow (homepage V5): one line of text; "★" becomes the star icon. It replaces the rating line when filled.
+  assign eyebrow = section.settings.eyebrow | strip
+  if eyebrow != blank
+    assign has_meta = false
+  endif
+  assign is_single = false
+  if section.settings.desktop_photos == 'one'
+    assign is_single = true
+  endif
+  assign fallback_left = section.settings.fallback_left | default: 'fa-hero-left.jpg'
+  assign fallback_right = section.settings.fallback_right | default: 'fa-hero-right.jpg'
+  assign fallback_mobile = section.settings.fallback_mobile | strip
+  # Intrinsic sizes of the bundled photos (another theme asset gets the home photos' size; the photos are
+  # absolutely positioned, so the attributes never affect layout).
+  assign fallback_files = fallback_left | append: '|' | append: fallback_right | append: '|' | append: fallback_mobile | split: '|'
+  for file in fallback_files
+    case file
+      when 'fa-page-hero-services-left.jpg'
+        assign w = 630
+        assign h = 427
+      when 'fa-page-hero-services-right.jpg'
+        assign w = 1440
+        assign h = 976
+      when 'fa-page-hero-approach.jpg'
+        assign w = 2880
+        assign h = 1729
+      when 'fa-page-hero-approach-mobile.jpg'
+        assign w = 1125
+        assign h = 1266
+      else
+        assign w = 2259
+        assign h = 1590
+    endcase
+    case forloop.index
+      when 1
+        assign fallback_left_w = w
+        assign fallback_left_h = h
+      when 2
+        assign fallback_right_w = w
+        assign fallback_right_h = h
+      else
+        assign fallback_mobile_w = w
+        assign fallback_mobile_h = h
+    endcase
+  endfor
+-%}
+
+<section
+  class="fa-section fa-hero{% if is_page %} fa-hero--page{% endif %}{% if section.settings.layout == 'centered' %} fa-hero--centered{% endif %}{% if is_single %} fa-hero--single{% endif %}{% if section.settings.button_label_linen %} fa-hero--label-linen{% endif %}{% if section.settings.mobile_style == 'compact' %} fa-hero--mobile-compact{% endif %}"
+  style="--fa-hero-shade: {{ section.settings.overlay_opacity | divided_by: 100.0 }};{% if is_page %} --fa-hero-shade-mobile: {{ section.settings.overlay_opacity_mobile | divided_by: 100.0 }}; --fa-hero-photo-y: {{ section.settings.photo_position }}%; --fa-hero-min-h: {{ section.settings.min_height | default: 481 }}px; --fa-hero-copy-w: {{ section.settings.copy_width | default: 544 }}px; --fa-hero-pad-top: {{ section.settings.padding_top }}px; --fa-hero-pad-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;{% endif %} --fa-hero-grain: url({{ 'fa-hero-grain.png' | asset_url }});"
+>
+  {%- comment -%}
+    Each slot is a <picture> so a phone downloads only the photo it shows: up to 899px the left slot resolves to a
+    1x1 transparent GIF (the slot is hidden there) and the right slot swaps to the mobile image when one is set, or
+    to the left photo when "Mobile photo" is Left. The mobile theme asset stands in only while the photo the mobile
+    slot would show has not been uploaded. "Desktop photos: One" drops the left slot; the right photo spans the width.
+    Desktop keeps both photos eager with fetchpriority=high (LCP). Srcsets reach 1920 (desktop: 2x of a 960px half at
+    1920) and 1800 (mobile: 2x of the 899px slot) so uploaded photos stay sharp on high-density screens.
+  {%- endcomment -%}
+  {%- liquid
+    # Optional background video (Shopify-hosted file, or a direct .mp4 / .webm URL). Empty = the photos below, unchanged.
+    assign hero_video_url = section.settings.video_url | strip
+    assign has_video = false
+    if section.settings.video != blank or hero_video_url != blank
+      assign has_video = true
+    endif
+    assign hero_poster = blank
+    if section.settings.video_poster != blank
+      assign hero_poster = section.settings.video_poster | image_url: width: 1920
+    elsif section.settings.video != blank and section.settings.video.preview_image != blank
+      assign hero_poster = section.settings.video.preview_image | image_url: width: 1920
+    endif
+    assign hero_video_type = 'video/mp4'
+    assign hero_video_ext = hero_video_url | split: '?' | first | downcase
+    if hero_video_ext contains '.webm'
+      assign hero_video_type = 'video/webm'
+    endif
+  -%}
+  {%- capture fa_hero_blank -%}data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7{%- endcapture -%}
+  <div class="fa-hero__media" aria-hidden="true">
+    {%- if has_video -%}
+    <div class="fa-hero__img fa-hero__img--video">
+      <video class="fa-hero__video" autoplay muted loop playsinline preload="metadata"{% if hero_poster != blank %} poster="{{ hero_poster }}"{% endif %} data-fa-hero-video>
+        {%- if section.settings.video != blank -%}
+          {%- for source in section.settings.video.sources -%}
+            {%- if source.mime_type contains 'mp4' or source.mime_type contains 'webm' -%}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <source src="{{ hero_video_url }}" type="{{ hero_video_type }}">
+        {%- endif -%}
+      </video>
+    </div>
+    {%- else -%}
+    {%- unless is_single -%}
+    <div class="fa-hero__img fa-hero__img--left">
+      <picture>
+        <source media="(max-width: 899px)" srcset="{{ fa_hero_blank }}">
+        {%- if section.settings.image_left != blank -%}
+          {{ section.settings.image_left | image_url: width: 1920 | image_tag: widths: '375, 540, 720, 960, 1440, 1920', sizes: '50vw', loading: 'eager', fetchpriority: 'high', alt: '' }}
+        {%- else -%}
+          <img src="{{ fallback_left | asset_url }}" alt="" width="{{ fallback_left_w }}" height="{{ fallback_left_h }}" loading="eager" fetchpriority="high">
+        {%- endif -%}
+      </picture>
+    </div>
+    {%- endunless -%}
+    <div class="fa-hero__img fa-hero__img--right">
+      <picture>
+        {%- liquid
+          assign fa_hero_mobile = section.settings.image_mobile
+          assign fa_hero_mobile_slot = section.settings.image_right
+          if section.settings.mobile_photo == 'left'
+            assign fa_hero_mobile_slot = section.settings.image_left
+          endif
+          if fa_hero_mobile == blank and section.settings.mobile_photo == 'left'
+            assign fa_hero_mobile = section.settings.image_left
+          endif
+        -%}
+        {%- if fa_hero_mobile != blank -%}
+          <source
+            media="(max-width: 899px)"
+            srcset="{{ fa_hero_mobile | image_url: width: 375 }} 375w, {{ fa_hero_mobile | image_url: width: 540 }} 540w, {{ fa_hero_mobile | image_url: width: 750 }} 750w, {{ fa_hero_mobile | image_url: width: 1080 }} 1080w, {{ fa_hero_mobile | image_url: width: 1440 }} 1440w, {{ fa_hero_mobile | image_url: width: 1800 }} 1800w"
+            sizes="100vw"
+            width="{{ fa_hero_mobile.width }}"
+            height="{{ fa_hero_mobile.height }}"
+          >
+        {%- elsif fa_hero_mobile_slot == blank and fallback_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ fallback_mobile | asset_url }}" width="{{ fallback_mobile_w }}" height="{{ fallback_mobile_h }}">
+        {%- elsif section.settings.mobile_photo == 'left' -%}
+          <source media="(max-width: 899px)" srcset="{{ fallback_left | asset_url }}" width="{{ fallback_left_w }}" height="{{ fallback_left_h }}">
+        {%- endif -%}
+        {%- if section.settings.image_right != blank and is_single -%}
+          {{ section.settings.image_right | image_url: width: 2880 | image_tag: widths: '375, 540, 720, 960, 1440, 1920, 2400, 2880', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: '' }}
+        {%- elsif section.settings.image_right != blank -%}
+          {{ section.settings.image_right | image_url: width: 1920 | image_tag: widths: '375, 540, 720, 960, 1440, 1920', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: '' }}
+        {%- else -%}
+          <img src="{{ fallback_right | asset_url }}" alt="" width="{{ fallback_right_w }}" height="{{ fallback_right_h }}" loading="eager" fetchpriority="high">
+        {%- endif -%}
+      </picture>
+    </div>
+    {%- endif -%}
+  </div>
+  {%- if has_video -%}
+    {%- comment -%} Dev notes 2728:741: one pause / play control, bottom right. {%- endcomment -%}
+    <button type="button" class="fa-hero__video-toggle" data-fa-hero-video-toggle aria-label="Pause background video">
+      {%- render 'fa-icon', icon: 'pause' -%}{%- render 'fa-icon', icon: 'play' -%}
+    </button>
+    <script>
+      (() => {
+        const hero = document.currentScript.closest('.fa-hero');
+        const video = hero && hero.querySelector('[data-fa-hero-video]');
+        const toggle = hero && hero.querySelector('[data-fa-hero-video-toggle]');
+        if (!video || !toggle) return;
+        const sync = () => {
+          hero.toggleAttribute('data-video-paused', video.paused);
+          toggle.setAttribute('aria-label', video.paused ? 'Play background video' : 'Pause background video');
+        };
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
+        video.addEventListener('play', sync);
+        video.addEventListener('pause', sync);
+        toggle.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+        sync();
+      })();
+    </script>
+  {%- endif -%}
+
+  <div class="fa-hero__content">
+    {%- if eyebrow != blank -%}
+      {%- comment -%}
+        Figma V5 2612:3465: "Culver City's" + 3px + 13 x 12 star + " 5.0-Rated Acupuncture Clinic" (the text after the
+        star keeps its leading space). Inline, so a long merchant line wraps.
+      {%- endcomment -%}
+      {%- capture fa_hero_star -%}<span class="fa-hero__eyebrow-star">{% render 'fa-icon', icon: 'star' %}</span>{%- endcapture -%}
+      {%- comment -%} Figma V6 2669:25448: a row of clay stars, 5px before the text (decorative: the text states the rating). {%- endcomment -%}
+      {%- assign eyebrow_stars = section.settings.eyebrow_stars | default: 0 -%}
+      <p class="fa-hero__eyebrow{% if eyebrow_stars > 0 %} fa-hero__eyebrow--stars{% endif %}">
+        {%- if eyebrow_stars > 0 -%}
+          <span class="fa-hero__eyebrow-stars" aria-hidden="true">
+            {%- for i in (1..eyebrow_stars) -%}{% render 'fa-icon', icon: 'star-pointed' %}{%- endfor -%}
+          </span>
+        {%- endif -%}
+        {%- assign eyebrow_parts = eyebrow | split: '★' -%}
+        {%- for part in eyebrow_parts -%}
+          {%- unless forloop.first -%}{{ fa_hero_star }}{%- endunless -%}
+          {%- if forloop.last -%}{{ part | escape }}{%- else -%}{{ part | rstrip | escape }}{%- endif -%}
+        {%- endfor -%}
+        {%- assign eyebrow_last = eyebrow | slice: -1 -%}
+        {%- if eyebrow_last == '★' -%}{{ fa_hero_star }}{%- endif -%}
+      </p>
+    {%- endif -%}
+    {%- if section.settings.show_rating and has_meta -%}
+      <ul class="fa-hero__meta" role="list">
+        {%- if has_rating -%}
+        <li class="fa-hero__rating">
+          {%- if rating_count > 0 -%}
+            {%- comment -%} With a rating text the stars are decorative (no second, conflicting score for screen readers). {%- endcomment -%}
+            <span class="fa-hero__stars"{% if section.settings.rating_text != blank %} aria-hidden="true"{% else %} role="img" aria-label="{{ rating_count }} out of 5 stars"{% endif %}>
+              {%- for i in (1..rating_count) -%}{% render 'fa-icon', icon: 'star' %}{%- endfor -%}
+            </span>
+          {%- endif -%}
+          {%- if section.settings.rating_text != blank -%}<span class="fa-trim">{{ section.settings.rating_text }}</span>{%- endif -%}
+        </li>
+        {%- endif -%}
+        {%- if section.settings.meta_1 != blank -%}<li><span class="fa-trim">{{ section.settings.meta_1 }}</span></li>{%- endif -%}
+        {%- if section.settings.meta_2 != blank -%}<li><span class="fa-trim">{{ section.settings.meta_2 }}</span></li>{%- endif -%}
+      </ul>
+    {%- endif -%}
+
+    <div class="fa-hero__copy">
+      {%- if section.settings.heading != blank -%}
+        <h1 class="fa-hero__title">{{ section.settings.heading | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="fa-hero__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.tagline != blank -%}
+        <p class="fa-hero__tagline">{{ section.settings.tagline | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+      <div class="fa-hero__buttons">
+        {%- if section.settings.button_label_1 != blank -%}
+          <a href="{{ section.settings.button_link_1 | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link_1 %} class="fa-btn fa-btn--primary{% if section.settings.button_compact %} fa-btn--compact{% endif %}">{{ section.settings.button_label_1 }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link_2 %} class="fa-btn fa-btn--light{% if section.settings.button_compact %} fa-btn--compact{% endif %}">{{ section.settings.button_label_2 }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice hero",
+  "tag": "div",
+  "class": "fa-hero-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "button_label_linen",
+      "label": "Linen button label (desktop)",
+      "info": "Off = white label on the garnet button (most pages). Blog listing desktop design uses linen.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "mobile_style",
+      "label": "Mobile style",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "compact", "label": "Compact (Our Approach mobile)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "home", "label": "Home (tall, copy at the bottom)" },
+        { "value": "centered", "label": "Home, centred copy" },
+        { "value": "page", "label": "Page (short, copy near the top)" }
+      ],
+      "default": "home",
+      "info": "Centred: 714px tall on desktop with the copy centred and an even shade; on mobile it matches Home. Page: 481px tall on desktop with an even shade over both photos, 422px on mobile (services page)."
+    },
+    {
+      "type": "select",
+      "id": "desktop_photos",
+      "label": "Desktop photos",
+      "options": [
+        { "value": "two", "label": "Two (left and right image)" },
+        { "value": "one", "label": "One (right image across the full width)" }
+      ],
+      "default": "two"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left image",
+      "info": "720 x 825 slot (Home, centred: 720 x 714; Page: 720 x 488). Desktop only unless \"Mobile photo\" is Left."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right image",
+      "info": "Also used on mobile when no mobile image is set."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image (optional)"
+    },
+    {
+      "type": "select",
+      "id": "mobile_photo",
+      "label": "Mobile photo",
+      "options": [
+        { "value": "right", "label": "Right image" },
+        { "value": "left", "label": "Left image" }
+      ],
+      "default": "right",
+      "info": "Shown up to 899px when no mobile image is set."
+    },
+    {
+      "type": "range",
+      "id": "photo_position",
+      "label": "Photo vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 0,
+      "info": "Page layout only. 0% shows the top of the photos, 100% the bottom."
+    },
+    {
+      "type": "text",
+      "id": "fallback_left",
+      "label": "Left theme asset (fallback)",
+      "default": "fa-hero-left.jpg",
+      "info": "Theme asset shown when no left image is chosen."
+    },
+    {
+      "type": "text",
+      "id": "fallback_right",
+      "label": "Right theme asset (fallback)",
+      "default": "fa-hero-right.jpg",
+      "info": "Theme asset shown when no right image is chosen."
+    },
+    {
+      "type": "text",
+      "id": "fallback_mobile",
+      "label": "Mobile theme asset (fallback)",
+      "info": "Optional. Theme asset shown up to 899px while neither a mobile image nor the image picked under Mobile photo is chosen."
+    },
+    {
+      "type": "header",
+      "content": "Background video"
+    },
+    {
+      "type": "paragraph",
+      "content": "Optional. When a video is set it replaces the photos as the hero background (autoplay, muted, loop, with a pause button). Leave both video fields empty to show the photos."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video file",
+      "info": "Upload an MP4 / WebM to Shopify (Content > Files) and pick it here."
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Or video URL",
+      "info": "A direct link to an .mp4 or .webm file. Used when no video file is picked."
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Poster image",
+      "info": "Shown until the video loads. Blank uses the video's own preview image."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Shade behind text",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_mobile",
+      "label": "Shade behind text (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "default": 26,
+      "info": "Page layout only, up to 899px. The home layout uses a bottom gradient on mobile."
+    },
+    {
+      "type": "range",
+      "id": "copy_width",
+      "label": "Text width (desktop, page layout)",
+      "min": 532,
+      "max": 732,
+      "step": 2,
+      "unit": "px",
+      "default": 544
+    },
+    {
+      "type": "number",
+      "id": "min_height",
+      "label": "Minimum height (desktop, page layout)",
+      "info": "In px, e.g. 408 (services), 488 (approach), 527 (team).",
+      "default": 481
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Space above content (desktop)",
+      "min": 80,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 144,
+      "info": "Page layout only, from 900px."
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_mobile",
+      "label": "Space below content (mobile)",
+      "info": "Pixels. Page layout only, up to 899px.",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Rating line"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "info": "Optional line above the heading; replaces the rating line when filled. Type ★ where the star icon goes, e.g. Culver City's ★ 5.0-Rated Acupuncture Clinic"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_stars",
+      "label": "Stars before the eyebrow",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating line",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "stars",
+      "label": "Stars",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "4.9 stars"
+    },
+    {
+      "type": "text",
+      "id": "meta_1",
+      "label": "Detail 1",
+      "default": "Traditional Chinese Medicine"
+    },
+    {
+      "type": "text",
+      "id": "meta_2",
+      "label": "Detail 2",
+      "default": "Culver City"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Healing that starts at the root."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Personalized acupuncture and Traditional Chinese Medicine designed to look beyond symptoms, identify patterns of imbalance, and support your body to truly heal."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "info": "Optional uppercase line below the text (Our Team V3)."
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary button label",
+      "default": "Schedule your visit"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button label",
+      "default": "First visit details"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_compact",
+      "label": "Compact button",
+      "info": "Desktop: the button fits its label (42px side padding) and a garnet button gets white text.",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice hero"
+    }
+  ]
+}
+{% endschema %}

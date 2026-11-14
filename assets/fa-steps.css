@@ -1,0 +1,258 @@
+/* Felice steps ("Where to go next") — Figma (Our Approach v1) desktop 2275:19392, mobile 2305:5164 / 2305:5306 */
+
+.fa-steps {
+  position: relative;
+  overflow: hidden;
+  padding-block: 120px 124px; /* Figma: content 120px below the top, buttons end 124px above the bottom */
+  color: var(--fa-white);
+  background: #47392c; /* average tone of the bundled photo, shown while it loads */
+}
+
+.fa-steps__bg img { object-position: center; }
+
+/* Two classes so Dawn's base.css `div:empty { display: none }` doesn't hide the overlay. */
+.fa-steps .fa-steps__shade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / var(--fa-steps-shade, 0));
+}
+
+.fa-steps__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Figma: heading -> steps 63px, steps -> buttons 32px. */
+.fa-steps__heading + .fa-steps__list,
+.fa-steps__heading + .fa-steps__buttons { margin-top: 63px; }
+
+.fa-steps__list + .fa-steps__buttons { margin-top: 32px; }
+
+/* ---------- Steps ---------- */
+
+/* Three per row (Figma: 3 x 360 + 2 x 43 = 1166, centred); fewer steps, or a last row of four to six, centre
+   instead of leaving empty columns. */
+.fa-steps__list {
+  --fa-steps-col-gap: 43px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 48px var(--fa-steps-col-gap);
+  align-self: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-steps__step {
+  position: relative;
+  display: flex;
+  flex: 0 1 min(360px, calc((100% - 2 * var(--fa-steps-col-gap)) / 3));
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+  min-width: 0;
+}
+
+.fa-steps__photo {
+  position: relative;
+  width: 247px; /* Figma draws an oval, 247 x 256 */
+  max-width: 100%;
+  aspect-ratio: 247 / 256;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgb(238 225 209 / 0.18);
+}
+
+.fa-steps__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fa-steps__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  align-self: stretch;
+}
+
+.fa-steps__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 26px;
+}
+
+.fa-steps__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 25px;
+  border-radius: 999px;
+  background: var(--fa-clay);
+  color: var(--fa-linen);
+  font-family: 'Arial Black', 'Arial', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.06em;
+}
+
+.fa-steps__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.fa-steps__link { text-decoration: none; }
+
+/* A step with a link is clickable as a whole. */
+.fa-steps__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.fa-steps__text {
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: -0.02em;
+}
+
+/* The block's "Text width" reproduces Figma's hand-set wraps (358 / 362 / 360px) where the 360px columns exist;
+   a box wider than its column overflows both sides equally, as in Figma. */
+@media screen and (min-width: 1280px) {
+  .fa-steps__text {
+    width: var(--fa-steps-text-w, 360px);
+    max-width: calc(100% + 40px);
+  }
+}
+
+/* ---------- Buttons ---------- */
+
+.fa-steps__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* ---------- Tablet (900-1099): same row, narrower columns ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-steps { padding-block: 96px; }
+
+  .fa-steps__list { --fa-steps-col-gap: 32px; }
+
+  /* Narrow columns: keep the ovals clear of each other. */
+  .fa-steps__photo { width: min(247px, 88%); }
+
+  .fa-steps__title { font-size: 22px; line-height: 24px; }
+
+  .fa-steps__heading + .fa-steps__list,
+  .fa-steps__heading + .fa-steps__buttons { margin-top: 56px; }
+}
+
+/* ---------- Mobile (<= 899): the 375 frame ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-steps { padding-block: 75px; }
+
+  .fa-steps .fa-steps__shade { background: rgb(0 0 0 / var(--fa-steps-shade-m, 0)); }
+
+  .fa-steps__heading-title {
+    font-size: 32px;
+    line-height: 28px;
+    letter-spacing: -0.04em;
+    color: var(--fa-linen); /* Figma mobile 2305:5165 (desktop: white) */
+  }
+
+  .fa-steps__heading + .fa-steps__list,
+  .fa-steps__heading + .fa-steps__buttons { margin-top: 24px; }
+
+  .fa-steps__list {
+    --fa-swipe-item: 196px;
+    --fa-swipe-gap: 26px;
+    flex-wrap: nowrap; /* one swipe row */
+  }
+
+  .fa-steps__step { gap: 13px; }
+
+  .fa-steps__photo {
+    width: 180px;
+    aspect-ratio: 1;
+  }
+
+  /* Figma scales the desktop badge by 0.72 (17.28 x 17.5) */
+  .fa-steps__title-row {
+    gap: 4px;
+    min-height: 18px;
+  }
+
+  .fa-steps__badge {
+    width: 17.28px;
+    height: 17.5px;
+    font-size: 8.64px;
+    line-height: 12.96px;
+  }
+
+  .fa-steps__title {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  /* Figma: 220px text under a 196px card (card 2: 184px), centred, so it overruns the card by up to 12px. */
+  .fa-steps__text {
+    width: var(--fa-steps-text-w-m, 220px);
+    max-width: none;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .fa-steps__buttons {
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+    max-width: 351px; /* the 375 frame's row, kept on larger phones */
+  }
+
+  .fa-steps__button {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* Figma 2305:5191 / 5193: 168 + 10 + 173 = the 351px row (not half and half); narrower phones shrink both. */
+  .fa-steps__button:first-child:not(:only-child) { flex-basis: 168px; }
+
+  .fa-steps__button:last-child:not(:only-child) { flex-basis: 173px; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Hover: the step photo zooms slightly inside its oval. */
+
+.fa-steps__photo img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-steps__step:hover .fa-steps__photo img { transform: scale(var(--fa-zoom)); }
+}
+
+.fa-steps__step:focus-within .fa-steps__photo img { transform: scale(var(--fa-zoom)); }

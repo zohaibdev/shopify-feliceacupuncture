@@ -1,0 +1,549 @@
+/*
+  Felice article (sections/fa-article.liquid) — Article V2 frame 2719:22580, band 2719:22581 (1440 x 2982).
+  Padding 80 / 105. Header (1200 wide): eyebrow LCC 16 +3% moss (author garnet), 28, title Marisa 70/60 -2% garnet,
+  28, subtitle LCC 22/28 clay; 40; byline · date · read time LCC 18 -2% moss, 16, photo 1200 x 570.
+  40px, then a 1210px row: text 818 + 36 + sidebar 356. Text: paragraphs LCC 24/35 moss 24 apart, H2 Marisa 42/46
+  -1% garnet uppercase, 32px around headings, the e-book box and the share row. Sidebar 14 apart: contents box
+  (moss, 13/28/15 padding, title Marisa Medium 29/1.3 -2% white, 6, numbered links LCC 15/1.4 linen underlined, 10
+  apart) and the booking box (garnet, 10/16/16/24, title + text 15/1.4, 32, linen button 18/28 Marisa 20 + 8 + note
+  Marisa 16 -4% white). E-book box 2719:22666: 677 wide, 24 padding, moss texture, title Marisa 28 -4% linen + 7 +
+  text 16/30 white 70%, 22, fields (labels Marisa 18, fields 50 tall), 24, garnet 250px button.
+*/
+
+.fa-article {
+  position: relative;
+  padding-block: 74px 105px; /* Figma's band starts 6px under the header (y 117) */
+  color: var(--fa-moss);
+  background: #e8dcc9;
+}
+
+.fa-article__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ---------- Header ---------- */
+
+.fa-article__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: min(1200px, 100%);
+}
+
+.fa-article__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 813px;
+  text-align: center;
+}
+
+.fa-article__eyebrow {
+  margin: 0;
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
+}
+
+.fa-article__accent { color: var(--fa-garnet); }
+
+.fa-article__titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.fa-article__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-article__subtitle {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px;
+  color: var(--fa-clay);
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-article__lead {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.fa-article__meta {
+  margin: 0;
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* Two classes: Dawn's base.css hides an empty div (no article image yet). */
+.fa-article .fa-article__image {
+  display: block;
+  aspect-ratio: 1200 / 570;
+  background: #c7b8a3;
+  overflow: hidden;
+}
+
+.fa-article__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Text + sidebar ---------- */
+
+.fa-article__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 818fr) minmax(0, 356fr);
+  align-items: start;
+  gap: 36px;
+  width: min(1210px, 100%);
+}
+
+.fa-article__main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.fa-article__content {
+  font-size: 24px;
+  line-height: 35px;
+}
+
+.fa-article__content > * { margin: 0; }
+.fa-article__content > * + * { margin-top: 24px; }
+
+.fa-article__content > h2,
+.fa-article__content > h3 {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  scroll-margin-top: 24px;
+}
+
+.fa-article__content > h2 { font-size: 42px; line-height: 46px; }
+.fa-article__content > h3 { font-size: 30px; line-height: 34px; }
+
+/* Articles whose sections are H3s (no H2 in the body): the H3s take Figma's section-heading style (2719:22580). */
+.fa-article__content--h3-sections > h3 { font-size: 42px; line-height: 46px; }
+
+.fa-article__content > * + h2,
+.fa-article__content > * + h3,
+.fa-article__content > h2 + *,
+.fa-article__content > h3 + *,
+.fa-article__content > * + .fa-article__ebook,
+.fa-article__content > .fa-article__ebook + * { margin-top: 32px; }
+
+.fa-article__content a { color: var(--fa-garnet); text-decoration: underline; text-underline-offset: 3px; }
+
+.fa-article__content img { max-width: 100%; height: auto; }
+
+.fa-article__content ul,
+.fa-article__content ol { padding-left: 1.2em; }
+
+.fa-article__content blockquote {
+  padding-left: 24px;
+  border-left: 2px solid var(--fa-clay);
+  color: var(--fa-clay);
+}
+
+/* ---------- Share ---------- */
+
+.fa-article__share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.fa-article__share-label {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: normal;
+  letter-spacing: 0.02em;
+  color: var(--fa-garnet);
+}
+
+.fa-article__share-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-article__share-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fa-garnet);
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fa-article__share-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--fa-garnet);
+  -webkit-mask: var(--fa-share-icon) center / contain no-repeat;
+  mask: var(--fa-share-icon) center / contain no-repeat;
+}
+
+.fa-article__share-icon--small { width: 15px; height: 15px; }
+
+@media (hover: hover) {
+  .fa-article__share-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+}
+
+/* ---------- Sidebar ---------- */
+
+.fa-article__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.fa-article__box-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 500;
+  font-size: 29px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--fa-white);
+}
+
+.fa-article__toc {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 13px 28px 15px;
+  background: var(--fa-moss);
+}
+
+.fa-article__toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22.5px;
+  color: var(--fa-linen);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* H3s under their H2 (an article with only H3s lists them at the top level). */
+.fa-article__toc-list ol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0 0;
+  padding-left: 20px;
+  list-style: lower-alpha;
+}
+
+.fa-article__toc-list a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 4%;
+  text-underline-offset: 2px;
+}
+
+.fa-article__booking {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 10px 16px 16px 24px;
+  background: var(--fa-garnet);
+}
+
+.fa-article__booking-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.fa-article__booking-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--fa-linen);
+}
+
+.fa-article__booking-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.fa-article__booking-button {
+  display: inline-block;
+  padding: 18px 28px;
+  background: var(--fa-linen);
+  color: var(--fa-garnet);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-article__booking-note {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: var(--fa-white);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .fa-article__booking-button:hover { background: var(--fa-white); }
+}
+
+/* ---------- Mid-article e-book ---------- */
+
+.fa-article__ebook {
+  position: relative;
+  max-width: 677px;
+  padding: 24px;
+  overflow: hidden;
+  background: #79704b;
+  color: var(--fa-linen);
+}
+
+.fa-article__ebook-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.fa-article__ebook-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fa-article__ebook-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.fa-article__ebook-head {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.fa-article__ebook-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 28px;
+  line-height: 60px;
+  letter-spacing: -0.04em;
+  color: var(--fa-linen);
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-article__ebook-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 30px;
+  color: rgb(255 255 255 / 0.7);
+}
+
+.fa-article__ebook-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.fa-article__ebook .fa-inquiry__label {
+  font-size: 18px;
+  line-height: normal;
+  color: var(--fa-linen);
+}
+
+.fa-article__ebook .fa-inquiry__input { height: 50px; }
+
+/* "In this article" links glide to their heading on every click (the shared rule in fa-base.css only applies while
+   focus is inside the page, which Safari does not give a clicked link). */
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.fa-article__toc) { scroll-behavior: smooth; }
+}
+
+/* Desktop: the sidebar (contents + booking box) stays in view while the text scrolls, until the layout ends. */
+@media screen and (min-width: 1100px) {
+  .fa-article__sidebar {
+    position: sticky;
+    top: calc(var(--fa-header-main-h, 85px) + 24px); /* below the sticky header row */
+  }
+}
+
+/* ---------- Tablet / mobile (no design) ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-article { padding-block: 60px 80px; }
+  .fa-article__layout { grid-template-columns: minmax(0, 1fr); }
+  .fa-article__sidebar { order: -1; }
+  .fa-article__title { font-size: 52px; line-height: 48px; }
+}
+
+/* ---------- Mobile = Article mobile 2860:25002 (97-2688) ----------
+   60px padding. Header: eyebrow LCC 14 +3%, 20px, title Marisa 40 / 32 (-2%), 20px, subtitle 16 / 24 in 279px; 40px;
+   meta LCC 16 (-2%), 16px, photo 351 x 244; 24px; contents box (14 / 20 padding: title Marisa Medium 24 / 1.3 -2%,
+   6px, links 14 / 1.4 10px apart), 14px, booking box (10 / 20 / 16 padding: title, 1px, text 14 / 1.4; 24px; a
+   full-width 39px button, 14px -3%; 8px; note Marisa 14 -4%); 24px; text LCC 14 / 20, 24px between paragraphs;
+   section headings Marisa 24 / 24 (-1%), 16px above their text, 32px between sections; e-book box (20px padding: title
+   Marisa 20 / 22 -4%, 7px, text 14 / 22; 22px; labels Marisa 14 12px above 40px fields, 10px apart; 24px; a full-width
+   39px button); share row: label Marisa 16 +2%, links LCC 16 -2%. */
+@media screen and (max-width: 899px) {
+  .fa-article { padding-block: 60px; }
+  .fa-article__inner { gap: 24px; }
+  .fa-article__header { gap: 40px; }
+  .fa-article__heading,
+  .fa-article__titles { gap: 20px; }
+  .fa-article__eyebrow { font-size: 14px; }
+
+  .fa-article__title {
+    font-size: 40px;
+    line-height: 32px;
+  }
+
+  .fa-article__subtitle {
+    max-width: 279px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .fa-article__lead { gap: 16px; }
+  .fa-article__meta { font-size: 16px; }
+  .fa-article .fa-article__image { aspect-ratio: 351 / 244; }
+
+  .fa-article__layout { row-gap: 24px; }
+  .fa-article__sidebar { gap: 14px; }
+
+  .fa-article__box-title {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .fa-article__toc { padding: 14px 20px; }
+  .fa-article__toc-list { font-size: 14px; }
+
+  .fa-article__booking {
+    gap: 24px;
+    padding: 10px 20px 16px;
+  }
+
+  .fa-article__booking-text { font-size: 14px; }
+  .fa-article__booking-actions { align-items: stretch; }
+
+  .fa-article__booking-button {
+    padding: 16px 28px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .fa-article__booking-note { font-size: 14px; }
+
+  .fa-article__main { gap: 32px; }
+
+  .fa-article__content {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .fa-article__content > h3 { font-size: 20px; line-height: 22px; } /* sub-headings under an H2 (not drawn) */
+
+  .fa-article__content > h2,
+  .fa-article__content--h3-sections > h3 {
+    font-size: 24px;
+    line-height: 24px;
+  }
+  .fa-article__content > h2 + *,
+  .fa-article__content > h3 + * { margin-top: 16px; }
+
+  .fa-article__ebook {
+    max-width: none;
+    padding: 20px;
+  }
+
+  .fa-article__ebook-head { gap: 7px; }
+
+  .fa-article__ebook-title {
+    max-width: 235px; /* Figma's title box: "Free: Dr. Felice's Gut / Health E-book" */
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .fa-article__ebook-text {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .fa-article__ebook-form { align-items: stretch; }
+  .fa-article__ebook .fa-inquiry__fields,
+  .fa-article__ebook .fa-inquiry__row { gap: 10px; }
+  .fa-article__ebook .fa-inquiry__field { gap: 12px; }
+  .fa-article__ebook .fa-inquiry__label { font-size: 14px; }
+
+  .fa-article__ebook .fa-inquiry__input {
+    height: 40px;
+    border-radius: 4px;
+  }
+
+  .fa-article__ebook .fa-btn { min-height: 39px; }
+
+  .fa-article__share-label { font-size: 16px; }
+  .fa-article__share-list { gap: 8px 18px; }
+  .fa-article__share-link { font-size: 16px; }
+}

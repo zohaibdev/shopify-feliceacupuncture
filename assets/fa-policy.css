@@ -1,0 +1,136 @@
+/*
+  Felice policy pages (/policies/*, rendered by Shopify: .shopify-policy__container > __title h1 + __body .rte).
+  No Figma frame: built from the site's UI kit, after the blog article (Article V2 2719:22580 / mobile 2860:25002):
+  linen band (#E8DCC9) under the header, 80 / 105 padding; centred eyebrow (LCC 16 +3% moss), 28, title Marisa 70 / 60
+  -2% garnet uppercase; "Last updated" line LCC 18 -2% clay; 40, the 818px text column: paragraphs LCC 24 / 35 moss
+  24 apart, section headings Marisa 42 / 46 -1% garnet uppercase with 32px around them, lists 1.2em in, links garnet
+  underlined. Mobile: 60px padding, title 40 / 32, text 14 / 20, headings 24 / 24 (16 under, 32 above).
+  Loaded from snippets/fa-head.liquid on request.page_type 'policy' only.
+*/
+
+.shopify-policy__container {
+  max-width: none;
+  margin: 0;
+  padding: 80px var(--fa-gutter, 24px) 105px;
+  background: #e8dcc9;
+  color: var(--fa-moss);
+}
+
+.shopify-policy__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 813px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.shopify-policy__title::before {
+  content: 'Felice Acupuncture \00B7  Policies';
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: 0.03em;
+  color: var(--fa-moss);
+}
+
+.shopify-policy__title h1 {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+  text-box: trim-both cap alphabetic;
+}
+
+.shopify-policy__body {
+  max-width: 818px;
+  margin: 40px auto 0;
+}
+
+.shopify-policy__body .rte {
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  letter-spacing: 0;
+  color: var(--fa-moss);
+}
+
+.shopify-policy__body .rte > div > * { margin: 0; }
+.shopify-policy__body .rte > div > * + * { margin-top: 24px; }
+
+/* "Last updated: …" (Shopify's first paragraph): the article's meta line, centred under the title. */
+.shopify-policy__body .rte > div > p:first-child {
+  margin-bottom: 16px;
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--fa-clay);
+}
+
+.shopify-policy__body .rte :is(h2, h3, h4) {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+}
+
+.shopify-policy__body .rte h2 { font-size: 42px; line-height: 46px; }
+.shopify-policy__body .rte :is(h3, h4) { font-size: 30px; line-height: 34px; }
+
+.shopify-policy__body .rte > div > * + :is(h2, h3, h4),
+.shopify-policy__body .rte > div > :is(h2, h3, h4) + * { margin-top: 32px; }
+
+.shopify-policy__body .rte :is(ul, ol) { padding-left: 1.2em; }
+.shopify-policy__body .rte li + li { margin-top: 8px; }
+.shopify-policy__body .rte li::marker { color: var(--fa-clay); }
+.shopify-policy__body .rte strong { font-weight: 700; }
+
+.shopify-policy__body .rte a {
+  color: var(--fa-garnet);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .shopify-policy__body .rte a:hover { text-decoration-thickness: 2px; }
+}
+
+/* Tablet (no design): the article's 52 / 48 title. */
+@media screen and (max-width: 1099px) {
+  .shopify-policy__container { padding-block: 60px 80px; }
+  .shopify-policy__title h1 { font-size: 52px; line-height: 48px; }
+}
+
+/* Mobile = the article's mobile type (2860:25002). */
+@media screen and (max-width: 899px) {
+  .shopify-policy__container { padding: 60px 12px; }
+  .shopify-policy__title { gap: 20px; }
+  .shopify-policy__title::before { font-size: 14px; }
+
+  .shopify-policy__title h1 {
+    font-size: 40px;
+    line-height: 32px;
+  }
+
+  .shopify-policy__body { margin-top: 24px; }
+
+  .shopify-policy__body .rte {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .shopify-policy__body .rte > div > p:first-child { font-size: 16px; }
+  .shopify-policy__body .rte h2 { font-size: 24px; line-height: 24px; }
+  .shopify-policy__body .rte :is(h3, h4) { font-size: 20px; line-height: 22px; }
+  .shopify-policy__body .rte > div > :is(h2, h3, h4) + * { margin-top: 16px; }
+  .shopify-policy__body .rte li + li { margin-top: 6px; }
+}

@@ -1,0 +1,618 @@
+{%- comment -%}
+  Felice "What brings you in?" — six condition cards on a linen-texture background.
+  Figma: desktop 414:422 (background), 414:423 (botanical), 414:424 (content);
+         mobile 414:1004 (background), 414:1010 (botanical), 414:1056 (content).
+  Desktop and tablet (900+): 3-column grid. Mobile (<= 899): horizontal swipe row (.fa-swipe), or with "Cards on
+  mobile: Two-column grid" the homepage mobile V1 layout (2794:1089: 2 x 3 cards of 171 x 281).
+  Services page v2 (file B4QcctWXiG9ywP3uRA3coG): desktop 2289 / 2290 / 2858, mobile 6708 / 6783 / 6737 — white brush
+  characters (block "Fallback characters asset"), botanical "Small, top left", 15% shade on the first row.
+  Homepage V5 (same file, 2612:3246 / 2612:3248 / 2612:3247): set characters exported from Figma as outlined SVGs
+  (fa-conditions-type-*.svg, block "Characters height" 66, hand-placed per card: block "Characters vertical offset"
+  +3 / +8 / +8 / +3 / +3 / -4), Hormones text at -1% (block "Tighter text letter spacing"), garnet "Book now" button
+  (section "Button style").
+{%- endcomment -%}
+{{ 'fa-conditions.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign botanical_style = section.settings.botanical_style | default: 'standard'
+-%}
+{%- assign fa_default_id = 'fa-conditions-' | append: section.id -%}
+<section
+  class="fa-section fa-section--pad fa-conditions{% if section.settings.show_botanical and botanical_style == 'left' %} fa-conditions--botanical-left{% elsif section.settings.show_botanical and botanical_style == 'raised' %} fa-conditions--botanical-raised{% endif %}{% if section.settings.card_style == 'booking' %} fa-conditions--booking{% endif %}{% if section.settings.tone == 'light' %} fa-conditions--light{% endif %}{% if section.settings.intro_style == 'tight' %} fa-conditions--intro-tight{% elsif section.settings.intro_style == 'large' %} fa-conditions--intro-large{% endif %}{% if section.settings.mobile_layout == 'grid' %} fa-conditions--mobile-grid{% endif %}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_default_id }}"
+  style="--fa-cond-heading-w: {{ section.settings.heading_width | default: 670 }}px; --fa-cond-intro-w: {{ section.settings.text_width | default: 670 }}px; --fa-cond-text-gap: {{ section.settings.text_gap | default: 24 }}px; --fa-cond-pad-top: {{ section.settings.padding_top | default: 120 }}px; --fa-cond-pad-bottom: {{ section.settings.padding_bottom | default: 120 }}px; --fa-cond-pad-m: {{ section.settings.padding_mobile | default: 50 }}px; --fa-cond-title-lh-m: {{ section.settings.heading_line_height_mobile | default: 35 }}px; --fa-cond-text-gap-m: {{ section.settings.text_gap_mobile | default: 14 }}px; --fa-cond-button-gap-m: {{ section.settings.button_gap_mobile | default: 16 }}px;"
+>
+  <div class="fa-bg" aria-hidden="true">
+    {%- if section.settings.background != blank -%}
+      {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+    {%- else -%}
+      {%- if section.settings.background_asset != blank -%}
+        <img src="{{ section.settings.background_asset | asset_url }}" width="1440" height="1371" loading="lazy" alt="">
+      {%- else -%}
+        <img src="{{ 'fa-conditions-bg.jpg' | asset_url }}" srcset="{{ 'fa-conditions-bg.jpg' | asset_url }} 1440w, {{ 'fa-conditions-bg-2x.jpg' | asset_url }} 2880w" sizes="100vw" width="1440" height="1431" loading="lazy" alt="">
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_botanical -%}
+    {%- if botanical_style == 'left' -%}
+      {%- comment -%} Services page v2 2858 / 6737: the same drawing at the top left, rising into the previous section — the first-visit file has the resolution for it. {%- endcomment -%}
+      <img class="fa-deco fa-conditions__botanical fa-conditions__botanical--left" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+    {%- else -%}
+      <img class="fa-deco fa-conditions__botanical" src="{{ 'fa-conditions-botanical.png' | asset_url }}" width="460" height="720" loading="lazy" alt="" aria-hidden="true">
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="fa-container fa-conditions__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-conditions__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- render 'fa-eyebrow', text: section.settings.eyebrow, class: 'fa-conditions__eyebrow', tone: 'light' -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="fa-conditions__grid fa-card-row{% unless section.settings.mobile_layout == 'grid' %} fa-swipe{% endunless %}" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- for block in section.blocks -%}
+          <li class="fa-conditions__card{% if block.settings.text_tight %} fa-conditions__card--text-tight{% endif %}" style="--fa-cond-text-w: {{ block.settings.text_width }}px; --fa-cond-text-w-m: {{ block.settings.text_width_mobile }}px; --fa-cond-shade: {{ block.settings.shade | default: 10 | divided_by: 100.0 }}; --fa-cond-glyph-h: {{ block.settings.glyph_height | default: 84 }}; --fa-cond-glyph-y: {{ block.settings.glyph_offset | default: 0 }};" {{ block.shopify_attributes }}>
+            <div class="fa-conditions__media fa-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 1100px) 438px, (min-width: 900px) calc((100vw - 88px) / 3), 266px', loading: 'lazy', alt: block.settings.image.alt | default: '' }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img src="{{ block.settings.fallback_asset | asset_url }}" width="438" height="275" loading="lazy" alt="">
+              {%- endif -%}
+              {%- if block.settings.glyph_image != blank -%}
+                {{ block.settings.glyph_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '', class: 'fa-conditions__glyphs' }}
+              {%- elsif block.settings.glyph_asset != blank -%}
+                {%- comment -%} Approximate intrinsic size (two stacked characters); CSS sets the height, the width follows the file. {%- endcomment -%}
+                <img class="fa-conditions__glyphs" src="{{ block.settings.glyph_asset | asset_url }}" width="45" height="84" loading="lazy" alt="" aria-hidden="true">
+              {%- elsif block.settings.characters != blank -%}
+                <span class="fa-conditions__glyphs" lang="zh-Hans" aria-hidden="true">{{ block.settings.characters | escape }}</span>
+              {%- endif -%}
+            </div>
+            <div class="fa-conditions__body">
+              {%- if block.settings.title != blank -%}
+                <h3 class="fa-conditions__title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="fa-conditions__text">{{ block.settings.text | escape | newline_to_br }}</p>
+              {%- endif -%}
+              {%- if block.settings.practitioners != blank -%}
+                {%- comment -%} Our Team V3 2669:33639: one row per "Name | booking URL" line. {%- endcomment -%}
+                <ul class="fa-conditions__people" role="list">
+                  {%- assign people = block.settings.practitioners | newline_to_br | split: '<br />' -%}
+                  {%- for line in people -%}
+                    {%- assign parts = line | split: '|' -%}
+                    {%- assign person = parts[0] | strip -%}
+                    {%- if person != blank -%}
+                      {%- assign person_url = parts[1] | strip -%}
+                      <li class="fa-conditions__person">
+                        <span class="fa-conditions__dot" aria-hidden="true"></span>
+                        <span class="fa-conditions__person-name">{{ person | escape }}</span>
+                        <a class="fa-conditions__book" href="{{ person_url | default: '#' }}"{% render 'fa-link-target', url: person_url %}>
+                          {{- block.settings.book_label | default: 'Book' | escape }} <span class="fa-arrow-nudge" aria-hidden="true">→</span><span class="fa-visually-hidden"> {{ person | escape }}, {{ block.settings.title | escape }}</span>
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              {%- if block.settings.link_label != blank -%}
+                {%- comment -%} A trailing "→" gets its own span so it can slide on hover (fa-base.css "Motion"). {%- endcomment -%}
+                {%- assign link_label = block.settings.link_label | escape -%}
+                {%- assign link_last = link_label | slice: -1 -%}
+                {%- liquid
+                  assign link_href = block.settings.link
+                  if link_href == blank and block.settings.anchor != blank
+                    assign link_href = block.settings.anchor | strip | remove_first: '#' | prepend: '#'
+                  endif
+                -%}
+                <a class="fa-conditions__link" href="{{ link_href | default: '#' }}"{% render 'fa-link-target', url: link_href %}>
+                  {%- if link_last == '→' -%}
+                    {{- link_label | remove_last: '→' -}}<span class="fa-arrow-nudge" aria-hidden="true">→</span>
+                  {%- else -%}
+                    {{- link_label -}}
+                  {%- endif -%}
+                  {%- if block.settings.title != blank -%}<span class="fa-visually-hidden"> {{ block.settings.title | escape }}</span>{%- endif -%}
+                </a>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      {%- liquid
+        assign button_href = section.settings.button_link
+        if button_href == blank and section.settings.button_anchor != blank
+          assign button_href = section.settings.button_anchor | strip | remove_first: '#' | prepend: '#'
+        endif
+      -%}
+      {%- assign button_style = section.settings.button_style | default: 'light' -%}
+      {%- assign has_mobile_button = false -%}
+      {%- if section.settings.button_label_mobile != blank -%}{%- assign has_mobile_button = true -%}{%- endif -%}
+      <a href="{{ button_href | default: '#' }}"{% render 'fa-link-target', url: button_href %} class="fa-btn fa-btn--{{ button_style }}{% if section.settings.button_compact %} fa-btn--compact{% endif %} fa-conditions__button{% if has_mobile_button %} fa-hide-mobile{% endif %}" data-fa-reveal="up">{{ section.settings.button_label | escape }}</a>
+      {%- if has_mobile_button -%}
+        {%- assign mobile_href = section.settings.button_link_mobile | default: button_href -%}
+        <a href="{{ mobile_href | default: '#' }}"{% render 'fa-link-target', url: mobile_href %} class="fa-btn fa-btn--{{ button_style }} fa-btn--compact fa-conditions__button fa-conditions__button--mobile-label fa-hide-desktop" data-fa-reveal="up">{{ section.settings.button_label_mobile | escape }}</a>
+      {%- endif -%}
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}
+      <div class="fa-conditions__note" data-fa-reveal="fade">{{ section.settings.note }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice conditions",
+  "tag": "div",
+  "class": "fa-conditions-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets links jump here, e.g. conditions (link to /#conditions). Letters, numbers and hyphens."
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Uses the bundled linen texture when empty."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_botanical",
+      "label": "Show botanical illustration",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "botanical_style",
+      "label": "Botanical size",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "left", "label": "Small, top left" },
+        { "value": "raised", "label": "Standard, overlapping the section above" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "standard", "label": "Standard (photo, text, link)" },
+        { "value": "booking", "label": "Booking list (photo, practitioners)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Heading colour",
+      "options": [
+        { "value": "dark", "label": "Linen (on the dark texture)" },
+        { "value": "light", "label": "Moss (on a light texture)" }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Note below the cards"
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled background file",
+      "info": "Theme asset used when no background image is picked (blank = the standard texture)."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "info": "Small label with the Felice seal above the heading. Leave blank to hide."
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Line breaks are kept.",
+      "default": "What brings you in?"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Cards on mobile",
+      "options": [
+        { "value": "swipe", "label": "Swipe row" },
+        { "value": "grid", "label": "Two-column grid" }
+      ],
+      "default": "swipe"
+    },
+    {
+      "type": "select",
+      "id": "intro_style",
+      "label": "Intro text size",
+      "options": [
+        { "value": "standard", "label": "16 / 27" },
+        { "value": "tight", "label": "16 / 25" },
+        { "value": "large", "label": "18 / 29" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "range",
+      "id": "heading_width",
+      "label": "Heading width (desktop)",
+      "info": "Sets where the heading wraps.",
+      "min": 600,
+      "max": 800,
+      "step": 2,
+      "unit": "px",
+      "default": 670
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Start here. Traditional Chinese Medicine (TCM) can treat both acute and ongoing health concerns. At Felice Acupuncture we create a system of personalized care to support your healing journey.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width (desktop)",
+      "info": "Sets where the text wraps; never wider than the heading.",
+      "min": 500,
+      "max": 700,
+      "step": 2,
+      "unit": "px",
+      "default": 670
+    },
+    {
+      "type": "range",
+      "id": "text_gap",
+      "label": "Space between heading and text (desktop)",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "text_gap_mobile",
+      "label": "Space between heading and text (mobile)",
+      "min": 8,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height_mobile",
+      "label": "Heading line height (mobile)",
+      "info": "Space between heading lines when it wraps.",
+      "min": 28,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View services"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_mobile",
+      "label": "Button label (mobile)",
+      "info": "Optional: a different button on phones (homepage design: View services)."
+    },
+    {
+      "type": "url",
+      "id": "button_link_mobile",
+      "label": "Button link (mobile)"
+    },
+    {
+      "type": "text",
+      "id": "button_anchor",
+      "label": "Button jump link",
+      "info": "Used when Button link is blank: the id of a section on the same page, e.g. service-menu."
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "light", "label": "Light (linen)" },
+        { "value": "primary", "label": "Garnet" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_compact",
+      "label": "Compact button",
+      "info": "Desktop: the button fits its label (42px side padding) and a garnet button gets white text.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "button_gap_mobile",
+      "label": "Space above the button (mobile)",
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "condition",
+      "name": "Condition card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "438 x 275 on desktop, 266 x 202 on mobile."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no image is selected."
+        },
+        {
+          "type": "range",
+          "id": "shade",
+          "label": "Photo shade (desktop)",
+          "info": "Black wash over the photo. Mobile always uses 10%.",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "%",
+          "default": 10
+        },
+        {
+          "type": "image_picker",
+          "id": "glyph_image",
+          "label": "Chinese characters image",
+          "info": "Transparent PNG or SVG, centred on the photo."
+        },
+        {
+          "type": "text",
+          "id": "glyph_asset",
+          "label": "Fallback characters asset",
+          "info": "Theme asset filename used when no characters image is picked."
+        },
+        {
+          "type": "range",
+          "id": "glyph_height",
+          "label": "Characters height (desktop)",
+          "info": "Height of the characters image on the 275px desktop photo; phones scale it with the photo. Brush artwork: 84px, set type (fa-conditions-type-*.svg): 66px.",
+          "min": 40,
+          "max": 120,
+          "step": 1,
+          "unit": "px",
+          "default": 84
+        },
+        {
+          "type": "range",
+          "id": "glyph_offset",
+          "label": "Characters vertical offset (desktop)",
+          "info": "Moves the characters down (positive) or up from the centre of the 275px desktop photo; phones scale it with the photo.",
+          "min": -20,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "characters",
+          "label": "Chinese characters (text)",
+          "info": "Shown stacked over the image when there is no characters image.",
+          "default": "止痛"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Pain"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "info": "Line breaks are kept.",
+          "default": "Support for pain, tension, mobility, recovery, and everyday movement."
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Text width (desktop)",
+          "info": "Sets where the text wraps. Design: 366px; 418px keeps longer text on two lines.",
+          "min": 340,
+          "max": 418,
+          "step": 1,
+          "unit": "px",
+          "default": 366
+        },
+        {
+          "type": "range",
+          "id": "text_width_mobile",
+          "label": "Text width (mobile)",
+          "min": 200,
+          "max": 250,
+          "step": 1,
+          "unit": "px",
+          "default": 226
+        },
+        {
+          "type": "checkbox",
+          "id": "text_tight",
+          "label": "Tighter text letter spacing",
+          "info": "-1% letter spacing, so a longer text keeps the designed line break.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Learn more →"
+        },
+        {
+          "type": "textarea",
+          "id": "practitioners",
+          "label": "Practitioners (booking list style)",
+          "info": "One per line: Name | booking link."
+        },
+        {
+          "type": "text",
+          "id": "book_label",
+          "label": "Booking link label",
+          "default": "Book"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Jump link",
+          "info": "Used when Link is blank: the id of a row on the same page, e.g. treatment-acupuncture."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice conditions",
+      "blocks": [
+        {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-pain.jpg",
+            "characters": "止痛",
+            "title": "Pain",
+            "text": "Support for pain, tension, mobility, recovery, and everyday movement.",
+            "text_width": 366,
+            "text_width_mobile": 250
+          }
+        },
+        {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-anxiety.jpg",
+            "characters": "安神",
+            "title": "Anxiety & Stress",
+            "text": "Support for stress, relaxation, nervous system balance, and emotional wellbeing.",
+            "text_width": 366,
+            "text_width_mobile": 226
+          }
+        },
+        {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-hormones.jpg",
+            "characters": "调经",
+            "title": "Hormones & Fertility",
+            "text": "Support for cycle regulation, pregnancy, postpartum recovery, painful periods, and hormonal balance.",
+            "text_width": 418,
+            "text_width_mobile": 242
+          }
+        },
+        {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-gut.jpg",
+            "characters": "调胃",
+            "title": "Gut Health",
+            "text": "Support for bloating, reflux, SIBO, digestive discomfort, and other digestive concerns.",
+            "text_width": 366,
+            "text_width_mobile": 226
+          }
+        },
+        {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-skin.jpg",
+            "characters": "焕肤",
+            "title": "Skin Rejuvenation",
+            "text": "Support for wrinkles, skin texture, circulation, and natural radiance.",
+            "text_width": 366,
+            "text_width_mobile": 226
+          }
+        },
+        {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-sleep.jpg",
+            "characters": "助眠",
+            "title": "Sleep",
+            "text": "Support for calming the nervous system so you can rest more deeply.",
+            "text_width": 383,
+            "text_width_mobile": 226
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

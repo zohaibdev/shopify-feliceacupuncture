@@ -1,0 +1,1088 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "fa-hero",
+      "settings": {
+        "layout": "page",
+        "desktop_photos": "two",
+        "mobile_photo": "left",
+        "photo_position": 0,
+        "fallback_left": "fa-page-hero-services-left.jpg",
+        "fallback_right": "fa-page-hero-services-right.jpg",
+        "fallback_mobile": "",
+        "video_url": "",
+        "overlay_opacity": 35,
+        "overlay_opacity_mobile": 26,
+        "copy_width": 658,
+        "min_height": 481,
+        "padding_top": 182,
+        "padding_bottom_mobile": 131,
+        "eyebrow": "Culver City's 5.0-Rated Acupuncture Clinic",
+        "eyebrow_stars": 5,
+        "show_rating": true,
+        "stars": 5,
+        "rating_text": "4.9 stars",
+        "meta_1": "Traditional Chinese Medicine",
+        "meta_2": "Culver City",
+        "heading": "Concierge Care",
+        "text": "At Felice Acupuncture, healing is a partnership, and a privilege we don't take lightly.",
+        "tagline": "",
+        "button_label_1": "",
+        "button_link_1": "",
+        "button_label_2": "",
+        "button_link_2": "",
+        "button_compact": true,
+        "mobile_style": "compact"
+      }
+    },
+    "approach": {
+      "type": "fa-membership",
+      "blocks": {
+        "option_home": {
+          "type": "option",
+          "settings": {
+            "icon": "location",
+            "title": "At your home",
+            "text": "We come to you, within a 30-minute distance from Culver City, CA. Located further away? Call us to book and discuss the cost of treatment.\n\nHouse call acupuncture sessions are 90 minutes.",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "option_virtual": {
+          "type": "option",
+          "settings": {
+            "icon": "phone",
+            "title": "Virtually",
+            "text": "Ongoing sessions by video, based around your routine and schedule. You'll receive an email with a link to join 30 minutes before your appointment.",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "option_home",
+        "option_virtual"
+      ],
+      "settings": {
+        "heading": "A more dedicated, personalized approach",
+        "text": "<p>Our concierge practice is designed for anyone ready to take a more dedicated, highly personalized approach to their health. Patients receive unmatched access to their practitioner, longer appointments, and access to a suite of resources.</p><p>Instead of isolating one symptom, we take a comprehensive look at the entire system. We examine digestion, nervous system regulation, circulation, inflammation, hormones, and emotional stress as part of one interconnected picture. When we restore balance to the system, symptoms begin to resolve naturally.</p>",
+        "anchor_id": "approach",
+        "panel_title": "",
+        "panel_button_label": "",
+        "panel_button_link": "",
+        "layout": "split",
+        "botanical": "top_left",
+        "corners": "none",
+        "button_label": "Book now",
+        "button_link": "#inquiry",
+        "padding_top": 106,
+        "padding_bottom": 122,
+        "padding_mobile": 60,
+        "background_color": "#9d7f4e",
+        "background_asset": "fa-membership-bg.jpg",
+        "background_asset_mobile": "fa-membership-bg-mobile.jpg",
+        "mobile_style": "compact"
+      }
+    },
+    "includes": {
+      "type": "fa-glyph-columns",
+      "blocks": {
+        "column_01": {
+          "type": "column",
+          "settings": {
+            "number": "01",
+            "glyph_asset": "",
+            "color": "#922039",
+            "title": "A comprehensive diagnostic consultation",
+            "text": "",
+            "items": "Includes tongue and pulse analysis\nA deep, unhurried exploration of your health history, constitution, and goals",
+            "width": 284
+          }
+        },
+        "column_02": {
+          "type": "column",
+          "settings": {
+            "number": "02",
+            "glyph_asset": "",
+            "color": "#922039",
+            "title": "Ongoing sessions",
+            "text": "",
+            "items": "Available in-home or virtually\nBased around your routine and schedule",
+            "width": 284
+          }
+        },
+        "column_03": {
+          "type": "column",
+          "settings": {
+            "number": "03",
+            "glyph_asset": "",
+            "color": "#922039",
+            "title": "A fully tailored treatment protocol",
+            "text": "",
+            "items": "Includes herbal blends, dietary guidance, and lifestyle practices\nShifts with your symptoms and lifestyle",
+            "width": 284
+          }
+        },
+        "column_04": {
+          "type": "column",
+          "settings": {
+            "number": "04",
+            "glyph_asset": "",
+            "color": "#922039",
+            "title": "Direct, priority access to your practitioner",
+            "text": "",
+            "items": "Guaranteed response within 12–24 hours\nPersonal phone line in addition to email",
+            "width": 284
+          }
+        }
+      },
+      "block_order": [
+        "column_01",
+        "column_02",
+        "column_03",
+        "column_04"
+      ],
+      "settings": {
+        "heading": "Concierge Includes",
+        "text": "",
+        "note": "",
+        "style": "numbered",
+        "botanical": "rising_right",
+        "anchor_id": "membership",
+        "background_asset": "fa-faq-bg.jpg",
+        "padding_top": 120,
+        "padding_bottom": 142,
+        "mobile_style": "compact"
+      }
+    },
+    "inquiry": {
+      "type": "fa-inquiry",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "text": "We receive your inquiry."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "text": "Within a few days, a member of our patient care team reaches out with your concierge options."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "text": "We set up a call to make sure concierge care is the\nright fit."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "text": "We schedule your first session, at your home or virtually."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "heading": "Ready to begin?",
+        "text": "<p>Complete the New Patient Inquiry Form to share your health concerns and goals. A member of our patient care team will reach out within a few days to ensure Felice Acupuncture is the right fit for you, and that we are fully prepared to meet your needs before your first visit.</p>",
+        "anchor_id": "inquiry",
+        "contact_title": "Prefer to talk?",
+        "email": "info@feliceacupuncture.com",
+        "phone_label": "Call or text to book · +1 (424) 478-0019",
+        "phone_link": "tel:+14244780019",
+        "steps_title": "What happens after you submit",
+        "form_name": "New Patient Inquiry (concierge)",
+        "interest_label": "I’m interested in...*",
+        "interest_options": "In-Home Concierge Care\nVirtual Concierge Care",
+        "message_label": "Briefly describe your reason for seeking treatment",
+        "for_label": "I’m inquiring for...",
+        "for_options": "Myself\nMy child or dependent\nSomeone else",
+        "button_label": "Schedule your visit",
+        "success_message": "Thank you. We received your inquiry and will reach out within a few days.",
+        "background_asset": "fa-inquiry-bg.jpg",
+        "mobile_style": "compact"
+      }
+    },
+    "expect": {
+      "type": "fa-first-visit",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-concierge-expect-reach-out.jpg",
+            "alt": "A calm treatment room with a large painting and dried flowers",
+            "number": "",
+            "tag": "After you submit the form",
+            "title": "We reach out",
+            "duration_1": "Within a few days",
+            "text_1": "A member of our patient care team will reach out with your concierge options and set up a call to make sure it's the right fit.",
+            "duration_2": "",
+            "text_2": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-consultation.jpg",
+            "alt": "A practitioner standing beside a patient resting on a treatment table",
+            "number": "",
+            "tag": "At your home or virtually",
+            "title": "Your first session",
+            "duration_1": "Comprehensive",
+            "text_1": "A comprehensive diagnostic consultation: a deep, unhurried exploration of your health history, constitution, and goals.",
+            "duration_2": "",
+            "text_2": ""
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-concierge-expect-ongoing.jpg",
+            "alt": "A practitioner holding a lit moxa stick",
+            "number": "",
+            "tag": "Between sessions",
+            "title": "Ongoing care",
+            "duration_1": "Within 12–24 hours",
+            "text_1": "A fully tailored treatment protocol that shifts with your symptoms and lifestyle, with direct, priority access to your practitioner by phone and email.",
+            "duration_2": "",
+            "text_2": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "mobile_layout": "stack",
+        "anchor_id": "what-to-expect",
+        "show_botanical": true,
+        "botanical_style": "corners",
+        "botanical_display": "all",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "eyebrow": "",
+        "heading": "What to expect from concierge care",
+        "heading_width": 592,
+        "text": "<p>A more dedicated, highly personalized approach, with longer appointments and unmatched access to your practitioner.</p>",
+        "text_width": 420,
+        "text_gap_mobile": 16,
+        "card_text_layout": "standard",
+        "card_style": "moss",
+        "button_label": "Book your first visit",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_compact": false
+      }
+    },
+    "pillars": {
+      "type": "fa-feature-cards",
+      "blocks": {
+        "pillar_acupuncture": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-acupuncture.jpg",
+            "title": "Acupuncture",
+            "text": "Restores flow, releases stagnation, and rebalances energy.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 280,
+            "text_small_mobile": false
+          }
+        },
+        "pillar_herbal": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-herbal-medicine.jpg",
+            "title": "Herbal Medicine",
+            "text": "Nourishes from within using synergistic plant formulas.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 280,
+            "text_small_mobile": false
+          }
+        },
+        "pillar_food": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-food-as-medicine.jpg",
+            "title": "Food as Medicine",
+            "text": "Aligns diet with nature to support digestion and mood.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 280,
+            "text_small_mobile": true
+          }
+        },
+        "pillar_lifestyle": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-lifestyle-practices.jpg",
+            "title": "Lifestyle Practices",
+            "text": "Cultivates regulation through rest, ritual, and awareness.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 268,
+            "text_small_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "pillar_acupuncture",
+        "pillar_herbal",
+        "pillar_food",
+        "pillar_lifestyle"
+      ],
+      "settings": {
+        "heading": "The Four Pillars of Healing",
+        "text": "<p>Healing happens when yin and yang are in harmony and life is in balance. <br>Our work is rooted in four timeless pillars that guide the body back to balance:</p>",
+        "button_label": "",
+        "button_link": "",
+        "anchor_id": "",
+        "card_style": "moss_large",
+        "heading_color": "linen",
+        "heading_width": 810,
+        "heading_line_height": 56,
+        "columns": 4,
+        "padding_mobile": 60,
+        "background_asset": "fa-feature-cards-pillars-bg.jpg",
+        "background_asset_mobile": "fa-feature-cards-truth-bg-mobile.jpg",
+        "card_background_asset": "fa-feature-cards-card-bg.jpg",
+        "mobile_layout": "grid"
+      }
+    },
+    "truth": {
+      "type": "fa-feature-cards",
+      "blocks": {
+        "truth_time_tested": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-time-tested-v2.webp",
+            "title": "It's time-tested",
+            "text": "TCM has over 3,000 years of recorded practice.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 232,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-time-tested-mobile-v2.webp"
+          }
+        },
+        "truth_treats_root": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-treats-root-v2.webp",
+            "title": "It treats the root",
+            "text": "We look beyond symptoms to identify the patterns of imbalance underneath them.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 276,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-treats-root-mobile-v2.webp"
+          }
+        },
+        "truth_western_medicine": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-western-medicine-v2.webp",
+            "title": "It works \nwith Western medicine",
+            "text": "We do read labs, and we work with your Western doctors.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 306,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-western-medicine-mobile-v2.webp"
+          }
+        },
+        "truth_whole_system": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-whole-system-v2.webp",
+            "title": "It sees the whole system",
+            "text": "Digestion, nervous system, circulation, inflammation, hormones, and emotional stress are part of one interconnected picture.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 306,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-whole-system-mobile-v2.webp"
+          }
+        }
+      },
+      "block_order": [
+        "truth_time_tested",
+        "truth_treats_root",
+        "truth_western_medicine",
+        "truth_whole_system"
+      ],
+      "settings": {
+        "heading": "The truth about \nTraditional Chinese Medicine",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "anchor_id": "truth",
+        "card_style": "linen",
+        "heading_color": "linen",
+        "heading_width": 882,
+        "heading_line_height": 58,
+        "columns": 4,
+        "padding_mobile": 60,
+        "background_asset": "fa-feature-cards-truth-bg.jpg",
+        "background_asset_mobile": "fa-feature-cards-truth-bg-mobile.jpg",
+        "card_background_asset": "fa-feature-cards-card-bg.jpg",
+        "mobile_layout": "grid"
+      }
+    },
+    "cta_banner": {
+      "type": "fa-cta-banner",
+      "settings": {
+        "bundled_photo": "concierge",
+        "overlay_opacity": 0,
+        "layout": "spacious",
+        "show_botanicals": true,
+        "glyph_asset": "",
+        "subheading": "",
+        "heading": "Your first step toward lasting balance.",
+        "text": "",
+        "button_label": "Book your first visit",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_style": "light",
+        "content_offset": 0,
+        "button_label_2": "",
+        "button_link_2": ""
+      }
+    },
+    "testimonials": {
+      "type": "fa-testimonials",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Sabrina Sarmiento",
+            "date": "",
+            "rating": 5,
+            "text": "Dr. Felice is amazing.  Can't say enough good things about her!\nHer acupuncture and cupping sessions are pure healing, gentle, powerful, and full of care.  She’s sweet, compassionate, and incredibly skilled (and STYLISH). Every visit feels like a reset for both body and soul."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Adam Francis",
+            "date": "",
+            "rating": 5,
+            "text": "I'm not sure what I'd do without Sarah at Felice Acupuncture. I've been trying to recover from Long Covid for over a year and recently moved to LA from Seattle which caused a number of flare-ups, and I was without an acupuncturist to help calm things down. Luckily I found Felice Acupuncture and as soon as I met Sarah, I knew I was in good hands. She's been huge in not only helping me get my symptoms under control, but also teaching me about diet and supplement adjustments to help keep my system from breaking down as much. Can't recommend her enough, her calming presence and sense of humour is invaluable if you've been dealing with a chronic condition for a prolonged period of time."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Emily Chapel",
+            "date": "",
+            "rating": 5,
+            "text": "I was slightly skeptical that acupuncture would work for my chronic neck pain but I am SO happy to went to Felice Acupuncture and Wellness. Sam Audette was my provider and he made sure I was comfortable throughout the entire process. I can't say it was an enjoyable experience having needles twitch my aching muscles but wow, it helped so much. After two treatments, my pain is almost resolved. I know there is some science behind acuptuncture but I swear, it's magic."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "linda danh",
+            "date": "",
+            "rating": 5,
+            "text": "I went to Caroline as I was seeking treatment and cupping for back pain and overall muscle recovery. Caroline was very thorough and attentive - her soothing energy made me comfortable, as did the beautiful and calming space. Looking forward to another visit soon!"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "heading": "What people are saying",
+        "text": "<p>Pulled live from Google. 5.0 across 42 reviews, filterable by what the patient came in for.</p>",
+        "show_google": true,
+        "google_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "widget_code": "",
+        "arrow_size": "large",
+        "card_style": "square",
+        "mobile_background_asset": "fa-testimonials-bg-services.jpg",
+        "show_botanical": false,
+        "botanical_style": "standard",
+        "botanical_display": "all",
+        "botanical_overlap": true,
+        "padding_mobile": 60
+      },
+      "disabled": true
+    },
+    "faq": {
+      "type": "fa-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What happens during my first visit?",
+            "answer": "<p>Your initial visit is 75 minutes. Before your appointment, you'll complete an intake form. Together, you and your practitioner will review it and talk through your symptoms, followed by a tongue and pulse diagnostic and your first acupuncture treatment. You'll leave with a personalized treatment plan.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Does acupuncture hurt?",
+            "answer": "<p>Most patients find acupuncture surprisingly gentle. You may feel a brief sensation as the needles are placed, followed by warmth, heaviness, tingling, or deep relaxation.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How many sessions will I need?",
+            "answer": "<p>It depends on your goals and history. Your practitioner will recommend a treatment plan after your first visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "<p>Many patients notice a change within the first few sessions; long-standing concerns usually take longer. Your practitioner will review your progress with you at each visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How will I feel after my first session?",
+            "answer": "<p>Most people feel calm and relaxed, sometimes a little tired. Drink water, rest if you can, and tell your practitioner how you felt at your next visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What should I wear to my appointment?",
+            "answer": "",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "How much does a visit cost?",
+            "answer": "<p>Prices depend on the treatment and session length. See our services page for current prices, or contact us with any questions.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Do you take insurance?",
+            "answer": "<p>Please contact us before your visit to discuss insurance and payment options.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Which practitioner should I book?",
+            "answer": "<p>Every practitioner treats a wide range of concerns. If you're unsure, contact us and we'll help you choose the best fit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_10": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer care at home or virtually?",
+            "answer": "<p>Yes. Concierge in-home visits and virtual consultations are available by appointment — contact us to check availability in your area.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "What is your cancellation policy?",
+            "answer": "<p>Please let us know as early as possible if you need to cancel or reschedule. Contact us for the full policy.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9",
+        "question_10",
+        "question_11"
+      ],
+      "settings": {
+        "anchor_id": "faq",
+        "heading": "Frequently asked questions",
+        "single_open": true,
+        "faq_schema": true,
+        "heading_width": "wide",
+        "answer_size": "medium",
+        "left_column_count": 5,
+        "background_asset": "fa-faq-bg-home.jpg",
+        "show_flower": true,
+        "show_flower_mobile": true,
+        "flower_position": "bottom_left",
+        "flower_mobile_size": "small",
+        "padding_bottom": 130,
+        "padding_mobile": 60
+      }
+    },
+    "gallery": {
+      "type": "fa-photo-gallery",
+      "blocks": {
+        "photo_01": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-01-treatment-room.jpg",
+            "alt": "A treatment room with a massage table",
+            "shade": 0
+          }
+        },
+        "photo_02": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-02-fire-cupping.jpg",
+            "alt": "Fire cupping on the upper back",
+            "shade": 0
+          }
+        },
+        "photo_03": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-03-lounge-scrolls.jpg",
+            "alt": "The clinic lounge with hanging scroll paintings",
+            "shade": 0
+          }
+        },
+        "photo_04": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-04-hand-needles.jpg",
+            "alt": "Acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_13": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-05-palo-santo.jpg",
+            "alt": "Palo santo in a clay bowl",
+            "shade": 0
+          }
+        },
+        "photo_06": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-06-spine-needles.jpg",
+            "alt": "Acupuncture needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_07": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-07-room-painting.jpg",
+            "alt": "A treatment room with a landscape painting",
+            "shade": 0
+          }
+        },
+        "photo_08": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-08-tui-na.jpg",
+            "alt": "Tui na massage on the treatment table",
+            "shade": 0
+          }
+        },
+        "photo_09": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-09-moonbow-shelf.jpg",
+            "alt": "Moonbow Skin products on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_10": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-10-neck-needles.jpg",
+            "alt": "Acupuncture needles along the neck and shoulders",
+            "shade": 0
+          }
+        },
+        "photo_11": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-11-artwork.jpg",
+            "alt": "Artwork and dried pampas grass in the clinic",
+            "shade": 0
+          }
+        },
+        "photo_12": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-12-moxa-stick.jpg",
+            "alt": "Moxa warming acupuncture points on the back",
+            "shade": 0
+          }
+        },
+        "photo_05": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-13-sauna.jpg",
+            "alt": "The infrared sauna",
+            "shade": 0
+          }
+        },
+        "photo_14": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-14-heat-lamp.jpg",
+            "alt": "A patient resting under the heat lamp with needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_15": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-15-herb-shelf.jpg",
+            "alt": "Herbal supplements on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_16": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-16-placing-needle.jpg",
+            "alt": "A practitioner placing a needle on the shoulder",
+            "shade": 0
+          }
+        },
+        "photo_17": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-17-shower.jpg",
+            "alt": "The cold plunge shower",
+            "shade": 0
+          }
+        },
+        "photo_18": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-18-needling-hands.jpg",
+            "alt": "A practitioner placing acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_19": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-19-business-card.jpg",
+            "alt": "A Felice Acupuncture business card on a carved wooden Buddha",
+            "shade": 0
+          }
+        },
+        "photo_20": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-20-moxa.jpg",
+            "alt": "Preparing moxa at the clinic",
+            "shade": 0
+          }
+        }
+      },
+      "block_order": [
+        "photo_01",
+        "photo_02",
+        "photo_03",
+        "photo_04",
+        "photo_13",
+        "photo_06",
+        "photo_07",
+        "photo_08",
+        "photo_09",
+        "photo_10",
+        "photo_11",
+        "photo_12",
+        "photo_05",
+        "photo_14",
+        "photo_15",
+        "photo_16",
+        "photo_17",
+        "photo_18",
+        "photo_19",
+        "photo_20"
+      ],
+      "settings": {
+        "layout": "strip",
+        "heading": "",
+        "text": "",
+        "text_width": 460,
+        "review_label": "",
+        "review_link": "https://g.co/kgs/mxocT19",
+        "start": "center",
+        "show_arrows": true,
+        "curved_edges": false,
+        "strip_shape": "square_tight",
+        "row_gap": "32",
+        "loop": true,
+        "autoplay": true,
+        "autoplay_interval": 4,
+        "autoplay_speed": 30,
+        "lightbox": true,
+        "anchor_id": "",
+        "show_social": true,
+        "follow_label": "Follow @feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "follow_position": "center",
+        "background_style": "linen",
+        "botanical": "none",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "mobile_photo_size": "small",
+        "show_arrows_mobile": true
+      }
+    },
+    "posts": {
+      "type": "fa-blog-posts",
+      "blocks": {
+        "post_1": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-hypno-sound.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Sound Therapy",
+            "title": "The Healing Harmony of Hypno-Sound Therapy & Ear Acupuncture",
+            "link": "https://www.feliceacupuncture.com/post/the-healing-harmony-of-hypno-sound-therapy-ear-acupuncture"
+          }
+        },
+        "post_2": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-la-fires.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Respiratory",
+            "title": "Protecting Your Lungs and Health During the LA Fires",
+            "link": "https://www.feliceacupuncture.com/post/protecting-your-lungs-and-health-during-the-la-fires"
+          }
+        },
+        "post_3": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-acne.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Skin",
+            "title": "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective",
+            "link": "https://www.feliceacupuncture.com/post/addressing-acne-holistically-a-traditional-chinese-medicine-tcm-perspective"
+          }
+        }
+      },
+      "block_order": [
+        "post_1",
+        "post_2",
+        "post_3"
+      ],
+      "settings": {
+        "heading": "Chinese medicine, explained",
+        "text": "<p>Practical tips from our practitioners for better energy, sleep, digestion, and calm.</p>",
+        "blog": "blogs",
+        "posts_count": 3,
+        "show_date": true,
+        "show_read_time": true,
+        "show_category": true,
+        "link_label": "Read article →",
+        "button_label": "Explore all blogs",
+        "button_link": "shopify://pages/blog",
+        "anchor_id": "",
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "background_asset": "fa-blog-posts-bg.jpg",
+        "background_asset_mobile": "fa-blog-posts-bg-mobile.jpg"
+      }
+    },
+    "trust": {
+      "type": "fa-trust-bar",
+      "blocks": {
+        "trust_patients": {
+          "type": "item",
+          "settings": {
+            "icon": "patients",
+            "icon_color": "linen",
+            "title": "1,000+\nPatients",
+            "text": "Treated at our Culver City clinic"
+          }
+        },
+        "trust_board": {
+          "type": "item",
+          "settings": {
+            "icon": "certified",
+            "icon_color": "linen",
+            "title": "Board-Certified\nPractitioners",
+            "text": "Rooted in Traditional Chinese Medicine"
+          }
+        },
+        "trust_google": {
+          "type": "item",
+          "settings": {
+            "icon": "google",
+            "icon_color": "linen",
+            "title": "5.0 on\nGoogle",
+            "text": "Rated by our patients"
+          }
+        },
+        "trust_care": {
+          "type": "item",
+          "settings": {
+            "icon": "care",
+            "icon_color": "grey",
+            "title": "In Clinic, At\nHome, Online",
+            "text": "Care that fits your life"
+          }
+        }
+      },
+      "block_order": [
+        "trust_patients",
+        "trust_board",
+        "trust_google",
+        "trust_care"
+      ],
+      "settings": {
+        "label": "Why patients trust us"
+      }
+    },
+    "book_visit": {
+      "type": "fa-book-visit",
+      "blocks": {
+        "contact_hours": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "Open 7 days a week, 8 AM to 8 PM",
+            "link": "",
+            "no_underline": false
+          }
+        },
+        "contact_phone": {
+          "type": "contact",
+          "settings": {
+            "icon": "phone",
+            "text": "Call or text to book · +1 (424) 478-0019",
+            "link": "tel:+14244780019",
+            "no_underline": false
+          }
+        },
+        "contact_email": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "info@feliceacupuncture.com",
+            "link": "mailto:info@feliceacupuncture.com",
+            "no_underline": false
+          }
+        },
+        "contact_address": {
+          "type": "contact",
+          "settings": {
+            "icon": "pin",
+            "text": "8526 Washington Blvd, Culver City, CA 90232",
+            "link": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+            "no_underline": true
+          }
+        }
+      },
+      "block_order": [
+        "contact_hours",
+        "contact_phone",
+        "contact_email",
+        "contact_address"
+      ],
+      "settings": {
+        "maps_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "map_address": "8526 Washington Blvd, Culver City, CA 90232",
+        "map_embed_url": "",
+        "map_title": "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City",
+        "eyebrow": "",
+        "heading": "Book your first visit",
+        "text": "Based in Culver City and proudly serving the greater Los Angeles area.",
+        "button_label": "Open in google maps",
+        "button_label_2": "Book now",
+        "button_link_2": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "contact_underline": "links",
+        "map_height_mobile": "page",
+        "show_flower": false,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "approach",
+    "includes",
+    "inquiry",
+    "expect",
+    "pillars",
+    "truth",
+    "cta_banner",
+    "testimonials",
+    "faq",
+    "gallery",
+    "posts",
+    "trust",
+    "book_visit"
+  ]
+}

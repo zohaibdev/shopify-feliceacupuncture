@@ -1,0 +1,292 @@
+{%- comment -%}
+  Felice "Book your first visit" — map + contact details.
+  Figma: upper part of desktop group 414:875 (map 414:880, details 414:881, botanical 414:974);
+  mobile 414:1464 inside 414:1462.
+  Shares one paper texture with the fa-footer section below it. The Figma texture is cut at the boundary
+  between the two: this section pins the upper half to its bottom edge, the footer pins the lower half to its
+  top edge, both at the same width — so the seam rows are always adjacent, whatever each section's height.
+  (Each half is padded with a mirrored strip so a taller section never shows a gap.)
+  Map: a live Google Maps iframe filling the Figma map box (414:880 / 414:1465). Source: the optional
+  "Embed a map" src when pasted, otherwise a key-less embed built from the map address (fallback: the
+  first Location contact line).
+  V5 homepage (Footer Web 2620:10864 / mobile 2519:4184): "Contact underline" = all lines underlined at rest and
+  "Mobile map height" = compact (248px); both default to the earlier look used on the services / approach pages.
+{%- endcomment -%}
+{{ 'fa-book-visit.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign maps_url = section.settings.maps_url | default: '#'
+
+  assign map_address = section.settings.map_address | strip
+  if map_address == blank
+    for block in section.blocks
+      if block.settings.icon == 'pin' and block.settings.text != blank
+        assign map_address = block.settings.text | strip
+        break
+      endif
+    endfor
+  endif
+
+  assign map_src = section.settings.map_embed_url | strip
+  if map_src == blank and map_address != blank
+    assign map_src = map_address | url_encode | prepend: 'https://www.google.com/maps?q=' | append: '&z=16&output=embed'
+  endif
+
+  assign map_title = section.settings.map_title | strip
+  if map_title == blank
+    assign map_title = 'Map of ' | append: map_address
+  endif
+-%}
+
+<section class="fa-section fa-book-visit fa-book-visit--underline-{{ section.settings.contact_underline | default: 'hover' }}{% if section.settings.map_height_mobile == 'compact' %} fa-book-visit--map-compact{% elsif section.settings.map_height_mobile == 'page' %} fa-book-visit--map-page{% endif %}" id="FaBookVisit-{{ section.id }}" style="--fa-bv-pad-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="fa-bg fa-book-visit__bg" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 1099px)" srcset="{{ 'fa-book-visit-bg-mobile.jpg' | asset_url }}" width="750" height="1956">
+      <img src="{{ 'fa-book-visit-bg.jpg' | asset_url }}" alt="" width="1440" height="705" loading="lazy">
+    </picture>
+  </div>
+
+  {%- if section.settings.show_flower -%}
+    <img class="fa-deco fa-book-visit__flower" src="{{ 'fa-faq-flower.png' | asset_url }}" alt="" aria-hidden="true" width="743" height="599" loading="lazy">
+  {%- endif -%}
+
+  <div class="fa-container fa-book-visit__inner" data-fa-reveal="up" data-fa-reveal-stagger>
+    <div class="fa-book-visit__map fa-media">
+      {%- if map_src != blank -%}
+        <iframe
+          src="{{ map_src | escape }}"
+          title="{{ map_title | escape }}"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      {%- endif -%}
+    </div>
+
+    <div class="fa-book-visit__info">
+      <div class="fa-book-visit__details">
+        <div class="fa-book-visit__copy">
+          {%- render 'fa-eyebrow', text: section.settings.eyebrow, class: 'fa-book-visit__eyebrow' -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="fa-book-visit__title">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="fa-book-visit__text">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="fa-book-visit__contacts" role="list">
+            {%- for block in section.blocks -%}
+              {%- comment -%} A line with blank text renders nothing (no orphan icon / empty link). {%- endcomment -%}
+              {%- if block.settings.text == blank -%}{%- continue -%}{%- endif -%}
+              <li class="fa-book-visit__contact fa-book-visit__contact--{{ block.settings.icon }}{% if block.settings.no_underline %} fa-book-visit__contact--plain{% endif %}" {{ block.shopify_attributes }}>
+                {%- case block.settings.icon -%}
+                  {%- when 'clock' -%}
+                    {%- comment -%} Optional: Figma draws the mail envelope on the hours row too (the preset follows it); this is the top-bar clock. {%- endcomment -%}
+                    {% render 'fa-icon', icon: 'clock' %}
+                  {%- when 'none' -%}
+                  {%- else -%}
+                    {% render 'fa-icons-footer', icon: block.settings.icon %}
+                {%- endcase -%}
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="fa-book-visit__contact-text"{% render 'fa-link-target', url: block.settings.link %}>{{ block.settings.text | escape }}</a>
+                {%- else -%}
+                  <span class="fa-book-visit__contact-text">{{ block.settings.text | escape }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+        <div class="fa-book-visit__actions">
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ maps_url }}"{% render 'fa-link-target', url: section.settings.maps_url %} class="fa-book-visit__button">
+              <span class="fa-book-visit__button-icon fa-hide-mobile">{% render 'fa-icons-footer', icon: 'navigate' %}</span>
+              <span class="fa-book-visit__button-icon fa-hide-desktop">{% render 'fa-icons-footer', icon: 'navigate-sm' %}</span>
+              <span class="fa-book-visit__button-label">{{ section.settings.button_label | escape }}</span>
+            </a>
+          {%- endif -%}
+          {%- comment -%} Homepage mobile V1: a linen "Book now" beside the maps button (not drawn on desktop). {%- endcomment -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link_2 %} class="fa-book-visit__button fa-book-visit__button--light fa-hide-desktop">
+              <span class="fa-book-visit__button-label">{{ section.settings.button_label_2 | escape }}</span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice book a visit",
+  "tag": "div",
+  "class": "fa-book-visit-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "url",
+      "id": "maps_url",
+      "label": "Google Maps link",
+      "info": "Used by the Open in Google Maps button."
+    },
+    {
+      "type": "text",
+      "id": "map_address",
+      "label": "Map address",
+      "info": "The interactive map shows this address. Leave blank to use the first Location contact line.",
+      "default": "8526 Washington Blvd, Culver City, CA 90232"
+    },
+    {
+      "type": "text",
+      "id": "map_embed_url",
+      "label": "Google Maps embed URL (optional)",
+      "info": "Google Maps → Share → Embed a map → copy only the src URL (https://www.google.com/maps/embed?pb=…). When set, it replaces the map built from the address."
+    },
+    {
+      "type": "text",
+      "id": "map_title",
+      "label": "Map accessible name",
+      "default": "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "info": "Small label with the Felice seal above the heading. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Book your first visit"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Based in Culver City and proudly serving the greater Los Angeles area."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Open in google maps"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second button label (mobile only)",
+      "info": "Homepage mobile design: \"Book now\" beside the maps button."
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    },
+    {
+      "type": "select",
+      "id": "contact_underline",
+      "label": "Contact line underline",
+      "options": [
+        { "value": "hover", "label": "Links: on hover only" },
+        { "value": "links", "label": "Links: always" },
+        { "value": "all", "label": "Every line, always" }
+      ],
+      "default": "hover"
+    },
+    {
+      "type": "select",
+      "id": "map_height_mobile",
+      "label": "Mobile map height",
+      "options": [
+        { "value": "standard", "label": "Standard (323px)" },
+        { "value": "compact", "label": "Compact (248px, 24px spacing)" },
+        { "value": "page", "label": "Page mobile (323px, smaller title)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_flower",
+      "label": "Show botanical illustration",
+      "info": "Desktop only.",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "info": "Keep at 0 when the Felice footer follows — the footer provides the spacing.",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact",
+      "name": "Contact line",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "pin", "label": "Location" },
+            { "value": "mail", "label": "Envelope (email)" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "clock", "label": "Clock (hours)" },
+            { "value": "none", "label": "None" }
+          ],
+          "default": "pin"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "8526 Washington Blvd, Culver City, CA 90232"
+        },
+        {
+          "type": "text",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "A web address, mailto:you@example.com or tel:+14244780019."
+        },
+        {
+          "type": "checkbox",
+          "id": "no_underline",
+          "label": "No underline at rest",
+          "info": "Overrides \"Contact line underline\" for this line (hover still underlines a link).",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice book a visit",
+      "blocks": [
+        { "type": "contact", "settings": { "icon": "pin", "text": "8526 Washington Blvd, Culver City, CA 90232" } },
+        { "type": "contact", "settings": { "icon": "mail", "text": "info@feliceacupuncture.com", "link": "mailto:info@feliceacupuncture.com" } },
+        { "type": "contact", "settings": { "icon": "phone", "text": "Call or text to book · +1 (424) 478-0019", "link": "tel:+14244780019" } },
+        { "type": "contact", "settings": { "icon": "mail", "text": "Open 7 days a week, 8 AM to 8 PM" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

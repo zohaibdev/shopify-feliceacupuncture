@@ -1,0 +1,199 @@
+/* Felice illustrated cards — Figma (Our Approach v1) desktop 2272:18191, mobile 2305:4734 / 4736 / 4740 */
+
+.fa-illustrated-cards {
+  position: relative;
+  overflow-x: clip;
+  color: var(--fa-moss);
+  background: #d7c5ab; /* the texture's flat tone: linen + 30% #a18350 */
+}
+
+.fa-illustrated-cards__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+}
+
+/* ---------- Heading (title 60/56, intro 18/29 in an 868px box) ---------- */
+
+@media screen and (min-width: 1100px) {
+  .fa-illustrated-cards .fa-heading__title { line-height: 56px; }
+}
+
+.fa-illustrated-cards .fa-heading__text {
+  max-width: var(--fa-ic-intro-w, 868px);
+  font-size: 18px;
+  line-height: 29px;
+}
+
+/* ---------- Cards: 3 per row, 14px apart (Figma Frame 13), centred ----------
+   Flex rather than grid so a fourth+ card (or a shorter last row) stays centred. Desktop: Figma's content frame
+   (2272:18194) is 1343 wide, 48px in, so the cards are 438 wide (the standard container is 1340 / 50px). */
+
+@media screen and (min-width: 1100px) {
+  .fa-illustrated-cards__inner {
+    --fa-container: 1343px;
+    --fa-gutter: 48px;
+  }
+}
+
+.fa-illustrated-cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  align-self: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Olive caption panel (#80764d, r12); the paper illustration (r11) covers its top */
+.fa-illustrated-cards__card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex: 0 1 calc((100% - 28px) / 3);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #80764d;
+}
+
+.fa-illustrated-cards__media {
+  position: relative;
+  aspect-ratio: 438 / 323;
+  overflow: hidden;
+  border-radius: 11px;
+  background: #e9dfcf; /* paper tone while no illustration is set */
+}
+
+.fa-illustrated-cards__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Title 33px below the illustration, 366px text column, 32px below the text */
+.fa-illustrated-cards__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 33px 36px 32px;
+  color: var(--fa-linen);
+  text-align: center;
+}
+
+.fa-illustrated-cards__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1; /* Figma 32/58 on one trimmed line (same height); 58px would gap a title that wraps */
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-wrap: balance;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-illustrated-cards__text {
+  margin: 0;
+  font-size: 20px;
+  line-height: 30px;
+  opacity: 0.8;
+  text-box: trim-both cap alphabetic;
+}
+
+/* ---------- Small desktop / tablet: narrower columns ---------- */
+
+@media screen and (min-width: 900px) and (max-width: 1279px) {
+  .fa-illustrated-cards__text { text-wrap: pretty; }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-illustrated-cards__body { padding-inline: 24px; }
+  .fa-illustrated-cards__title { font-size: 28px; }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-illustrated-cards__inner { gap: 40px; }
+
+  .fa-illustrated-cards__body {
+    gap: 16px;
+    padding: 26px 20px 26px;
+  }
+
+  .fa-illustrated-cards__title { font-size: 24px; }
+
+  .fa-illustrated-cards__text {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+
+/* ---------- Mobile (2305:4556): 60px padding, swipe row of 291px cards ---------- */
+
+@media screen and (max-width: 899px) {
+  .fa-illustrated-cards { padding-block: 60px; }
+
+  .fa-illustrated-cards__inner { gap: 24px; }
+
+  .fa-illustrated-cards__heading { gap: 16px; }
+
+  .fa-illustrated-cards .fa-heading__title {
+    max-width: var(--fa-ic-heading-w-m, 259px);
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-illustrated-cards .fa-heading__text {
+    max-width: 351px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .fa-illustrated-cards__list {
+    --fa-swipe-item: 291px;
+    --fa-swipe-gap: 14px;
+    flex-wrap: nowrap;
+  }
+
+  .fa-illustrated-cards__card { border-radius: 10px; }
+
+  .fa-illustrated-cards__media {
+    aspect-ratio: 291 / 255;
+    border-radius: 9px;
+  }
+
+  /* Title 20px below the illustration, text 20px above the card edge. The text column is a block setting
+     (Figma 251px; 261px on the Five Elements card, which keeps its two lines). */
+  .fa-illustrated-cards__body {
+    gap: 16px;
+    padding: 20px 15px;
+  }
+
+  .fa-illustrated-cards__text { max-width: var(--fa-ic-text-w-m, 251px); }
+
+  /* Figma 26/48 on one trimmed line (line-height 1.1 from the base rule). */
+  .fa-illustrated-cards__title { font-size: 26px; }
+
+  .fa-illustrated-cards__text {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Hover: the illustration zooms slightly inside its rounded paper panel. */
+
+.fa-illustrated-cards__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-illustrated-cards__card:hover .fa-illustrated-cards__media img { transform: scale(var(--fa-zoom)); }
+}

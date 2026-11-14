@@ -1,0 +1,580 @@
+/* Felice team — classic layout: Figma 414:416 / 414:773 / 414:872 (desktop), 414:1007 / 414:1246 (mobile).
+   Booking layout (V5 homepage): see the "Booking layout" block below. */
+
+.fa-team {
+  position: relative;
+  overflow-x: clip;
+  color: var(--fa-garnet);
+  background: #e4d4c0;
+}
+
+.fa-team .fa-bg picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Figma 414:872: 401 x 256 image box, 3px below the section top, bleeding 52px past the right edge. */
+.fa-team__flower {
+  top: 3px;
+  right: -52px;
+  width: 401px;
+}
+
+.fa-team__heading {
+  max-width: 716px;
+}
+
+.fa-team__heading .fa-heading__title {
+  line-height: 58px; /* Figma 414:776 */
+  color: var(--fa-garnet);
+}
+
+/* Four cards per row (Figma 326px columns, 12px gaps). A flex row rather than a grid so a shorter (last) row —
+   three members, or a fifth one — stays centred like Figma's row instead of hugging the left. */
+.fa-team__list {
+  --fa-team-gap: 12px;
+  display: flex;
+  gap: var(--fa-team-gap);
+  margin: 42px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 900px) {
+  .fa-team__list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.fa-team__item {
+  display: flex;
+  flex: 0 0 calc((100% - 3 * var(--fa-team-gap)) / 4);
+  min-width: 0;
+}
+
+/* ---------- Card ---------- */
+
+.fa-team__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fa-team__media {
+  position: relative;
+  aspect-ratio: 326 / 428;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+
+.fa-team__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fa-team-focal, center);
+  display: block;
+}
+
+/* Garnet panel overlaps the photo by 56px and hangs 40px below it (Figma: 290 x 96 at 18 / 372).
+   Figma fixes the panel at 96px with its content top-aligned; min-height keeps longer copy from overflowing,
+   and flex-grow keeps every panel in a row as tall as the tallest one (the cards stretch to the row height),
+   so a role that wraps to an extra line at narrower widths doesn't leave the panels ragged.
+   Not positioned: as a flex item its z-index already lifts it over the photo, and the card (not the panel) stays
+   the containing block of the name link's overlay, so the photo is part of the link target too. */
+.fa-team__panel {
+  z-index: 1;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'info arrow'
+    'social social';
+  align-items: center;
+  align-content: start;
+  column-gap: 8px;
+  row-gap: 12px;
+  min-height: 96px;
+  margin: -56px 18px 0;
+  padding: 12px 14px;
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+}
+
+.fa-team__info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.fa-team__name {
+  margin: 0;
+  padding-top: 4px;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-team__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The whole card is the link target; social icons sit above it. */
+.fa-team__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.fa-team__link:focus-visible { outline: none; }
+
+.fa-team__card:has(.fa-team__link:focus-visible) {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 3px;
+}
+
+.fa-team__role {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  /* Figma sets each role box narrower by hand so two-line roles break evenly (e.g. "Women's health, hormonal /
+     balance, fertility support"); balancing reproduces those breaks without per-card widths. */
+  text-wrap: balance;
+}
+
+.fa-team__arrow {
+  grid-area: arrow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--fa-beige);
+  color: var(--fa-garnet);
+}
+
+.fa-team__arrow .fa-icon {
+  width: 84.6%;
+  height: 84.6%;
+  transform: scaleX(-1);
+}
+
+/* Figma 414:790: Instagram and Facebook in 16.86px boxes, X in a 13.7px box, 9px apart, centred on one row.
+   The row sits above the card link; only real links take the pointer, decorative icons let clicks through. */
+.fa-team__social {
+  grid-area: social;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.fa-team__social a,
+.fa-team__social span {
+  display: block;
+  color: inherit;
+}
+
+.fa-team__social a {
+  pointer-events: auto;
+}
+
+.fa-team__social a:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+.fa-team__social .fa-icon {
+  width: 16.86px;
+  height: 16.86px;
+}
+
+.fa-team__social .fa-icon--x {
+  width: 13.7px;
+  height: 13.7px;
+  overflow: hidden;
+}
+
+/* Small desktop (1100-1279): the four columns shrink below Figma's 326px, so the panel takes the mobile
+   frame's 8px inset and 10px padding (instead of 18 / 14) to keep every name on one line. */
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-team__panel {
+    margin-inline: 8px;
+    padding-inline: 10px;
+  }
+}
+
+/* ---------- Tablet ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-team__flower {
+    right: -36px;
+    width: 280px;
+  }
+
+}
+
+/* Tablet (900-1099, not drawn in Figma): the desktop row of four cards. The columns (200-250px) are narrower than
+   Figma's 326, so the panel takes the mobile frame's layout — name on its own row, arrow beside the icons,
+   18px names — which keeps every name on one line. */
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-team__panel {
+    grid-template-areas:
+      'info info'
+      'social arrow';
+    row-gap: 10px;
+    margin-inline: 8px;
+    padding: 10px;
+  }
+
+  .fa-team__name { font-size: 18px; }
+}
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 899px) {
+  /* Section setting (default 50 = the mobile section padding; homepage V4 2264:2432: 60). */
+  .fa-team { padding-block: var(--fa-team-pad-m, var(--fa-section-pad)); }
+
+  /* Homepage V4 2264:2513: the desktop botanical scaled to 122 x 97 at x 279, 21px above the band (the drawing starts
+     61 / 401 of the box lower, as on desktop), 26px past the right edge (clipped). */
+  .fa-team__flower {
+    top: -2.44px;
+    right: -26px;
+    width: 122px;
+  }
+
+  .fa-team__heading { gap: 16px; }
+
+  .fa-team__heading .fa-heading__title { line-height: 29px; } /* Figma 414:1249 (undoes the desktop 58) */
+
+  .fa-team__list {
+    --fa-swipe-item: 259px;
+    --fa-swipe-gap: 8px;
+    margin-top: 27px;
+  }
+
+  /* Mobile panel: 243 x 93 at 8 / 284, content centred vertically; the arrow drops to the social row. */
+  .fa-team__panel {
+    grid-template-areas:
+      'info info'
+      'social arrow';
+    align-content: center;
+    row-gap: 10px;
+    min-height: 93px;
+    margin: -56px 8px 0;
+    padding: 8px 10px;
+  }
+
+  .fa-team__name { font-size: 18px; }
+}
+
+/* ==========================================================================================================
+   Booking layout (setting layout = booking) — V5 homepage "Your care team", file B4QcctWXiG9ywP3uRA3coG:
+   band 2612:3240 (1440 x 951: 120px padding), content 2615:10072: header row 93 tall (heading 716 wide, title
+   60/58, 24px, intro 16/27; 250 x 54 "View services" button bottom-aligned on the right), 42px, four 326px cards
+   12px apart: photo 326 x 428, garnet panel 314 wide 6px in from the card edges, overlapping the photo by 40px,
+   padding 14 / 12 / 14 / 16 around a centred 278px column: name (Marisa 24, its cap box centred in a 16.9px row),
+   10px, icons (16.9px row, 9px gaps), 8px, specialties (Libre Caslon 14/19 -4%; V5 12px at 85%), 12px, 40px button
+   (Marisa 16 -3%, 22px side padding, r2; solid linen or 1px linen outline).
+   No mobile frame: <= 899 keeps the V4 mobile card row (259px swipe cards) with the V5 panel; heading centred and
+   the header button centred 24px below the row, as in the other mobile sections.
+   ========================================================================================================== */
+
+.fa-team__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 42px;
+}
+
+.fa-team--booking .fa-team__heading {
+  flex: 0 1 716px;
+  align-items: flex-start;
+  margin-inline: 0;
+  text-align: start;
+}
+
+.fa-team__action { flex: none; }
+
+/* Keeps the button on the right when the heading and text are blank (mobile centres it below the cards). */
+@media screen and (min-width: 900px) {
+  .fa-team__action { margin-inline-start: auto; }
+}
+
+/* Without a heading or button the cards start at the section padding. */
+.fa-team--booking .fa-team__list:first-child { margin-top: 0; }
+
+.fa-team--booking .fa-team__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  min-height: 0;
+  margin: -40px 6px 0;
+  padding: 14px 12px 14px 16px;
+  text-align: center;
+}
+
+.fa-team--booking .fa-team__panel > * {
+  width: 100%;
+  max-width: 278px;
+}
+
+/* The cap box sits centred in Figma's 16.9px name row (1cap = the cap height of whichever font renders). */
+.fa-team--booking .fa-team__name {
+  padding-block: max(0px, calc((16.9px - 1cap) / 2));
+  font-size: 24px;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.fa-team--booking .fa-team__social {
+  justify-content: center;
+  min-height: 16.9px;
+  margin-top: 10px;
+}
+
+.fa-team__social .fa-icon--substack {
+  width: 11.4px;
+  height: 13.1px;
+}
+
+.fa-team--booking .fa-team__role {
+  margin-top: 8px;
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 14px; /* V6 2669:25577 (V5: 12px at 85%) */
+  line-height: 19px;
+  letter-spacing: -0.04em;
+  text-transform: none;
+  text-wrap: wrap;
+}
+
+/* Pinned to the panel foot so the buttons line up when the specialties wrap to different line counts. */
+.fa-team__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* Sits above the card link (z-index 1). The 1px border replaces Figma's inside stroke (padding 21 + 1 = 22). */
+.fa-team .fa-team__btn {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  min-height: 40px;
+  padding: 6px 21px;
+  border: 1px solid var(--fa-linen);
+  font-size: 16px;
+  line-height: 1.1;
+  white-space: normal; /* a long merchant label wraps inside the panel */
+  text-wrap: balance;
+}
+
+.fa-team__btn--solid {
+  background: var(--fa-linen);
+  color: var(--fa-garnet);
+}
+
+.fa-team__btn--outline {
+  background: transparent;
+  color: var(--fa-linen);
+}
+
+/* Botanical "bottom" (Figma 2612:3700, the fa-first-visit-botanical.png drawing at 82%): the full image 205.6 x 322
+   rotated -109.12deg (CSS) around its centre, which sits 129.37px in from the right edge and 38.16px below the band,
+   so the flower hangs over the next section (the section is raised above it). Figma's crop: 3.59% top, 5.02% right.
+   --fa-team-fl scales it about that centre (tablet 0.7, mobile 0.4 — assumptions, no frames). */
+.fa-team--flower-bottom { z-index: 1; }
+
+.fa-team .fa-team__flower--bottom {
+  --fa-team-fl: 1;
+  top: auto;
+  right: calc(129.37px * var(--fa-team-fl) - 102.8px);
+  bottom: calc(-38.16px * var(--fa-team-fl) - 161px);
+  width: 205.6px;
+  opacity: 0.82;
+  clip-path: inset(3.59% 5.02% 0 0);
+  transform: rotate(-109.12deg) scale(var(--fa-team-fl));
+}
+
+/* Small desktop (1100-1279): 241-284px cards. */
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-team--booking .fa-team__panel { padding-inline: 10px; }
+  .fa-team--booking .fa-team__name { font-size: 20px; }
+}
+
+/* Tablet (900-1099, not drawn): the row of four at 200-250px; mobile-sized names and buttons, labels may wrap. */
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+  .fa-team--booking .fa-team__panel { padding: 12px 10px; }
+  .fa-team--booking .fa-team__name { font-size: 18px; }
+
+  .fa-team .fa-team__btn {
+    min-height: 36px;
+    padding-inline: 11px;
+    font-size: 14px;
+  }
+
+  .fa-team .fa-team__flower--bottom { --fa-team-fl: 0.7; }
+}
+
+@media screen and (max-width: 899px) {
+  /* Heading, card row, then the header button (as in the conditions / first visit mobile frames). */
+  .fa-team--booking .fa-team__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fa-team--booking .fa-team__head { display: contents; }
+
+  .fa-team--booking .fa-team__heading {
+    flex: none;
+    align-items: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .fa-team--booking .fa-team__list { order: 1; }
+
+  .fa-team__action {
+    order: 2;
+    margin-top: 24px;
+  }
+
+  .fa-team--booking .fa-team__panel { padding: 12px 10px; }
+  .fa-team--booking .fa-team__name { font-size: 18px; }
+
+  .fa-team .fa-team__btn {
+    min-height: 36px;
+    padding-inline: 15px;
+    font-size: 14px;
+  }
+
+  .fa-team .fa-team__flower--bottom { --fa-team-fl: 0.4; }
+}
+
+/* ---------- Motion (tokens: fa-base.css "Motion") ----------
+   Card hover (or keyboard focus on its link): the portrait zooms slightly inside its frame, the arrow button
+   turns white and its chevron slides right. Social icons dim on hover. */
+
+.fa-team__media img { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+.fa-team__arrow { transition: background-color var(--fa-dur-hover) var(--fa-ease-out); }
+
+.fa-team__arrow .fa-icon { transition: transform var(--fa-dur-ui) var(--fa-ease-out); }
+
+.fa-team__social a { transition: opacity var(--fa-dur-hover) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-team__card:hover .fa-team__media img { transform: scale(var(--fa-zoom)); }
+  .fa-team__card:hover .fa-team__arrow { background: var(--fa-white); }
+  /* the glyph is mirrored (scaleX(-1)), so a negative x moves it right */
+  .fa-team__card:hover .fa-team__arrow .fa-icon { transform: scaleX(-1) translateX(calc(var(--fa-nudge) / -2)); }
+  .fa-team__social a:hover { opacity: 0.75; }
+  /* booking buttons: the solid one brightens to white, the outline one fills with linen */
+  .fa-team__btn--solid:hover { background: var(--fa-white); border-color: var(--fa-white); }
+  .fa-team__btn--outline:hover { background: var(--fa-linen); color: var(--fa-garnet); }
+}
+
+.fa-team__card:has(.fa-team__link:focus-visible) .fa-team__media img { transform: scale(var(--fa-zoom)); }
+.fa-team__card:has(.fa-team__link:focus-visible) .fa-team__arrow { background: var(--fa-white); }
+
+/* Booking layout on phones = homepage mobile V1 2794:1089 "Your care team" (5729–6581): heading and intro left-aligned
+   (32 / 29, -7%; 14 / 22 in a 333px box, 16px apart), 24px to a row of 316px cards 12px apart (photo 316 x 364, the
+   305px panel 40px up over it, 14px padding, 20px names), and the standard 250 x 54 "Meet the team" button 32px
+   below. */
+@media screen and (max-width: 899px) {
+  .fa-team--booking .fa-team__heading {
+    align-self: stretch;
+    align-items: flex-start;
+    margin-inline: 0;
+    text-align: start;
+  }
+
+  .fa-team--booking .fa-team__heading .fa-heading__title { letter-spacing: -0.07em; }
+  .fa-team--booking .fa-team__heading .fa-heading__text { max-width: 333px; }
+
+  .fa-team--booking .fa-team__list {
+    --fa-swipe-item: 316px;
+    --fa-swipe-gap: 12px;
+    margin-top: 24px;
+  }
+
+  .fa-team--booking .fa-team__panel { padding: 14px 14px 14px 13px; }
+
+  .fa-team--booking .fa-team__btn {
+    min-height: 40px;
+    padding-inline: 21px;
+    font-size: 16px;
+  }
+  .fa-team--booking .fa-team__name { font-size: 20px; }
+
+  .fa-team--booking .fa-team__action { margin-top: 32px; }
+
+  .fa-team--booking .fa-team__action .fa-btn {
+    min-width: 188px; /* homepage mobile V1 (updated): 188 x 39, 12px sides, 14px label */
+    min-height: 39px;
+    padding-inline: 12px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-team--booking .fa-team__media { aspect-ratio: 316 / 364; } /* homepage mobile V1: 316 x 364 photo */
+}
+
+/* "Cards on mobile: Stacked" — homepage mobile V1 (updated frame) "Your care team" (6269–8144): four 351px cards
+   12px apart; photo 351 x 261; the 333px panel (12 / 14 / 12 / 13 padding) 40px up over it, 9px in; specialties
+   12 / 17 (-4%); 24px to the 188 x 39 button. */
+@media screen and (max-width: 899px) {
+  .fa-team--mobile-stack .fa-team__list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .fa-team--mobile-stack.fa-team--booking .fa-team__media { aspect-ratio: 351 / 261; }
+
+  .fa-team--mobile-stack.fa-team--booking .fa-team__panel {
+    margin-inline: 9px;
+    padding: 12px 14px 12px 13px;
+  }
+
+  .fa-team--mobile-stack.fa-team--booking .fa-team__role {
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .fa-team--mobile-stack.fa-team--booking .fa-team__action { margin-top: 24px; }
+}
+
+/* Mobile style re-check: Home 2794:1089 "Meet the team" label is white on the garnet button. */
+@media screen and (max-width: 899px) {
+  .fa-team--mobile-stack.fa-team--booking .fa-team__action .fa-btn { color: var(--fa-white); }
+}

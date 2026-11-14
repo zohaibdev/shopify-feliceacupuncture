@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "fa_header": {
+      "type": "fa-header",
+      "blocks": {
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Our Approach",
+            "link": "/pages/our-approach",
+            "sub_links": ""
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Our Team",
+            "link": "/pages/our-team",
+            "sub_links": ""
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Our Services",
+            "link": "/pages/services",
+            "sub_links": "In-Clinic | /pages/services\nConcierge | /pages/concierge"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Education",
+            "link": "/pages/e-courses",
+            "sub_links": "E-courses | /pages/e-courses\nE-books | /pages/e-books\nBlog | /pages/blog"
+          }
+        }
+      },
+      "block_order": [
+        "link_3",
+        "link_4",
+        "link_2",
+        "link_5"
+      ],
+      "settings": {
+        "show_bar": true,
+        "address": "8526 Washington Blvd, Culver City",
+        "address_link": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "phone": "(424) 478-0019",
+        "phone_label": "Call or text",
+        "hours": "Open 7 days a week, 8 AM to 8 PM",
+        "show_x": false,
+        "x_url": "",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "show_substack": false,
+        "substack_url": "",
+        "menu": "main-menu",
+        "show_home_link": true,
+        "home_label": "Home",
+        "button_label": "Book Now",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_sub_links": "In-Clinic | https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1\nConcierge | /pages/concierge",
+        "sticky_bar": true,
+        "sticky_call_label": "Call or text",
+        "sticky_book_label": "Book now",
+        "sticky_book_link": ""
+      }
+    }
+  },
+  "order": [
+    "fa_header"
+  ]
+}

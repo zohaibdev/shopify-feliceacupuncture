@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "felice-harness",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/Zohaib/AppData/Local/Temp/claude/E--Edits-felicea/94a8406a-575a-4284-afb7-f74f93621e1a/scratchpad/harness/serve.mjs", "9393"],
+      "port": 9393
+    }
+  ]
+}

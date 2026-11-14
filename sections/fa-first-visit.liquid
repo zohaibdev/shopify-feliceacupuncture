@@ -1,0 +1,430 @@
+{%- comment -%}
+  Felice "What to expect for your first visit" — three numbered step cards on a paper frame.
+  Figma: desktop 414:419 (background), 414:495 (content), 414:563 (botanical);
+         mobile 414:1131 (background), 414:1133 (content), 414:1132 (botanical).
+  The botanical straddles the top edge and paints over the bottom of the previous section,
+  as in Figma (this section comes later in the DOM, so no z-index is needed). "Small, mirrored (right)" is the
+  services page (v2 2845 / mobile 6977); "Small (left)" + "Desktop and tablet only" is the Our Approach page
+  (2275:19390; its mobile frame 2299:2467 draws no botanical); its desktop content also sits 5px lower in the same
+  1189px band (2275:19321: padding 125 / 115 via padding_top / padding_bottom; homepage / services 120 / 120).
+  Homepage V3 "Latest version" (2612:3077, band 2977–4166: content 2612:3319): botanical style "Top right and bottom
+  left" (2612:3387 rising into the previous section, 2615:9705 spilling into the next one — the section then stacks
+  above its neighbours), step tags (block "tag"), card text layout "Even" (17px duration → text, 26px between parts,
+  full-width closing note, title 4px higher).
+  Desktop and tablet (900+): 3 columns. Mobile (<= 899): horizontal swipe row (.fa-swipe), or with "Steps on
+  mobile: Stacked cards" the homepage mobile V1 layout (2794:1089: three 351 x 440 cards, 8px apart).
+{%- endcomment -%}
+{{ 'fa-first-visit.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign botanical_style = section.settings.botanical_style | default: 'standard'
+  assign botanical_display = section.settings.botanical_display | default: 'all'
+  assign card_text_layout = section.settings.card_text_layout | default: 'standard'
+  assign card_style = section.settings.card_style | default: 'paper'
+-%}
+{%- assign fa_default_id = 'fa-first-visit-' | append: section.id -%}
+<section
+  class="fa-section fa-section--pad fa-first-visit fa-first-visit--{{ card_style }}{% if section.settings.show_botanical and botanical_style == 'corners' %} fa-first-visit--spill{% endif %}{% if card_text_layout == 'even' %} fa-first-visit--even{% endif %}{% if section.settings.mobile_layout == 'stack' %} fa-first-visit--mobile-stack{% endif %}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_default_id }}"
+  style="--fa-first-visit-paper: url('{{ 'fa-first-visit-paper.jpg' | asset_url }}');{% if card_style == 'moss' %} --fa-first-visit-moss: url('{{ 'fa-first-visit-moss-card.jpg' | asset_url }}');{% endif %} --fa-first-visit-badge: url('{{ 'fa-first-visit-badge.jpg' | asset_url }}'); --fa-fv-heading-w: {{ section.settings.heading_width | default: 668 }}px; --fa-fv-intro-w: {{ section.settings.text_width | default: 592 }}px; --fa-fv-pad-top: {{ section.settings.padding_top | default: 120 }}px; --fa-fv-pad-bottom: {{ section.settings.padding_bottom | default: 120 }}px; --fa-fv-pad-m: {{ section.settings.padding_mobile | default: 50 }}px; --fa-fv-text-gap-m: {{ section.settings.text_gap_mobile | default: 14 }}px;"
+>
+  <div class="fa-bg" aria-hidden="true">
+    {%- if section.settings.background != blank -%}
+      {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+    {%- else -%}
+      <picture>
+        <source media="(max-width: 899px)" srcset="{{ 'fa-first-visit-bg-mobile.jpg' | asset_url }}" width="750" height="1474">
+        <img src="{{ 'fa-first-visit-bg.jpg' | asset_url }}" width="1440" height="1189" loading="lazy" alt="">
+      </picture>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_botanical -%}
+    {%- if botanical_style == 'corners' -%}
+      <img class="fa-deco fa-first-visit__botanical fa-first-visit__botanical--corner-top{% if botanical_display != 'all' %} fa-first-visit__botanical--{{ botanical_display }}-only{% endif %}" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+      {%- if botanical_display != 'mobile' -%}
+        <img class="fa-deco fa-first-visit__botanical fa-first-visit__botanical--corner-bottom" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+      {%- endif -%}
+    {%- else -%}
+      <img class="fa-deco fa-first-visit__botanical{% if botanical_style != 'standard' %} fa-first-visit__botanical--{{ botanical_style }}{% endif %}{% if botanical_display != 'all' %} fa-first-visit__botanical--{{ botanical_display }}-only{% endif %}" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="fa-container fa-first-visit__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-first-visit__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- render 'fa-eyebrow', text: section.settings.eyebrow, class: 'fa-first-visit__eyebrow' -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ol class="fa-first-visit__steps fa-card-row{% unless section.settings.mobile_layout == 'stack' %} fa-swipe{% endunless %}" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- for block in section.blocks -%}
+          <li class="fa-first-visit__card" {{ block.shopify_attributes }}>
+            <div class="fa-first-visit__frame">
+              {%- if block.settings.tag != blank -%}
+                <p class="fa-first-visit__tag"><span>{{ block.settings.tag | escape }}</span></p>
+              {%- endif -%}
+              <div class="fa-first-visit__media fa-media">
+                {%- liquid
+                  assign step_alt = block.settings.alt | strip
+                  if block.settings.image != blank and block.settings.image.alt != blank
+                    assign step_alt = block.settings.image.alt
+                  endif
+                -%}
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 830 | image_tag: widths: '260, 415, 520, 830', sizes: '(min-width: 1100px) 414px, (min-width: 900px) calc((100vw - 88px) / 3 - 26px), 258px', loading: 'lazy', alt: step_alt }}
+                {%- elsif block.settings.fallback_asset != blank -%}
+                  <img src="{{ block.settings.fallback_asset | asset_url }}" width="414" height="363" loading="lazy" alt="{{ step_alt | escape }}">
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.number != blank -%}
+                <span class="fa-first-visit__badge" aria-hidden="true"><span class="fa-trim">{{ block.settings.number | escape }}</span></span>
+              {%- endif -%}
+
+              <div class="fa-first-visit__body">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="fa-first-visit__title">
+                    {%- if block.settings.number != blank -%}<span class="fa-visually-hidden">{{ block.settings.number | escape }}. </span>{%- endif -%}
+                    {{- block.settings.title | escape -}}
+                  </h3>
+                {%- endif -%}
+
+                {%- for i in (1..2) -%}
+                  {%- liquid
+                    assign duration_key = 'duration_' | append: i
+                    assign text_key = 'text_' | append: i
+                    assign duration = block.settings[duration_key]
+                    assign text = block.settings[text_key]
+                  -%}
+                  {%- if duration != blank or text != blank -%}
+                    <div class="fa-first-visit__part{% if duration == blank %} fa-first-visit__part--plain{% endif %}">
+                      {%- if duration != blank -%}
+                        <p class="fa-first-visit__duration">{{ duration | escape }}</p>
+                      {%- endif -%}
+                      {%- if text != blank -%}
+                        <p class="fa-first-visit__text">{{ text | escape }}</p>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary{% if section.settings.button_compact %} fa-btn--compact{% endif %} fa-first-visit__button" data-fa-reveal="up">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice first visit",
+  "tag": "div",
+  "class": "fa-first-visit-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Steps on mobile",
+      "options": [
+        { "value": "swipe", "label": "Swipe row" },
+        { "value": "stack", "label": "Stacked cards" }
+      ],
+      "default": "swipe"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets links jump here, e.g. first-visit (link to /#first-visit). Letters, numbers and hyphens."
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Uses the bundled ink-wash landscape when empty."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_botanical",
+      "label": "Show botanical illustration",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "botanical_style",
+      "label": "Botanical size",
+      "options": [
+        { "value": "standard", "label": "Standard (left)" },
+        { "value": "small", "label": "Small (left)" },
+        { "value": "right", "label": "Small, mirrored (right)" },
+        { "value": "corners", "label": "Top right and bottom left" }
+      ],
+      "default": "standard",
+      "info": "Top right and bottom left: the lower drawing spills into the next section (desktop and tablet; mobile shows the top one only)."
+    },
+    {
+      "type": "select",
+      "id": "botanical_display",
+      "label": "Show botanical on",
+      "options": [
+        { "value": "all", "label": "All screen sizes" },
+        { "value": "desktop", "label": "Desktop and tablet only" },
+        { "value": "mobile", "label": "Mobile only" }
+      ],
+      "default": "all",
+      "info": "Mobile = screens up to 899px wide."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "info": "Screens 1100px and wider.",
+      "min": 80,
+      "max": 160,
+      "step": 1,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "info": "Screens 1100px and wider.",
+      "min": 80,
+      "max": 160,
+      "step": 1,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "info": "Small label with the Felice seal above the heading. Leave blank to hide."
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Line breaks are kept.",
+      "default": "What to expect\nfor your first visit"
+    },
+    {
+      "type": "range",
+      "id": "heading_width",
+      "label": "Heading width (desktop)",
+      "min": 560,
+      "max": 760,
+      "step": 2,
+      "unit": "px",
+      "default": 668
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Your 75-minute initial consultation gives us time to understand your health history, identify patterns beneath the symptoms, and begin personalized care.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width (desktop)",
+      "info": "Sets where the text wraps.",
+      "min": 400,
+      "max": 600,
+      "step": 2,
+      "unit": "px",
+      "default": 592
+    },
+    {
+      "type": "range",
+      "id": "text_gap_mobile",
+      "label": "Space between heading and text (mobile)",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "card_text_layout",
+      "label": "Card text spacing",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "even", "label": "Even" }
+      ],
+      "default": "standard",
+      "info": "Even: a little more space under each duration, the same space between parts, and a full-width closing note (desktop and tablet)."
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "paper", "label": "Tan paper, garnet frame" },
+        { "value": "moss", "label": "Moss, linen frame and tag" }
+      ],
+      "default": "paper",
+      "info": "Moss (concierge page): linen text, the tag sits on the photo's bottom edge."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Schedule your visit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_compact",
+      "label": "Compact button",
+      "info": "Desktop: the button fits its label (42px side padding) and a garnet button gets white text.",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "414 x 363 on desktop."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Photo description",
+          "info": "Alt text for the bundled photo, and for a selected photo without its own alt text. Leave blank if the photo is only decorative."
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "info": "Optional small label hanging from the top of the photo, e.g. Before your appointment."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Consultation"
+        },
+        {
+          "type": "text",
+          "id": "duration_1",
+          "label": "Duration 1",
+          "default": "25 min"
+        },
+        {
+          "type": "textarea",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "We go through your history, sleep, digestion, cycle and stress. Tongue and pulse diagnosis gives us the picture behind the symptom."
+        },
+        {
+          "type": "text",
+          "id": "duration_2",
+          "label": "Duration 2",
+          "info": "Optional."
+        },
+        {
+          "type": "textarea",
+          "id": "text_2",
+          "label": "Text 2",
+          "info": "Optional."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice first visit",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-consultation.jpg",
+            "alt": "A practitioner standing beside a patient resting on a treatment table",
+            "number": "1",
+            "title": "Consultation",
+            "duration_1": "25 min",
+            "text_1": "We go through your history, sleep, digestion, cycle and stress. Tongue and pulse diagnosis gives us the picture behind the symptom."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-treatment.jpg",
+            "alt": "A practitioner placing a fine acupuncture needle in a patient’s wrist",
+            "number": "2",
+            "title": "Treatment",
+            "duration_1": "30 min",
+            "text_1": "Together, we review your intake form and talk through symptoms. Your practitioner will complete a tongue and pulse diagnostic.",
+            "duration_2": "45 min",
+            "text_2": "Your practitioner will complete an initial acupuncture treatment based on your conversation and intake form."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-restoration.jpg",
+            "alt": "A woman sipping tea from a small porcelain cup",
+            "number": "3",
+            "title": "Restoration",
+            "duration_1": "Ongoing",
+            "text_1": "You’ll leave with a personalized treatment plan, which may also include herbs and dietary recommendations that support your unique needs.",
+            "text_2": "Drink lots of water, and eat nourishing foods, as your body begins its healing journey!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

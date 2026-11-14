@@ -1,0 +1,50 @@
+{%- comment -%}
+  One article card for sections/fa-blog-posts.liquid (shared by the blog articles and the manual "Post" blocks).
+  Params: uid (unique id prefix), media (rendered <img> or blank), meta (date · read time · category line), title,
+  url (blank = the label shows without a link), link_label (escaped), link_last (its last character).
+  The link stretches over the whole card (::after), so the photo and title are clickable too, with one tab stop.
+  With a blank link label the card stays linked (the link is named by the title alone).
+{%- endcomment -%}
+{%- liquid
+  assign card_title = title | escape
+  assign card_linked = false
+  if url != blank
+    if link_label != blank or card_title != blank
+      assign card_linked = true
+    endif
+  endif
+-%}
+<article class="fa-blog-posts__card{% if card_linked %} fa-blog-posts__card--linked{% endif %}">
+  <div class="fa-blog-posts__media fa-media">{{ media }}</div>
+  <div class="fa-blog-posts__body">
+    {%- if meta != blank or card_title != blank -%}
+      <div class="fa-blog-posts__text">
+        {%- if meta != blank -%}
+          <p class="fa-blog-posts__meta">{{ meta | escape }}</p>
+        {%- endif -%}
+        {%- if card_title != blank -%}
+          <h3 class="fa-blog-posts__title" id="{{ uid }}-title">{{ card_title }}</h3>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- capture label_html -%}
+      {%- if link_label != blank -%}
+        {%- if link_last == '→' -%}
+          {{- link_label | remove_last: '→' -}}<span class="fa-arrow-nudge" aria-hidden="true">→</span>
+        {%- else -%}
+          {{- link_label -}}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if card_linked -%}
+      <a class="fa-blog-posts__link{% if link_label == blank %} fa-blog-posts__link--bare{% endif %}" href="{{ url }}"{% render 'fa-link-target', url: url %}>
+        {{- label_html -}}
+        {%- if card_title != blank -%}
+          <span class="fa-visually-hidden">{% if link_label != blank %}: {% endif %}{{ card_title }}</span>
+        {%- endif -%}
+      </a>
+    {%- elsif link_label != blank -%}
+      <span class="fa-blog-posts__link" aria-hidden="true">{{ label_html }}</span>
+    {%- endif -%}
+  </div>
+</article>

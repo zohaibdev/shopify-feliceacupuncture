@@ -1,0 +1,161 @@
+/*
+  Felice image + checklist (sections/fa-checklist.liquid).
+  Figma E-Courses V1 2770:3112 (1440 x 805): 120 / 51 padding; title Marisa 60 / 56, -4%, garnet, 40px above a row of
+  the 672 x 495 photo (r2) and, 24px to its right, a 641px column centred on it: items 28px apart — a tick
+  (Libre Caslon 26 / 36.4) 14px left of the title (Marisa 30 / 27, -4%) and its text (18 / 30, -2%) 4px below — then,
+  32px under the list, the button (hugs its label, 219 x 54) indented 36px to line up with the titles. Unlike most
+  Figma text here, the list's text boxes are full line boxes (not cap-trimmed).
+*/
+
+.fa-checklist {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--fa-cl-pad-top, 120px) var(--fa-cl-pad-bottom, 120px);
+  background-color: var(--fa-linen);
+  color: var(--fa-garnet);
+}
+
+.fa-checklist__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.fa-checklist__title {
+  line-height: 56px;
+  text-align: center;
+}
+
+.fa-checklist__row {
+  display: grid;
+  grid-template-columns: minmax(0, 672fr) minmax(0, 641fr);
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.fa-checklist__media {
+  aspect-ratio: 672 / 495;
+  overflow: hidden;
+  border-radius: var(--fa-radius);
+  background: rgb(0 0 0 / 0.06);
+}
+
+.fa-checklist__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fa-checklist__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.fa-checklist__list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.fa-checklist__tick {
+  flex: none;
+  width: 22px;
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 36.4px;
+}
+
+.fa-checklist__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fa-checklist__item-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.fa-checklist__item-text {
+  margin: 0;
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+}
+
+.fa-checklist__button {
+  min-width: 219px; /* QA 2026-10-14: Figma 219 x 54 */
+  margin-left: 36px;
+}
+
+/* ---------- Tablet / mobile (no design): photo above the list ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-checklist { padding-block: var(--fa-section-pad); }
+  .fa-checklist__row { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+
+/* Mobile = E-Courses mobile 2860:26195 "What's included" (456-1254): 60px padding; title 32 / 30 (-4%); 24px; photo
+   351 x 283 r2; 24px; items 14px apart (tick LCC 18 / 1.4, 14px, title Marisa 18 / 20 -4%, 4px, text 16 / 18 -2%);
+   24px; a full-width 39px "Enroll now" (14px, -2%). */
+@media screen and (max-width: 899px) {
+  .fa-checklist { padding-block: 60px; }
+  .fa-checklist__inner,
+  .fa-checklist__row,
+  .fa-checklist__body { gap: 24px; }
+
+  .fa-checklist__title {
+    line-height: 30px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-checklist__media { aspect-ratio: 351 / 283; }
+  .fa-checklist__list { gap: 14px; }
+
+  .fa-checklist__tick {
+    width: 15px;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .fa-checklist__item-title {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .fa-checklist__item-text {
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-checklist__button {
+    width: 100%;
+    margin-left: 0;
+    letter-spacing: -0.02em;
+  }
+}

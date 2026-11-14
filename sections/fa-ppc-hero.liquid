@@ -1,0 +1,126 @@
+{%- comment -%}
+  PPC Landing Page hero (Figma "LP" 3014:4054 band 121–804 / mobile 3031:4731 band 94–750): rating line, offer title,
+  intro, price row ($150 · struck $250 · "Save $100" pill), booking button + call line, and the photo (right on
+  desktop, below the copy on phones with a caption). Styles: assets/fa-ppc.css. Template: templates/page.ppc.json.
+{%- endcomment -%}
+{{ 'fa-ppc.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background_asset
+  assign bg_m = section.settings.background_asset_mobile | default: bg
+  assign phone_digits = section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
+  if phone_digits.size == 10
+    assign phone_digits = phone_digits | prepend: '+1'
+  endif
+-%}
+
+<section class="fa-section fa-ppc-hero" aria-labelledby="fa-ppc-hero-title-{{ section.id }}">
+  <div class="fa-bg" aria-hidden="true">
+    <picture>
+      {%- if section.settings.background_mobile != blank -%}
+        <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }}">
+      {%- elsif bg_m != blank -%}
+        <source media="(max-width: 899px)" srcset="{{ bg_m | asset_url }}">
+      {%- endif -%}
+      {%- if section.settings.background != blank -%}
+        {{ section.settings.background | image_url: width: 2880 | image_tag: widths: '1440, 2160, 2880', sizes: '100vw', loading: 'eager', alt: '' }}
+      {%- elsif bg != blank -%}
+        <img src="{{ bg | asset_url }}" width="1440" height="683" loading="eager" alt="">
+      {%- endif -%}
+    </picture>
+  </div>
+
+  <div class="fa-container fa-ppc-hero__inner">
+    <div class="fa-ppc-hero__copy">
+      {%- if section.settings.rating_text != blank -%}
+        <p class="fa-ppc-hero__rating">
+          {%- if section.settings.stars > 0 -%}
+            <span class="fa-ppc-hero__stars" aria-hidden="true">
+              {%- for i in (1..section.settings.stars) -%}{% render 'fa-icon', icon: 'star-pointed' %}{%- endfor -%}
+            </span>
+          {%- endif -%}
+          <span>{{ section.settings.rating_text | escape }}</span>
+        </p>
+      {%- endif -%}
+      <h1 class="fa-ppc-hero__title" id="fa-ppc-hero-title-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h1>
+      {%- if section.settings.text != blank -%}
+        <div class="fa-ppc-hero__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.price != blank -%}
+        <p class="fa-ppc-price fa-ppc-hero__price">
+          <span class="fa-ppc-price__now">{{ section.settings.price | escape }}</span>
+          {%- if section.settings.price_was != blank -%}<s class="fa-ppc-price__was"><span class="fa-visually-hidden">Regular price </span>{{ section.settings.price_was | escape }}</s>{%- endif -%}
+          {%- if section.settings.badge != blank -%}<span class="fa-ppc-badge">{{ section.settings.badge | escape }}</span>{%- endif -%}
+        </p>
+      {%- endif -%}
+      <div class="fa-ppc-hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary fa-ppc-hero__button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.call_text != blank -%}
+          {%- if phone_digits != blank -%}
+            <a class="fa-ppc-hero__call" href="tel:{{ phone_digits }}">{{ section.settings.call_text | escape }}</a>
+          {%- else -%}
+            <p class="fa-ppc-hero__call">{{ section.settings.call_text | escape }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <figure class="fa-ppc-hero__figure">
+      <div class="fa-ppc-hero__media fa-media">
+        <picture>
+          {%- if section.settings.image_mobile != blank -%}
+            <source media="(max-width: 899px)" srcset="{{ section.settings.image_mobile | image_url: width: 702 }}">
+          {%- elsif section.settings.image_asset_mobile != blank -%}
+            <source media="(max-width: 899px)" srcset="{{ section.settings.image_asset_mobile | asset_url }}">
+          {%- endif -%}
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 908 | image_tag: widths: '454, 908', sizes: '(min-width: 900px) 454px, 100vw', loading: 'eager', alt: section.settings.image_alt }}
+          {%- elsif section.settings.image_asset != blank -%}
+            <img src="{{ section.settings.image_asset | asset_url }}" width="454" height="543" loading="eager" alt="{{ section.settings.image_alt | escape }}">
+          {%- endif -%}
+        </picture>
+      </div>
+      {%- if section.settings.caption != blank -%}
+        <figcaption class="fa-ppc-hero__caption">{{ section.settings.caption | escape }}</figcaption>
+      {%- endif -%}
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PPC hero",
+  "tag": "div",
+  "class": "fa-ppc-hero-section",
+  "settings": [
+    { "type": "range", "id": "stars", "label": "Stars", "min": 0, "max": 5, "step": 1, "default": 5 },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "Culver City's 5.0-Rated Acupuncture Clinic" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Save $100 on your first acupuncture visit" },
+    { "type": "richtext", "id": "text", "label": "Intro" },
+    { "type": "header", "content": "Price" },
+    { "type": "text", "id": "price", "label": "Offer price", "default": "$150" },
+    { "type": "text", "id": "price_was", "label": "Regular price (struck through)", "default": "$250" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Save $100" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Claim my $150 first visit" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "call_text", "label": "Call line", "default": "or call or text (424) 478-0019" },
+    { "type": "text", "id": "phone", "label": "Phone number (call line link)", "default": "(424) 478-0019" },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Photo (mobile crop)" },
+    { "type": "text", "id": "image_asset", "label": "Bundled photo file", "default": "fa-ppc-hero-photo.webp" },
+    { "type": "text", "id": "image_asset_mobile", "label": "Bundled photo file (mobile)", "default": "fa-ppc-hero-photo-mobile.webp" },
+    { "type": "text", "id": "image_alt", "label": "Photo description" },
+    { "type": "textarea", "id": "caption", "label": "Caption (mobile)", "info": "Shown under the photo on phones." },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "background", "label": "Background image" },
+    { "type": "image_picker", "id": "background_mobile", "label": "Background image (mobile)" },
+    { "type": "text", "id": "background_asset", "label": "Bundled background file", "default": "fa-ppc-hero-bg.webp" },
+    { "type": "text", "id": "background_asset_mobile", "label": "Bundled background file (mobile)", "default": "fa-ppc-hero-bg-mobile.webp" }
+  ],
+  "presets": [{ "name": "PPC hero" }]
+}
+{% endschema %}

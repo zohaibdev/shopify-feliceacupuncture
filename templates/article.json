@@ -1,0 +1,544 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+    "sections":  {
+                     "main":  {
+                                  "type":  "fa-article",
+                                  "settings":  {
+                                                   "eyebrow_label":  "Blog",
+                                                   "byline":  "Felice Acupuncture",
+                                                   "toc_title":  "In this article",
+                                                   "booking_title":  "Book your first visit",
+                                                   "booking_text":  "Your initial visit is 75 minutes.",
+                                                   "booking_button":  "Book your first visit",
+                                                   "booking_link":  "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+                                                   "booking_note":  "or call or text (424) 478-0019",
+                                                   "booking_note_link":  "tel:+14244780019",
+                                                   "ebook_before":  2,
+                                                   "ebook_heading":  "Free: Gut Health E-book",
+                                                   "ebook_text":  "Fill this form out to receive the Gut Health E-book, get yours now!",
+                                                   "ebook_button":  "Sign me up",
+                                                   "ebook_tags":  "newsletter, ebook-gut-health",
+                                                   "ebook_success":  "Thank you! Check your inbox for the e-book.",
+                                                   "share_label":  "Share:",
+                                                   "background_asset":  "fa-team-bg.jpg"
+                                               }
+                              },
+                     "ready":  {
+                                   "type":  "fa-cta-banner",
+                                   "settings":  {
+                                                    "bundled_photo":  "treatment",
+                                                    "overlay_opacity":  0,
+                                                    "layout":  "buttons",
+                                                    "show_botanicals":  false,
+                                                    "glyph_asset":  "",
+                                                    "subheading":  "",
+                                                    "heading":  "Ready to\nstart your care?",
+                                                    "text":  "Visit us at our Culver City clinic, or let our practitioners come to you, at home or virtually.",
+                                                    "button_label":  "Book in-clinic",
+                                                    "button_link":  "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+                                                    "button_style":  "primary",
+                                                    "content_offset":  28,
+                                                    "button_label_2":  "Book concierge",
+                                                    "button_link_2":  "/pages/concierge",
+                                                    "mobile_style":  "compact"
+                                                }
+                               },
+                     "team":  {
+                                  "type":  "fa-team",
+                                  "blocks":  {
+                                                 "member_felice":  {
+                                                                       "type":  "member",
+                                                                       "settings":  {
+                                                                                        "fallback_asset":  "fa-team-felice-chan.jpg",
+                                                                                        "name":  "Dr. Felice Chan",
+                                                                                        "role":  "Gut Health · Nervous System Imbalance · Mental Health · Women\u0027s Health · Pain Management · Chronic Inflammation · Cosmetic Acupuncture",
+                                                                                        "link":  "/pages/our-team#felice",
+                                                                                        "button_label":  "Join the waitlist",
+                                                                                        "button_link":  "mailto:info@feliceacupuncture.com?subject=Waitlist%20for%20Dr.%20Felice",
+                                                                                        "button_style":  "solid",
+                                                                                        "instagram":  "https://www.instagram.com/drfelicechan/",
+                                                                                        "facebook":  "",
+                                                                                        "x":  "",
+                                                                                        "substack":  "https://drfelicechan.substack.com/",
+                                                                                        "tiktok":  "https://www.tiktok.com/@drfelicechan",
+                                                                                        "blog":  ""
+                                                                                    }
+                                                                   },
+                                                 "member_sam":  {
+                                                                    "type":  "member",
+                                                                    "settings":  {
+                                                                                     "fallback_asset":  "fa-team-sam-audette.jpg",
+                                                                                     "name":  "Dr. Sam Audette",
+                                                                                     "role":  "Nervous System Health · Sports Medicine · Pain Management · Immune + Autoimmune Support · Nutrition Support · Cosmetic Acupuncture",
+                                                                                     "link":  "/pages/our-team#sam",
+                                                                                     "button_label":  "Book with Dr. Sam",
+                                                                                     "button_link":  "https://feliceacupuncture.janeapp.com/#/staff_member/2",
+                                                                                     "button_style":  "outline",
+                                                                                     "instagram":  "https://www.instagram.com/samaudette_lac/",
+                                                                                     "facebook":  "https://www.facebook.com/samueltheriveraud/",
+                                                                                     "x":  "",
+                                                                                     "substack":  "",
+                                                                                     "tiktok":  "",
+                                                                                     "blog":  "https://samuelaudetteacupuncture.com/blog"
+                                                                                 }
+                                                                },
+                                                 "member_caroline":  {
+                                                                         "type":  "member",
+                                                                         "settings":  {
+                                                                                          "fallback_asset":  "fa-team-caroline-kirk.jpg",
+                                                                                          "name":  "Caroline Kirk",
+                                                                                          "role":  "Hormonal Imbalance · Menstrual Irregularity · Mental Health · Fertility Support · Pain Management · Digestive Disorders · Cosmetic Acupuncture",
+                                                                                          "link":  "/pages/our-team#caroline",
+                                                                                          "button_label":  "Book with Caroline",
+                                                                                          "button_link":  "https://feliceacupuncture.janeapp.com/#/staff_member/4",
+                                                                                          "button_style":  "outline",
+                                                                                          "instagram":  "https://www.instagram.com/carolinekirk.lac",
+                                                                                          "facebook":  "https://www.facebook.com/profile.php?id=61554254777504",
+                                                                                          "x":  "",
+                                                                                          "substack":  "https://substack.com/@carolinekirklac",
+                                                                                          "tiktok":  "",
+                                                                                          "blog":  ""
+                                                                                      }
+                                                                     },
+                                                 "member_sarah":  {
+                                                                      "type":  "member",
+                                                                      "settings":  {
+                                                                                       "fallback_asset":  "fa-team-sarah-viducic.jpg",
+                                                                                       "name":  "Dr. Sarah Viducic",
+                                                                                       "role":  "Menstrual Irregularity · Gynecological Conditions · Hormonal Imbalance · Fertility Support · Nutrition Support · Cosmetic Acupuncture",
+                                                                                       "link":  "/pages/our-team#sarah",
+                                                                                       "button_label":  "Book with Dr. Sarah",
+                                                                                       "button_link":  "https://feliceacupuncture.janeapp.com/#/staff_member/3",
+                                                                                       "button_style":  "outline",
+                                                                                       "instagram":  "https://www.instagram.com/dr.sarahviducic/",
+                                                                                       "facebook":  "",
+                                                                                       "x":  "",
+                                                                                       "substack":  "https://drsarahviducic.substack.com/",
+                                                                                       "tiktok":  "https://www.tiktok.com/@dr.sarahviducic",
+                                                                                       "blog":  ""
+                                                                                   }
+                                                                  }
+                                             },
+                                  "block_order":  [
+                                                      "member_felice",
+                                                      "member_sam",
+                                                      "member_caroline",
+                                                      "member_sarah"
+                                                  ],
+                                  "settings":  {
+                                                   "layout":  "booking",
+                                                   "heading":  "Your care team",
+                                                   "text":  "\u003cp\u003eOur practitioners offer diverse specialties and treatment styles rooted in TCM. We focus on understanding the deeper patterns that affect your well-being, rather than just treating your symptoms.\u003c/p\u003e",
+                                                   "button_label":  "Meet the team",
+                                                   "button_link":  "/pages/our-team",
+                                                   "background_asset":  "fa-team-bg-care.jpg",
+                                                   "show_botanical":  true,
+                                                   "botanical_position":  "bottom",
+                                                   "padding_mobile":  60,
+                                                   "mobile_layout":  "stack"
+                                               }
+                              },
+                     "related":  {
+                                     "type":  "fa-blog-posts",
+                                     "blocks":  {
+                                                    "post_1":  {
+                                                                   "type":  "post",
+                                                                   "settings":  {
+                                                                                    "fallback_asset":  "fa-blog-posts-hypno-sound.jpg",
+                                                                                    "meta":  "Mar 5, 2025 · 3 min read · Sound Therapy",
+                                                                                    "title":  "The Healing Harmony of Hypno-Sound Therapy \u0026 Ear Acupuncture",
+                                                                                    "link":  "https://www.feliceacupuncture.com/post/the-healing-harmony-of-hypno-sound-therapy-ear-acupuncture"
+                                                                                }
+                                                               },
+                                                    "post_2":  {
+                                                                   "type":  "post",
+                                                                   "settings":  {
+                                                                                    "fallback_asset":  "fa-blog-posts-la-fires.jpg",
+                                                                                    "meta":  "Mar 5, 2025 · 3 min read · Respiratory",
+                                                                                    "title":  "Protecting Your Lungs and Health During the LA Fires",
+                                                                                    "link":  "https://www.feliceacupuncture.com/post/protecting-your-lungs-and-health-during-the-la-fires"
+                                                                                }
+                                                               },
+                                                    "post_3":  {
+                                                                   "type":  "post",
+                                                                   "settings":  {
+                                                                                    "fallback_asset":  "fa-blog-posts-acne.jpg",
+                                                                                    "meta":  "Mar 5, 2025 · 3 min read · Skin",
+                                                                                    "title":  "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective",
+                                                                                    "link":  "https://www.feliceacupuncture.com/post/addressing-acne-holistically-a-traditional-chinese-medicine-tcm-perspective"
+                                                                                }
+                                                               }
+                                                },
+                                     "block_order":  [
+                                                         "post_1",
+                                                         "post_2",
+                                                         "post_3"
+                                                     ],
+                                     "settings":  {
+                                                      "heading":  "Related articles",
+                                                      "text":  "\u003cp\u003ePractical tips from our practitioners for better energy, sleep, digestion, and calm.\u003c/p\u003e",
+                                                      "blog":  "blogs",
+                                                      "posts_count":  3,
+                                                      "show_date":  true,
+                                                      "show_read_time":  true,
+                                                      "show_category":  true,
+                                                      "link_label":  "Read article →",
+                                                      "button_label":  "Explore all blogs",
+                                                      "button_link":  "shopify://blogs/blogs",
+                                                      "anchor_id":  "related",
+                                                      "padding_bottom":  100,
+                                                      "padding_mobile":  60,
+                                                      "background_asset":  "fa-blog-posts-bg.jpg",
+                                                      "background_asset_mobile":  "fa-blog-posts-bg-mobile.jpg"
+                                                  }
+                                 },
+                     "gallery":  {
+                                     "type":  "fa-photo-gallery",
+                                     "blocks":  {
+                                                    "photo_01":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-01-treatment-room.jpg",
+                                                                                      "alt":  "A treatment room with a massage table",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_02":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-02-fire-cupping.jpg",
+                                                                                      "alt":  "Fire cupping on the upper back",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_03":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-03-lounge-scrolls.jpg",
+                                                                                      "alt":  "The clinic lounge with hanging scroll paintings",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_04":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-04-hand-needles.jpg",
+                                                                                      "alt":  "Acupuncture needles in the hand",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_13":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-05-palo-santo.jpg",
+                                                                                      "alt":  "Palo santo in a clay bowl",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_06":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-06-spine-needles.jpg",
+                                                                                      "alt":  "Acupuncture needles along the spine",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_07":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-07-room-painting.jpg",
+                                                                                      "alt":  "A treatment room with a landscape painting",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_08":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-08-tui-na.jpg",
+                                                                                      "alt":  "Tui na massage on the treatment table",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_09":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-09-moonbow-shelf.jpg",
+                                                                                      "alt":  "Moonbow Skin products on the clinic shelf",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_10":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-10-neck-needles.jpg",
+                                                                                      "alt":  "Acupuncture needles along the neck and shoulders",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_11":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-11-artwork.jpg",
+                                                                                      "alt":  "Artwork and dried pampas grass in the clinic",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_12":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-12-moxa-stick.jpg",
+                                                                                      "alt":  "Moxa warming acupuncture points on the back",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_05":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-13-sauna.jpg",
+                                                                                      "alt":  "The infrared sauna",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_14":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-14-heat-lamp.jpg",
+                                                                                      "alt":  "A patient resting under the heat lamp with needles along the spine",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_15":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-15-herb-shelf.jpg",
+                                                                                      "alt":  "Herbal supplements on the clinic shelf",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_16":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-16-placing-needle.jpg",
+                                                                                      "alt":  "A practitioner placing a needle on the shoulder",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_17":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-17-shower.jpg",
+                                                                                      "alt":  "The cold plunge shower",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_18":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-18-needling-hands.jpg",
+                                                                                      "alt":  "A practitioner placing acupuncture needles in the hand",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_19":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-19-business-card.jpg",
+                                                                                      "alt":  "A Felice Acupuncture business card on a carved wooden Buddha",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_20":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-20-moxa.jpg",
+                                                                                      "alt":  "Preparing moxa at the clinic",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 }
+                                                },
+                                     "block_order":  [
+                                                         "photo_01",
+                                                         "photo_02",
+                                                         "photo_03",
+                                                         "photo_04",
+                                                         "photo_13",
+                                                         "photo_06",
+                                                         "photo_07",
+                                                         "photo_08",
+                                                         "photo_09",
+                                                         "photo_10",
+                                                         "photo_11",
+                                                         "photo_12",
+                                                         "photo_05",
+                                                         "photo_14",
+                                                         "photo_15",
+                                                         "photo_16",
+                                                         "photo_17",
+                                                         "photo_18",
+                                                         "photo_19",
+                                                         "photo_20"
+                                                     ],
+                                     "settings":  {
+                                                      "layout":  "strip",
+                                                      "heading":  "",
+                                                      "text":  "",
+                                                      "text_width":  460,
+                                                      "review_label":  "",
+                                                      "review_link":  "",
+                                                      "start":  "center",
+                                                      "show_arrows":  true,
+                                                      "curved_edges":  false,
+                                                      "strip_shape":  "square_tight",
+                                                      "row_gap":  "32",
+                                                      "loop":  true,
+                                                      "autoplay":  true,
+                                                      "autoplay_interval":  4,
+                                                      "autoplay_speed":  30,
+                                                      "lightbox":  true,
+                                                      "anchor_id":  "",
+                                                      "show_social":  true,
+                                                      "follow_label":  "Follow @feliceacupuncture",
+                                                      "instagram_url":  "https://www.instagram.com/feliceacupuncture/",
+                                                      "facebook_url":  "https://www.facebook.com/feliceacupuncture",
+                                                      "follow_position":  "center",
+                                                      "background_style":  "linen",
+                                                      "botanical":  "none",
+                                                      "padding_top":  120,
+                                                      "padding_bottom":  120,
+                                                      "padding_mobile":  60,
+                                                      "mobile_photo_size":  "small",
+                                                      "show_arrows_mobile":  true
+                                                  }
+                                 },
+                     "trust":  {
+                                   "type":  "fa-trust-bar",
+                                   "blocks":  {
+                                                  "trust_patients":  {
+                                                                         "type":  "item",
+                                                                         "settings":  {
+                                                                                          "icon":  "patients",
+                                                                                          "icon_color":  "linen",
+                                                                                          "title":  "1,000+\nPatients",
+                                                                                          "text":  "Treated at our Culver City clinic"
+                                                                                      }
+                                                                     },
+                                                  "trust_board":  {
+                                                                      "type":  "item",
+                                                                      "settings":  {
+                                                                                       "icon":  "certified",
+                                                                                       "icon_color":  "linen",
+                                                                                       "title":  "Board-Certified\nPractitioners",
+                                                                                       "text":  "Rooted in Traditional Chinese Medicine"
+                                                                                   }
+                                                                  },
+                                                  "trust_google":  {
+                                                                       "type":  "item",
+                                                                       "settings":  {
+                                                                                        "icon":  "google",
+                                                                                        "icon_color":  "linen",
+                                                                                        "title":  "5.0 on\nGoogle",
+                                                                                        "text":  "Rated by our patients"
+                                                                                    }
+                                                                   },
+                                                  "trust_care":  {
+                                                                     "type":  "item",
+                                                                     "settings":  {
+                                                                                      "icon":  "care",
+                                                                                      "icon_color":  "grey",
+                                                                                      "title":  "In Clinic, At\nHome, Online",
+                                                                                      "text":  "Care that fits your life"
+                                                                                  }
+                                                                 }
+                                              },
+                                   "block_order":  [
+                                                       "trust_patients",
+                                                       "trust_board",
+                                                       "trust_google",
+                                                       "trust_care"
+                                                   ],
+                                   "settings":  {
+                                                    "label":  "Why patients trust us"
+                                                }
+                               },
+                     "book_visit":  {
+                                        "type":  "fa-book-visit",
+                                        "blocks":  {
+                                                       "contact_hours":  {
+                                                                             "type":  "contact",
+                                                                             "settings":  {
+                                                                                              "icon":  "mail",
+                                                                                              "text":  "Open 7 days a week, 8 AM to 8 PM",
+                                                                                              "link":  "",
+                                                                                              "no_underline":  false
+                                                                                          }
+                                                                         },
+                                                       "contact_phone":  {
+                                                                             "type":  "contact",
+                                                                             "settings":  {
+                                                                                              "icon":  "phone",
+                                                                                              "text":  "Call or text to book · +1 (424) 478-0019",
+                                                                                              "link":  "tel:+14244780019",
+                                                                                              "no_underline":  false
+                                                                                          }
+                                                                         },
+                                                       "contact_email":  {
+                                                                             "type":  "contact",
+                                                                             "settings":  {
+                                                                                              "icon":  "mail",
+                                                                                              "text":  "info@feliceacupuncture.com",
+                                                                                              "link":  "mailto:info@feliceacupuncture.com",
+                                                                                              "no_underline":  false
+                                                                                          }
+                                                                         },
+                                                       "contact_address":  {
+                                                                               "type":  "contact",
+                                                                               "settings":  {
+                                                                                                "icon":  "pin",
+                                                                                                "text":  "8526 Washington Blvd, Culver City, CA 90232",
+                                                                                                "link":  "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+                                                                                                "no_underline":  true
+                                                                                            }
+                                                                           }
+                                                   },
+                                        "block_order":  [
+                                                            "contact_hours",
+                                                            "contact_phone",
+                                                            "contact_email",
+                                                            "contact_address"
+                                                        ],
+                                        "settings":  {
+                                                         "maps_url":  "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+                                                         "map_address":  "8526 Washington Blvd, Culver City, CA 90232",
+                                                         "map_embed_url":  "",
+                                                         "map_title":  "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City",
+                                                         "eyebrow":  "",
+                                                         "heading":  "Book your first visit",
+                                                         "text":  "Based in Culver City and proudly serving the greater Los Angeles area.",
+                                                         "button_label":  "Open in google maps",
+                                                         "button_label_2":  "Book now",
+                                                         "button_link_2":  "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+                                                         "contact_underline":  "links",
+                                                         "map_height_mobile":  "page",
+                                                         "show_flower":  false,
+                                                         "padding_bottom":  0
+                                                     }
+                                    }
+                 },
+    "order":  [
+                  "main",
+                  "ready",
+                  "team",
+                  "related",
+                  "gallery",
+                  "trust",
+                  "book_visit"
+              ]
+}

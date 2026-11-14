@@ -1,0 +1,138 @@
+{%- comment -%}
+  Felice blog listing — every article of the chosen blog, newest first: a featured post (first article of the first
+  page) then cards three to a row, paginated.
+  Figma: Blog page V1 (file B4QcctWXiG9ywP3uRA3coG, frame 2719:19545), band "Related posts" 2719:19634 (1440 x 1626):
+  featured 2719:19636, cards 2719:19646 … Used on a page template (templates/page.blogs.json), so the blog is a section
+  setting rather than the URL's blog.
+  Card data: image, published date, read time (word count / 200), first tag (cards) or author (featured), excerpt
+  (the article excerpt, else the start of the content), title, URL.
+{%- endcomment -%}
+{{ 'fa-blog-listing.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign listing_blog = section.settings.blog
+  assign per_page = section.settings.per_page | default: 7
+  # "Show all articles on one page": Shopify's paginate maximum (250), so the page links never render.
+  if section.settings.show_all
+    assign per_page = 250
+  endif
+  assign words_per_minute = 200
+  assign bg = section.settings.background_asset
+  assign link_label = section.settings.link_label | default: 'Read the post →'
+-%}
+<section class="fa-section fa-blog-listing" id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: 'fa-blog-listing' }}" aria-label="{{ section.settings.label | default: 'Articles' | escape }}">
+  {%- if section.settings.background != blank or bg != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      {%- if section.settings.background != blank -%}
+        {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+      {%- else -%}
+        <img src="{{ bg | asset_url }}" width="1440" height="778" loading="lazy" alt="">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  {%- if section.settings.show_botanical -%}
+    <img class="fa-deco fa-blog-listing__botanical" src="{{ 'fa-blog-listing-botanical.png' | asset_url }}" width="163" height="162" loading="lazy" alt="" aria-hidden="true">
+  {%- endif -%}
+
+  <div class="fa-container fa-blog-listing__inner">
+    {%- if listing_blog != blank and listing_blog.articles_count > 0 -%}
+      {%- paginate listing_blog.articles by per_page -%}
+        <ul class="fa-blog-listing__list" role="list">
+          {%- for article in listing_blog.articles -%}
+            {%- liquid
+              assign featured = false
+              if section.settings.show_featured and forloop.first and paginate.current_page == 1
+                assign featured = true
+              endif
+              assign word_count = article.content | strip_html | split: ' ' | size
+              assign minutes = word_count | plus: words_per_minute | minus: 1 | divided_by: words_per_minute | floor | at_least: 1
+              assign accent = article.tags.first
+              assign excerpt_length = 110
+              if featured
+                assign accent = article.author
+                assign excerpt_length = 100
+              endif
+              if article.excerpt != blank
+                assign excerpt = article.excerpt | strip_html | strip | truncate: excerpt_length, '…'
+              else
+                assign excerpt = article.content | strip_html | strip | truncate: excerpt_length, '…'
+              endif
+            -%}
+            <li class="fa-blog-listing__item{% if featured %} fa-blog-listing__item--featured{% endif %}" data-fa-reveal="up">
+              <article class="fa-blog-listing__card">
+                <a class="fa-blog-listing__media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+                  {%- if article.image != blank -%}
+                    {%- if featured -%}
+                      {{ article.image | image_url: width: 1400 | image_tag: widths: '450, 700, 1050, 1400', sizes: '(min-width: 1100px) 700px, 100vw', loading: 'lazy', alt: '' }}
+                    {%- else -%}
+                      {{ article.image | image_url: width: 874 | image_tag: widths: '437, 656, 874', sizes: '(min-width: 1100px) 437px, (min-width: 900px) 33vw, 100vw', loading: 'lazy', alt: '' }}
+                    {%- endif -%}
+                  {%- endif -%}
+                </a>
+                <div class="fa-blog-listing__body">
+                  <div class="fa-blog-listing__text">
+                    <p class="fa-blog-listing__meta">
+                      {{- article.published_at | date: '%b %-d, %Y' }}&nbsp; · &nbsp;{{ minutes }} min read
+                      {%- if accent != blank -%}&nbsp; · &nbsp;<span class="fa-blog-listing__accent">{{ accent | escape }}</span>{%- endif -%}
+                    </p>
+                    <h2 class="fa-blog-listing__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+                    {%- if excerpt != blank -%}
+                      <p class="fa-blog-listing__excerpt">{{ excerpt }}</p>
+                    {%- endif -%}
+                  </div>
+                  <a class="fa-blog-listing__link" href="{{ article.url }}" aria-label="{{ link_label | remove: '→' | strip | escape }}: {{ article.title | escape }}">{{ link_label | escape }}</a>
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="fa-blog-listing__pagination" aria-label="Article pages">
+            {%- if paginate.previous -%}
+              <a class="fa-blog-listing__page fa-blog-listing__page--step" href="{{ paginate.previous.url }}">← Newer</a>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a class="fa-blog-listing__page" href="{{ part.url }}">{{ part.title }}</a>
+              {%- elsif part.title == paginate.current_page -%}
+                <span class="fa-blog-listing__page fa-blog-listing__page--current" aria-current="page">{{ part.title }}</span>
+              {%- else -%}
+                <span class="fa-blog-listing__page">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <a class="fa-blog-listing__page fa-blog-listing__page--step" href="{{ paginate.next.url }}">Older →</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <p class="fa-blog-listing__empty">{{ section.settings.empty_text | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice blog listing",
+  "tag": "div",
+  "class": "fa-blog-listing-section",
+  "settings": [
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "checkbox", "id": "show_all", "label": "Show all articles on one page", "default": false, "info": "No page links (up to 250 articles)." },
+    { "type": "range", "id": "per_page", "label": "Articles per page", "min": 4, "max": 25, "step": 3, "default": 7, "info": "The first page leads with one featured article: 7 = featured + two rows of three." },
+    { "type": "checkbox", "id": "show_featured", "label": "Feature the newest article", "default": true },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read the post →" },
+    { "type": "text", "id": "empty_text", "label": "Text when the blog has no articles", "default": "New articles are on their way." },
+    { "type": "text", "id": "label", "label": "Accessible name", "default": "Articles" },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID" },
+    { "type": "checkbox", "id": "show_botanical", "label": "Botanical (top right)", "default": false },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "background", "label": "Background image" },
+    { "type": "text", "id": "background_asset", "label": "Bundled background file", "default": "fa-blog-posts-bg.jpg" }
+  ],
+  "presets": [
+    { "name": "Felice blog listing" }
+  ]
+}
+{% endschema %}

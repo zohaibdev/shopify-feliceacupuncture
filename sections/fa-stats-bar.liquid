@@ -1,0 +1,198 @@
+{%- comment -%}
+  Felice stats bar — clay strip of short stats separated by the swirl icon.
+  Figma v2 (file B4Qc…, services page): desktop 2486 (1440 x 49) + content 2487 (stats + 17.25px swirls 44px
+  apart). Mobile 7504 (37 tall) + content 7589: one 14px line wider than the screen (the frame shows it already
+  scrolled: "…42 VERIFIED REVIEWS · 7 DAYS OPEN EVERY WEEK" ending at the right).
+  Built as a slow, seamless ticker at every width (client request 2026-10-01: desktop marquees too, at Figma's
+  desktop sizes) — see fa-stats-bar.css. The track holds the real list once plus aria-hidden, inert copies (one
+  drawn after it and, before it, as many as a short list needs so the loop never shows a gap on screens up to
+  2560px wide — one for the default copy).
+  The loop durations are set here from the copy length (~30px/s at the mobile 14px type, ~51px/s at the desktop
+  24px type) so the speed stays even when stats are edited. A "★" in a stat value renders at Figma's 17/24 size on
+  desktop.
+  The strip is focusable (inline script below): hovering or focusing it pauses the ticker. Reduced motion: the
+  static centred desktop row (Figma 2487) from 900px, a static swipeable row below.
+{%- endcomment -%}
+{{ 'fa-stats-bar.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign has_sep = false
+  if section.settings.separator == 'swirl'
+    assign has_sep = true
+  endif
+
+  # Blocks with neither a value nor a label are skipped (no empty slot between two separators).
+  # Loop duration in ms ≈ (copy characters x 6.8px + one separator per stat) / 30px per second.
+  assign stat_count = 0
+  assign char_count = 0
+  for block in section.blocks
+    if block.settings.value != blank or block.settings.label != blank
+      assign stat_count = stat_count | plus: 1
+      assign char_count = char_count | plus: block.settings.value.size | plus: block.settings.label.size | plus: 1
+    endif
+  endfor
+  assign tail_ms = 467
+  assign tail_px100 = 1400
+  # Desktop (>= 900): 24px type (~11.7px per character), 44px gaps, 17.25px swirls, ~51px per second.
+  assign tail_ms_d = 863
+  assign tail_px100_d = 4400
+  if has_sep
+    assign tail_ms = 1209
+    assign tail_px100 = 3626
+    assign tail_ms_d = 2064
+    assign tail_px100_d = 10525
+  endif
+  assign tail_total = stat_count | times: tail_ms
+  assign loop_ms = char_count | times: 226 | plus: tail_total
+  assign tail_total_d = stat_count | times: tail_ms_d
+  assign loop_ms_d = char_count | times: 229 | plus: tail_total_d
+
+  # Copies drawn before the real list: the ticker needs (copies before + 1) list widths ≥ the screen width plus the
+  # resting offset, or a short list (few / brief stats) would leave an empty strip at the left. Checked for the
+  # widest mobile screen (899 + 22px, 14px type) and for desktop screens up to 2560px (+ 106px, 24px type); the
+  # list width is estimated low (5.5 / 9.43px per character, in 1/100 px) so the count errs on the safe side.
+  assign copies_before = 1
+  if stat_count > 0
+    assign list_px100 = stat_count | times: tail_px100
+    assign list_px100 = char_count | times: 550 | plus: list_px100
+    assign copies_before = 92100 | plus: list_px100 | minus: 1 | divided_by: list_px100 | floor | minus: 1
+    assign list_px100_d = stat_count | times: tail_px100_d
+    assign list_px100_d = char_count | times: 943 | plus: list_px100_d
+    assign copies_before_d = 266600 | plus: list_px100_d | minus: 1 | divided_by: list_px100_d | floor | minus: 1
+    if copies_before_d > copies_before
+      assign copies_before = copies_before_d
+    endif
+    if copies_before < 1
+      assign copies_before = 1
+    endif
+  endif
+  assign list_total = copies_before | plus: 2
+-%}
+
+{%- if stat_count > 0 -%}
+  <section
+    class="fa-section fa-stats-bar{% unless has_sep %} fa-stats-bar--no-sep{% endunless %}"
+    aria-label="{{ section.settings.label | default: 'Highlights' | escape }}"
+    tabindex="0"
+    style="--fa-stats-loop: {{ loop_ms }}ms; --fa-stats-loop-d: {{ loop_ms_d }}ms; --fa-stats-lists: {{ list_total }};"
+  >
+    <div class="fa-stats-bar__viewport" data-fa-reveal="fade">
+      <div class="fa-stats-bar__track">
+        {%- for copy in (1..list_total) -%}
+          {%- liquid
+            assign is_clone = true
+            assign copy_class = ' fa-stats-bar__list--clone fa-stats-bar__list--before'
+            if copy == 1
+              assign is_clone = false
+              assign copy_class = ''
+            elsif copy == list_total
+              assign copy_class = ' fa-stats-bar__list--clone fa-stats-bar__list--after'
+            endif
+            assign shown = 0
+          -%}
+          <ul class="fa-stats-bar__list{{ copy_class }}" role="list"{% if is_clone %} aria-hidden="true" inert{% endif %}>
+            {%- for block in section.blocks -%}
+              {%- if block.settings.value == blank and block.settings.label == blank -%}{%- continue -%}{%- endif -%}
+              {%- if has_sep and shown > 0 -%}
+                <li class="fa-stats-bar__sep" aria-hidden="true">{% render 'fa-icons-stats', icon: 'swirl' %}</li>
+              {%- endif -%}
+              {%- assign shown = shown | plus: 1 -%}
+              <li class="fa-stats-bar__item"{% unless is_clone %} {{ block.shopify_attributes }}{% endunless %}>
+                {%- if block.settings.value != blank -%}
+                  <span class="fa-stats-bar__value">{{ block.settings.value | escape | replace: '★', '<span class="fa-stats-bar__star">★</span>' }}</span>
+                  {%- if block.settings.label != blank %} {% endif -%}
+                {%- endif -%}
+                {%- if block.settings.label != blank -%}
+                  <span class="fa-stats-bar__label">{{ block.settings.label | escape }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+            {%- if has_sep -%}
+              <li class="fa-stats-bar__sep fa-stats-bar__sep--tail" aria-hidden="true">{% render 'fa-icons-stats', icon: 'swirl' %}</li>
+            {%- endif -%}
+          </ul>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- comment -%}
+    The strip is a tab stop wherever it moves (focus pauses it). With reduced motion, 900px and up shows a static
+    row, so the script drops the tabindex there (and restores it when that changes); below 900 the static row
+    scrolls sideways, so it stays focusable. Without JS the strip is focusable everywhere.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      var bar = document.currentScript.previousElementSibling;
+      if (!bar || !window.matchMedia) return;
+      var mq = window.matchMedia('(min-width: 900px) and (prefers-reduced-motion: reduce)');
+      var sync = function () {
+        if (mq.matches) bar.removeAttribute('tabindex');
+        else bar.setAttribute('tabindex', '0');
+      };
+      sync();
+      if (mq.addEventListener) mq.addEventListener('change', sync);
+      else if (mq.addListener) mq.addListener(sync);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Felice stats bar",
+  "tag": "div",
+  "class": "fa-stats-bar-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Accessible name",
+      "default": "Highlights",
+      "info": "Read by screen readers only."
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Separator",
+      "options": [
+        { "value": "swirl", "label": "Swirl icon" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "swirl",
+      "info": "Shown between the stats (on mobile they scroll past as a slow ticker)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "4.9★",
+          "info": "Figure part, e.g. 76% or 4.9★ (a ★ is drawn smaller, as in the design)."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Google rating"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice stats bar",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "4.9★", "label": "Google rating" } },
+        { "type": "stat", "settings": { "value": "76%", "label": "return for a second visit" } },
+        { "type": "stat", "settings": { "value": "42", "label": "verified reviews" } },
+        { "type": "stat", "settings": { "value": "7", "label": "days open every week" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

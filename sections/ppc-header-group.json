@@ -1,0 +1,38 @@
+{
+  "name": "PPC header",
+  "type": "header",
+  "sections": {
+    "fa_header": {
+      "type": "fa-header",
+      "settings": {
+        "show_bar": true,
+        "address": "8526 Washington Blvd, Culver City",
+        "address_link": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "phone": "(424) 478-0019",
+        "phone_label": "Call or text",
+        "hours": "Open 7 days a week, 8 AM to 8 PM",
+        "show_x": false,
+        "x_url": "",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "show_substack": false,
+        "substack_url": "",
+        "menu": "main-menu",
+        "show_home_link": true,
+        "home_label": "Home",
+        "button_label": "Claim my $150 first visit",
+        "button_link": "https://feliceacupuncture.janeapp.com/locations/felice-acupuncture-clinic/book",
+        "button_sub_links": "",
+        "sticky_bar": true,
+        "sticky_call_label": "Call or text",
+        "sticky_book_label": "Book · $150",
+        "sticky_book_link": "https://feliceacupuncture.janeapp.com/locations/felice-acupuncture-clinic/book",
+        "variant": "ppc",
+        "button_label_mobile": "Book · $150"
+      }
+    }
+  },
+  "order": [
+    "fa_header"
+  ]
+}

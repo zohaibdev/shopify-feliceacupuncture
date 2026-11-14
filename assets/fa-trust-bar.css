@@ -1,0 +1,118 @@
+/*
+  Felice trust bar — Figma 2637:15605 (desktop 1440 x 174, garnet, linen type). See sections/fa-trust-bar.liquid.
+  Desktop (>= 1100): one row inset 74px (Figma 34 + 40), items spread edge to edge, capped at the 1440 frame.
+  Tablet (900–1099): the same row inside the page gutter. Mobile (<= 899, not drawn): centred two-column grid.
+*/
+
+.fa-trust-bar {
+  background: var(--fa-garnet);
+  color: var(--fa-linen);
+}
+
+.fa-trust-bar__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 44px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 74px;
+  list-style: none;
+}
+
+.fa-trust-bar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px; /* V6 2669:25837 (V5: 24) */
+  margin: 0;
+  text-align: center;
+}
+
+.fa-trust-bar__icon {
+  display: block;
+  width: 32px; /* V6 (V5: 24) */
+  height: 32px;
+  flex: none;
+}
+
+/* V6 icons: raster masks in Figma, painted in the text colour (the fourth is #D9D9D9 in Figma: "Grey"). */
+.fa-trust-bar__icon--mask {
+  background: currentColor;
+  -webkit-mask: var(--fa-tb-icon) center / contain no-repeat;
+  mask: var(--fa-tb-icon) center / contain no-repeat;
+}
+
+.fa-trust-bar__icon--grey { color: #d9d9d9; }
+
+.fa-trust-bar__icon :is(svg, img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.fa-trust-bar__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+/* Marisa 24 / 21, -3%; the two-line box is trimmed to cap height / baseline (Figma 33px tall). */
+.fa-trust-bar__title {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 21px;
+  letter-spacing: -0.03em;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Libre Caslon 14 / 135% (an untrimmed 19px box in Figma). */
+.fa-trust-bar__text {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-trust-bar__list {
+    gap: 24px;
+    padding-inline: var(--fa-gutter);
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-trust-bar__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 32px 12px;
+    padding-block: 40px;
+  }
+
+  .fa-trust-bar__item { gap: 16px; }
+
+  .fa-trust-bar__copy { gap: 8px; }
+
+  .fa-trust-bar__title {
+    font-size: 20px;
+    line-height: 18px;
+  }
+
+  .fa-trust-bar__text { font-size: 13px; }
+}
+
+/* Homepage mobile V1 (9789–10085, 296 tall): 24px above and below, two rows 39px apart, columns 44px apart; icon,
+   12px, title (Marisa 20 / 18), 8px, text (Libre Caslon 14). */
+@media screen and (max-width: 899px) {
+  .fa-trust-bar__list {
+    gap: 39px 44px;
+    padding-block: 24px;
+  }
+
+  .fa-trust-bar__item { gap: 12px; }
+  .fa-trust-bar__text { font-size: 14px; }
+}

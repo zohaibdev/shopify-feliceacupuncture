@@ -1,0 +1,357 @@
+{%- comment -%}
+  Felice profile — a founder / practitioner bio on a textured band: photo beside (desktop / tablet) or above (mobile)
+  a name heading, a role line, a lead line, rich-text paragraphs, an optional pull quote and an optional button.
+  Figma "Our Approach" v1 (file B4QcctWXiG9ywP3uRA3coG): desktop frame 2267:16180 band y 646–1485 (background
+  2270:17604, content 2270:17572); mobile frame 2305:4556 band y 534–1438 (background 2305:4557, content 2305:4672).
+  Reusable: photo side (left / right), every text optional, background textures and photo replaceable from the editor.
+{%- endcomment -%}
+{{ 'fa-profile.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign fa_default_id = 'fa-profile-' | append: section.id
+  assign media_side = section.settings.image_position | default: 'left'
+  assign bg_asset = section.settings.background_asset | strip
+  assign bg_asset_mobile = section.settings.background_asset_mobile | strip
+  assign button_link = section.settings.button_link | default: '#'
+
+  assign photo_alt = section.settings.image_alt | strip
+  if photo_alt == blank
+    assign photo_alt = section.settings.heading | strip
+  endif
+-%}
+
+<section
+  class="fa-section fa-profile fa-profile--media-{{ media_side }}{% if section.settings.style == 'team' %} fa-profile--team{% endif %}{% if section.settings.mobile_style == 'compact' %} fa-profile--mobile-compact{% endif %}"
+  style="--fa-profile-pad-top: {{ section.settings.padding_top | default: 120 }}px; --fa-profile-pad-bottom: {{ section.settings.padding_bottom | default: 120 }}px; --fa-profile-photo-h: {{ section.settings.photo_height | default: 633 }};"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_default_id }}"
+  {%- if section.settings.heading != blank %} aria-labelledby="fa-profile-title-{{ section.id }}"{% endif %}
+>
+  {%- if section.settings.background != blank or section.settings.background_mobile != blank or bg_asset != blank or bg_asset_mobile != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      {%- comment -%}
+        Mobile (<= 899) has its own Figma crop (2305:4557: the bamboo sprigs sit at the band's right edge, moss 80%).
+        A picked desktop image is used on mobile too unless a mobile image is picked. The texture is cropped to cover the
+        band (object-fit), so width / height on asset fallbacks are only the bundled files' aspect hints.
+      {%- endcomment -%}
+      <picture>
+        {%- if section.settings.background_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w, {{ section.settings.background_mobile | image_url: width: 1500 }} 1500w" sizes="100vw">
+        {%- elsif section.settings.background == blank and bg_asset_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ bg_asset_mobile | asset_url }}">
+        {%- endif -%}
+        {%- if section.settings.background != blank -%}
+          {{ section.settings.background | image_url: width: 2880 | image_tag: widths: '750, 1100, 1440, 1920, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- elsif bg_asset == 'fa-profile-bg.jpg' -%}
+          <img src="{{ 'fa-profile-bg.jpg' | asset_url }}" srcset="{{ 'fa-profile-bg.jpg' | asset_url }} 1440w, {{ 'fa-profile-bg-2x.jpg' | asset_url }} 2880w" sizes="100vw" width="1440" height="839" loading="lazy" alt="">
+        {%- elsif bg_asset != blank -%}
+          <img src="{{ bg_asset | asset_url }}" width="1440" height="839" loading="lazy" alt="">
+        {%- elsif section.settings.background_mobile != blank -%}
+          {%- comment -%} Only a mobile texture is set: it covers every screen size. {%- endcomment -%}
+          {{ section.settings.background_mobile | image_url: width: 1920 | image_tag: widths: '750, 1100, 1500, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- else -%}
+          <img src="{{ bg_asset_mobile | asset_url }}" width="750" height="1808" loading="lazy" alt="">
+        {%- endif -%}
+      </picture>
+    </div>
+  {%- endif -%}
+
+  <div class="fa-profile__inner">
+    <div class="fa-profile__row" data-fa-reveal="up" data-fa-reveal-stagger>
+      <div class="fa-profile__media fa-media">
+        {%- if section.settings.image != blank -%}
+          {%- liquid
+            assign focal = section.settings.image.presentation.focal_point | default: 'center'
+            assign focal_style = '--fa-profile-focal: ' | append: focal
+            assign img_alt = section.settings.image.alt | default: photo_alt
+          -%}
+          {{ section.settings.image | image_url: width: 1400 | image_tag: widths: '375, 560, 750, 1000, 1264, 1400', sizes: '(min-width: 1440px) 632px, (min-width: 1100px) calc((100vw - 129px) * 0.482), (min-width: 900px) calc((100vw - 96px) * 0.482), min(100vw - 24px, 560px)', loading: 'lazy', alt: img_alt, class: 'fa-profile__photo', style: focal_style }}
+        {%- elsif section.settings.fallback_asset != blank -%}
+          <img class="fa-profile__photo" src="{{ section.settings.fallback_asset | asset_url }}" alt="{{ photo_alt | escape }}" width="1264" height="1556" loading="lazy">
+        {%- endif -%}
+      </div>
+
+      {%- liquid
+        assign roles = section.settings.roles | split: '|'
+        assign role_count = 0
+        for role in roles
+          assign role_text = role | strip
+          if role_text != blank
+            assign role_count = role_count | plus: 1
+          endif
+        endfor
+        assign has_content = false
+        if section.settings.heading != blank or role_count > 0 or section.settings.lead != blank or section.settings.text != blank or section.settings.quote != blank
+          assign has_content = true
+        endif
+      -%}
+      {%- if has_content or section.settings.button_label != blank -%}
+        <div class="fa-profile__body">
+          {%- if has_content -%}
+            <div class="fa-profile__content">
+              {%- if section.settings.heading != blank or role_count > 0 -%}
+                <div class="fa-profile__head">
+                  {%- if section.settings.heading != blank -%}
+                    <h2 class="fa-profile__title" id="fa-profile-title-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+                  {%- endif -%}
+                  {%- if role_count > 0 -%}
+                    <ul class="fa-profile__roles" role="list">
+                      {%- for role in roles -%}
+                        {%- assign role_text = role | strip -%}
+                        {%- if role_text != blank -%}
+                          <li class="fa-profile__role">{{ role_text | escape }}</li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.lead != blank or section.settings.text != blank -%}
+                <div class="fa-profile__copy">
+                  {%- if section.settings.lead != blank -%}
+                    <p class="fa-profile__lead">{{ section.settings.lead | escape }}</p>
+                  {%- endif -%}
+                  {%- if section.settings.text != blank -%}
+                    <div class="fa-profile__text">{{ section.settings.text }}</div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.quote != blank -%}
+                <blockquote class="fa-profile__quote">
+                  <p>{{ section.settings.quote | strip | escape | newline_to_br }}</p>
+                </blockquote>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+            <div class="fa-profile__buttons">
+              {%- if section.settings.button_label != blank -%}
+                <a href="{{ button_link }}"{% render 'fa-link-target', url: button_link %} class="fa-btn fa-btn--light fa-profile__button">{{ section.settings.button_label | escape }}</a>
+              {%- endif -%}
+              {%- if section.settings.button_label_2 != blank -%}
+                {%- assign button_link_2 = section.settings.button_link_2 | default: '#' -%}
+                <a href="{{ button_link_2 }}"{% render 'fa-link-target', url: button_link_2 %} class="fa-btn fa-profile__button fa-profile__button--outline">{{ section.settings.button_label_2 | escape }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.note != blank -%}
+            <p class="fa-profile__note">{{ section.settings.note | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice profile",
+  "tag": "div",
+  "class": "fa-profile-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_style",
+      "label": "Mobile style",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "compact", "label": "Compact (Our Approach mobile)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets links jump here, e.g. founder (link to #founder). Letters, numbers and hyphens."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Photo position",
+      "info": "Desktop and tablet. On mobile the photo always sits above the text.",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "founder", "label": "Founder (large photo, pull quote)" },
+        { "value": "team", "label": "Team (616 x 566 photo, specialties line)" }
+      ],
+      "default": "founder",
+      "info": "Team: the quote field shows as an uppercase specialties line."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "Photo"
+    },
+    {
+      "type": "range",
+      "id": "photo_height",
+      "label": "Photo height (desktop, at 632 wide)",
+      "info": "Our Approach 633; E-Courses 503.",
+      "min": 403,
+      "max": 703,
+      "step": 5,
+      "unit": "px",
+      "default": 633
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Shown at 632 x 633 on desktop and 351 x 357 on mobile (cropped to fit; set a focal point to steer the crop). Portrait photos of 1300px or wider look sharpest."
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Fallback theme asset",
+      "info": "Theme asset filename shown when no image is picked.",
+      "default": "fa-profile-felice-chan.jpg"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Photo description (alt text)",
+      "info": "For screen readers. Used for the fallback photo, and for a picked image without its own alt text. Defaults to the name.",
+      "default": "Portrait of Dr. Felice Chan, smiling"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Uses the fallback asset below when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background texture (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the mobile fallback asset."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Fallback background asset",
+      "info": "Theme asset filename (bundled: fa-profile-bg.jpg, moss bamboo texture). Clear it for a plain moss band.",
+      "default": "fa-profile-bg.jpg"
+    },
+    {
+      "type": "text",
+      "id": "background_asset_mobile",
+      "label": "Fallback background asset (mobile)",
+      "info": "Theme asset filename for screens up to 899px (bundled: fa-profile-bg-mobile.jpg).",
+      "default": "fa-profile-bg-mobile.jpg"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Name",
+      "default": "Dr. Felice Chan, DACM"
+    },
+    {
+      "type": "text",
+      "id": "roles",
+      "label": "Roles",
+      "info": "Separate items with | (shown with dots between them).",
+      "default": "Founder | DACM, LAc | Clinical Herbalist"
+    },
+    {
+      "type": "text",
+      "id": "lead",
+      "label": "Lead line",
+      "info": "Larger line above the paragraphs."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Raised in Hong Kong, where Traditional Chinese Medicine was part of daily life, she later studied neuroscience and pre-med at Bowdoin College before earning her Chinese medical doctoral degree at Emperor’s College in Los Angeles.</p><p>Years later, while studying neuroscience and working in hospitals, she began to see the gap between symptom management and true root healing. That realization led her back to her roots and toward a more integrated model of care.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Pull quote",
+      "info": "Optional. Type the quotation marks you want shown; line breaks are kept.",
+      "default": "“She believes that medicine is not something we take but something we remember.”"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Leave empty to hide the button.",
+      "default": "Book in-clinic"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "E.g. your Jane App booking page. Links to other sites open in a new tab."
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second button label",
+      "info": "Outline button beside the first. Leave empty to hide it."
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small note below the buttons"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice profile",
+      "settings": {
+        "lead": "Doctor of Acupuncture and Chinese Herbal Medicine, based in Los Angeles, California",
+        "button_link": "https://feliceacupuncture.janeapp.com/"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,132 @@
+{%- comment -%}
+  Felice trust bar — garnet band of short credentials, each an icon over a two-line title and a caption.
+  Figma (file B4Qc…, homepage "V3 - Latest version" desktop 2637:14885): band 2637:15605 (1440 x 174, just above the
+  footer) — 32px top / bottom, row 2637:15606 inset 74px (34 + 40) with the items spread edge to edge; item = 24px
+  icon, 24px, title (Marisa 24 / 21, -3%, linen, hand-broken over two lines), 10px, caption (Libre Caslon 14 / 135%).
+  No mobile version is drawn (the in-progress mobile frame 2632:10962 has none): below 900px the items sit in a
+  centred two-column grid at the mobile type scale.
+{%- endcomment -%}
+{{ 'fa-trust-bar.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign shown = 0
+  for block in section.blocks
+    if block.settings.title != blank or block.settings.text != blank
+      assign shown = shown | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if shown > 0 -%}
+  <section
+    class="fa-section fa-trust-bar"
+    aria-label="{{ section.settings.label | default: 'Why patients trust us' | escape }}"
+  >
+    <ul class="fa-trust-bar__list" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+      {%- for block in section.blocks -%}
+        {%- if block.settings.title == blank and block.settings.text == blank -%}{%- continue -%}{%- endif -%}
+        <li class="fa-trust-bar__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon_image != blank -%}
+            <span class="fa-trust-bar__icon" aria-hidden="true">
+              {{- block.settings.icon_image | image_url: width: 96 | image_tag: width: 32, height: 32, loading: 'lazy', alt: '' -}}
+            </span>
+          {%- elsif block.settings.icon == 'patients' or block.settings.icon == 'certified' or block.settings.icon == 'google' or block.settings.icon == 'care' -%}
+            {%- comment -%} Figma V6 2669:25836: raster masks in Figma, drawn as CSS masks in the icon colour. {%- endcomment -%}
+            {%- assign icon_file = 'fa-trust-bar-icon-' | append: block.settings.icon | append: '.png' -%}
+            <span class="fa-trust-bar__icon fa-trust-bar__icon--mask{% if block.settings.icon_color == 'grey' %} fa-trust-bar__icon--grey{% endif %}" style="--fa-tb-icon: url('{{ icon_file | asset_url }}');" aria-hidden="true"></span>
+          {%- elsif block.settings.icon != 'none' -%}
+            <span class="fa-trust-bar__icon" aria-hidden="true">{% render 'fa-icons-trust', icon: block.settings.icon %}</span>
+          {%- endif -%}
+          <p class="fa-trust-bar__copy">
+            {%- if block.settings.title != blank -%}
+              <span class="fa-trust-bar__title">{{ block.settings.title | escape | newline_to_br }}</span>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <span class="fa-trust-bar__text">{{ block.settings.text | escape }}</span>
+            {%- endif -%}
+          </p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Felice trust bar",
+  "tag": "div",
+  "class": "fa-trust-bar-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Accessible name",
+      "default": "Why patients trust us",
+      "info": "Read by screen readers only."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "patients", "label": "Patients" },
+            { "value": "certified", "label": "Certified seal" },
+            { "value": "google", "label": "Google" },
+            { "value": "care", "label": "Practitioner treating" },
+            { "value": "instagram-outline", "label": "Instagram outline" },
+            { "value": "none", "label": "None" }
+          ],
+          "default": "instagram-outline"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon",
+          "info": "Replaces the icon above. Square, light-coloured artwork, shown at 32 x 32px."
+        },
+        {
+          "type": "select",
+          "id": "icon_color",
+          "label": "Icon colour",
+          "options": [
+            { "value": "linen", "label": "Linen" },
+            { "value": "grey", "label": "Grey (#D9D9D9)" }
+          ],
+          "default": "linen"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Title",
+          "default": "1,000+\nPatients",
+          "info": "Line breaks are kept."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Caption",
+          "default": "Treated at our Culver City clinic"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice trust bar",
+      "blocks": [
+        { "type": "item", "settings": { "title": "1,000+\nPatients", "text": "Treated at our Culver City clinic" } },
+        { "type": "item", "settings": { "title": "Board-Certified\nPractitioners", "text": "rooted in Traditional Chinese Medicine" } },
+        { "type": "item", "settings": { "title": "5.0 on\nGoogle", "text": "Rated by our patients" } },
+        { "type": "item", "settings": { "title": "In Clinic, At\nHome, Online", "text": "Care that fits your life" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

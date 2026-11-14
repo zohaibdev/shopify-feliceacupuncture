@@ -1,0 +1,390 @@
+/*
+  Felice sign-up (sections/fa-signup.liquid) — Blog page V1 e-book band 2719:19702, 1440 x 674: padding 110, a 998px
+  column: title Marisa 60/60 -4% linen + 24 + intro 20/30 white 90%, 36px, fields (inquiry form styles, labels linen),
+  36px, a garnet 250px button, centred.
+*/
+
+.fa-signup {
+  position: relative;
+  padding-block: 110px;
+  color: var(--fa-linen);
+  background: #9d7f4e;
+}
+
+.fa-signup__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  max-width: calc(998px + var(--fa-gutter) * 2);
+}
+
+.fa-signup__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.fa-signup__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 60px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-signup__text {
+  font-size: 20px;
+  line-height: 30px;
+  color: rgb(255 255 255 / 0.9);
+}
+
+.fa-signup__text p { margin: 0; }
+
+.fa-signup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+}
+
+.fa-signup .fa-inquiry__label { color: var(--fa-linen); }
+
+.fa-signup__submit { flex: none; }
+
+@media screen and (max-width: 1099px) {
+  .fa-signup { padding-block: var(--fa-section-pad); }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-signup__title { font-size: 32px; line-height: 32px; }
+  .fa-signup__text { font-size: 16px; line-height: 24px; }
+  .fa-signup__inner,
+  .fa-signup__form { gap: 28px; }
+}
+
+/* ---------- Botanicals (setting "Show botanicals", E-Courses V1 2770:2777 / 2770:2822) ----------
+   Two copies of the chrysanthemum drawing on the 1440 frame, with Figma's transforms relative to the band top: one
+   (195.43 x 306.07, 80%) rising 137px into the band above at the right edge, one (205.07 x 325.98, image cropped
+   to 95.1% x 96.4%, 82%) hanging 137px into the band below at the left. The band stacks above its neighbours so
+   they show over their backgrounds; the wrapper reaches 150px past the band and clips the overflow at the sides. */
+
+.fa-signup--botanicals { z-index: 2; } /* above an FAQ that stacks at 1 for its own flower */
+
+.fa-signup__botanicals {
+  position: absolute;
+  inset: -150px 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fa-signup__botanical-frame {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 720px);
+  width: 1440px;
+  height: 100%;
+}
+
+.fa-signup__botanical {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  max-width: none;
+  transform-origin: 0 0;
+}
+
+.fa-signup__botanical--top {
+  width: 195.43px;
+  height: 306.07px;
+  opacity: 0.8;
+  transform: matrix(-0.99174, -0.12824, 0.12824, -0.99174, 1437.81, 341.6);
+}
+
+.fa-signup__botanical--bottom {
+  width: 205.07px;
+  height: 325.98px;
+  overflow: hidden;
+  opacity: 0.82;
+  transform: matrix(0.4179, -0.90849, -0.90849, -0.4179, 244.15, 960.53);
+}
+
+.fa-signup__botanical--bottom img {
+  position: absolute;
+  top: -12.15px;
+  left: 0.27px;
+  width: 215.62px;
+  height: 338.12px;
+  max-width: none;
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-signup__botanicals { display: none; }
+}
+
+/* ---------- Layout "Image left, form right" (E-Books V2 2792:3816, 1440 x 705) ----------
+   80px above and below; a 1192px row: the cover (433 x 545, r10), 43px, a 716px column centred on it — title Marisa
+   70 / 60 (-4%, white), 16px, intro 20 / 30 (white 90%), 36px, the fields (352 + 12 + 352), 36px, the 250px button. */
+
+.fa-signup--split { padding-block: 80px; }
+
+.fa-signup--split .fa-signup__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 433fr) minmax(0, 716fr);
+  align-items: center;
+  gap: 43px;
+  max-width: calc(1192px + var(--fa-gutter) * 2);
+}
+
+.fa-signup__media {
+  aspect-ratio: 433 / 545;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgb(0 0 0 / 0.08);
+}
+
+.fa-signup__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fa-signup__column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+  min-width: 0;
+}
+
+.fa-signup--split .fa-signup__heading {
+  align-items: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.fa-signup--split .fa-signup__title {
+  max-width: 560px; /* Figma's title box: two lines, GUT / HEALTH */
+  font-size: 70px;
+  line-height: 60px;
+  letter-spacing: -0.04em;
+  color: var(--fa-linen); /* Figma Latest pages E-Books (desktop + mobile): #EEE1D1 */
+}
+
+.fa-signup--split .fa-signup__form { align-items: flex-start; }
+
+/* ---------- Layout "Email only" (E-Books V2 2792:3891, 1440 x 496) ----------
+   Light band, 120px above and below, a 658px column: title Marisa 60 / 52 moss (600px box, two lines), 24px, intro
+   20 / 30 moss 90%, 36px, one 54px field (Warm Linen 50%, r4, 28 / 4px insets) with the placeholder in Marisa 24
+   uppercase and the button (162 x 46, 32px padding) inside it. */
+
+.fa-signup--inline {
+  padding-block: 120px;
+  background: var(--fa-linen);
+  color: var(--fa-moss);
+}
+
+.fa-signup--inline .fa-signup__inner { max-width: calc(658px + var(--fa-gutter) * 2); }
+
+.fa-signup--inline .fa-signup__title {
+  max-width: 600px;
+  line-height: 52px;
+}
+
+.fa-signup--inline .fa-signup__text {
+  color: inherit;
+  opacity: 0.9;
+}
+
+.fa-signup__inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 54px;
+  padding: 0 4px 0 28px;
+  border-radius: 4px;
+  background: rgb(239 231 219 / 0.5);
+}
+
+.fa-signup__inline:focus-within {
+  outline: 2px solid var(--fa-moss);
+  outline-offset: 2px;
+}
+
+.fa-signup__inline-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fa-moss);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  box-shadow: none;
+  appearance: none;
+}
+
+.fa-signup__inline-input::placeholder {
+  color: var(--fa-moss);
+  opacity: 1;
+}
+
+.fa-signup__inline-input:focus { outline: 0; }
+
+.fa-signup__inline .fa-signup__submit {
+  min-width: 0;
+  min-height: 46px;
+  padding-inline: 32px;
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-signup--split .fa-signup__inner { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .fa-signup--split .fa-signup__media { width: min(433px, 100%); }
+  .fa-signup--split .fa-signup__column { width: 100%; }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-signup--split .fa-signup__title { font-size: 32px; line-height: 32px; }
+  .fa-signup--inline .fa-signup__title { line-height: 32px; }
+  .fa-signup__inline { padding-left: 16px; }
+  .fa-signup__inline-input { font-size: 16px; }
+  .fa-signup__inline .fa-signup__submit { padding-inline: 18px; }
+}
+
+/* "Mobile style: Compact" = Blog listing mobile 2860:24040 e-book band (2057-2620): 60px padding; title 32 / 30 (-7%)
+   in a 244px box, 14px, intro 14 / 20 (-2%); 24px; labels Marisa 16 (-2%) 12px above 40px fields (r4), fields 12px
+   apart; 24px; the 137 x 39 "Sign me up" (14px, -3%). */
+@media screen and (max-width: 899px) {
+  .fa-signup--mobile-compact { padding-block: 60px; }
+  .fa-signup--mobile-compact .fa-signup__inner { gap: 24px; }
+  .fa-signup--mobile-compact .fa-signup__heading { gap: 14px; }
+
+  .fa-signup--mobile-compact .fa-signup__title {
+    max-width: 244px;
+    margin-inline: auto;
+    line-height: 30px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-signup--mobile-compact .fa-signup__text {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .fa-signup--mobile-compact .fa-signup__form { gap: 24px; }
+  .fa-signup--mobile-compact .fa-inquiry__fields,
+  .fa-signup--mobile-compact .fa-inquiry__row { gap: 12px; }
+  .fa-signup--mobile-compact .fa-inquiry__field { gap: 12px; }
+
+  .fa-signup--mobile-compact .fa-inquiry__label {
+    font-size: 16px;
+    line-height: 15px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-signup--mobile-compact .fa-inquiry__input {
+    height: 40px;
+    border-radius: 4px;
+  }
+
+  .fa-signup--mobile-compact .fa-signup__submit {
+    min-width: 137px; /* Figma's fixed 137 */
+    min-height: 39px;
+    padding-inline: 12px;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Compact + split = E-Books mobile 2860:27436 hero form (97-1084): 60px padding; the form first: title 40 / 35 (-7%),
+   16px, text 14 / 22 (-1%) white; 24px; fields as above; 24px; a full-width 39px button; 32px; the cover 351 x 419 r4
+   below. */
+@media screen and (max-width: 899px) {
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__inner { gap: 32px; }
+
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__media {
+    order: 1;
+    width: 100%;
+    aspect-ratio: 351 / 419;
+    border-radius: 4px;
+  }
+
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__column { gap: 24px; }
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__heading { gap: 16px; }
+
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__title {
+    max-width: none;
+    margin-inline: 0;
+    font-size: min(40px, 11vw); /* 40 from 364px up; scales below so the one-line title fits a 320px phone */
+    line-height: 35px;
+    letter-spacing: -0.07em;
+    color: var(--fa-linen);
+  }
+
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__text {
+    line-height: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__form { align-items: stretch; }
+  .fa-signup--split.fa-signup--mobile-compact .fa-signup__submit { width: 100%; }
+}
+
+/* Compact + email only = E-Books mobile 2860:27436 "Not ready to download anything?" (3387-3687): 60px padding; title
+   32 / 30 (-4%) moss, 14px, intro 14 / 18; 36px; a 48px field (16 / 4 insets, placeholder Marisa 14 -2%) with the
+   133 x 39 button (32px sides, 14px -3%) inside. */
+@media screen and (max-width: 899px) {
+  .fa-signup--inline.fa-signup--mobile-compact .fa-signup__inner { gap: 36px; }
+
+  .fa-signup--inline.fa-signup--mobile-compact .fa-signup__title {
+    max-width: 320px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-signup--inline.fa-signup--mobile-compact .fa-signup__text {
+    line-height: 18px;
+    letter-spacing: 0;
+    text-box: none; /* Figma's untrimmed 2 x 18 box */
+  }
+
+  .fa-signup--mobile-compact .fa-signup__inline {
+    height: 48px;
+    padding: 0 4px 0 16px;
+  }
+
+  .fa-signup--mobile-compact .fa-signup__inline-input { font-size: 14px; }
+
+  .fa-signup--mobile-compact .fa-signup__inline .fa-signup__submit {
+    min-width: 133px;
+    min-height: 39px;
+    padding-inline: 32px;
+  }
+}
+
+/* Mobile style re-check: Blog 2860:24040 e-book band sets the intro in linen and the button label in white. */
+@media screen and (max-width: 899px) {
+  .fa-signup--centered.fa-signup--mobile-compact .fa-signup__text { color: var(--fa-linen); }
+  .fa-signup--centered.fa-signup--mobile-compact .fa-signup__submit { color: var(--fa-white); }
+}
+
+/* 2026-10-21: keep "Gut Health E-book" on one line on every screen (client feedback). Not the inline newsletter
+   band ("Not ready to download anything?"): Figma E-Books sets it on two lines in its 600px box (60 / 52). */
+.fa-signup:not(.fa-signup--inline) .fa-signup__title { white-space: nowrap; max-width: none; }
+.fa-signup--split .fa-signup__title { font-size: clamp(24px, 6.4vw, 52px); line-height: 1.05; }
+.fa-signup:not(.fa-signup--split):not(.fa-signup--inline) .fa-signup__title { font-size: clamp(24px, 6.4vw, 60px); line-height: 1.05; }

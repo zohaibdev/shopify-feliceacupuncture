@@ -1,0 +1,120 @@
+{%- comment -%}
+  Felice Acupuncture — fonts and shared stylesheet. Rendered in layout/theme.liquid <head>.
+  - Libre Caslon Condensed (OFL, self-hosted from Fontsource) — body copy.
+  - Marisa Bold — display face (licensed, not bundled). Upload the webfont as assets/fa-marisa-bold.woff2, then tick
+    Theme settings → Felice → "Marisa font uploaded". Until then the "Marisa font URL" setting loads it (default: the live site's file); Tenor Sans (OFL) is only the last fallback.
+  - Futura PT Medium — top bar (licensed, not bundled). 'Futura PT' / system Futura win when installed; otherwise
+    Jost 500 (OFL, Fontsource) stands in.
+  Stand-ins are tuned by measurement against Figma (Phase-2 typography QA, 2026-09-29); CSS keeps Figma's own
+  font-size / line-height / letter-spacing values, so nothing needs changing when the real fonts arrive.
+{%- endcomment -%}
+{{ 'fa-libre-caslon-condensed-500.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{%- if settings.fa_marisa_uploaded -%}
+  {%- assign marisa_preload_file = 'fa-marisa-bold.woff2' -%}
+  {{ marisa_preload_file | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{%- elsif settings.fa_marisa_url != blank -%}
+  {%- comment -%} External font URL: preload_tag only takes theme assets. {%- endcomment -%}
+  {%- # theme-check-disable AssetPreload -%}
+  <link rel="preload" href="{{ settings.fa_marisa_url | strip }}" as="font" type="font/woff2" crossorigin="anonymous">
+  {%- # theme-check-enable AssetPreload -%}
+{%- endif -%}
+<style>
+  @font-face {
+    font-family: 'Libre Caslon Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ 'fa-libre-caslon-condensed-400.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Libre Caslon Condensed';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('{{ 'fa-libre-caslon-condensed-500.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Libre Caslon Condensed';
+    font-style: normal;
+    font-weight: 600 700;
+    font-display: swap;
+    src: url('{{ 'fa-libre-caslon-condensed-600.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Tenor Sans';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('{{ 'fa-tenor-sans-400.woff2' | asset_url }}') format('woff2');
+    /* Stand-in for Marisa (OFL, self-hosted; replaced Federo 2026-10-14). Chosen by glyph overlap with Figma's Marisa
+       render: same ink density (0.253), stroke within 7%; Federo was ~35% heavier.
+       - Widths: measured against 24 Marisa strings with known Figma widths (nav, buttons, card titles, headings):
+         median ratio 0.80 (spread 0.74–0.87), used as is: headings match Marisa's width on average.
+       - Cap height: Tenor 0.700em x 80% = 0.56em vs Marisa 0.50em (Federo was 0.646em).
+       ascent/descent overrides (scaled by size-adjust): Marisa's ~0.93em line box with the caps centred. */
+    size-adjust: 80%;
+    ascent-override: 93.1%;
+    descent-override: 23.1%;
+    line-gap-override: 0%;
+  }
+  @font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('{{ 'fa-jost-500.woff2' | asset_url }}') format('woff2');
+    /* Stand-in for Futura PT Medium (top bar, 12px, -3%). 91.5% matches Figma's measured widths —
+       address 158.8px (Figma 158), "Open 7 days" 57.7 (60), phone ink 73 (72) — and a 7.7px cap (Figma 8). */
+    size-adjust: 91.5%;
+  }
+  {%- liquid
+    # Marisa (Figma's display face). Sources, in order: the licensed file uploaded to the theme assets
+    # ("Marisa font uploaded"), then "Marisa font URL" (default: the client's own Marisa Bold upload on the live
+    # Wix site, served with CORS *). It covers every weight so the browser never fakes bold; Marisa Medium,
+    # when uploaded, takes 400–599 and Bold the rest.
+    assign marisa_url = settings.fa_marisa_url | strip
+    assign marisa_bold_asset = blank
+    if settings.fa_marisa_uploaded
+      assign marisa_bold_file = 'fa-marisa-bold.woff2'
+      assign marisa_bold_asset = marisa_bold_file | asset_url
+    endif
+    assign marisa_bold_weights = '100 900'
+    if settings.fa_marisa_medium_uploaded
+      assign marisa_bold_weights = '600 900'
+    endif
+  -%}
+  {%- if marisa_bold_asset != blank or marisa_url != blank %}
+    @font-face {
+      font-family: 'Marisa';
+      font-style: normal;
+      font-weight: {{ marisa_bold_weights }};
+      font-display: swap;
+      src: {% if marisa_bold_asset != blank %}url('{{ marisa_bold_asset }}') format('woff2'){% if marisa_url != blank %}, {% endif %}{% endif %}{% if marisa_url != blank %}url('{{ marisa_url }}') format('woff2'){% endif %};
+    }
+  {%- endif %}
+  {%- if settings.fa_marisa_medium_uploaded %}
+    @font-face {
+      font-family: 'Marisa';
+      font-style: normal;
+      font-weight: 100 599;
+      font-display: swap;
+      {%- assign marisa_medium_file = 'fa-marisa-medium.woff2' -%}
+      src: url('{{ marisa_medium_file | asset_url }}') format('woff2');
+    }
+  {%- endif %}
+</style>
+{{ 'fa-base.css' | asset_url | stylesheet_tag }}
+{%- if request.page_type == 'policy' %}
+  {{ 'fa-policy.css' | asset_url | stylesheet_tag }}
+{%- endif %}
+{%- comment -%}
+  Motion (assets/fa-motion.js + the "Motion" block in fa-base.css): html.fa-motion enables the hero entrance and
+  scroll reveals. Set before first paint; never in the Theme Editor or with prefers-reduced-motion: reduce, and
+  without JS nothing is hidden.
+{%- endcomment -%}
+{%- unless request.design_mode -%}
+  <script>
+    if (!(window.Shopify && Shopify.designMode) && window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('fa-motion');
+  </script>
+{%- endunless -%}
+<script src="{{ 'fa-motion.js' | asset_url }}" defer="defer"></script>

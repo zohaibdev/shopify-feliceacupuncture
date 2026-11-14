@@ -1,0 +1,182 @@
+/* Felice stats bar — Figma v2 2486 (background) + 2487 (content) desktop, 7504 + 7589 mobile (services page).
+   Desktop: 1440 x 49 clay strip; stats Marisa Bold 24px linen with a 0.2px outside stroke of the same colour; the
+   figure part ("76% ", tracking -3%) and the words (tracking -5%, line-height 20px); "★" at 17px; 17.25px swirls;
+   everything 44px apart. Mobile: 37px strip, Marisa 14px, "★" at full size, 8.26px swirls, 14px apart.
+
+   Both run as a slow, seamless ticker (client request: desktop marquees too). The track = [copies][real list][copy],
+   each list ending in a separator so they tile seamlessly, and it slides one list-width left per loop (transform
+   only, no layout shift). The resting / first frame is Figma's mobile one: the real list ends one gap before the
+   right edge. 100% in the transforms is the track (--fa-stats-lists lists, set by the section: 3 for the default
+   copy, more when the list is short), so one list = 100% / lists; the real list is the next-to-last, and the
+   trailing separator (--fa-stats-tail) is added back. Reduced motion: no ticker (see the end). */
+
+.fa-stats-bar {
+  --fa-stats-gap: 44px;
+  --fa-stats-swirl: 17.25px;
+  --fa-stats-tail: calc(var(--fa-stats-gap) * 2 + var(--fa-stats-swirl));
+  --fa-stats-from: calc(-100% * (var(--fa-stats-lists, 3) - 1) / var(--fa-stats-lists, 3) + var(--fa-stats-tail));
+  display: block;
+  background: var(--fa-clay);
+  color: var(--fa-linen);
+  container-type: inline-size;
+}
+
+.fa-stats-bar--no-sep { --fa-stats-tail: var(--fa-stats-gap); }
+
+.fa-stats-bar:focus-visible {
+  outline: 2px solid var(--fa-linen);
+  outline-offset: -4px;
+}
+
+.fa-stats-bar__viewport {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 49px;
+  overflow: hidden;
+  overflow: clip;
+}
+
+.fa-stats-bar__track {
+  display: flex;
+  flex: none;
+  justify-content: flex-start;
+  width: max-content;
+  margin-inline-start: calc(100% - var(--fa-stats-gap));
+  transform: translateX(var(--fa-stats-from));
+  animation: fa-stats-ticker var(--fa-stats-loop-d, 40s) linear infinite;
+}
+
+.fa-stats-bar__list {
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--fa-stats-gap);
+  margin: 0;
+  padding: 0 var(--fa-stats-gap) 0 0;
+  list-style: none;
+  font-size: 24px;
+}
+
+.fa-stats-bar__list--before { order: -1; }
+
+.fa-stats-bar__item {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 0.8333em; /* 20 / 24 */
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  /* Figma: 0.2px stroke outside the glyphs (a centred 0.4px stroke painted under the fill). */
+  -webkit-text-stroke: 0.4px currentColor;
+  paint-order: stroke fill;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-stats-bar__label { letter-spacing: -0.05em; }
+
+.fa-stats-bar__star { font-size: 0.7083em; } /* 17 / 24 */
+
+.fa-stats-bar__sep {
+  display: flex;
+  align-items: center;
+}
+
+.fa-stats-bar__sep .fa-icon {
+  width: var(--fa-stats-swirl);
+  height: var(--fa-stats-swirl);
+}
+
+/* Pause while the strip is hovered or focused (it is focusable: keyboard and tap). */
+.fa-stats-bar:focus-within .fa-stats-bar__track { animation-play-state: paused; }
+
+@media (hover: hover) {
+  .fa-stats-bar:hover .fa-stats-bar__track { animation-play-state: paused; }
+}
+
+/* Mobile (Figma 7504 / 7589). */
+@media screen and (max-width: 899px) {
+  .fa-stats-bar {
+    --fa-stats-gap: 14px;
+    --fa-stats-swirl: 8.26px;
+  }
+
+  .fa-stats-bar__viewport { min-height: 37px; }
+
+  .fa-stats-bar__track { animation-duration: var(--fa-stats-loop, 25s); }
+
+  .fa-stats-bar__list { font-size: 14px; }
+
+  .fa-stats-bar__item { line-height: 20px; }
+
+  .fa-stats-bar__star { font-size: 1em; }
+}
+
+@keyframes fa-stats-ticker {
+  from { transform: translateX(var(--fa-stats-from)); }
+  to { transform: translateX(calc(-100% + var(--fa-stats-tail))); }
+}
+
+/* ---------- Reduced motion: no ticker, the real list only ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-stats-bar__track {
+    transform: none;
+    animation: none;
+  }
+
+  .fa-stats-bar__list--clone,
+  .fa-stats-bar__sep--tail { display: none; }
+
+  .fa-stats-bar__list { padding-inline-end: 0; }
+}
+
+/* 900 and up: Figma's static desktop frame — the row centred in the 1372px content frame (34px in from both edges).
+   It scales with the strip below 1440 (tablet / small desktop are not drawn): Figma's row is 55.5 x the 24px type
+   wide (1330px), so min(24px, 100cqi / 55.5) keeps it on one line in any width ≥ 900 at Figma's proportions (gaps
+   and swirls in em); longer copy wraps onto a second centred line. */
+@media screen and (min-width: 900px) and (prefers-reduced-motion: reduce) {
+  .fa-stats-bar { padding: 8px 34px; }
+
+  .fa-stats-bar__track {
+    flex: 1 1 auto;
+    justify-content: center;
+    width: auto;
+    margin: 0;
+  }
+
+  .fa-stats-bar__list {
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3333em 1.8333em; /* 44 / 24 */
+    font-size: min(24px, 1.8018cqi);
+  }
+
+  .fa-stats-bar__viewport { min-height: 33px; } /* 49 - 2 x 8 */
+
+  .fa-stats-bar__sep .fa-icon {
+    width: 0.71875em; /* 17.25 / 24 */
+    height: 0.71875em;
+  }
+}
+
+/* Below 900: a static row starting at the gutter that can be swiped (centred when it fits, e.g. on wider phones /
+   small tablets: auto margins drop to 0 once it overflows). */
+@media screen and (max-width: 899px) and (prefers-reduced-motion: reduce) {
+  .fa-stats-bar__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .fa-stats-bar__viewport::-webkit-scrollbar { display: none; }
+
+  .fa-stats-bar__track {
+    margin-inline: auto;
+    padding-inline: var(--fa-gutter);
+  }
+}

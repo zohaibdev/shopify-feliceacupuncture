@@ -1,0 +1,401 @@
+{%- comment -%}
+  Felice services — "Our services": centred heading, 3-column grid of moss-green service cards
+  (photo with notched corners, title, short text) and a "View services" button.
+  Mobile: horizontal swipe row of cards.
+  Figma: desktop 414:417 (background), 414:681 (content), 414:564 / 414:565 (botanicals);
+  mobile 414:1005 (background), 414:1193 (content).
+  Homepage V3 "Latest version" (2612:3077, band 5252–6865, content 2612:3507): longer card texts in hand-set boxes
+  (block text width "Custom": 412 / 368 / 380 / 396px); its botanicals now belong to the neighbouring bands
+  (2612:3388 = clinic band, 2612:3389 = fa-cta-banner), so the homepage turns them off here.
+  "Price list" card layout (services page "Jump to a treatment", Figma v2 2263:2528 / mobile 2264:7630):
+  shorter desktop photo (408 x 322), no card text, "Starting from" / "Session" rows with dotted rules and outlined
+  pills; cards link to a same-page anchor (block "anchor") when no link is set. Modifier class fa-services--menu.
+{%- endcomment -%}
+{{ 'fa-services.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign menu = false
+  if section.settings.card_layout == 'price_list'
+    assign menu = true
+  endif
+-%}
+
+{%- assign fa_services_default_id = 'fa-services-' | append: section.id -%}
+<section class="fa-section fa-section--pad fa-services{% if menu %} fa-services--menu{% endif %}{% if section.settings.intro_style == 'tight' %} fa-services--intro-tight{% elsif section.settings.intro_style == 'large' %} fa-services--intro-large{% endif %}{% if section.settings.mobile_layout == 'grid' %} fa-services--mobile-grid{% endif %}" id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_services_default_id }}" style="--fa-sv-pad-m: {{ section.settings.padding_mobile | default: 50 }}px;"{% if section.settings.heading != blank %} aria-labelledby="fa-services-title-{{ section.id }}"{% endif %}>
+  <div class="fa-bg" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 899px)" srcset="{{ 'fa-services-bg-mobile.jpg' | asset_url }}" width="750" height="1208">
+      {%- if section.settings.background_asset != blank -%}
+        {%- comment -%} Cover-fitted, so the size is only a hint (fa-services-menu-bg.jpg is 1440 x 1449). {%- endcomment -%}
+        <img src="{{ section.settings.background_asset | asset_url }}" alt="" width="1440" height="1449" loading="lazy">
+      {%- else -%}
+        <img src="{{ 'fa-services-bg.jpg' | asset_url }}" alt="" width="1440" height="1613" loading="lazy">
+      {%- endif -%}
+    </picture>
+  </div>
+
+  {%- if section.settings.show_botanicals -%}
+    <img class="fa-deco fa-services__flower fa-services__flower--top" src="{{ 'fa-services-flower.png' | asset_url }}" alt="" aria-hidden="true" width="506" height="792" loading="lazy">
+    <img class="fa-deco fa-services__flower fa-services__flower--bottom" src="{{ 'fa-services-flower.png' | asset_url }}" alt="" aria-hidden="true" width="506" height="792" loading="lazy">
+  {%- endif -%}
+
+  <div class="fa-container fa-services__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-services__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title" id="fa-services-title-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="fa-services__list{% unless section.settings.mobile_layout == 'grid' %} fa-swipe{% endunless %}" role="list" data-fa-reveal="up" data-fa-reveal-stagger style="--fa-services-card-bg: url('{{ 'fa-services-card-bg.jpg' | asset_url }}');">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign title = block.settings.title | escape
+            assign card_href = block.settings.link
+            if card_href == blank and block.settings.anchor != blank
+              assign card_href = block.settings.anchor | strip | remove_first: '#' | prepend: '#'
+            endif
+            if card_href != blank
+              assign card_tag = 'a'
+            else
+              assign card_tag = 'div'
+            endif
+            assign has_facts = false
+            if block.settings.price != blank or block.settings.duration != blank
+              assign has_facts = true
+            endif
+            assign card_uid = 'fa-services-' | append: section.id | append: '-' | append: block.id
+          -%}
+          <li class="fa-services__item" {{ block.shopify_attributes }}>
+            <{{ card_tag }} class="fa-services__card"{% if card_href != blank %} href="{{ card_href }}"{% render 'fa-link-target', url: card_href %}{% if title != blank %} aria-labelledby="{{ card_uid }}-title"{% endif %}{% if has_facts %} aria-describedby="{{ card_uid }}-facts"{% endif %}{% endif %}>
+              <div class="fa-services__media fa-media">
+                {%- if block.settings.image != blank -%}
+                  {%- liquid
+                    assign image_alt = block.settings.image.alt | default: block.settings.title
+                    assign focal = block.settings.image.presentation.focal_point | default: 'center'
+                    assign focal_style = '--fa-services-focal: ' | append: focal
+                  -%}
+                  {%- liquid
+                    if menu
+                      assign image_sizes = '(min-width: 1100px) calc((min(100vw, 1440px) - 132px) / 3 - 28px), (min-width: 900px) calc((100vw - 96px) / 3 - 28px), 264px'
+                    else
+                      assign image_sizes = '(min-width: 1100px) calc((min(100vw, 1440px) - 136px) / 3 - 36px), (min-width: 900px) calc((100vw - 98px) / 3 - 36px), 264px'
+                    endif
+                  -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: widths: '264, 400, 528, 800', sizes: image_sizes, loading: 'lazy', alt: image_alt, style: focal_style }}
+                {%- elsif block.settings.fallback_asset != blank -%}
+                  {%- if block.settings.fallback_asset_mobile != blank -%}
+                    <picture>
+                      <source media="(max-width: 899px)" srcset="{{ block.settings.fallback_asset_mobile | asset_url }}">
+                      <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ title }}" width="800" height="837" loading="lazy">
+                    </picture>
+                  {%- else -%}
+                    <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ title }}" width="800" height="837" loading="lazy">
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+              <div class="fa-services__body">
+                {%- if title != blank -%}
+                  <h3 class="fa-services__title"{% if card_href != blank %} id="{{ card_uid }}-title"{% endif %}>{{ title }}</h3>
+                {%- endif -%}
+                {%- if has_facts -%}
+                  <dl class="fa-services__facts" id="{{ card_uid }}-facts">
+                    {%- if block.settings.price != blank -%}
+                      <div class="fa-services__fact">
+                        <dt class="fa-services__fact-label"><span>{{ block.settings.price_label | default: section.settings.price_label | escape }}</span></dt>
+                        <dd class="fa-services__pill"><span>{{ block.settings.price | escape }}</span></dd>
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.duration != blank -%}
+                      <div class="fa-services__fact">
+                        <dt class="fa-services__fact-label"><span>{{ section.settings.duration_label | escape }}</span></dt>
+                        <dd class="fa-services__pill"><span>{{ block.settings.duration | escape }}</span></dd>
+                      </div>
+                    {%- endif -%}
+                  </dl>
+                {%- endif -%}
+                {%- if block.settings.text != blank and menu == false -%}
+                  <p class="fa-services__text{% if block.settings.text_width == 'narrow' %} fa-services__text--narrow{% elsif block.settings.text_width == 'custom' %} fa-services__text--custom{% endif %}"{% if block.settings.text_width == 'custom' %} style="--fa-sv-text-w: {{ block.settings.text_width_custom | default: 350 }}px;"{% endif %}>{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+              </div>
+            </{{ card_tag }}>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary{% if section.settings.button_compact %} fa-btn--compact{% endif %} fa-services__button" data-fa-reveal="up">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice services",
+  "tag": "div",
+  "class": "fa-services-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Cards on mobile",
+      "options": [
+        { "value": "swipe", "label": "Swipe row" },
+        { "value": "grid", "label": "Two-column grid" }
+      ],
+      "default": "swipe"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our services"
+    },
+    {
+      "type": "select",
+      "id": "intro_style",
+      "label": "Intro text size",
+      "options": [
+        { "value": "standard", "label": "16 / 27" },
+        { "value": "tight", "label": "16 / 25" },
+        { "value": "large", "label": "18 / 29" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every treatment draws on the same four pillars - acupuncture, herbal medicine, food as medicine, and lifestyle.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View services"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_compact",
+      "label": "Compact button",
+      "info": "Desktop: the button fits its label (42px side padding) and a garnet button gets white text.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets other sections jump here, e.g. service-menu (link to #service-menu). Letters, numbers and hyphens."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_botanicals",
+      "label": "Show botanical illustrations",
+      "info": "Mobile shows the top one only (homepage V4).",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 50,
+      "info": "Up to 899px (homepage V4: 60)."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled background file",
+      "info": "Theme asset used as the desktop and tablet background texture. Blank uses the standard services texture."
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "options": [
+        { "value": "description", "label": "Photo, title and text" },
+        { "value": "price_list", "label": "Photo, title, price and session" }
+      ],
+      "default": "description",
+      "info": "The price layout uses a shorter photo, hides the card text and shows each card's price and session rows."
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Price row label",
+      "default": "Starting from"
+    },
+    {
+      "type": "text",
+      "id": "duration_label",
+      "label": "Session row label",
+      "default": "Session"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Shown at 400 x 418. Corners are notched automatically."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset_mobile",
+          "label": "Bundled mobile image file",
+          "info": "Optional theme asset for phones (up to 899px) when no image is selected. Blank uses the bundled image file."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Acupuncture"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "The core treatment. Pain, stress, sleep, digestion and hormones."
+        },
+        {
+          "type": "select",
+          "id": "text_width",
+          "label": "Text width",
+          "info": "Narrow wraps short descriptions onto two lines on desktop. Custom uses the width below.",
+          "options": [
+            { "value": "standard", "label": "Standard" },
+            { "value": "narrow", "label": "Narrow" },
+            { "value": "custom", "label": "Custom" }
+          ],
+          "default": "standard"
+        },
+        {
+          "type": "range",
+          "id": "text_width_custom",
+          "label": "Custom text width (desktop)",
+          "info": "Used when Text width is Custom. Sets where the text wraps; up to 6px wider than the card's text column.",
+          "min": 240,
+          "max": 420,
+          "step": 2,
+          "unit": "px",
+          "default": 350
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Makes the whole card clickable."
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Jump link",
+          "info": "Used when Link is blank: the id of a section or row on the same page, e.g. treatment-acupuncture."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "info": "Price row, e.g. $200 – $300. Blank hides the row."
+        },
+        {
+          "type": "text",
+          "id": "price_label",
+          "label": "Price label (optional)",
+          "info": "Replaces the section's price label on this card only, e.g. Price for a price that varies."
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Session length",
+          "info": "Session row, e.g. 60 min. Blank hides the row."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice services",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "fallback_asset": "fa-services-acupuncture.jpg",
+            "title": "Acupuncture",
+            "text": "The core treatment. Pain, stress, sleep, digestion and hormones."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "fallback_asset": "fa-services-cosmetic-acupuncture.jpg",
+            "title": "Cosmetic Acupuncture",
+            "text": "Support for circulation, texture, and collagen production."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "fallback_asset": "fa-services-cupping.jpg",
+            "title": "Cupping",
+            "text": "Myofascial release for tight backs, shoulders and necks. Add-on or standalone."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "fallback_asset": "fa-services-tui-na.jpg",
+            "title": "Tui Na Massage",
+            "text": "Chinese therapeutic bodywork.",
+            "text_width": "narrow"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "fallback_asset": "fa-services-contrast-therapy.jpg",
+            "title": "Contrast Therapy",
+            "text": "Heat and cold for recovery, inflammation and nervous-system reset."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "fallback_asset": "fa-services-herbal-wellness.jpg",
+            "title": "Herbal Wellness",
+            "text": "Custom formulas and supplement support",
+            "text_width": "narrow"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

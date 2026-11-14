@@ -1,0 +1,372 @@
+{%- comment -%}
+  Felice FAQ — beige textured band, moss accordion bars.
+  Figma: desktop 414:354 (+ botanical 414:874), mobile 414:1008 (background) + 414:1313 (content).
+  Services page v2 (file B4QcctWXiG9ywP3uRA3coG): desktop 2263:2958 (+ botanical 3020, same box as 414:874),
+  mobile 2264:7162 (+ botanical 7210 — the "on mobile" flower setting, size Large; homepage V4 2264:2704: size Small).
+  Our Approach page (2275:19391 / 2305:4848): no desktop botanical; mobile botanical 2305:5001 = size "Large, raised".
+  Homepage V5 (file B4Qc…, 2612:3178 in 2612:3077, botanical 2618:10420): one-line heading ("Heading width: One
+  line"), 15px answers, 5 + 6 questions ("Questions in the left column" 5), 130px bottom padding, the botanical at the
+  bottom left spilling into the next section ("Botanical position"), the band texture re-exported for the taller band
+  (fa-faq-bg-home.jpg). Every new setting defaults to the earlier behaviour (services / Our Approach unchanged).
+  Desktop (>= 1100px): items are split into two independent columns — by default the first half of the blocks
+  (rounded up) fills the left column, the rest the right column. Tablet and mobile: one column in block order.
+  Native <details>/<summary>: every question opens and closes independently (several can be open at once).
+  Initial state per breakpoint, as in Figma: Liquid renders the "Open by default on desktop" items open (also the
+  no-JS state); on screens <= 899px the inline script after the list swaps in "Open by default on mobile" before
+  first paint (initial render only). assets/fa-faq.js keeps aria-expanded in sync and handles the Theme Editor.
+  The height animation is CSS-only.
+{%- endcomment -%}
+{{ 'fa-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fa-faq.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%} Questions with a blank title or a blank answer are skipped (an unlabeled toggle); the column split counts rendered items only. {%- endcomment -%}
+{%- liquid
+  assign item_count = 0
+  for block in section.blocks
+    if block.settings.question != blank and block.settings.answer != blank
+      assign item_count = item_count | plus: 1
+    endif
+  endfor
+  assign left_count = item_count | plus: 1 | divided_by: 2 | floor
+  assign left_setting = section.settings.left_column_count | default: 0
+  if left_setting > 0
+    assign left_count = left_setting | at_most: item_count
+  endif
+  assign right_count = item_count | minus: left_count
+
+  assign flower_bottom = false
+  if section.settings.flower_position == 'bottom_left'
+    assign flower_bottom = true
+  endif
+  assign section_class = ''
+  if section.settings.heading_width == 'wide'
+    assign section_class = section_class | append: ' fa-faq--heading-wide'
+  endif
+  if section.settings.answer_size == 'medium'
+    assign section_class = section_class | append: ' fa-faq--answer-medium'
+  endif
+  if flower_bottom
+    if section.settings.show_flower or section.settings.show_flower_mobile
+      assign section_class = section_class | append: ' fa-faq--flower-bottom'
+    endif
+  endif
+  if section.settings.flower_position == 'bottom_right' and section.settings.show_flower
+    assign section_class = section_class | append: ' fa-faq--flower-bottom'
+  endif
+  assign bg_asset = section.settings.background_asset | strip | default: 'fa-faq-bg.jpg'
+-%}
+
+{%- capture fa_faq_chevron -%}
+  <span class="fa-faq__icon" aria-hidden="true">{% render 'fa-icon', icon: 'chevron' %}</span>
+{%- endcapture -%}
+
+{%- assign fa_default_id = 'FaFaq-' | append: section.id -%}
+<section
+  class="fa-section fa-section--pad fa-faq{{ section_class }}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_default_id }}"
+  style="--fa-faq-pad-mobile: {{ section.settings.padding_mobile | default: 50 }}px; --fa-faq-pad-bottom: {{ section.settings.padding_bottom | default: 120 }}px;"
+>
+  <div class="fa-bg" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 899px)" srcset="{{ 'fa-faq-bg-mobile.jpg' | asset_url }}" width="750" height="1336">
+      {%- comment -%} Cover-fitted, so the size is only a hint (fa-faq-bg-home.jpg is 1440 x 795). {%- endcomment -%}
+      <img src="{{ bg_asset | asset_url }}" alt="" width="1440" height="729" loading="lazy">
+    </picture>
+  </div>
+
+  {%- if section.settings.flower_position == 'bottom_right' -%}
+    {%- comment -%} E-Courses V1 2770:2942: the chrysanthemum drawing turned 165deg at 80%, placed with Figma's transform on
+      the 1440 frame; it hangs 141px into the section below. Desktop only (no mobile design). {%- endcomment -%}
+    {%- if section.settings.show_flower -%}
+      <span class="fa-faq__flower-frame" aria-hidden="true"><img class="fa-faq__flower-br" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" alt="" width="544" height="852" loading="lazy"></span>
+    {%- endif -%}
+  {%- elsif section.settings.show_flower or section.settings.show_flower_mobile -%}
+    {%- liquid
+      assign flower_class = ''
+      unless section.settings.show_flower
+        assign flower_class = ' fa-faq__flower--mobile-only'
+      endunless
+      if section.settings.show_flower_mobile
+        assign flower_class = flower_class | append: ' fa-faq__flower--mobile'
+        if flower_bottom
+          assign flower_class = flower_class | append: ' fa-faq__flower--bottom'
+        elsif section.settings.flower_mobile_size == 'small'
+          assign flower_class = flower_class | append: ' fa-faq__flower--mobile-small'
+        elsif section.settings.flower_mobile_size == 'large_raised'
+          assign flower_class = flower_class | append: ' fa-faq__flower--mobile-raised'
+        endif
+      elsif flower_bottom
+        assign flower_class = flower_class | append: ' fa-faq__flower--bottom'
+      endif
+    -%}
+    {%- if flower_bottom -%}
+      <img class="fa-deco fa-faq__flower{{ flower_class }}" src="{{ 'fa-faq-flower-bottom.png' | asset_url }}" alt="" aria-hidden="true" width="310" height="413" loading="lazy">
+    {%- else -%}
+      <img class="fa-deco fa-faq__flower{{ flower_class }}" src="{{ 'fa-faq-flower.png' | asset_url }}" alt="" aria-hidden="true" width="743" height="599" loading="lazy">
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="fa-container fa-faq__inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="fa-heading fa-faq__heading" data-fa-reveal="up">
+        <h2 class="fa-heading__title fa-faq__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+    {%- endif -%}
+
+    {%- if item_count > 0 -%}
+      <div class="fa-faq__columns" data-fa-reveal="up">
+        {%- for column in (1..2) -%}
+          {%- liquid
+            if column == 1
+              assign column_first = 1
+              assign column_limit = left_count
+            else
+              assign column_first = left_count | plus: 1
+              assign column_limit = right_count
+            endif
+            assign column_end = column_first | plus: column_limit
+          -%}
+          {%- if column_limit > 0 -%}
+        <div class="fa-faq__column">
+          {%- assign item_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.question == blank or block.settings.answer == blank -%}{%- continue -%}{%- endif -%}
+            {%- assign item_index = item_index | plus: 1 -%}
+            {%- if item_index < column_first -%}{%- continue -%}{%- endif -%}
+            {%- if item_index >= column_end -%}{%- break -%}{%- endif -%}
+            {%- comment -%} The first question is open on load (every page, desktop and mobile); all others start closed. {%- endcomment -%}
+            {%- liquid
+              assign item_open = false
+              if item_index == 1
+                assign item_open = true
+              endif
+              assign answer_id = 'FaFaqAnswer-' | append: block.id
+            -%}
+            <details class="fa-faq__item"{% if section.settings.single_open %} name="fa-faq-{{ section.id }}"{% endif %} {{ block.shopify_attributes }}{% if item_open %} data-open-mobile open{% endif %}>
+              <summary class="fa-faq__question" aria-expanded="{% if item_open %}true{% else %}false{% endif %}"{% if block.settings.answer != blank %} aria-controls="{{ answer_id }}"{% endif %}>
+                <span class="fa-faq__question-text">{{ block.settings.question | escape }}</span>
+                {{- fa_faq_chevron -}}
+              </summary>
+              {%- if block.settings.answer != blank -%}
+                <div class="fa-faq__answer" id="{{ answer_id }}">{{ block.settings.answer }}</div>
+              {%- endif -%}
+            </details>
+          {%- endfor -%}
+        </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <script>
+        (function (list) {
+          if (!window.matchMedia('(max-width: 899px)').matches) return;
+          list.querySelectorAll('details.fa-faq__item').forEach(function (item) {
+            item.open = item.hasAttribute('data-open-mobile');
+            item.firstElementChild.setAttribute('aria-expanded', item.open);
+          });
+        })(document.currentScript.previousElementSibling);
+      </script>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- if section.settings.faq_schema -%}
+  {%- comment -%} Dev notes 2728:741: FAQPage structured data for search engines. {%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- assign first_q = true -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question == blank or block.settings.answer == blank -%}{%- continue -%}{%- endif -%}
+          {%- unless first_q -%},{%- endunless -%}
+          {%- assign first_q = false -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | strip | json }} }
+          }
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Felice FAQ",
+  "tag": "div",
+  "class": "fa-faq-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets links jump here, e.g. faq (link to /#faq). Letters, numbers and hyphens."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "checkbox",
+      "id": "single_open",
+      "label": "Open one question at a time",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "faq_schema",
+      "label": "Add FAQ structured data (SEO)",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "heading_width",
+      "label": "Heading width",
+      "options": [
+        { "value": "narrow", "label": "Two lines" },
+        { "value": "wide", "label": "One line" }
+      ],
+      "default": "narrow",
+      "info": "Desktop and tablet. Mobile wraps the heading to fit the screen."
+    },
+    {
+      "type": "select",
+      "id": "answer_size",
+      "label": "Answer text size",
+      "options": [
+        { "value": "small", "label": "Small (14px)" },
+        { "value": "medium", "label": "Medium (15px)" }
+      ],
+      "default": "small",
+      "info": "Desktop and tablet. Mobile answers are 11px."
+    },
+    {
+      "type": "range",
+      "id": "left_column_count",
+      "label": "Questions in the left column (desktop)",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 0,
+      "info": "0 = automatic: the first half of the questions (rounded up) fills the left column, the rest the right column. Tablet and mobile show one column."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled desktop background file",
+      "info": "Theme asset used as the desktop and tablet background texture (cover-fitted). Blank uses fa-faq-bg.jpg."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_flower",
+      "label": "Show botanical illustration",
+      "info": "Desktop and tablet (900px and wider).",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_flower_mobile",
+      "label": "Show botanical illustration on mobile",
+      "info": "Screens up to 899px wide: a small version of the botanical.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "flower_position",
+      "label": "Botanical position",
+      "options": [
+        { "value": "top_right", "label": "Top right, rising into the section above" },
+        { "value": "bottom_left", "label": "Bottom left, spilling into the section below" },
+        { "value": "bottom_right", "label": "Bottom right, into the section below (desktop)" }
+      ],
+      "default": "top_right"
+    },
+    {
+      "type": "select",
+      "id": "flower_mobile_size",
+      "label": "Mobile botanical size",
+      "info": "Top right botanical only.",
+      "options": [
+        { "value": "large", "label": "Large (services page)" },
+        { "value": "small", "label": "Small" },
+        { "value": "large_raised", "label": "Large, raised (Our Approach page)" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 80,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 120,
+      "info": "Screens 1100px and wider."
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What can acupuncture help with?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open by default on desktop",
+          "info": "No longer used: the first question opens by default and the others start closed.",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "open_mobile",
+          "label": "Open by default on mobile",
+          "info": "No longer used: the first question opens by default and the others start closed.",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What can acupuncture help with?", "answer": "<p>Acupuncture can support pain, stress, sleep, digestion, hormonal balance and overall wellbeing. We'll talk through your goals at your first visit.</p>" } },
+        { "type": "question", "settings": { "question": "Do you offer concierge or in-home care?", "answer": "<p>Yes. Concierge and in-home visits are available by appointment — contact us to check availability in your area.</p>" } },
+        { "type": "question", "settings": { "question": "What happens during my first visit?", "answer": "<p>Your initial consultation is 75 minutes and includes a detailed health intake, tongue and pulse assessment, your first treatment, and a personalized care plan outlining your next steps.</p>", "open": true, "open_mobile": true } },
+        { "type": "question", "settings": { "question": "How do I know which practitioner to book with?", "answer": "<p>Every practitioner treats a wide range of concerns. If you're unsure, contact us and we'll help you choose the best fit.</p>" } },
+        { "type": "question", "settings": { "question": "Does acupuncture hurt?", "answer": "<p>Most patients find acupuncture surprisingly gentle. You may feel a brief sensation as the needles are placed, followed by warmth, heaviness, tingling, or deep relaxation.</p>", "open": true } },
+        { "type": "question", "settings": { "question": "How many treatments will I need?", "answer": "<p>It depends on your goals and history. Your practitioner will recommend a treatment plan after your first visit.</p>" } },
+        { "type": "question", "settings": { "question": "Do you offer care beyond acupuncture?", "answer": "<p>Yes. Depending on your needs, care may include cupping, herbal medicine, and nutrition and lifestyle guidance.</p>" } },
+        { "type": "question", "settings": { "question": "Will I receive guidance after my appointment?", "answer": "<p>Yes. You'll leave with clear next steps and at-home recommendations to support your care between visits.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

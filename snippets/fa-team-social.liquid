@@ -1,0 +1,75 @@
+{%- comment -%}
+  Social icon row of a fa-team member card.
+  Usage: {% render 'fa-team-social', block: block, name: name, layout: section.settings.layout %}
+  - name: the member name, already escaped (labels read "{name} on Instagram").
+  - layout 'classic' (Figma V4 414:790): Instagram, Facebook and X always render, as drawn.
+    layout 'booking' (Figma V5 2612:9868; client's final links 2026-10-15): only the member's own accounts render —
+    Instagram, Facebook, TikTok, Substack, Blog, X — each when its URL is set, opening in a new tab.
+  - Classic: Substack renders whenever the member has a Substack URL.
+  An icon links when its URL is known (Instagram and Facebook fall back to the practice accounts); otherwise it is a
+  decorative span, so the card keeps its drawn layout without a dead link.
+{%- endcomment -%}
+{%- liquid
+  assign label_prefix = ''
+  if name != blank
+    assign label_prefix = name | append: ' on '
+  endif
+  assign instagram_url = block.settings.instagram
+  assign instagram_label = label_prefix | append: 'Instagram'
+  if instagram_url == blank
+    assign instagram_url = 'https://www.instagram.com/feliceacupuncture/'
+    assign instagram_label = 'Instagram'
+  endif
+  assign facebook_url = block.settings.facebook
+  assign facebook_label = label_prefix | append: 'Facebook'
+  if facebook_url == blank
+    assign facebook_url = 'https://www.facebook.com/feliceacupuncture'
+    assign facebook_label = 'Facebook'
+  endif
+  assign instagram_icon = 'instagram'
+  assign show_x = true
+  if layout == 'booking'
+    assign instagram_icon = 'instagram-large'
+    if block.settings.x == blank
+      assign show_x = false
+    endif
+  endif
+-%}
+<ul class="fa-team__social" role="list">
+  {%- if layout == 'booking' -%}
+    {%- comment -%} Booking layout: only the member's own accounts, in this order; each opens in a new tab. {%- endcomment -%}
+    {%- if block.settings.instagram != blank -%}
+      <li><a href="{{ block.settings.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_prefix }}Instagram">{% render 'fa-icons-team', icon: 'instagram-large' %}</a></li>
+    {%- endif -%}
+    {%- if block.settings.facebook != blank -%}
+      <li><a href="{{ block.settings.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_prefix }}Facebook">{% render 'fa-icons-team', icon: 'facebook' %}</a></li>
+    {%- endif -%}
+    {%- if block.settings.tiktok != blank -%}
+      <li><a href="{{ block.settings.tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_prefix }}TikTok">{% render 'fa-icons-team', icon: 'tiktok' %}</a></li>
+    {%- endif -%}
+    {%- if block.settings.substack != blank -%}
+      <li><a href="{{ block.settings.substack }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_prefix }}Substack">{% render 'fa-icons-team', icon: 'substack' %}</a></li>
+    {%- endif -%}
+    {%- if block.settings.blog != blank -%}
+      <li><a href="{{ block.settings.blog }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_prefix }}blog">{% render 'fa-icons-team', icon: 'blog' %}</a></li>
+    {%- endif -%}
+    {%- if block.settings.x != blank -%}
+      <li><a href="{{ block.settings.x }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_prefix }}X">{% render 'fa-icons-team', icon: 'x' %}</a></li>
+    {%- endif -%}
+  {%- else -%}
+  <li><a href="{{ instagram_url }}"{% render 'fa-link-target', url: instagram_url %} aria-label="{{ instagram_label }}">{% render 'fa-icons-team', icon: instagram_icon %}</a></li>
+  <li><a href="{{ facebook_url }}"{% render 'fa-link-target', url: facebook_url %} aria-label="{{ facebook_label }}">{% render 'fa-icons-team', icon: 'facebook' %}</a></li>
+  {%- if show_x -%}
+    <li{% if block.settings.x == blank %} aria-hidden="true"{% endif %}>
+      {%- if block.settings.x != blank -%}
+        <a href="{{ block.settings.x }}"{% render 'fa-link-target', url: block.settings.x %} aria-label="{{ label_prefix }}X">{% render 'fa-icons-team', icon: 'x' %}</a>
+      {%- else -%}
+        <span aria-hidden="true">{% render 'fa-icons-team', icon: 'x' %}</span>
+      {%- endif -%}
+    </li>
+  {%- endif -%}
+  {%- if block.settings.substack != blank -%}
+    <li><a href="{{ block.settings.substack }}"{% render 'fa-link-target', url: block.settings.substack %} aria-label="{{ label_prefix }}Substack">{% render 'fa-icons-team', icon: 'substack' %}</a></li>
+  {%- endif -%}
+  {%- endif -%}
+</ul>

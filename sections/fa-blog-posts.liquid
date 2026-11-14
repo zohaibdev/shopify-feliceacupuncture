@@ -1,0 +1,366 @@
+{%- comment -%}
+  Felice blog posts — centred heading + intro and a row of article cards (photo, date · read time · category line,
+  title, "Read article →") on a textured moss band.
+  Homepage "Chinese medicine, explained" (file B4QcctWXiG9ywP3uRA3coG, V3 latest): desktop 2620:10728 (band
+  1440 x 778, cards 2620:10731 / 10837 / 10852). No mobile frame: mobile follows the established swipe-row pattern.
+  Content: pick a blog and the latest articles fill the cards (image, published date, read time from the article's
+  word count, first tag, title, URL). Without a blog, or when it has no articles, the "Post" blocks are shown.
+  Desktop (>= 1100) and tablet (900–1099): up to 3 per row (more wrap to the next row). Mobile (<= 899): swipe row.
+{%- endcomment -%}
+{{ 'fa-blog-posts.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign default_id = 'fa-blog-posts-' | append: section.id
+  assign title_id = 'fa-blog-posts-title-' | append: section.id
+  assign desktop_bg = section.settings.background_asset | default: section.settings.background_asset_mobile
+  assign bp_blog = section.settings.blog
+  assign posts_count = section.settings.posts_count | default: 3
+  assign use_blog = false
+  if bp_blog != blank and bp_blog.articles_count > 0
+    assign use_blog = true
+  endif
+  assign words_per_minute = 200
+  assign link_label = section.settings.link_label | strip | escape
+  assign link_last = link_label | slice: -1
+  assign image_sizes = '(min-width: 1100px) calc((min(100vw, 1440px) - 130px) / 3), (min-width: 900px) calc((100vw - 94px) / 3), 314px'
+-%}
+<section
+  class="fa-section fa-blog-posts"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  style="--fa-bp-pad-m: {{ section.settings.padding_mobile | default: 60 }}px; --fa-bp-pad-bottom: {{ section.settings.padding_bottom | default: 120 }}px;"
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if section.settings.background != blank or desktop_bg != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      <picture>
+        {%- if section.settings.background_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+        {%- elsif section.settings.background == blank and section.settings.background_asset_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_asset_mobile | asset_url }}" width="750" height="1200">
+        {%- endif -%}
+        {%- if section.settings.background != blank -%}
+          {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- else -%}
+          {%- comment -%} Cover-fitted, so the size is only a hint (the bundled band is 1440 x 778). {%- endcomment -%}
+          <img src="{{ desktop_bg | asset_url }}" alt="" width="1440" height="778" loading="lazy">
+        {%- endif -%}
+      </picture>
+    </div>
+  {%- endif -%}
+
+  <div class="fa-container fa-blog-posts__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-blog-posts__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-blog-posts__heading-title" id="{{ title_id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-blog-posts__intro">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if use_blog or section.blocks.size > 0 -%}
+      <ul class="fa-blog-posts__list fa-swipe" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if use_blog -%}
+          {%- comment -%} On an article page, the post being read is skipped (still posts_count cards). {%- endcomment -%}
+          {%- assign current_article_id = article.id | default: 0 -%}
+          {%- assign shown_count = 0 -%}
+          {%- for article in bp_blog.articles -%}
+            {%- if article.id == current_article_id -%}{%- continue -%}{%- endif -%}
+            {%- if shown_count >= posts_count -%}{%- break -%}{%- endif -%}
+            {%- assign shown_count = shown_count | plus: 1 -%}
+            {%- liquid
+              assign meta_parts = ''
+              if section.settings.show_date and article.published_at != blank
+                assign meta_parts = article.published_at | date: '%b %-d, %Y'
+              endif
+              if section.settings.show_read_time
+                assign word_count = article.content | strip_html | split: ' ' | size
+                assign minutes = word_count | plus: words_per_minute | minus: 1 | divided_by: words_per_minute | floor | at_least: 1
+                assign read_time = minutes | append: ' min read'
+                if meta_parts != blank
+                  assign meta_parts = meta_parts | append: ' · '
+                endif
+                assign meta_parts = meta_parts | append: read_time
+              endif
+              if section.settings.show_category and article.tags.size > 0
+                if meta_parts != blank
+                  assign meta_parts = meta_parts | append: ' · '
+                endif
+                assign meta_parts = meta_parts | append: article.tags.first
+              endif
+              assign card_uid = 'fa-blog-posts-' | append: section.id | append: '-' | append: forloop.index
+            -%}
+            <li class="fa-blog-posts__item">
+              {%- capture card_media -%}
+                {%- if article.image != blank -%}
+                  {%- liquid
+                    assign focal = article.image.presentation.focal_point | default: 'center'
+                    assign focal_style = '--fa-bp-focal: ' | append: focal
+                    assign image_alt = article.image.alt | default: ''
+                  -%}
+                  {{ article.image | image_url: width: 1100 | image_tag: widths: '314, 450, 628, 874, 1100', sizes: image_sizes, loading: 'lazy', alt: image_alt, style: focal_style }}
+                {%- endif -%}
+              {%- endcapture -%}
+              {%- render 'fa-blog-posts-card',
+                uid: card_uid,
+                media: card_media,
+                meta: meta_parts,
+                title: article.title,
+                url: article.url,
+                link_label: link_label,
+                link_last: link_last
+              -%}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- assign card_uid = 'fa-blog-posts-' | append: section.id | append: '-' | append: block.id -%}
+            <li class="fa-blog-posts__item" {{ block.shopify_attributes }}>
+              {%- capture card_media -%}
+                {%- if block.settings.image != blank -%}
+                  {%- liquid
+                    assign focal = block.settings.image.presentation.focal_point | default: 'center'
+                    assign focal_style = '--fa-bp-focal: ' | append: focal
+                    assign image_alt = block.settings.image.alt | default: ''
+                  -%}
+                  {{ block.settings.image | image_url: width: 1100 | image_tag: widths: '314, 450, 628, 874, 1100', sizes: image_sizes, loading: 'lazy', alt: image_alt, style: focal_style }}
+                {%- elsif block.settings.fallback_asset != blank -%}
+                  <img src="{{ block.settings.fallback_asset | asset_url }}" alt="" width="874" height="480" loading="lazy">
+                {%- endif -%}
+              {%- endcapture -%}
+              {%- render 'fa-blog-posts-card',
+                uid: card_uid,
+                media: card_media,
+                meta: block.settings.meta,
+                title: block.settings.title,
+                url: block.settings.link,
+                link_label: link_label,
+                link_last: link_last
+              -%}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      {%- comment -%} Figma V6 2669:25802: a light button centred 38px below the cards. {%- endcomment -%}
+      <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--light fa-blog-posts__button" data-fa-reveal="up">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice blog posts",
+  "tag": "div",
+  "class": "fa-blog-posts-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Chinese medicine, explained"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text",
+      "default": "<p>Practical tips from our practitioners for better energy, sleep, digestion, and calm.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Articles"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog",
+      "info": "Shows the latest articles of this blog. Without a blog (or while it has no articles) the Post blocks below are shown."
+    },
+    {
+      "type": "range",
+      "id": "posts_count",
+      "label": "Number of articles",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "info": "Used with a blog. Three fit one row on desktop; more continue on a second row."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show publish date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_time",
+      "label": "Show read time",
+      "default": true,
+      "info": "Estimated from the article length (200 words a minute)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "label": "Show category (first tag)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read article →",
+      "info": "A trailing → slides on hover."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Shown below the posts. Leave blank for no button."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets other sections jump here, e.g. articles (link to #articles). Letters, numbers and hyphens."
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 60,
+      "info": "Up to 899px."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Replaces the bundled texture."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background texture (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the bundled mobile texture."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled background file",
+      "default": "fa-blog-posts-bg.jpg",
+      "info": "Theme asset used when no background texture is picked. Clear both bundled files for a plain moss band."
+    },
+    {
+      "type": "text",
+      "id": "background_asset_mobile",
+      "label": "Bundled mobile background file",
+      "default": "fa-blog-posts-bg-mobile.jpg",
+      "info": "Theme asset for phones (up to 899px) when no background texture is picked."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Post",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shown when no blog is selected, or the blog has no articles yet."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Cropped to a 437 x 240 frame (314 x 172 on phones). Upload at least 900px wide."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta line",
+          "default": "Mar 5, 2025 · 3 min read · Sound Therapy",
+          "info": "Date, read time and category. Words are capitalised as in the design."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "The Healing Harmony of Hypno-Sound Therapy & Ear Acupuncture"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Article link",
+          "info": "Blank shows the link label without a link."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice blog posts",
+      "blocks": [
+        {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-hypno-sound.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Sound Therapy",
+            "title": "The Healing Harmony of Hypno-Sound Therapy & Ear Acupuncture"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-la-fires.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Respiratory",
+            "title": "Protecting Your Lungs and Health During the LA Fires"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-acne.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Skin",
+            "title": "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

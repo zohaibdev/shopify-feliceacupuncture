@@ -1,0 +1,435 @@
+{%- comment -%}
+  Felice feature cards — centred heading + intro and a row of moss photo cards (photo, title, short text and a
+  pale tag panel at the bottom) on a textured band, with an optional button below.
+  Our Approach page "The four pillars of healing" (file B4QcctWXiG9ywP3uRA3coG): desktop 2270:17607 (band 2270:17608,
+  content 2270:17610, cards 2270:17894 / 2272:18084 / 18141 / 18158), mobile 2305:4694 (band) / 2305:4696 (content).
+  Desktop (>= 1100): one row of up to 4 columns ("Cards per row"). Tablet (900–1099): 4 per row becomes 2 per row.
+  Mobile (<= 899): horizontal swipe row of 314px cards (.fa-swipe).
+  The card surface uses the same moss texture recipe as fa-services (paper + 80% moss), corners rounded 8px.
+  Homepage V5 "The truth about Traditional Chinese Medicine" (same file, 2615:8811): "Card style: Linen" (linen cards,
+  garnet text, 326 x 210 photos, radius 12), "Heading colour: Linen", heading 882 wide / 58px line height, olive
+  leaf texture fa-feature-cards-truth-bg(-mobile).jpg.
+{%- endcomment -%}
+{{ 'fa-feature-cards.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign columns = section.settings.columns | default: 4
+  assign card_style = section.settings.card_style | default: 'moss'
+  assign heading_color = section.settings.heading_color | default: 'garnet'
+  assign default_id = 'fa-feature-cards-' | append: section.id
+  assign title_id = 'fa-feature-cards-title-' | append: section.id
+  assign desktop_bg = section.settings.background_asset | default: section.settings.background_asset_mobile
+  case columns
+    when 2
+      assign image_sizes = '(min-width: 1100px) calc((min(100vw, 1440px) - 112px) / 2), (min-width: 900px) calc((100vw - 76px) / 2), 314px'
+    when 3
+      assign image_sizes = '(min-width: 1100px) calc((min(100vw, 1440px) - 124px) / 3), (min-width: 900px) calc((100vw - 88px) / 3), 314px'
+    else
+      assign image_sizes = '(min-width: 1100px) calc((min(100vw, 1440px) - 136px) / 4), (min-width: 900px) calc((100vw - 76px) / 2), 314px'
+  endcase
+-%}
+<section
+  class="fa-section fa-section--pad fa-feature-cards fa-feature-cards--cols-{{ columns }}{% if card_style == 'linen' %} fa-feature-cards--linen{% elsif card_style == 'moss_large' %} fa-feature-cards--moss-large{% elsif card_style == 'moss_photo' %} fa-feature-cards--moss-photo{% elsif card_style == 'moss_icon' %} fa-feature-cards--moss-icon{% endif %}{% if heading_color == 'linen' %} fa-feature-cards--heading-linen{% elsif heading_color == 'moss' %} fa-feature-cards--heading-moss{% endif %}{% if section.settings.mobile_layout == 'grid' %} fa-feature-cards--mobile-grid{% endif %}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  style="--fa-fc-cols: {{ columns }}; --fa-fc-pad-m: {{ section.settings.padding_mobile | default: 60 }}px; --fa-fc-heading-w: {{ section.settings.heading_width | default: 810 }}px; --fa-fc-title-lh: {{ section.settings.heading_line_height | default: 56 }}px;"
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if section.settings.background != blank or desktop_bg != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      <picture>
+        {%- if section.settings.background_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+        {%- elsif section.settings.background == blank and section.settings.background_asset_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_asset_mobile | asset_url }}" width="750" height="1352">
+        {%- endif -%}
+        {%- if section.settings.background != blank -%}
+          {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- else -%}
+          {%- comment -%} Cover-fitted, so the size is only a hint (the bundled band is 1440 x 814). {%- endcomment -%}
+          <img src="{{ desktop_bg | asset_url }}" alt="" width="1440" height="814" loading="lazy">
+        {%- endif -%}
+      </picture>
+    </div>
+  {%- endif -%}
+
+  <div class="fa-container fa-feature-cards__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-feature-cards__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-feature-cards__heading-title" id="{{ title_id }}">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-feature-cards__intro">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="fa-feature-cards__list{% unless section.settings.mobile_layout == 'grid' %} fa-swipe{% endunless %}" role="list" data-fa-reveal="up" data-fa-reveal-stagger{% if section.settings.card_background_asset != blank and card_style != 'linen' %} style="--fa-fc-card-bg: url('{{ section.settings.card_background_asset | asset_url }}');"{% endif %}>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign title = block.settings.title | escape
+            assign title_text = block.settings.title | newline_to_br | replace: '<br />', ' ' | strip_newlines | replace: '  ', ' ' | strip
+            assign title_plain = title_text | escape
+            assign card_href = block.settings.link
+            if card_href != blank
+              assign card_tag_name = 'a'
+            else
+              assign card_tag_name = 'div'
+            endif
+            assign card_uid = 'fa-feature-cards-' | append: section.id | append: '-' | append: block.id
+          -%}
+          <li class="fa-feature-cards__item{% if block.settings.text_small_mobile %} fa-feature-cards__item--text-sm{% endif %}" style="--fa-fc-text-w: {{ block.settings.text_width | default: 274 }}px;" {{ block.shopify_attributes }}>
+            <{{ card_tag_name }} class="fa-feature-cards__card"{% if card_href != blank %} href="{{ card_href }}"{% render 'fa-link-target', url: card_href %}{% if title != blank %} aria-labelledby="{{ card_uid }}-title"{% endif %}{% endif %}>
+              {%- if card_style == 'moss_icon' -%}
+                {%- liquid
+                  assign icon_url = blank
+                  if block.settings.icon_image != blank
+                    assign icon_url = block.settings.icon_image | image_url: width: 160
+                  elsif block.settings.icon_asset != blank
+                    assign icon_url = block.settings.icon_asset | asset_url
+                  endif
+                -%}
+                {%- if icon_url != blank -%}
+                  <span class="fa-feature-cards__icon" style="--fa-fc-icon: url('{{ icon_url }}');" aria-hidden="true"></span>
+                {%- endif -%}
+              {%- else -%}
+              <div class="fa-feature-cards__media fa-media">
+                {%- if block.settings.image != blank -%}
+                  {%- liquid
+                    assign image_alt = block.settings.image.alt | default: title_text
+                    assign focal = block.settings.image.presentation.focal_point | default: 'center'
+                    assign focal_style = '--fa-fc-focal: ' | append: focal
+                  -%}
+                  {{ block.settings.image | image_url: width: 1400 | image_tag: widths: '314, 450, 652, 900, 1100, 1400', sizes: image_sizes, loading: 'lazy', alt: image_alt, style: focal_style }}
+                {%- elsif block.settings.fallback_asset != blank -%}
+                  <picture>
+                    {%- if block.settings.fallback_asset_mobile != blank -%}<source media="(max-width: 899px)" srcset="{{ block.settings.fallback_asset_mobile | asset_url }}">{%- endif -%}
+                    <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ title_plain }}" width="652" height="{% if card_style == 'linen' %}420{% else %}542{% endif %}" loading="lazy">
+                  </picture>
+                {%- endif -%}
+              </div>
+              {%- endif -%}
+              <div class="fa-feature-cards__body">
+                {%- if title != blank -%}
+                  <h3 class="fa-feature-cards__title" id="{{ card_uid }}-title">{{ title | newline_to_br }}</h3>
+                {%- endif -%}
+                {%- if card_style == 'moss_icon' and block.settings.tag != blank -%}
+                  <p class="fa-feature-cards__meta">{{ block.settings.tag | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="fa-feature-cards__text">{{ block.settings.text | escape | newline_to_br }}</p>
+                {%- endif -%}
+                {%- if block.settings.tag != blank and card_style != 'moss_icon' -%}
+                  <p class="fa-feature-cards__tag">{{ block.settings.tag | escape }}</p>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.button_label != blank -%}
+                {%- comment -%} The whole card is the link (when set), so the button is drawn, not nested. {%- endcomment -%}
+                <span class="fa-btn fa-btn--light fa-feature-cards__card-button">{{ block.settings.button_label | escape }}</span>
+              {%- endif -%}
+            </{{ card_tag_name }}>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary fa-feature-cards__button" data-fa-reveal="up">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice feature cards",
+  "tag": "div",
+  "class": "fa-feature-cards-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Cards on mobile",
+      "options": [
+        { "value": "swipe", "label": "Swipe row" },
+        { "value": "grid", "label": "Two-column grid" }
+      ],
+      "default": "swipe"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Four Pillars of Healing"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text",
+      "info": "Optional. Leave blank for no intro."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Optional. Leave blank for no button."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets other sections jump here, e.g. pillars (link to #pillars). Letters, numbers and hyphens."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "moss", "label": "Moss (photo 6:5, white text)" },
+        { "value": "linen", "label": "Linen (wide photo, garnet text)" },
+        { "value": "moss_large", "label": "Moss, larger text (16px at 80%)" },
+        { "value": "moss_photo", "label": "Plain moss, rounded photo (328 x 241)" },
+        { "value": "moss_icon", "label": "Moss, icon and button (no photo)" }
+      ],
+      "default": "moss",
+      "info": "Linen cards have a 326 x 210 photo, 12px corners and the text centred below the photo; the card texture file is not used."
+    },
+    {
+      "type": "select",
+      "id": "heading_color",
+      "label": "Heading colour",
+      "options": [
+        { "value": "garnet", "label": "Garnet" },
+        { "value": "linen", "label": "Linen (for dark backgrounds)" },
+        { "value": "moss", "label": "Moss" }
+      ],
+      "default": "garnet"
+    },
+    {
+      "type": "range",
+      "id": "heading_width",
+      "label": "Heading width (desktop)",
+      "info": "Sets where the heading and intro wrap on desktop and tablet.",
+      "min": 750,
+      "max": 950,
+      "step": 2,
+      "unit": "px",
+      "default": 810
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "Heading line height (desktop)",
+      "info": "Space between heading lines when it wraps (1100px and wider).",
+      "min": 44,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "info": "Tablets show 4 per row as 2 per row. Phones always show a swipe row."
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 60,
+      "info": "Up to 899px. Desktop and tablet use the standard section padding."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Replaces the bundled texture."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background texture (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the bundled mobile texture."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled background file",
+      "default": "fa-feature-cards-bg.jpg",
+      "info": "Theme asset used when no background texture is picked. Clear both bundled files for a plain tan band."
+    },
+    {
+      "type": "text",
+      "id": "background_asset_mobile",
+      "label": "Bundled mobile background file",
+      "default": "fa-feature-cards-bg-mobile.jpg",
+      "info": "Theme asset for phones (up to 899px) when no background texture is picked."
+    },
+    {
+      "type": "text",
+      "id": "card_background_asset",
+      "label": "Bundled card texture file",
+      "default": "fa-feature-cards-card-bg.jpg",
+      "info": "Theme asset behind each card's text. Blank leaves the cards plain moss green."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Cropped to a 6:5 frame: 326 x 271 with 4 cards per row (314 x 261 on phones), up to 664 wide with 2 per row. Upload at least 1400px wide."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset_mobile",
+          "label": "Bundled image file (mobile)",
+          "info": "Optional: the phone crop (up to 899px) of the bundled image."
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Title",
+          "info": "Line breaks are kept.",
+          "default": "Acupuncture"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "The needles are inserted at specific depths to stimulate the nervous and immune systems."
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag line",
+          "info": "Short line in the pale panel at the bottom of the card. Blank hides the panel."
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon (icon card style)",
+          "info": "Shape on a transparent background, painted linen (52 x 52)."
+        },
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Bundled icon file",
+          "info": "Theme asset used when no icon is picked, e.g. fa-feature-cards-icon-consultation.png."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "info": "Shown at the foot of the card; it uses the card link."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional. Makes the whole card clickable."
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Text width (desktop)",
+          "min": 200,
+          "max": 320,
+          "step": 2,
+          "unit": "px",
+          "default": 274,
+          "info": "Where the text wraps on desktop and tablet (Figma: 274, or 306 for longer texts). Phones use the card width."
+        },
+        {
+          "type": "checkbox",
+          "id": "text_small_mobile",
+          "label": "Smaller text on phones",
+          "info": "13px instead of 14px, so a longer text keeps to two lines on phones.",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice feature cards",
+      "settings": {
+        "text": "<p>Healing happens when yin and yang are in harmony and life is in balance. Our work is rooted in four timeless pillars that guide the body back to balance:</p>"
+      },
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-acupuncture.jpg",
+            "title": "Acupuncture",
+            "text": "The needles are inserted at specific depths to stimulate the nervous and immune systems.",
+            "tag": "Restores flow, releases stagnation, and balances energy."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-herbal-medicine.jpg",
+            "title": "Herbal Medicine",
+            "text": "Herbs are categorized by temperature, direction, and flavor to support balance in the body.",
+            "tag": "Nourishes from within using synergistic plant formulas."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-food-as-medicine.jpg",
+            "title": "Food as Medicine",
+            "text": "The energetics of temperature, flavor, and health how to choose foods that balance energy and digestion.",
+            "tag": "Aligns diet with nature to support digestion and mood.",
+            "text_width": 306,
+            "text_small_mobile": true
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-lifestyle-practices.jpg",
+            "title": "Lifestyle Practices",
+            "text": "Movement, breathwork, and simple rituals that balance yin and yang throughout your day.",
+            "tag": "Cultivates regulation through rest, ritual, and awareness.",
+            "text_width": 306
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

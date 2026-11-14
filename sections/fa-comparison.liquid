@@ -1,0 +1,241 @@
+{%- comment -%}
+  Felice comparison — "How it works, in two languages": centred heading + intro over side-by-side columns, each a
+  photo, a column title and quote paragraphs, on a moss botanical texture.
+  Figma (Our Approach v1, file B4QcctWXiG9ywP3uRA3coG): desktop 2267:16180 band y 3145–4111 — background 2267:16580,
+  content 2267:16581 (heading 2267:16582, columns 2267:18657 / 2267:18716), botanical 2267:16751 (owned here: it rises
+  into the band above). Mobile 2305:4556 band y 2757–4013 — background 2305:4771, heading 2305:4772, columns 2305:4776.
+  Desktop / tablet (900+): one column per block (up to three per row), 608 x 454 photos at 1440.
+  Mobile (<= 899): the columns stack (photo 351 x 340 at 375); no botanical in the mobile design.
+{%- endcomment -%}
+{{ 'fa-comparison.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cols = section.blocks.size | at_most: 3 | at_least: 1
+  comment
+    Photo slot widths for the srcset: 608px columns at 1440 (three per row: 425px), else the share of the screen.
+  endcomment
+  if cols == 3
+    assign photo_wide = '425px'
+  else
+    assign photo_wide = '608px'
+  endif
+  assign photo_sizes = '(min-width: 1440px) ' | append: photo_wide | append: ', (min-width: 900px) calc((100vw - 96px) / ' | append: cols | append: '), min(100vw - 24px, 560px)'
+-%}
+
+<section class="fa-section fa-comparison" id="fa-comparison-{{ section.id }}"{% if section.settings.heading != blank %} aria-labelledby="fa-comparison-title-{{ section.id }}"{% endif %} style="--fa-cmp-cols: {{ cols }}; --fa-cmp-heading-w-m: {{ section.settings.heading_width_mobile }}px;">
+  <div class="fa-bg" aria-hidden="true">
+    {%- comment -%}
+      Mobile (<= 899) has its own Figma crop of the texture (2305:4771); a picked desktop image is used on mobile too
+      unless a mobile image is picked.
+    {%- endcomment -%}
+    <picture>
+      {%- if section.settings.background_mobile != blank -%}
+        <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+      {%- elsif section.settings.background == blank -%}
+        <source media="(max-width: 899px)" srcset="{{ 'fa-comparison-bg-mobile.jpg' | asset_url }}" width="750" height="2512">
+      {%- endif -%}
+      {%- if section.settings.background != blank -%}
+        {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+      {%- else -%}
+        <img src="{{ 'fa-comparison-bg.jpg' | asset_url }}" alt="" width="1440" height="966" loading="lazy">
+      {%- endif -%}
+    </picture>
+  </div>
+  {%- if section.settings.show_botanical -%}
+    <img class="fa-deco fa-comparison__botanical" src="{{ 'fa-first-visit-botanical.png' | asset_url }}" width="544" height="852" loading="lazy" alt="" aria-hidden="true">
+  {%- endif -%}
+
+  <div class="fa-container fa-comparison__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-comparison__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-comparison__heading-title" id="fa-comparison-title-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-comparison__intro">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="fa-comparison__grid" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- for block in section.blocks -%}
+          <article class="fa-comparison__column" style="--fa-cmp-text-w: {{ block.settings.text_width }}px; --fa-cmp-title-w-m: {{ block.settings.title_width_mobile }}px;" {{ block.shopify_attributes }}>
+            <div class="fa-comparison__media fa-media">
+              {%- if block.settings.image != blank -%}
+                {%- liquid
+                  assign alt = block.settings.image.alt | default: block.settings.alt
+                  assign focal = block.settings.image.presentation.focal_point | default: 'center'
+                  assign focal_style = '--fa-cmp-focal: ' | append: focal
+                -%}
+                {{ block.settings.image | image_url: width: 1216 | image_tag: widths: '375, 560, 760, 1000, 1216', sizes: photo_sizes, loading: 'lazy', alt: alt, class: 'fa-comparison__photo', style: focal_style }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img class="fa-comparison__photo" src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ block.settings.alt | escape }}" width="980" height="676" loading="lazy">
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank or block.settings.text != blank -%}
+              <div class="fa-comparison__body">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="fa-comparison__title">{{ block.settings.title | escape | newline_to_br }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="fa-comparison__text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice comparison",
+  "tag": "div",
+  "class": "fa-comparison-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Uses the bundled moss botanical texture when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background texture (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the bundled mobile texture."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_botanical",
+      "label": "Show botanical",
+      "info": "Chrysanthemum at the top right, rising into the section above. Desktop only (1100px and wider).",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Line breaks are kept.",
+      "default": "How it works, in two languages"
+    },
+    {
+      "type": "range",
+      "id": "heading_width_mobile",
+      "label": "Heading width (mobile)",
+      "info": "Narrower values wrap the heading earlier on phones.",
+      "min": 251,
+      "max": 351,
+      "step": 1,
+      "unit": "px",
+      "default": 259
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro",
+      "default": "<p>The same treatment, described twice. This is the section that does the work of the whole page.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Shown at 608 x 454 on desktop, 351 x 340 on mobile (cropped to fill)."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Fallback theme asset",
+          "info": "Theme asset filename shown when no image is picked."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image description",
+          "info": "Alt text for the fallback photo, and for a picked image without its own alt text."
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Title",
+          "info": "Line breaks are kept."
+        },
+        {
+          "type": "range",
+          "id": "title_width_mobile",
+          "label": "Title width (mobile)",
+          "info": "Narrower values wrap the title earlier on phones.",
+          "min": 251,
+          "max": 351,
+          "step": 1,
+          "unit": "px",
+          "default": 351
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "info": "Each paragraph is a separate quote."
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Text width (desktop)",
+          "info": "Sets where the lines wrap; never wider than the column plus the gap beside it.",
+          "min": 440,
+          "max": 640,
+          "step": 2,
+          "unit": "px",
+          "default": 576
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice comparison",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "fallback_asset": "fa-comparison-chinese-medicine.jpg",
+            "alt": "A practitioner placing a fine acupuncture needle on a patient's abdomen",
+            "title": "In the language of Chinese medicine",
+            "title_width_mobile": 317,
+            "text": "<p>“Acupuncture consists of placing thin needles at specific points of energy reservoirs to tap into the body’s qi.”</p><p>“With acupuncture, we elicit your body’s innate power to find balance.”</p>",
+            "text_width": 554
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "fallback_asset": "fa-comparison-neuroscience.jpg",
+            "alt": "A practitioner treating a patient lying on the treatment table",
+            "title": "In the language of neuroscience",
+            "text": "<p>“The needles are placed at certain depths to invigorate the nervous system and signal the immune system. Insertion of needles creates micro-trauma and vasodilation, therefore increasing blood flow to your organs and tissues.”</p>",
+            "text_width": 618
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

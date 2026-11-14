@@ -1,0 +1,203 @@
+/*
+  Felice module grid (sections/fa-modules.liquid).
+  Figma E-Courses V1 2770:2778 (1440 x 780): content 105px from the top, 97 from the bottom; title Marisa 60 / 58, -4%,
+  linen, intro (16 / 27) 20px below, grid 38px under it. Grid 2770:2781: four 315px columns and rows of 239 / 227,
+  12px apart — module 1 and 5 run both rows, 2 spans the middle columns, 3 and 4 sit under it. Cards: linen paper
+  texture (r0); photo (r2; r0 on the small cards) above a centred label (Libre Caslon 16, +1%, moss 80%) and title
+  (Marisa 32.73, -4%, moss; 30px lines when it wraps). Insets: tall 20, wide 18 / 16.5, small 12; 19–20px below the text.
+*/
+
+.fa-modules {
+  position: relative;
+  isolation: isolate;
+  padding-block: 105px 97px;
+  background-color: var(--fa-clay);
+  color: var(--fa-linen);
+}
+
+.fa-modules__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+}
+
+.fa-modules__heading { gap: 20px; }
+
+.fa-modules__title { line-height: 58px; }
+
+.fa-modules__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 315px));
+  grid-template-rows: 239px 227px;
+  grid-template-areas:
+    'm1 m2 m2 m5'
+    'm1 m3 m4 m5';
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-modules__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 20px 20px 20px;
+  background: var(--fa-linen) var(--fa-mod-card-bg, none) center / cover;
+  color: var(--fa-moss);
+  text-align: center;
+}
+
+/* shortcut: the bento places only the first five modules; a sixth+ flows into extra rows below. */
+.fa-modules__card:nth-child(1) { grid-area: m1; }
+.fa-modules__card:nth-child(2) { grid-area: m2; padding: 18px 16.5px 19px; gap: 13px; }
+.fa-modules__card:nth-child(3) { grid-area: m3; }
+.fa-modules__card:nth-child(4) { grid-area: m4; }
+.fa-modules__card:nth-child(5) { grid-area: m5; padding-bottom: 19.4px; }
+.fa-modules__card:nth-child(n + 6) { grid-row: auto; }
+
+.fa-modules__card:nth-child(3),
+.fa-modules__card:nth-child(4) {
+  padding: 12px 12px 19px;
+  gap: 11px;
+}
+
+.fa-modules__media {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--fa-radius);
+  background: rgb(0 0 0 / 0.06);
+}
+
+.fa-modules__card:nth-child(3) .fa-modules__media,
+.fa-modules__card:nth-child(4) .fa-modules__media { border-radius: 0; }
+
+.fa-modules__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fa-modules__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 13.6px;
+}
+
+.fa-modules__card:nth-child(2) .fa-modules__copy { gap: 12px; }
+
+/* Module 5's two-line title is set at 32px in a 285px box, 5px wider than the card's text column on each side. */
+.fa-modules__card:nth-child(5) .fa-modules__card-title {
+  margin-inline: -5px;
+  font-size: 32px;
+}
+
+.fa-modules__card:nth-child(3) .fa-modules__copy,
+.fa-modules__card:nth-child(4) .fa-modules__copy { gap: 10px; }
+
+.fa-modules__label {
+  margin: 0;
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  opacity: 0.8;
+}
+
+.fa-modules__card-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32.73px;
+  line-height: 30px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+/* ---------- Tablet / mobile (no design): two columns, then one ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-modules { padding-block: var(--fa-section-pad); }
+
+  .fa-modules__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-template-areas: none;
+    grid-auto-rows: 300px;
+  }
+
+  .fa-modules__card:nth-child(n) { grid-area: auto; }
+  .fa-modules__card:nth-child(2) { grid-column: span 2; }
+}
+
+/* Mobile = E-Courses mobile 2860:26195 "What you will learn" (1254-2960): title 32 / 30 (-4%), 14px, intro 14 / 18
+   in 304px; 24px; cards 12px apart: the first and last (featured) with a 307 x 274 photo 20 / 22px in, the others a
+   311 x 140 photo 20px in; 14px; label LCC 14 +1%, 8px, title Marisa 24 / 26 (-4%); 20px foot. */
+@media screen and (max-width: 899px) {
+  .fa-modules { padding-block: 60px; }
+  .fa-modules__inner { gap: 24px; }
+  .fa-modules__heading { gap: 14px; }
+
+  .fa-modules__title {
+    line-height: 30px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-modules__heading .fa-heading__text {
+    max-width: 304px;
+    margin-inline: auto;
+    line-height: 18px;
+  }
+
+  .fa-modules__grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+    gap: 12px;
+  }
+
+  .fa-modules__card:nth-child(n) {
+    grid-column: auto;
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .fa-modules__card:first-child,
+  .fa-modules__card:last-child { padding-inline: 22px; }
+
+  .fa-modules__media,
+  .fa-modules__card:nth-child(n) .fa-modules__media {
+    flex: none;
+    aspect-ratio: 311 / 140;
+    border-radius: var(--fa-radius);
+  }
+
+  .fa-modules__card:first-child .fa-modules__media,
+  .fa-modules__card:last-child .fa-modules__media { aspect-ratio: 307 / 274; }
+
+  .fa-modules__card:nth-child(n) .fa-modules__copy { gap: 8px; }
+
+  .fa-modules__label {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .fa-modules__card:last-child .fa-modules__card-title { max-width: 250px; } /* "Lifestyle practices / for balance" */
+
+  .fa-modules__card:nth-child(n) .fa-modules__card-title {
+    margin-inline: auto;
+    font-size: 24px;
+    line-height: 26px;
+  }
+}
+
+/* Bundled photo with a phone crop: the <picture> wrapper lays out as if the img were the media's own child. */
+.fa-modules__media picture { display: contents; }

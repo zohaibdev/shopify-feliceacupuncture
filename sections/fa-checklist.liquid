@@ -1,0 +1,89 @@
+{%- comment -%}
+  Felice image + checklist — centred heading, then a photo beside a list of ticked items (title + short text) and an
+  optional button.
+  Figma: E-Courses V1 "What's included" (file B4QcctWXiG9ywP3uRA3coG, frame 2770:2692, band 2770:3112).
+{%- endcomment -%}
+
+{{ 'fa-checklist.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign default_id = 'fa-checklist-' | append: section.id
+  assign title_id = 'fa-checklist-title-' | append: section.id
+  assign bg = section.settings.background_asset
+-%}
+<section
+  class="fa-section fa-checklist"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  style="--fa-cl-pad-top: {{ section.settings.padding_top }}px; --fa-cl-pad-bottom: {{ section.settings.padding_bottom }}px;"
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if bg != blank -%}
+    <div class="fa-bg" aria-hidden="true"><img src="{{ bg | asset_url }}" width="1440" height="805" loading="lazy" alt=""></div>
+  {%- endif -%}
+
+  <div class="fa-container fa-checklist__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="fa-heading__title fa-checklist__title" id="{{ title_id }}" data-fa-reveal="up">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="fa-checklist__row">
+      <div class="fa-checklist__media fa-media" data-fa-reveal="up">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1344 | image_tag: widths: '672, 1000, 1344', sizes: '(min-width: 1100px) 672px, calc(100vw - 2 * var(--fa-gutter))', loading: 'lazy', class: 'fa-checklist__photo', alt: section.settings.image_alt }}
+        {%- elsif section.settings.fallback_asset != blank -%}
+          <img class="fa-checklist__photo" src="{{ section.settings.fallback_asset | asset_url }}" width="1344" height="990" loading="lazy" alt="{{ section.settings.image_alt | escape }}">
+        {%- endif -%}
+      </div>
+
+      <div class="fa-checklist__body" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.blocks.size > 0 -%}
+          <ul class="fa-checklist__list" role="list">
+            {%- for block in section.blocks -%}
+              <li class="fa-checklist__item" {{ block.shopify_attributes }}>
+                <span class="fa-checklist__tick" aria-hidden="true">✓</span>
+                <div class="fa-checklist__copy">
+                  {%- if block.settings.title != blank -%}<h3 class="fa-checklist__item-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+                  {%- if block.settings.text != blank -%}<p class="fa-checklist__item-text">{{ block.settings.text | escape }}</p>{%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary fa-btn--compact fa-checklist__button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice image + checklist",
+  "tag": "div",
+  "class": "fa-checklist-wrapper",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "info": "Optional, for in-page links." },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop)", "min": 40, "max": 200, "step": 2, "unit": "px", "default": 120 },
+    { "type": "range", "id": "padding_bottom", "label": "Space below (desktop)", "min": 40, "max": 200, "step": 2, "unit": "px", "default": 120 },
+    { "type": "text", "id": "background_asset", "label": "Background (bundled file)", "default": "fa-checklist-bg.jpg" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's included" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback image (bundled file)", "default": "fa-checklist-courses.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image description" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Felice image + checklist", "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }] }]
+}
+{% endschema %}

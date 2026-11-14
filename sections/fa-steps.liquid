@@ -1,0 +1,339 @@
+{%- comment -%}
+  Felice "Where to go next" — full-bleed photo band with a centred heading, numbered steps (round photo, number badge,
+  title, short text) and up to two buttons.
+  Figma (file B4Qc…, Our Approach v1): desktop group 2275:19392 (photo 2275:19393, content 2275:19515);
+  mobile 2305:5164 (photo) + 2305:5306 (content).
+  The bundled photos are Figma exports and already include its darkening (exposure, 30% black, noise); the shade
+  setting darkens your own photo instead.
+  Desktop and tablet (900+): one row of columns. Mobile (<= 899): horizontal swipe row (.fa-swipe).
+{%- endcomment -%}
+{{ 'fa-steps.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign shade = section.settings.overlay_opacity | default: 0 | divided_by: 100.0
+  assign shade_desktop = 0
+  assign shade_mobile = 0
+  if section.settings.image != blank
+    assign shade_desktop = shade
+    assign shade_mobile = shade
+  endif
+  assign fallback = section.settings.fallback_asset | strip
+  assign fallback_mobile = section.settings.fallback_asset_mobile | strip
+  if section.settings.image_mobile != blank
+    assign shade_mobile = shade
+    if section.settings.image == blank and fallback == blank
+      assign shade_desktop = shade
+    endif
+  endif
+  assign fa_default_id = 'fa-steps-' | append: section.id
+-%}
+<section
+  class="fa-section fa-steps"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_default_id }}"
+  {%- if section.settings.heading != blank %} aria-labelledby="fa-steps-title-{{ section.id }}"{% endif %}
+  style="--fa-steps-shade: {{ shade_desktop }}; --fa-steps-shade-m: {{ shade_mobile }};"
+>
+  <div class="fa-bg fa-steps__bg" aria-hidden="true">
+    {%- if section.settings.image != blank or section.settings.image_mobile != blank or fallback != blank -%}
+      <picture>
+        {%- if section.settings.image_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.image_mobile | image_url: width: 750 }} 750w, {{ section.settings.image_mobile | image_url: width: 1125 }} 1125w, {{ section.settings.image_mobile | image_url: width: 1800 }} 1800w" sizes="100vw">
+        {%- elsif section.settings.image == blank and fallback_mobile != blank -%}
+          <source media="(max-width: 749px)" srcset="{{ fallback_mobile | asset_url }}" width="750" height="1090">
+        {%- endif -%}
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 2880 | image_tag: widths: '750, 1080, 1440, 1920, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- elsif fallback != blank -%}
+          <img src="{{ fallback | asset_url }}" alt="" width="1440" height="780" loading="lazy">
+        {%- else -%}
+          {{ section.settings.image_mobile | image_url: width: 1125 | image_tag: loading: 'lazy', alt: '' }}
+        {%- endif -%}
+      </picture>
+    {%- endif -%}
+    <div class="fa-steps__shade"></div>
+  </div>
+
+  <div class="fa-container fa-steps__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-steps__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-steps__heading-title" id="fa-steps-title-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ol class="fa-steps__list fa-swipe" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign text_w = block.settings.text_width | default: 360
+            assign text_w_m = block.settings.text_width_mobile | default: 220
+            assign step_fallback = block.settings.fallback_asset | strip
+            assign step_alt = block.settings.alt | strip
+            if block.settings.image != blank and block.settings.image.alt != blank
+              assign step_alt = block.settings.image.alt
+            endif
+          -%}
+          <li class="fa-steps__step" style="--fa-steps-text-w: {{ text_w }}px; --fa-steps-text-w-m: {{ text_w_m }}px;" {{ block.shopify_attributes }}>
+            <div class="fa-steps__photo fa-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 600 | image_tag: widths: '200, 300, 400, 600', sizes: '(min-width: 900px) 247px, 180px', loading: 'lazy', alt: step_alt }}
+              {%- elsif step_fallback != blank -%}
+                <img src="{{ step_fallback | asset_url }}" alt="{{ step_alt | escape }}" width="304" height="314" loading="lazy">
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.title != blank or block.settings.text != blank -%}
+              <div class="fa-steps__body">
+                {%- if block.settings.title != blank or block.settings.number != blank -%}
+                  <div class="fa-steps__title-row">
+                    {%- if block.settings.number != blank -%}
+                      <span class="fa-steps__badge" aria-hidden="true"><span class="fa-trim">{{ block.settings.number | escape }}</span></span>
+                    {%- endif -%}
+                    {%- if block.settings.title != blank -%}
+                      <h3 class="fa-steps__title">
+                        {%- if block.settings.link != blank -%}
+                          <a class="fa-steps__link" href="{{ block.settings.link }}"{% render 'fa-link-target', url: block.settings.link %}>
+                        {%- endif -%}
+                        {%- if block.settings.number != blank -%}<span class="fa-visually-hidden">{{ block.settings.number | escape }}. </span>{%- endif -%}
+                        {{- block.settings.title | escape -}}
+                        {%- if block.settings.link != blank -%}</a>{%- endif -%}
+                      </h3>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="fa-steps__text">{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+      <div class="fa-steps__buttons" data-fa-reveal="up">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary fa-steps__button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link_2 %} class="fa-btn fa-btn--light fa-steps__button">{{ section.settings.button_label_2 | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice steps",
+  "tag": "div",
+  "class": "fa-steps-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets links jump here, e.g. next-steps (link to /pages/your-page#next-steps). Letters, numbers and hyphens."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background photo",
+      "info": "Full width, 1440 x 780 on desktop. Uses the bundled photo below when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile background photo (optional)",
+      "info": "375 x 545 on phones. Uses the background photo when empty."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Shade on your own photo",
+      "info": "Darkens an uploaded photo so the white text stays readable. The bundled photo already includes its shade.",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Bundled photo file",
+      "info": "Theme asset used when no background photo is selected.",
+      "default": "fa-steps-bg.jpg"
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset_mobile",
+      "label": "Bundled mobile photo file",
+      "info": "Theme asset used on phones (up to 749px) when no photo is selected.",
+      "default": "fa-steps-bg-mobile.jpg"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Line breaks are kept.",
+      "default": "Where to go next"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text (optional)",
+      "info": "Short intro below the heading."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "First button label",
+      "default": "Book in-clinic"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "First button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second button label",
+      "default": "Book concierge"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Shown in an oval, 247 x 256 on desktop (a 180px circle on phones)."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled photo file",
+          "info": "Theme asset used when no photo is selected."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Photo description",
+          "info": "Alt text for the bundled photo, and for a selected photo without its own alt text. Leave blank if the photo is only decorative."
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "info": "Shown in the small circle before the title. Leave blank to hide.",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Book a session"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "You can choose to visit us in-clinic in Culver City, or enjoy our concierge services right at your home."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "Makes the whole step clickable."
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Text width (desktop)",
+          "info": "Sets where the text wraps on screens 1280px and wider.",
+          "min": 300,
+          "max": 400,
+          "step": 2,
+          "unit": "px",
+          "default": 360
+        },
+        {
+          "type": "range",
+          "id": "text_width_mobile",
+          "label": "Text width (mobile)",
+          "info": "Sets where the text wraps on phones.",
+          "min": 160,
+          "max": 240,
+          "step": 2,
+          "unit": "px",
+          "default": 220
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-steps-book-a-session.jpg",
+            "alt": "Two women talking on a sofa in the clinic lounge, one with a laptop",
+            "number": "1",
+            "title": "Book a session",
+            "text": "You can choose to visit us in-clinic in Culver City, or enjoy our concierge services right at your home.",
+            "text_width": 358
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-steps-find-your-condition.jpg",
+            "alt": "A practitioner in a pinstripe jacket holding a patient’s wrist",
+            "number": "2",
+            "title": "Find your condition",
+            "text": "Pain, fertility, sleep, and digestion—what we treat and which pillar addresses it.",
+            "text_width": 362,
+            "text_width_mobile": 184
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-steps-learn-it-yourself.jpg",
+            "alt": "A smiling woman on the clinic sofa, speaking into her phone",
+            "number": "3",
+            "title": "Learn it yourself",
+            "text": "Beginner’s Guide to Traditional Chinese Medicine $350 for 5 modules, 27 lessons, lifetime access."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

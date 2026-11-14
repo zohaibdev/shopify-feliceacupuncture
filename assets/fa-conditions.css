@@ -1,0 +1,587 @@
+/* Felice conditions — Figma 414:422 / 414:423 / 414:424 (desktop), 414:1004 / 414:1010 / 414:1056 (mobile);
+   services page v2 (file B4Qc…) 2289 / 2290 / 2858 (desktop), 6708 / 6783 / 6737 (mobile);
+   homepage V5 (file B4Qc…) 2612:3246 / 2612:3248 / 2612:3247 (desktop only, mobile follows V4). */
+
+.fa-conditions {
+  position: relative;
+  overflow: clip; /* the botanical must not spill over the hero above or cause horizontal scroll */
+  color: var(--fa-linen);
+  background: #9c7d4c;
+}
+
+.fa-conditions .fa-bg img { object-position: center; }
+
+/* image 60 — rotated 7.37deg and mirrored vertically in Figma, 80% opacity. Figma places its box 177px above the
+   heading (V4 and V5), so the top follows the desktop top padding: -43.8px with the default 120 (V4), -54.8px with
+   V5's 109 (the hero covers the band's first 11px there). */
+.fa-conditions__botanical {
+  top: calc(var(--fa-cond-pad-top, 120px) - 163.8px);
+  right: -10.8px;
+  width: 228.75px;
+  height: 358.27px;
+  opacity: 0.8;
+  transform: rotate(-7.368deg) scaleY(-1);
+}
+
+/* "Small, top left" (services v2 2858: 355.7 x 459.6 box at x -65, 141px above the band) — the first-visit drawing
+   at 259.39 x 406.27, rotated 15deg and mirrored, 80% opacity. It rises into the previous section, so the section
+   clips only horizontally. */
+.fa-conditions--botanical-left { overflow-y: visible; overflow-x: clip; }
+
+/* "Standard, overlapping the section above" (homepage V6 2669:25970): the same drawing 28px higher — its box 205px
+   above the heading — so it reaches over the hero's bottom edge. Desktop only (no V6 mobile frame). */
+@media screen and (min-width: 1100px) {
+  .fa-conditions--botanical-raised { overflow-y: visible; overflow-x: clip; }
+  .fa-conditions--botanical-raised .fa-conditions__botanical { top: calc(var(--fa-cond-pad-top, 120px) - 191.8px); }
+}
+
+.fa-conditions__botanical--left {
+  top: -114.35px;
+  right: auto;
+  left: -16.84px;
+  width: 259.39px;
+  height: 406.27px;
+  transform: rotate(-15deg) scaleY(-1);
+}
+
+.fa-conditions__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+/* Heading / intro widths come from the section settings (defaults 670px): Figma hand-sets them so the lines wrap as drawn. */
+.fa-conditions__heading { max-width: var(--fa-cond-heading-w, 670px); }
+
+.fa-conditions .fa-heading__title { color: inherit; }
+
+@media screen and (min-width: 900px) {
+  .fa-conditions .fa-heading__text { max-width: var(--fa-cond-intro-w, 670px); }
+
+  /* Title -> intro spacing from the section setting (default 24 = the shared .fa-heading gap; services 394:3078: 26).
+     The margin adds the difference to that gap. */
+  .fa-conditions .fa-heading__title + .fa-heading__text { margin-top: calc(var(--fa-cond-text-gap, 24px) - 24px); }
+}
+
+@media screen and (min-width: 1100px) {
+  .fa-conditions {
+    padding-top: var(--fa-cond-pad-top, var(--fa-section-pad));
+    padding-bottom: var(--fa-cond-pad-bottom, var(--fa-section-pad));
+  }
+}
+
+/* ---------- Cards ---------- */
+/* Per-card text widths (--fa-cond-text-w / -m) come from block settings: Figma hand-sets them so the lines wrap as drawn. */
+
+/* Grid: .fa-card-row (fa-base.css) — Figma 3 x 438px cards + 12px gaps = 1338px, centred in the container. */
+
+.fa-conditions__card {
+  display: flex;
+  flex-direction: column;
+  min-height: 466px;
+  border-radius: 2.36px;
+  background: #80764d;
+  overflow: hidden;
+  text-align: center;
+}
+
+.fa-conditions__media {
+  position: relative;
+  aspect-ratio: 438 / 275;
+  border-radius: 2.36px;
+  overflow: hidden;
+  background: #6c6441;
+}
+
+.fa-conditions__media img:not(.fa-conditions__glyphs) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Figma: rgba(0,0,0,.1) wash over every photo (block "Photo shade", desktop/tablet; services v2 row 1: 15%) */
+.fa-conditions__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--fa-cond-shade, 0.1));
+}
+
+/* Centred on the photo, moved by block "Characters vertical offset" (px on the 275px desktop photo, so it scales with
+   the photo; homepage V5 hand-places the six pairs 4px above to 8px below the centre). */
+.fa-conditions__glyphs {
+  position: absolute;
+  top: calc(50% + var(--fa-cond-glyph-y, 0) / 275 * 100%);
+  left: 50%;
+  z-index: 1;
+  width: min-content; /* one character per line */
+  transform: translate(-50%, -50%);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 37px;
+  letter-spacing: -0.04em;
+  color: var(--fa-linen);
+  text-align: center;
+  text-box: trim-both cap alphabetic;
+}
+
+/* Characters artwork, centred on the 275px photo: block "Characters height" (services v2 2303…2365 white brush
+   vectors 84px; homepage V5 set type 66px) */
+img.fa-conditions__glyphs {
+  width: auto;
+  max-width: none;
+  height: calc(var(--fa-cond-glyph-h, 84) / 275 * 100%);
+}
+
+.fa-conditions__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Figma: title starts 32px below the photo. The bottom padding never shows with the Figma copy (the 466px card
+     leaves 30px+ below the link); it keeps longer merchant text off the card edge. */
+  padding: 32px 10px 24px;
+}
+
+.fa-conditions__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-conditions__text {
+  max-width: var(--fa-cond-text-w, 366px);
+  margin: 18px 0 0;
+  font-size: 20px;
+  line-height: 30px;
+  opacity: 0.8;
+  text-box: trim-both cap alphabetic;
+}
+
+/* block "Tighter text letter spacing" (homepage V5 Hormones 2612:8775: 20 / 30, -1%) */
+.fa-conditions__card--text-tight .fa-conditions__text { letter-spacing: -0.01em; }
+
+.fa-conditions__link {
+  display: inline-block;
+  margin-top: 32px;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 0.065em;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: none;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-conditions__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* ---------- Tablet ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-conditions__inner { gap: 40px; }
+
+  .fa-conditions__botanical {
+    top: -26px;
+    right: -6px;
+    width: 137px;
+    height: 215px;
+  }
+
+  /* scaled like the standard botanical (x 0.6) */
+  .fa-conditions__botanical--left {
+    top: -68.61px;
+    right: auto;
+    left: -10.1px;
+    width: 155.63px;
+    height: 243.76px;
+  }
+
+  .fa-conditions__card { min-height: 0; }
+  .fa-conditions__body { padding-bottom: 32px; }
+  .fa-conditions__title { font-size: 28px; line-height: 1.2; }
+  .fa-conditions__text { max-width: none; font-size: 18px; line-height: 27px; text-wrap: pretty; }
+  .fa-conditions__link { font-size: 18px; }
+}
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 899px) {
+  /* section setting "Top and bottom padding (mobile)" (default 50 = --fa-section-pad; services v2: 60) */
+  .fa-conditions { padding-block: var(--fa-cond-pad-m, var(--fa-section-pad)); }
+
+  .fa-conditions__inner { gap: 0; }
+
+  /* image 60 (homepage V4 mobile 2264:813: 132.2 x 101.1 box at x 272.4, 34.8px above the band) — the drawing at
+     75.1 x 117.62, turned 76.11deg and mirrored; the part above the band is cut, as the hero covers it in Figma. */
+  .fa-conditions__botanical {
+    top: -43.05px;
+    right: -1.05px;
+    width: 75.1px;
+    height: 117.62px;
+    transform: rotate(76.11deg) scaleY(-1);
+  }
+
+  /* services v2 mobile 6737 (139.9 x 107 box at x -32, 55px above the band): the drawing at 79.48 x 124.48,
+     turned 103.9deg, not mirrored */
+  .fa-conditions__botanical--left {
+    top: -63.72px;
+    right: auto;
+    left: -1.77px;
+    width: 79.48px;
+    height: 124.48px;
+    transform: rotate(103.9deg);
+  }
+
+  /* Figma lets the intro run 6px into each gutter (363px on a 375 screen). */
+  .fa-conditions__heading {
+    max-width: none;
+    margin-inline: -6px;
+    gap: var(--fa-cond-text-gap-m, 14px); /* section setting (default 14 = the shared mobile heading gap; services v2: 16) */
+  }
+
+  /* Figma 414:1059 / 414:1060: 32/35 title (setting "Heading line height (mobile)"; services v2 6786: 31),
+     14/20/-2% intro (the shared mobile heading is 29 and 22/0) */
+  .fa-conditions .fa-heading__title { line-height: var(--fa-cond-title-lh-m, 35px); }
+  .fa-conditions .fa-heading__text { line-height: 20px; letter-spacing: -0.02em; }
+
+  .fa-conditions__grid {
+    --fa-swipe-item: 266px;
+    --fa-swipe-gap: 8px;
+    margin-top: 24px;
+  }
+
+  .fa-conditions__card { min-height: 343px; }
+  .fa-conditions__media { aspect-ratio: 266 / 202; }
+
+  /* Figma draws every mobile photo with the 10% wash (services v2 6794) */
+  .fa-conditions__media::after { background: rgba(0, 0, 0, 0.1); }
+
+  .fa-conditions__glyphs {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  /* services v2 6797: the 84px artwork is 56.4px tall on the 202px photo; other heights scale the same way */
+  img.fa-conditions__glyphs { height: calc(var(--fa-cond-glyph-h, 84) * 56.4 / 84 / 202 * 100%); }
+
+  /* Figma: the text block is centred in the space below the photo (16-26px above and below it with the Figma copy);
+     the 12px block padding only keeps longer merchant text off the photo and the card edge. */
+  .fa-conditions__body {
+    justify-content: center;
+    padding: 12px 8px;
+  }
+
+  /* Figma 414:1071 is 24/58/-4%; the title is one trimmed line, so the line-height has no visual effect where
+     text-box is supported — the tablet 1.2 is kept so engines without text-box don't grow a 58px box. */
+  .fa-conditions__title { font-size: 24px; }
+
+  .fa-conditions__text {
+    max-width: var(--fa-cond-text-w-m, 226px);
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .fa-conditions__link {
+    margin-top: 22px;
+    font-size: 14px;
+  }
+
+  /* section setting "Space above the button (mobile)" (default 16; services v2: 24) */
+  .fa-conditions__button { margin-top: var(--fa-cond-button-gap-m, 16px); }
+}
+
+/* ---------- "Cards on mobile: Two-column grid" (homepage mobile V1 2794:1089, 592–1771) ----------
+   Two 171px columns 10px apart both ways; card 281 tall (moss, r2.36): photo 171 x 139 (10% wash), the title
+   (Marisa 20, -4%) 12px below it, the text (14 / 18, -2%) 10px under the title, both 5px from the card sides, and
+   "Learn more" (Marisa 14, -3%) at the foot, 10px above the card edge. */
+@media screen and (max-width: 899px) {
+  .fa-conditions--mobile-grid .fa-conditions__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .fa-conditions--mobile-grid .fa-conditions__card { min-height: 281px; }
+  .fa-conditions--mobile-grid .fa-conditions__media { aspect-ratio: 171 / 139; }
+
+  .fa-conditions--mobile-grid .fa-conditions__body {
+    justify-content: flex-start;
+    padding: 12px 5px 10px;
+  }
+
+  .fa-conditions--mobile-grid .fa-conditions__title {
+    font-size: 20px;
+    line-height: 19px;
+  }
+
+  .fa-conditions--mobile-grid .fa-conditions__text {
+    max-width: none;
+    margin-top: 10px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-conditions--mobile-grid .fa-conditions__link {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+
+  .fa-conditions--mobile-grid .fa-conditions__button { margin-top: 32px; }
+}
+
+/* ---------- Motion (tokens + .fa-arrow-nudge: fa-base.css "Motion") ----------
+   Hover (or keyboard focus on "Learn more"): the photo zooms slightly inside its rounded frame (the Chinese
+   characters and the wash stay put), the link dims a little and its arrow slides right. */
+
+.fa-conditions__media img:not(.fa-conditions__glyphs) { transition: transform var(--fa-dur-zoom) var(--fa-ease-out); }
+
+.fa-conditions__link { transition: opacity var(--fa-dur-hover) var(--fa-ease-out); }
+
+@media (hover: hover) {
+  .fa-conditions__card:hover .fa-conditions__media img:not(.fa-conditions__glyphs) { transform: scale(var(--fa-zoom)); }
+  .fa-conditions__link:hover { opacity: 0.75; }
+}
+
+.fa-conditions__card:has(:focus-visible) .fa-conditions__media img:not(.fa-conditions__glyphs) { transform: scale(var(--fa-zoom)); }
+
+/* ---------- "Booking list" cards + "Moss" heading (Our Team V3 "Find the right practitioner" 2669:33626):
+   1342px row of 438 x 467 moss (#80764D, r2) cards 14px apart both ways; photo 439 x 261 (r12, 10% shade); 23px;
+   title Marisa 38 linen; 26px; rows 24px apart at 80%: 20px #F0DFCE dot, 12px, name (Libre Caslon 22, -1%), "Book →"
+   (Marisa 20, -3%, underlined) at the right; 30px bottom inset. Note pill 32px below. Desktop only. ---------- */
+.fa-conditions--light .fa-conditions__heading { color: var(--fa-moss); }
+
+.fa-conditions__people {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0.8;
+}
+
+.fa-conditions__person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.fa-conditions__dot {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f0dfce;
+}
+
+.fa-conditions__person-name {
+  flex: 1 1 auto;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.fa-conditions__book {
+  flex: none;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: inherit;
+}
+
+.fa-conditions__note {
+  margin-top: 0; /* spaced by the column gap */
+  padding: 16px 24px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.36);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 16px;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #61603a;
+}
+
+.fa-conditions__note p { margin: 0; }
+
+.fa-conditions__note a { color: inherit; text-decoration: underline; }
+
+.fa-conditions--booking .fa-conditions__glyphs,
+.fa-conditions--booking .fa-conditions__text,
+.fa-conditions--booking .fa-conditions__link { display: none; }
+
+@media screen and (min-width: 1100px) {
+  .fa-conditions--booking .fa-conditions__inner { gap: 32px; }
+
+  .fa-conditions--booking .fa-conditions__grid { row-gap: 14px; column-gap: 14px; }
+
+  .fa-conditions--booking .fa-conditions__card {
+    min-height: 467px;
+    border-radius: 2px;
+    background: #80764d;
+  }
+
+  .fa-conditions--booking .fa-conditions__media {
+    aspect-ratio: 439 / 261;
+    border-radius: 12px;
+  }
+
+  .fa-conditions--booking .fa-conditions__body {
+    align-items: flex-start;
+    gap: 26px;
+    padding: 23px 20px 30px;
+  }
+
+  .fa-conditions--booking .fa-conditions__title { font-size: 38px; }
+
+  /* QA 2026-10-14: Our Team 2669:33510 sets the two-line title at 60 / 56 (shared title is 60 / 50). */
+  .fa-conditions--booking .fa-heading__title { line-height: 56px; }
+
+  /* QA 2026-10-14: the Our Team note band is white @ 59% (approach / home use 36%). */
+  .fa-conditions--booking .fa-conditions__note { background: rgb(255 255 255 / 0.59); }
+}
+
+/* Setting "Intro text size" (V6 / V3 Figma: 16 / 25 on the homepage and Our Approach, 18 / 29 on Our Team). Desktop. */
+@media screen and (min-width: 900px) {
+  .fa-conditions--intro-tight .fa-heading__text { font-size: 16px; line-height: 25px; }
+  .fa-conditions--intro-large .fa-heading__text { font-size: 18px; line-height: 29px; }
+}
+
+/* Grid + "Booking list" = Our Team mobile 2821:4461 "Find the right practitioner" (3929–4849): title 32 / 30 (-7%),
+   14px, intro 14 / 20 (-2%); 18px; 171 x 196 moss cards 8px apart: photo 171 x 108, 10px, 160px column (title
+   Marisa 14 / 13 -3%, 12px, rows 11px apart: 9px dot, 4px, name 10 / 14 -3%, "Book" Marisa 10 -6% at the right),
+   10px foot; 14px; note (white 59%, 10 / 24 / 9 padding). */
+@media screen and (max-width: 899px) {
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-heading__title { letter-spacing: -0.07em; }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-heading__text {
+    line-height: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__grid {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__card {
+    min-height: 196px;
+    border-radius: 2px;
+    background: #80764d;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__media { aspect-ratio: 171 / 108; }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__body {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 5px 10px 5px;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__title {
+    font-size: 14px;
+    line-height: 13px;
+    letter-spacing: -0.03em;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__people { gap: 11px; }
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__person { gap: 4px; }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__person-name {
+    font-size: 10px;
+    line-height: 9px; /* Figma's trimmed 9px rows (10 / 14 text), 20px apart */
+    letter-spacing: -0.03em;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__book {
+    font-size: 10px;
+    letter-spacing: -0.06em;
+  }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__note {
+    margin-top: 14px;
+    padding: 10px 24px 9px;
+    line-height: 22px; /* Figma's three-line note box is 67 tall (3 x 22) */
+    text-align: center;
+    background: rgb(255 255 255 / 0.59);
+  }
+}
+
+/* Our Team mobile 2821:4461 note: "Still not sure?" / the call link / "and we will help you choose." on three lines. */
+@media screen and (max-width: 899px) {
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__note { align-self: stretch; width: 100%; }
+  .fa-conditions--booking.fa-conditions--mobile-grid { padding-bottom: 47px; } /* Figma: the band ends 47px under the note */
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__note a { display: block; }
+}
+
+/* Review 2026-10-21, Figma "Latest pages" mobile: the garnet button label is white, 42px sides (Book now 153 wide);
+   the "View services" button (Home, PPC) is 44 tall with a 16px label. */
+@media screen and (max-width: 899px) {
+  .fa-conditions__button.fa-btn--primary { color: var(--fa-white); }
+
+  .fa-conditions__button.fa-btn {
+    min-width: 0;
+    padding-inline: 42px;
+  }
+
+  .fa-conditions__button--mobile-label.fa-btn {
+    min-height: 44px;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Review 2026-10-21: the practitioner "Book →" links get 44px tall tap rows (rows were 9px tall, 11px apart). */
+@media screen and (max-width: 899px) {
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__people { gap: 0; }
+
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__book {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-left: 8px;
+  }
+}
+
+/* Review 2026-10-22: the "Call or text us" link in the practitioner note is a 44px tall tap area (layout unchanged). */
+@media screen and (max-width: 899px) {
+  .fa-conditions--booking.fa-conditions--mobile-grid .fa-conditions__note a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-block: -11px;
+  }
+}

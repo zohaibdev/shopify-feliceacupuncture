@@ -1,0 +1,203 @@
+{%- comment -%}
+  Felice illustrated cards — a centred heading + intro over a paper texture, then cards that each pair an
+  illustration (ink art on a paper panel) with an olive caption panel (title + text).
+  Figma (Our Approach v1): desktop group 2272:18191 (band 2299–3145); mobile 2305:4734 (background),
+  2305:4736 (heading), 2305:4740 (cards).
+  Desktop and tablet (900+): 3 columns. Mobile (<= 899): horizontal swipe row (.fa-swipe).
+{%- endcomment -%}
+{{ 'fa-illustrated-cards.css' | asset_url | stylesheet_tag }}
+
+{%- assign fa_default_id = 'fa-illustrated-cards-' | append: section.id -%}
+<section
+  class="fa-section fa-section--pad fa-illustrated-cards"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: fa_default_id }}"
+  style="--fa-ic-intro-w: {{ section.settings.text_width | default: 868 }}px; --fa-ic-heading-w-m: {{ section.settings.heading_width_mobile | default: 259 }}px;"
+>
+  <div class="fa-bg" aria-hidden="true">
+    {%- if section.settings.background != blank -%}
+      {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+    {%- else -%}
+      <picture>
+        <source media="(max-width: 899px)" srcset="{{ 'fa-illustrated-cards-bg-mobile.jpg' | asset_url }}" width="750" height="1286">
+        <img src="{{ 'fa-illustrated-cards-bg.jpg' | asset_url }}" width="1440" height="846" loading="lazy" alt="">
+      </picture>
+    {%- endif -%}
+  </div>
+
+  <div class="fa-container fa-illustrated-cards__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-illustrated-cards__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="fa-illustrated-cards__list fa-swipe" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- for block in section.blocks -%}
+          <li class="fa-illustrated-cards__card" style="--fa-ic-text-w-m: {{ block.settings.text_width_mobile | default: 251 }}px;" {{ block.shopify_attributes }}>
+            <div class="fa-illustrated-cards__media fa-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 876 | image_tag: widths: '291, 438, 582, 876', sizes: '(min-width: 1100px) 438px, (min-width: 900px) calc((100vw - 92px) / 3), 291px', loading: 'lazy', alt: block.settings.image.alt | default: '' }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img src="{{ block.settings.fallback_asset | asset_url }}" width="876" height="876" loading="lazy" alt="">
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.title != blank or block.settings.text != blank -%}
+              <div class="fa-illustrated-cards__body">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="fa-illustrated-cards__title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="fa-illustrated-cards__text">{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice illustrated cards",
+  "tag": "div",
+  "class": "fa-illustrated-cards-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets links jump here, e.g. concepts (link to #concepts). Letters, numbers and hyphens."
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Uses the bundled faded botanical paper when empty."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Line breaks are kept.",
+      "default": "The Four Pillars of Healing"
+    },
+    {
+      "type": "range",
+      "id": "heading_width_mobile",
+      "label": "Heading width (mobile)",
+      "info": "Sets where the heading wraps on phones.",
+      "min": 200,
+      "max": 300,
+      "step": 1,
+      "unit": "px",
+      "default": 259
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Chinese medicine understands the body as an interconnected system shaped by yin and yang, the Five Elements, and the Three Treasures. It offers a framework for understanding root patterns rather than chasing symptoms.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width (desktop)",
+      "info": "Sets where the text wraps.",
+      "min": 520,
+      "max": 1000,
+      "step": 6,
+      "unit": "px",
+      "default": 868
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Illustration",
+          "info": "Shown 438 x 323 on desktop (cropped to fill, centred). Square artwork on a paper background works best."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled illustration file",
+          "info": "Theme asset used when no illustration is selected."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Yin and yang"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "The two forces whose balance the whole system is trying to describe."
+        },
+        {
+          "type": "range",
+          "id": "text_width_mobile",
+          "label": "Text width (mobile)",
+          "info": "Sets where the card text wraps on phones.",
+          "min": 200,
+          "max": 261,
+          "step": 1,
+          "unit": "px",
+          "default": 251
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice illustrated cards",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-illustrated-cards-yin-yang.jpg",
+            "title": "Yin and yang",
+            "text": "The two forces whose balance the whole system is trying to describe."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-illustrated-cards-five-elements.jpg",
+            "title": "The Five Elements",
+            "text": "How the organ systems relate to each other, and to season and emotion.",
+            "text_width_mobile": 261
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-illustrated-cards-three-treasures.jpg",
+            "title": "The Three Treasures",
+            "text": "Jing, qi and shen — the body’s reserve, its function and its spirit."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

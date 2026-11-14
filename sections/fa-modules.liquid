@@ -1,0 +1,90 @@
+{%- comment -%}
+  Felice module grid — centred heading + intro over a bento grid of course modules (photo, small label, title).
+  Figma: E-Courses V1 "What you will learn" (file B4QcctWXiG9ywP3uRA3coG, frame 2770:2692, band 2770:2778, grid 2770:2781).
+  Desktop places the first five blocks as drawn: 1 tall | 2 wide over 3 + 4 | 5 tall. Later blocks continue in rows.
+{%- endcomment -%}
+
+{{ 'fa-modules.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign default_id = 'fa-modules-' | append: section.id
+  assign title_id = 'fa-modules-title-' | append: section.id
+  assign bg = section.settings.background_asset
+  assign card_bg = section.settings.card_background_asset
+-%}
+<section
+  class="fa-section fa-modules"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  {%- if card_bg != blank %} style="--fa-mod-card-bg: url('{{ card_bg | asset_url }}');"{% endif %}
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if bg != blank -%}
+    <div class="fa-bg" aria-hidden="true"><img src="{{ bg | asset_url }}" width="1440" height="780" loading="lazy" alt=""></div>
+  {%- endif -%}
+
+  <div class="fa-container fa-modules__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-modules__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-modules__title" id="{{ title_id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-modules__intro">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="fa-modules__grid" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- for block in section.blocks -%}
+          <li class="fa-modules__card" {{ block.shopify_attributes }}>
+            <div class="fa-modules__media fa-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1220 | image_tag: widths: '320, 610, 1220', sizes: '(min-width: 1100px) 610px, 100vw', loading: 'lazy', class: 'fa-modules__photo', alt: block.settings.image_alt }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <picture>
+                  {%- if block.settings.fallback_asset_mobile != blank -%}<source media="(max-width: 899px)" srcset="{{ block.settings.fallback_asset_mobile | asset_url }}">{%- endif -%}
+                  <img class="fa-modules__photo" src="{{ block.settings.fallback_asset | asset_url }}" width="584" height="278" loading="lazy" alt="{{ block.settings.image_alt | escape }}">
+                </picture>
+              {%- endif -%}
+            </div>
+            <div class="fa-modules__copy">
+              {%- if block.settings.label != blank -%}<p class="fa-modules__label">{{ block.settings.label | escape }}</p>{%- endif -%}
+              {%- if block.settings.title != blank -%}<h3 class="fa-modules__card-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice module grid",
+  "tag": "div",
+  "class": "fa-modules-wrapper",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "info": "Optional, for in-page links." },
+    { "type": "text", "id": "background_asset", "label": "Background (bundled file)", "default": "fa-modules-bg.jpg" },
+    { "type": "text", "id": "card_background_asset", "label": "Card texture (bundled file)", "default": "fa-checklist-bg.jpg" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What you will learn" },
+    { "type": "richtext", "id": "text", "label": "Intro" }
+  ],
+  "blocks": [
+    {
+      "type": "module",
+      "name": "Module",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback photo (bundled file)" },
+        { "type": "text", "id": "fallback_asset_mobile", "label": "Fallback photo, mobile crop (bundled file)" },
+        { "type": "text", "id": "image_alt", "label": "Photo description" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Module 01" },
+        { "type": "text", "id": "title", "label": "Title" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Felice module grid", "blocks": [{ "type": "module" }, { "type": "module" }, { "type": "module" }, { "type": "module" }, { "type": "module" }] }]
+}
+{% endschema %}

@@ -1,0 +1,109 @@
+{%- comment -%}
+  PPC Landing Page offer. Two layouts:
+  - "Strip" (Figma 3014:4054 band 804–923 / 3031:4731 750–884): garnet band, eyebrow + offer name at the left, badge,
+    struck regular price, offer price and a linen button at the right; flower crops at both ends (desktop).
+  - "Photo banner" (3014:4054 8484–8961 / 3031:4731 9278–9514): centred title, offer price + struck price + "Regular"
+    beside a linen button, and the small-print line, on a darkened photo.
+  Styles: assets/fa-ppc.css.
+{%- endcomment -%}
+{{ 'fa-ppc.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign layout = section.settings.layout
+  assign bg = section.settings.background_asset
+  assign bg_m = section.settings.background_asset_mobile | default: bg
+-%}
+
+<section class="fa-section fa-ppc-offer fa-ppc-offer--{{ layout }}"{% if section.settings.heading != blank %} aria-labelledby="fa-ppc-offer-title-{{ section.id }}"{% endif %} style="--fa-ppc-shade: {{ section.settings.overlay_opacity | divided_by: 100.0 }};">
+  {%- if layout == 'banner' -%}
+    <div class="fa-bg" aria-hidden="true">
+      <picture>
+        {%- if section.settings.background_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }}">
+        {%- elsif bg_m != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ bg_m | asset_url }}">
+        {%- endif -%}
+        {%- if section.settings.background != blank -%}
+          {{ section.settings.background | image_url: width: 2880 | image_tag: widths: '1440, 2160, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- elsif bg != blank -%}
+          <img src="{{ bg | asset_url }}" width="1440" height="477" loading="lazy" alt="">
+        {%- endif -%}
+      </picture>
+    </div>
+  {%- elsif section.settings.show_flowers -%}
+    <img class="fa-deco fa-ppc-offer__flower fa-ppc-offer__flower--left" src="{{ 'fa-ppc-flower-left.webp' | asset_url }}" width="114" height="119" loading="lazy" alt="" aria-hidden="true">
+    <img class="fa-deco fa-ppc-offer__flower fa-ppc-offer__flower--right" src="{{ 'fa-ppc-flower-right.webp' | asset_url }}" width="119" height="119" loading="lazy" alt="" aria-hidden="true">
+  {%- endif -%}
+
+  <div class="fa-container fa-ppc-offer__inner">
+    <div class="fa-ppc-offer__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="fa-ppc-offer__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="fa-ppc-offer__title" id="fa-ppc-offer-title-{{ section.id }}">{{ section.settings.heading | escape | newline_to_br }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="fa-ppc-offer__deal">
+      <p class="fa-ppc-price fa-ppc-offer__price">
+        {%- if section.settings.badge != blank -%}<span class="fa-ppc-badge fa-ppc-badge--light">{{ section.settings.badge | escape }}</span>{%- endif -%}
+        {%- if section.settings.price_was != blank -%}<s class="fa-ppc-price__was"><span class="fa-visually-hidden">Regular price </span>{{ section.settings.price_was | escape }}</s>{%- endif -%}
+        {%- if section.settings.price != blank -%}<span class="fa-ppc-price__now">{{ section.settings.price | escape }}</span>{%- endif -%}
+        {%- if section.settings.price_note != blank -%}<span class="fa-ppc-price__note">{{ section.settings.price_note | escape }}</span>{%- endif -%}
+      </p>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--light fa-ppc-offer__button">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.small_print != blank -%}
+      <p class="fa-ppc-offer__small">{{ section.settings.small_print | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PPC offer",
+  "tag": "div",
+  "class": "fa-ppc-offer-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "strip", "label": "Garnet strip" },
+        { "value": "banner", "label": "Photo banner" }
+      ],
+      "default": "strip"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Patient Offer" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "$150 first visit" },
+    { "type": "text", "id": "badge", "label": "Badge", "info": "Strip layout.", "default": "Save $100" },
+    { "type": "text", "id": "price", "label": "Offer price", "default": "$150" },
+    { "type": "text", "id": "price_was", "label": "Regular price (struck through)", "default": "$250" },
+    { "type": "text", "id": "price_note", "label": "Label after the regular price", "info": "Banner layout, e.g. Regular." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Claim my $150 first visit" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "small_print", "label": "Small print", "info": "Banner layout." },
+    { "type": "checkbox", "id": "show_flowers", "label": "Show flowers (strip, desktop)", "default": true },
+    { "type": "header", "content": "Banner background" },
+    { "type": "image_picker", "id": "background", "label": "Background image" },
+    { "type": "image_picker", "id": "background_mobile", "label": "Background image (mobile)" },
+    { "type": "text", "id": "background_asset", "label": "Bundled background file", "default": "fa-ppc-banner-bg.webp" },
+    { "type": "text", "id": "background_asset_mobile", "label": "Bundled background file (mobile)", "default": "fa-ppc-banner-bg-mobile.webp" },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Extra darkening",
+      "info": "The bundled photos already include Figma's shade (39%); add some for an uploaded photo.",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    }
+  ],
+  "presets": [{ "name": "PPC offer" }]
+}
+{% endschema %}

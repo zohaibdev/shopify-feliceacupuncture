@@ -1,0 +1,1110 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "fa-hero",
+      "settings": {
+        "layout": "page",
+        "desktop_photos": "two",
+        "mobile_photo": "left",
+        "photo_position": 0,
+        "fallback_left": "fa-page-hero-services-left.jpg",
+        "fallback_right": "fa-page-hero-services-right.jpg",
+        "fallback_mobile": "",
+        "video_url": "",
+        "overlay_opacity": 20,
+        "overlay_opacity_mobile": 26,
+        "copy_width": 672,
+        "min_height": 408,
+        "padding_top": 136,
+        "padding_bottom_mobile": 114,
+        "eyebrow": "Culver City's 5.0-Rated Acupuncture Clinic",
+        "eyebrow_stars": 5,
+        "show_rating": true,
+        "stars": 5,
+        "rating_text": "4.9 stars",
+        "meta_1": "Traditional Chinese Medicine",
+        "meta_2": "Culver City",
+        "heading": "In-Clinic TCM Services",
+        "text": "At Felice Acupuncture, we help our patients find their innate abilities to heal.",
+        "tagline": "",
+        "button_label_1": "",
+        "button_link_1": "",
+        "button_label_2": "",
+        "button_link_2": "",
+        "button_compact": true,
+        "mobile_style": "compact"
+      }
+    },
+    "treatments": {
+      "type": "fa-treatments",
+      "blocks": {
+        "treatment_acupuncture": {
+          "type": "treatment",
+          "settings": {
+            "handle": "acupuncture",
+            "fallback_asset": "fa-treatments-acupuncture.jpg",
+            "fallback_asset_mobile": "fa-treatments-acupuncture-mobile.jpg",
+            "shade": 10,
+            "shade_mobile": 10,
+            "glyph_asset": "fa-treatments-glyph-acupuncture.png",
+            "characters": "针刺",
+            "glyph_height": 133,
+            "glyph_x": 0,
+            "glyph_y": 0,
+            "glyph_height_mobile": 81,
+            "title": "Acupuncture",
+            "price": "$200 - $300 - 60 minutes",
+            "price_tags": "Initial visit  ·  75 min  ·  $250\nFollow-up treatment  ·  60 min  ·  $200",
+            "price_tags_compact": false,
+            "lead": "With Acupuncture, we elicit your body's innate power to find Balance.",
+            "text": "<p>Acupuncture consists of placing thin needles at specific points of energy reservoirs to tap into the body's qi. The needles are placed at certain depths to invigorate the nervous system and signal the immune system.</p><p>Insertion of needles creates micro-trauma and vasodilation, therefore increasing blood flow to your organs and tissues. Acupuncture can treat both acute and chronic issues, pain relief, reproductive health, mental health, neurological health, digestive health, respiratory health, cardiovascular health, and much more.</p>",
+            "text_line_height": 24,
+            "paragraph_gap": 24,
+            "copy_gap": 32,
+            "button_label": "Book now",
+            "button_link": "",
+            "button_compact_mobile": false
+          }
+        },
+        "treatment_cosmetic_acupuncture": {
+          "type": "treatment",
+          "settings": {
+            "handle": "cosmetic-acupuncture",
+            "fallback_asset": "fa-treatments-cosmetic-acupuncture.jpg",
+            "fallback_asset_mobile": "fa-treatments-cosmetic-acupuncture-mobile.jpg",
+            "shade": 10,
+            "shade_mobile": 10,
+            "glyph_asset": "fa-treatments-glyph-tui-na-massage.png",
+            "characters": "焕肤",
+            "glyph_height": 117,
+            "glyph_x": 0,
+            "glyph_y": 0,
+            "glyph_height_mobile": 91,
+            "title": "Cosmetic Acupuncture",
+            "price": "$275 - 60 minutes",
+            "price_tags": "Cosmetic acupuncture  ·  60 min  ·  $275",
+            "price_tags_compact": false,
+            "lead": "",
+            "text": "<p>Cosmetic acupuncture is a luxurious technique, combining traditional acupuncture with an emphasis on increasing circulation to the face and neck region.</p><p>Enhance glow and plumpness from the inside by building collagen, reducing fine lines, and tightening the skin.</p>",
+            "text_line_height": 24,
+            "paragraph_gap": 24,
+            "copy_gap": 32,
+            "button_label": "Book now",
+            "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/7",
+            "button_compact_mobile": false
+          }
+        },
+        "treatment_cupping": {
+          "type": "treatment",
+          "settings": {
+            "handle": "cupping",
+            "fallback_asset": "fa-treatments-cupping.jpg",
+            "fallback_asset_mobile": "fa-treatments-cupping-mobile.jpg",
+            "shade": 10,
+            "shade_mobile": 10,
+            "glyph_asset": "fa-treatments-glyph-cupping.png",
+            "characters": "拔罐",
+            "glyph_height": 126,
+            "glyph_x": 0,
+            "glyph_y": 0,
+            "glyph_height_mobile": 86,
+            "title": "Cupping",
+            "price": "$100 - $200 - 30 minutes",
+            "price_tags": "New patient initial  ·  45 min  ·  $200\nFollow-up  ·  45 min  ·  $150\nCupping session  ·  45 min  ·  $100\nAdd-on to any treatment  ·  $100",
+            "price_tags_compact": false,
+            "lead": "",
+            "text": "<p>Cupping involves placing special suction cups on the skin to deeply release tension and promote systemic healing. Cupping can be used to treat pain caused by stagnant blood, dispel toxins and pathogens in the body, improve mental health, and much more.</p><p>The inflammation and bruising post-cupping activates your body's immune system to signal tissues to repair and heal.</p>",
+            "text_line_height": 24,
+            "paragraph_gap": 24,
+            "copy_gap": 24,
+            "button_label": "Book now",
+            "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/2/treatment/29",
+            "button_compact_mobile": false
+          }
+        },
+        "treatment_tui_na_massage": {
+          "type": "treatment",
+          "settings": {
+            "handle": "tui-na-massage",
+            "fallback_asset": "fa-treatments-tui-na-massage.jpg",
+            "fallback_asset_mobile": "fa-treatments-tui-na-massage-mobile.jpg",
+            "shade": 20,
+            "shade_mobile": 20,
+            "glyph_asset": "fa-treatments-glyph-tui-na-massage.png",
+            "characters": "推拿",
+            "glyph_height": 141,
+            "glyph_x": 0,
+            "glyph_y": 0,
+            "glyph_height_mobile": 89,
+            "title": "Tui Na Massage",
+            "price": "$275 - 60 minutes",
+            "price_tags": "Tui Na massage  ·  60 min  ·  $275",
+            "price_tags_compact": false,
+            "lead": "",
+            "text": "<p>Tui Na is an ancient Chinese system of bodywork that translates to \"push and pull.\" Tui Na involves applying pressure along acupuncture points and meridians to bring the body back into balance.</p><p>Tui Na techniques consist of rolling, tapping, and pressing, which stimulates the lymphatic and circulatory system. Tui Na also activates the parasympathetic nervous system to help the body with pain and relaxation.</p>",
+            "text_line_height": 24,
+            "paragraph_gap": 24,
+            "copy_gap": 32,
+            "button_label": "Book now",
+            "button_link": "",
+            "button_compact_mobile": false
+          }
+        },
+        "treatment_contrast_therapy": {
+          "type": "treatment",
+          "settings": {
+            "handle": "contrast-therapy",
+            "fallback_asset": "fa-treatments-contrast-therapy.jpg",
+            "fallback_asset_mobile": "fa-treatments-contrast-therapy-mobile.jpg",
+            "shade": 10,
+            "shade_mobile": 20,
+            "glyph_asset": "fa-treatments-glyph-contrast-therapy.png",
+            "characters": "桑拿",
+            "glyph_height": 113,
+            "glyph_x": 0,
+            "glyph_y": 0,
+            "glyph_height_mobile": 81,
+            "title": "Contrast Therapy",
+            "price": "$75 - $100 - 60 minutes",
+            "price_tags": "Contrast therapy (treatment or add-on)  ·  45 min  ·  $100",
+            "price_tags_compact": true,
+            "lead": "",
+            "text": "<p>Contrast therapy offers numerous benefits, including a nervous system reset, pain relief, improved circulation, lymphatic drainage, and enhanced energy and focus.</p><p>Spend time alternating between the infrared sauna and the cold plunge for a reset and relaxation.</p>",
+            "text_line_height": 24,
+            "paragraph_gap": 24,
+            "copy_gap": 32,
+            "button_label": "Book now",
+            "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/3/treatment/9",
+            "button_compact_mobile": false
+          }
+        },
+        "treatment_herbal_wellness": {
+          "type": "treatment",
+          "settings": {
+            "handle": "herbal-wellness",
+            "fallback_asset": "fa-treatments-herbal-wellness.jpg",
+            "fallback_asset_mobile": "fa-treatments-herbal-wellness-mobile.jpg",
+            "shade": 20,
+            "shade_mobile": 30,
+            "glyph_asset": "fa-treatments-glyph-herbal-wellness.png",
+            "characters": "中药",
+            "glyph_height": 115,
+            "glyph_x": 0,
+            "glyph_y": 0,
+            "glyph_height_mobile": 85,
+            "title": "Herbal Wellness\n+ Supplement Support",
+            "price": "Price varies - 60 minutes",
+            "price_tags": "Herbal formulas and supplements  ·  Price varies",
+            "price_tags_compact": false,
+            "lead": "",
+            "text": "<p>Chinese herbal therapies consist of a combination of traditional Chinese herbs to target certain symptoms. The herbs have unique properties (such as temperature, flavor, and nature) that bring the body back into balance. Chinese herbal medicine can help with a variety of ailments and can be given in different forms such as capsules, powders, teas, or tinctures.</p><p>As needed, your practitioner will also recommend dietary suggestions, vitamins, and supplements to optimize your health.</p>",
+            "text_line_height": 26,
+            "paragraph_gap": 41,
+            "copy_gap": 36,
+            "button_label": "Book now",
+            "button_link": "",
+            "button_compact_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "treatment_acupuncture",
+        "treatment_cosmetic_acupuncture",
+        "treatment_cupping",
+        "treatment_tui_na_massage",
+        "treatment_contrast_therapy",
+        "treatment_herbal_wellness"
+      ],
+      "settings": {
+        "botanical": false,
+        "eyebrow": "Our team",
+        "heading": "Rooted in expertise. Personal in every detail.",
+        "text": "<p>Our practitioners offer diverse specialties and treatment styles rooted in Traditional Chinese Medicine. We focus on understanding the deeper patterns that affect your well-being, rather than just treating symptoms.</p>",
+        "booking_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "mobile_style": "compact"
+      }
+    },
+    "first_visit": {
+      "type": "fa-first-visit",
+      "blocks": {
+        "step_consultation": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-consultation.jpg",
+            "alt": "A practitioner standing beside a patient resting on a treatment table",
+            "number": "1",
+            "tag": "Before Your Appointment",
+            "title": "Consultation",
+            "duration_1": "20 Minutes",
+            "text_1": "Complete the intake form. This helps us better understand your medical history and allows us to act as your detective, identifying where to start our focus and treatment.",
+            "duration_2": "",
+            "text_2": ""
+          }
+        },
+        "step_treatment": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-treatment.jpg",
+            "alt": "A practitioner placing a fine acupuncture needle in a patient’s wrist",
+            "number": "2",
+            "tag": "During Your Appointment",
+            "title": "Treatment",
+            "duration_1": "30 Minutes",
+            "text_1": "Together, we review your intake form and talk through symptoms. Your practitioner will complete a tongue and pulse diagnostic.",
+            "duration_2": "45 Minutes",
+            "text_2": "Your practitioner will complete an initial acupuncture treatment based on your conversation and intake form."
+          }
+        },
+        "step_restoration": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-restoration.jpg",
+            "alt": "A woman sipping tea from a small porcelain cup",
+            "number": "3",
+            "tag": "After Your Appointment",
+            "title": "Restoration",
+            "duration_1": "Ongoing",
+            "text_1": "You'll leave with a personalized treatment plan, which may also include herbs and dietary recommendations that support your unique needs.",
+            "duration_2": "",
+            "text_2": "Drink lots of water, and eat nourishing foods, as your body begins its healing journey!"
+          }
+        }
+      },
+      "block_order": [
+        "step_consultation",
+        "step_treatment",
+        "step_restoration"
+      ],
+      "settings": {
+        "mobile_layout": "stack",
+        "anchor_id": "first-visit",
+        "show_botanical": true,
+        "botanical_style": "corners",
+        "botanical_display": "all",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "eyebrow": "",
+        "heading": "What to expect\nfor your first visit",
+        "heading_width": 668,
+        "text": "<p>Your 75-minute initial consultation gives us time to understand your health history, identify patterns beneath the symptoms, and begin personalized care.</p>",
+        "text_width": 560,
+        "text_gap_mobile": 16,
+        "card_text_layout": "even",
+        "card_style": "paper",
+        "button_label": "Book your first visit",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_compact": true
+      }
+    },
+    "cta_banner": {
+      "type": "fa-cta-banner",
+      "settings": {
+        "bundled_photo": "concierge",
+        "overlay_opacity": 0,
+        "layout": "spacious",
+        "show_botanicals": true,
+        "glyph_asset": "",
+        "subheading": "",
+        "heading": "Your first step toward lasting balance.",
+        "text": "",
+        "button_label": "Book your first visit",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_style": "light",
+        "content_offset": 0,
+        "button_label_2": "",
+        "button_link_2": "",
+        "button_narrow": true
+      }
+    },
+    "testimonials": {
+      "type": "fa-testimonials",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Sabrina Sarmiento",
+            "date": "",
+            "rating": 5,
+            "text": "Dr. Felice is amazing.  Can't say enough good things about her!\nHer acupuncture and cupping sessions are pure healing, gentle, powerful, and full of care.  She’s sweet, compassionate, and incredibly skilled (and STYLISH). Every visit feels like a reset for both body and soul."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Adam Francis",
+            "date": "",
+            "rating": 5,
+            "text": "I'm not sure what I'd do without Sarah at Felice Acupuncture. I've been trying to recover from Long Covid for over a year and recently moved to LA from Seattle which caused a number of flare-ups, and I was without an acupuncturist to help calm things down. Luckily I found Felice Acupuncture and as soon as I met Sarah, I knew I was in good hands. She's been huge in not only helping me get my symptoms under control, but also teaching me about diet and supplement adjustments to help keep my system from breaking down as much. Can't recommend her enough, her calming presence and sense of humour is invaluable if you've been dealing with a chronic condition for a prolonged period of time."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Emily Chapel",
+            "date": "",
+            "rating": 5,
+            "text": "I was slightly skeptical that acupuncture would work for my chronic neck pain but I am SO happy to went to Felice Acupuncture and Wellness. Sam Audette was my provider and he made sure I was comfortable throughout the entire process. I can't say it was an enjoyable experience having needles twitch my aching muscles but wow, it helped so much. After two treatments, my pain is almost resolved. I know there is some science behind acuptuncture but I swear, it's magic."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "linda danh",
+            "date": "",
+            "rating": 5,
+            "text": "I went to Caroline as I was seeking treatment and cupping for back pain and overall muscle recovery. Caroline was very thorough and attentive - her soothing energy made me comfortable, as did the beautiful and calming space. Looking forward to another visit soon!"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "heading": "What people are saying",
+        "text": "<p>Pulled live from Google. 5.0 across 42 reviews, filterable by what the patient came in for.</p>",
+        "show_google": true,
+        "google_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "widget_code": "",
+        "arrow_size": "large",
+        "card_style": "square",
+        "mobile_background_asset": "fa-testimonials-bg-services.jpg",
+        "show_botanical": false,
+        "botanical_style": "standard",
+        "botanical_display": "all",
+        "botanical_overlap": true,
+        "padding_mobile": 60
+      },
+      "disabled": true
+    },
+    "acupuncture": {
+      "type": "fa-cta-banner",
+      "settings": {
+        "bundled_photo": "acupuncture",
+        "overlay_opacity": 0,
+        "layout": "feature",
+        "show_botanicals": false,
+        "glyph_asset": "fa-cta-banner-glyph-acupuncture.svg",
+        "subheading": "Originating in China 3,000 years ago, acupuncture elicits your body’s innate power to find balance.",
+        "heading": "What is acupuncture?",
+        "text": "In Chinese medicine, acupuncture consists of placing thin needles at specific points of energy reservoirs to tap into the body's qi. The needles are placed at certain depths, guided by a tongue and pulse diagnostic, to bring the body back into balance.",
+        "button_label": "Book now",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_style": "light",
+        "content_offset": 0,
+        "button_label_2": "",
+        "button_link_2": "",
+        "mobile_style": "compact"
+      }
+    },
+    "science": {
+      "type": "fa-feature-cards",
+      "blocks": {
+        "blood_flow": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-science-blood-flow.jpg",
+            "title": "Increases blood flow",
+            "text": "Insertion of needles creates micro-trauma and vasodilation, therefore increasing blood flow to your organs and tissues.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "nervous_system": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-science-nervous-system.jpg",
+            "title": "Invigorates the \nnervous system",
+            "text": "Needles placed at specific points and depths invigorate the nervous system.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "immune_system": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-science-immune-system.jpg",
+            "title": "Signals the \nimmune system",
+            "text": "Acupuncture signals the immune system, supporting your body's own healing response.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "muscle_tension": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-science-muscle-tension.jpg",
+            "title": "Releases \nmuscle tension",
+            "text": "Palpation-based diagnosis and trigger point therapy target musculoskeletal pain at its source.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "blood_flow",
+        "nervous_system",
+        "immune_system",
+        "muscle_tension"
+      ],
+      "settings": {
+        "heading": "The science behind acupuncture",
+        "text": "<p>Felice has a background in neuroscience and understands the importance of the mind-body connection. <br>We do read labs, and we work with your Western doctors.</p>",
+        "button_label": "",
+        "button_link": "",
+        "anchor_id": "science",
+        "card_style": "moss_photo",
+        "heading_color": "moss",
+        "heading_width": 908,
+        "heading_line_height": 56,
+        "columns": 4,
+        "padding_mobile": 60,
+        "background_asset": "fa-photo-gallery-bg.jpg",
+        "background_asset_mobile": "fa-photo-gallery-bg-mobile.jpg",
+        "card_background_asset": "fa-feature-cards-card-bg.jpg",
+        "mobile_layout": "grid"
+      }
+    },
+    "concierge": {
+      "type": "fa-membership",
+      "blocks": {
+        "option_in_home": {
+          "type": "option",
+          "settings": {
+            "icon": "location",
+            "title": "In-home",
+            "text": "We come to you, within 30 minutes of Culver City.",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "option_virtual": {
+          "type": "option",
+          "settings": {
+            "icon": "video",
+            "title": "Virtual",
+            "text": "Sessions by video, around your schedule.",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "item_consultation": {
+          "type": "item",
+          "settings": {
+            "text": "A comprehensive diagnostic consultation"
+          }
+        },
+        "item_sessions": {
+          "type": "item",
+          "settings": {
+            "text": "Ongoing sessions, in-home or virtually"
+          }
+        },
+        "item_protocol": {
+          "type": "item",
+          "settings": {
+            "text": "A fully tailored treatment protocol"
+          }
+        },
+        "item_priority": {
+          "type": "item",
+          "settings": {
+            "text": "Priority access to your practitioner (response within 12–24 hours)"
+          }
+        }
+      },
+      "block_order": [
+        "option_in_home",
+        "option_virtual",
+        "item_consultation",
+        "item_sessions",
+        "item_protocol",
+        "item_priority"
+      ],
+      "settings": {
+        "heading": "Concierge Care",
+        "text": "<p>Our concierge practice is designed for anyone ready to take a more dedicated, highly personalized approach to their health. Patients receive unmatched access to their practitioner, longer appointments, and access to a suite of resources.</p>",
+        "anchor_id": "concierge",
+        "panel_title": "Concierge Includes",
+        "panel_button_label": "",
+        "panel_button_link": "",
+        "layout": "row",
+        "botanical": "none",
+        "corners": "diagonal",
+        "button_label": "Book concierge",
+        "button_link": "/pages/concierge",
+        "padding_top": 116,
+        "padding_bottom": 109,
+        "padding_mobile": 60,
+        "background_color": "#9d7f4e",
+        "background_asset": "fa-membership-bg.jpg",
+        "background_asset_mobile": "fa-membership-bg-mobile.jpg"
+      }
+    },
+    "faq": {
+      "type": "fa-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What happens during my first visit?",
+            "answer": "<p>Your initial visit is 75 minutes. Before your appointment, you'll complete an intake form. Together, you and your practitioner will review it and talk through your symptoms, followed by a tongue and pulse diagnostic and your first acupuncture treatment. You'll leave with a personalized treatment plan.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Does acupuncture hurt?",
+            "answer": "<p>Most patients find acupuncture surprisingly gentle. You may feel a brief sensation as the needles are placed, followed by warmth, heaviness, tingling, or deep relaxation.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How many sessions will I need?",
+            "answer": "<p>It depends on your goals and history. Your practitioner will recommend a treatment plan after your first visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "<p>Many patients notice a change within the first few sessions; long-standing concerns usually take longer. Your practitioner will review your progress with you at each visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How will I feel after my first session?",
+            "answer": "<p>Most people feel calm and relaxed, sometimes a little tired. Drink water, rest if you can, and tell your practitioner how you felt at your next visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What should I wear to my appointment?",
+            "answer": "",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "How much does a visit cost?",
+            "answer": "<p>Prices depend on the treatment and session length. See our services page for current prices, or contact us with any questions.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Do you take insurance?",
+            "answer": "<p>Please contact us before your visit to discuss insurance and payment options.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Which practitioner should I book?",
+            "answer": "<p>Every practitioner treats a wide range of concerns. If you're unsure, contact us and we'll help you choose the best fit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_10": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer care at home or virtually?",
+            "answer": "<p>Yes. Concierge in-home visits and virtual consultations are available by appointment — contact us to check availability in your area.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "What is your cancellation policy?",
+            "answer": "<p>Please let us know as early as possible if you need to cancel or reschedule. Contact us for the full policy.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9",
+        "question_10",
+        "question_11"
+      ],
+      "settings": {
+        "anchor_id": "faq",
+        "heading": "Frequently asked questions",
+        "single_open": true,
+        "faq_schema": true,
+        "heading_width": "wide",
+        "answer_size": "medium",
+        "left_column_count": 5,
+        "background_asset": "fa-faq-bg-home.jpg",
+        "show_flower": true,
+        "show_flower_mobile": true,
+        "flower_position": "bottom_left",
+        "flower_mobile_size": "small",
+        "padding_bottom": 130,
+        "padding_mobile": 60
+      }
+    },
+    "gallery": {
+      "type": "fa-photo-gallery",
+      "blocks": {
+        "photo_01": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-01-treatment-room.jpg",
+            "alt": "A treatment room with a massage table",
+            "shade": 0
+          }
+        },
+        "photo_02": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-02-fire-cupping.jpg",
+            "alt": "Fire cupping on the upper back",
+            "shade": 0
+          }
+        },
+        "photo_03": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-03-lounge-scrolls.jpg",
+            "alt": "The clinic lounge with hanging scroll paintings",
+            "shade": 0
+          }
+        },
+        "photo_04": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-04-hand-needles.jpg",
+            "alt": "Acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_13": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-05-palo-santo.jpg",
+            "alt": "Palo santo in a clay bowl",
+            "shade": 0
+          }
+        },
+        "photo_06": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-06-spine-needles.jpg",
+            "alt": "Acupuncture needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_07": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-07-room-painting.jpg",
+            "alt": "A treatment room with a landscape painting",
+            "shade": 0
+          }
+        },
+        "photo_08": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-08-tui-na.jpg",
+            "alt": "Tui na massage on the treatment table",
+            "shade": 0
+          }
+        },
+        "photo_09": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-09-moonbow-shelf.jpg",
+            "alt": "Moonbow Skin products on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_10": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-10-neck-needles.jpg",
+            "alt": "Acupuncture needles along the neck and shoulders",
+            "shade": 0
+          }
+        },
+        "photo_11": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-11-artwork.jpg",
+            "alt": "Artwork and dried pampas grass in the clinic",
+            "shade": 0
+          }
+        },
+        "photo_12": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-12-moxa-stick.jpg",
+            "alt": "Moxa warming acupuncture points on the back",
+            "shade": 0
+          }
+        },
+        "photo_05": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-13-sauna.jpg",
+            "alt": "The infrared sauna",
+            "shade": 0
+          }
+        },
+        "photo_14": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-14-heat-lamp.jpg",
+            "alt": "A patient resting under the heat lamp with needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_15": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-15-herb-shelf.jpg",
+            "alt": "Herbal supplements on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_16": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-16-placing-needle.jpg",
+            "alt": "A practitioner placing a needle on the shoulder",
+            "shade": 0
+          }
+        },
+        "photo_17": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-17-shower.jpg",
+            "alt": "The cold plunge shower",
+            "shade": 0
+          }
+        },
+        "photo_18": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-18-needling-hands.jpg",
+            "alt": "A practitioner placing acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_19": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-19-business-card.jpg",
+            "alt": "A Felice Acupuncture business card on a carved wooden Buddha",
+            "shade": 0
+          }
+        },
+        "photo_20": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-20-moxa.jpg",
+            "alt": "Preparing moxa at the clinic",
+            "shade": 0
+          }
+        }
+      },
+      "block_order": [
+        "photo_01",
+        "photo_02",
+        "photo_03",
+        "photo_04",
+        "photo_13",
+        "photo_06",
+        "photo_07",
+        "photo_08",
+        "photo_09",
+        "photo_10",
+        "photo_11",
+        "photo_12",
+        "photo_05",
+        "photo_14",
+        "photo_15",
+        "photo_16",
+        "photo_17",
+        "photo_18",
+        "photo_19",
+        "photo_20"
+      ],
+      "settings": {
+        "layout": "strip",
+        "heading": "",
+        "text": "",
+        "text_width": 460,
+        "review_label": "",
+        "review_link": "https://g.co/kgs/mxocT19",
+        "start": "center",
+        "show_arrows": true,
+        "curved_edges": false,
+        "strip_shape": "square_tight",
+        "row_gap": "32",
+        "loop": true,
+        "autoplay": true,
+        "autoplay_interval": 4,
+        "autoplay_speed": 30,
+        "lightbox": true,
+        "anchor_id": "",
+        "show_social": true,
+        "follow_label": "Follow @feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "follow_position": "center",
+        "background_style": "linen",
+        "botanical": "none",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "mobile_photo_size": "small",
+        "show_arrows_mobile": true
+      }
+    },
+    "posts": {
+      "type": "fa-blog-posts",
+      "blocks": {
+        "post_1": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-hypno-sound.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Sound Therapy",
+            "title": "The Healing Harmony of Hypno-Sound Therapy & Ear Acupuncture",
+            "link": "https://www.feliceacupuncture.com/post/the-healing-harmony-of-hypno-sound-therapy-ear-acupuncture"
+          }
+        },
+        "post_2": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-la-fires.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Respiratory",
+            "title": "Protecting Your Lungs and Health During the LA Fires",
+            "link": "https://www.feliceacupuncture.com/post/protecting-your-lungs-and-health-during-the-la-fires"
+          }
+        },
+        "post_3": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-acne.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Skin",
+            "title": "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective",
+            "link": "https://www.feliceacupuncture.com/post/addressing-acne-holistically-a-traditional-chinese-medicine-tcm-perspective"
+          }
+        }
+      },
+      "block_order": [
+        "post_1",
+        "post_2",
+        "post_3"
+      ],
+      "settings": {
+        "heading": "Chinese medicine, explained",
+        "text": "<p>Practical tips from our practitioners for better energy, sleep, digestion, and calm.</p>",
+        "blog": "blogs",
+        "posts_count": 3,
+        "show_date": true,
+        "show_read_time": true,
+        "show_category": true,
+        "link_label": "Read article →",
+        "button_label": "Explore all blogs",
+        "button_link": "shopify://pages/blog",
+        "anchor_id": "",
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "background_asset": "fa-blog-posts-bg.jpg",
+        "background_asset_mobile": "fa-blog-posts-bg-mobile.jpg"
+      }
+    },
+    "trust": {
+      "type": "fa-trust-bar",
+      "blocks": {
+        "trust_patients": {
+          "type": "item",
+          "settings": {
+            "icon": "patients",
+            "icon_color": "linen",
+            "title": "1,000+\nPatients",
+            "text": "Treated at our Culver City clinic"
+          }
+        },
+        "trust_board": {
+          "type": "item",
+          "settings": {
+            "icon": "certified",
+            "icon_color": "linen",
+            "title": "Board-Certified\nPractitioners",
+            "text": "Rooted in Traditional Chinese Medicine"
+          }
+        },
+        "trust_google": {
+          "type": "item",
+          "settings": {
+            "icon": "google",
+            "icon_color": "linen",
+            "title": "5.0 on\nGoogle",
+            "text": "Rated by our patients"
+          }
+        },
+        "trust_care": {
+          "type": "item",
+          "settings": {
+            "icon": "care",
+            "icon_color": "grey",
+            "title": "In Clinic, At\nHome, Online",
+            "text": "Care that fits your life"
+          }
+        }
+      },
+      "block_order": [
+        "trust_patients",
+        "trust_board",
+        "trust_google",
+        "trust_care"
+      ],
+      "settings": {
+        "label": "Why patients trust us"
+      }
+    },
+    "book_visit": {
+      "type": "fa-book-visit",
+      "blocks": {
+        "contact_hours": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "Open 7 days a week, 8 AM to 8 PM",
+            "link": "",
+            "no_underline": false
+          }
+        },
+        "contact_phone": {
+          "type": "contact",
+          "settings": {
+            "icon": "phone",
+            "text": "Call or text to book · +1 (424) 478-0019",
+            "link": "tel:+14244780019",
+            "no_underline": false
+          }
+        },
+        "contact_email": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "info@feliceacupuncture.com",
+            "link": "mailto:info@feliceacupuncture.com",
+            "no_underline": false
+          }
+        },
+        "contact_address": {
+          "type": "contact",
+          "settings": {
+            "icon": "pin",
+            "text": "8526 Washington Blvd, Culver City, CA 90232",
+            "link": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+            "no_underline": true
+          }
+        }
+      },
+      "block_order": [
+        "contact_hours",
+        "contact_phone",
+        "contact_email",
+        "contact_address"
+      ],
+      "settings": {
+        "maps_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "map_address": "8526 Washington Blvd, Culver City, CA 90232",
+        "map_embed_url": "",
+        "map_title": "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City",
+        "eyebrow": "",
+        "heading": "Book your first visit",
+        "text": "Based in Culver City and proudly serving the greater Los Angeles area.",
+        "button_label": "Open in google maps",
+        "button_label_2": "Book now",
+        "button_link_2": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "contact_underline": "links",
+        "map_height_mobile": "page",
+        "show_flower": false,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "treatments",
+    "first_visit",
+    "cta_banner",
+    "testimonials",
+    "acupuncture",
+    "science",
+    "concierge",
+    "faq",
+    "gallery",
+    "posts",
+    "trust",
+    "book_visit"
+  ]
+}

@@ -1,0 +1,10 @@
+{%- comment -%}
+  Header chevrons (Figma navigation 2519:3714): desktop nav 9 x 3 ("Vector 5"), mobile menu 13 x 5 ("Vector 6"),
+  1.5px garnet stroke, butt caps, mitre join. Drawn pointing down; CSS flips them when the item is open.
+  Accepts: size ('nav' | 'menu')
+{%- endcomment -%}
+{%- if size == 'menu' -%}
+  <svg class="fa-header__caret fa-header__caret--menu" width="14.5" height="6.5" viewBox="-0.75 -0.75 14.5 6.5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M0 0L6.5 5L13 0" stroke="currentColor" stroke-width="1.5"/></svg>
+{%- else -%}
+  <svg class="fa-header__caret fa-header__caret--nav" width="10.5" height="4.5" viewBox="-0.75 -0.75 10.5 4.5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M0 0L4.5 3L9 0" stroke="currentColor" stroke-width="1.5"/></svg>
+{%- endif -%}

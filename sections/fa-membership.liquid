@@ -1,0 +1,443 @@
+{%- comment -%}
+  Felice membership — heading + intro and a row of option cards (icon, title, short text, button) on the left, a pale
+  "includes" panel (title, checklist, button) on the right, on a textured tan band.
+  Homepage "Concierge Care" (Figma file B4QcctWXiG9ywP3uRA3coG, V3 2612:3077): band 2616:10080, content 2616:10164
+  (left column 2616:10141, cards 2616:10133 / 10248, panel 2616:10199). No mobile frame exists for this design.
+  Desktop (>= 1100): two columns (646 / 631 at 1440, 32px apart); the panel stretches to the left column's height and
+  keeps its button at the bottom. 1100–1279: tighter card padding so the buttons fit.
+  Tablet (900–1099): stacked — heading, cards two-up, panel full width.
+  Mobile (<= 899, derived from the established mobile patterns): 60px padding, mobile type scale, cards two-up
+  (a third card wraps to a full-width row), panel full width.
+  Blocks: "option" cards and "item" checklist lines; each type renders in its own place, in block order.
+  Buttons default to "#" (concierge booking is not linked yet, client decision).
+  Layout "Split" (Concierge page V1, frame 2644:15168, band 2644:15466): heading, intro and the button on the left,
+  the option cards stacked on the right (linen / moss alternating, r8), no panel; optional top-left botanical.
+{%- endcomment -%}
+{{ 'fa-membership.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign default_id = 'fa-membership-' | append: section.id
+  assign title_id = 'fa-membership-title-' | append: section.id
+  assign desktop_bg = section.settings.background_asset
+  assign mobile_bg = section.settings.background_asset_mobile
+  assign corners = section.settings.corners | default: 'diagonal'
+  assign layout = section.settings.layout | default: 'row'
+  assign option_count = 0
+  assign item_count = 0
+  for block in section.blocks
+    if block.type == 'option'
+      assign option_count = option_count | plus: 1
+    elsif block.type == 'item'
+      assign item_count = item_count | plus: 1
+    endif
+  endfor
+  assign has_panel = false
+  if section.settings.panel_title != blank or item_count > 0 or section.settings.panel_button_label != blank
+    assign has_panel = true
+  endif
+  if layout == 'split'
+    assign has_panel = false
+  endif
+-%}
+<section
+  class="fa-section fa-membership fa-membership--corners-{{ corners }} fa-membership--{{ layout }}{% unless has_panel %} fa-membership--no-panel{% endunless %}{% if section.settings.mobile_style == 'compact' %} fa-membership--mobile-compact{% endif %}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  style="--fa-mb-bg: {{ section.settings.background_color | default: '#9d7f4e' }}; --fa-mb-pad-m: {{ section.settings.padding_mobile | default: 60 }}px; --fa-mb-pad-top: {{ section.settings.padding_top | default: 120 }}px; --fa-mb-pad-bottom: {{ section.settings.padding_bottom | default: 120 }}px;"
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if section.settings.background != blank or desktop_bg != blank or section.settings.background_mobile != blank or mobile_bg != blank -%}
+    <div class="fa-bg fa-membership__bg" aria-hidden="true">
+      <picture>
+        {%- if section.settings.background_mobile != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+        {%- elsif section.settings.background == blank and mobile_bg != blank -%}
+          <source media="(max-width: 899px)" srcset="{{ mobile_bg | asset_url }}" width="750" height="1348">
+        {%- endif -%}
+        {%- if section.settings.background != blank -%}
+          {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+        {%- elsif desktop_bg != blank -%}
+          {%- liquid
+            assign desktop_bg_2x = desktop_bg | replace: '.jpg', '-2x.jpg'
+            if desktop_bg == 'fa-membership-bg.jpg'
+              assign has_2x = true
+            else
+              assign has_2x = false
+            endif
+          -%}
+          {%- comment -%} Cover-fitted, so the size is only a hint (the bundled band is 1440 x 674, 2x file 2880). {%- endcomment -%}
+          <img src="{{ desktop_bg | asset_url }}"{% if has_2x %} srcset="{{ desktop_bg | asset_url }} 1440w, {{ desktop_bg_2x | asset_url }} 2880w" sizes="100vw"{% endif %} width="1440" height="674" loading="lazy" alt="">
+        {%- elsif section.settings.background_mobile != blank -%}
+          {{ section.settings.background_mobile | image_url: width: 1100 | image_tag: loading: 'lazy', alt: '', class: 'fa-membership__bg-mobile-only' }}
+        {%- else -%}
+          <img class="fa-membership__bg-mobile-only" src="{{ mobile_bg | asset_url }}" width="750" height="1348" loading="lazy" alt="">
+        {%- endif -%}
+      </picture>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.botanical == 'top_left' -%}
+    <img class="fa-deco fa-membership__botanical" src="{{ 'fa-concierge-botanical-left.png' | asset_url }}" width="137" height="108" loading="lazy" alt="" aria-hidden="true">
+  {%- endif -%}
+
+  <div class="fa-container fa-membership__inner">
+    <div class="fa-membership__main">
+      {%- if section.settings.heading != blank or section.settings.text != blank -%}
+        <div class="fa-heading fa-membership__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+          {%- if section.settings.heading != blank -%}
+            <h2 class="fa-heading__title fa-membership__title" id="{{ title_id }}">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="fa-heading__text fa-membership__intro">{{ section.settings.text }}</div>
+          {%- endif -%}
+          {%- if layout == 'split' and section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary fa-membership__split-btn">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if option_count > 0 -%}
+        <ul class="fa-membership__options" role="list" data-fa-reveal="up" data-fa-reveal-stagger>
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'option' -%}{%- continue -%}{%- endif -%}
+            {%- liquid
+              assign icon = block.settings.icon | default: 'none'
+              assign card_uid = 'fa-membership-' | append: section.id | append: '-' | append: block.id
+            -%}
+            <li class="fa-membership__option" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 96 | image_tag: class: 'fa-membership__icon', width: 32, height: 32, loading: 'lazy', alt: '' }}
+              {%- elsif icon == 'location' -%}
+                {%- comment -%} Figma 2616:10245 (32px frame, 24 x 27.3 pin). {%- endcomment -%}
+                <svg class="fa-membership__icon" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M24.4854 6.18076C26.6885 8.3836 27.9485 11.3569 27.999 14.472C28.0496 17.587 26.8866 20.5996 24.7561 22.8728L24.4854 23.1528L18.8281 28.8088C18.1102 29.5261 17.1466 29.9438 16.1323 29.9773C15.118 30.0107 14.1289 29.6573 13.3654 28.9888L13.1734 28.8088L7.51474 23.1514C5.26429 20.901 4 17.8487 4 14.6661C4 11.4835 5.26429 8.43121 7.51474 6.18076C9.76519 3.93031 12.8175 2.66602 16.0001 2.66602C19.1827 2.66602 22.235 3.93031 24.4854 6.18076ZM16.0001 10.6661C15.4748 10.6661 14.9546 10.7696 14.4693 10.9706C13.984 11.1716 13.5431 11.4662 13.1716 11.8377C12.8002 12.2091 12.5056 12.6501 12.3046 13.1354C12.1035 13.6207 12.0001 14.1408 12.0001 14.6661C12.0001 15.1914 12.1035 15.7115 12.3046 16.1968C12.5056 16.6821 12.8002 17.1231 13.1716 17.4945C13.5431 17.866 13.984 18.1606 14.4693 18.3616C14.9546 18.5626 15.4748 18.6661 16.0001 18.6661C17.0609 18.6661 18.0784 18.2447 18.8285 17.4945C19.5786 16.7444 20.0001 15.727 20.0001 14.6661C20.0001 13.6052 19.5786 12.5878 18.8285 11.8377C18.0784 11.0875 17.0609 10.6661 16.0001 10.6661Z"/></svg>
+              {%- elsif icon == 'video' -%}
+                {%- comment -%} Figma V6 2669:41880: a laptop with a person, a raster mask in Figma — drawn here as a CSS mask so it takes the text colour. {%- endcomment -%}
+                <span class="fa-membership__icon fa-membership__icon--mask" style="--fa-mb-icon: url('{{ 'fa-membership-icon-video.png' | asset_url }}');" aria-hidden="true"></span>
+              {%- elsif icon == 'phone' -%}
+                {%- comment -%} Figma 2616:10266 (26px handset in a 32px frame). {%- endcomment -%}
+                <svg class="fa-membership__icon" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M28.5327 25.5255C27.7302 27.9642 24.5859 29.181 22.3395 28.9782C19.2714 28.7009 15.933 27.0733 13.3989 25.2811C9.6739 22.6466 6.18467 18.5716 4.15146 14.2471C2.71451 11.1914 2.39211 7.43364 4.52933 4.64827C5.31973 3.6187 6.17601 3.06926 7.45868 3.00513C9.24056 2.91846 9.49017 3.93763 10.102 5.5253C10.5579 6.71259 11.1663 7.92415 11.506 9.15477C12.1422 11.4514 9.9183 11.5467 9.6375 13.4238C9.46417 14.6076 10.8976 16.1953 11.5459 17.0394C12.7955 18.6834 14.3259 20.0934 16.0665 21.2045C17.0545 21.8267 18.6457 22.9481 19.7758 22.3294C21.5161 21.3761 21.3532 18.4416 23.7851 19.4348C25.0452 19.9479 26.2655 20.688 27.4684 21.3362C29.3283 22.3363 29.2417 23.3728 28.5327 25.5255Z"/></svg>
+              {%- endif -%}
+              <div class="fa-membership__option-text">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="fa-membership__option-title" id="{{ card_uid }}-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  {%- comment -%} A blank line starts a new paragraph (Figma: separate trimmed text boxes). {%- endcomment -%}
+                  {%- assign paragraphs = block.settings.text | strip | escape | newline_to_br | strip_newlines | split: '<br /><br />' -%}
+                  <div class="fa-membership__option-paras">
+                    {%- for paragraph in paragraphs -%}
+                      <p class="fa-membership__option-desc">{{ paragraph }}</p>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: block.settings.button_link %} class="fa-btn fa-membership__btn">{{ block.settings.button_label | escape }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    {%- if has_panel -%}
+      <div class="fa-membership__panel" data-fa-reveal="up">
+        <div class="fa-membership__panel-body">
+          {%- if section.settings.panel_title != blank -%}
+            <h3 class="fa-membership__panel-title">{{ section.settings.panel_title | escape }}</h3>
+          {%- endif -%}
+          {%- if item_count > 0 -%}
+            <ul class="fa-membership__list" role="list">
+              {%- for block in section.blocks -%}
+                {%- if block.type != 'item' or block.settings.text == blank -%}{%- continue -%}{%- endif -%}
+                <li class="fa-membership__item" {{ block.shopify_attributes }}><svg class="fa-membership__check" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M.2 12.8 2 11.6l1.6.2L5 14l1.2-1.6 1-1.4 2-3 3-4L14.8 1 16 0h3.8l-1 1.2-3 3.3-3 3.8-2 2.7L9 14l-1.4 2.2-1.2 1.8-.8 1.8H2.4l-1-2.2-.8-2.2Z"/></svg>{{ block.settings.text | escape }}</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.panel_button_label != blank -%}
+          <a href="{{ section.settings.panel_button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.panel_button_link %} class="fa-btn fa-membership__btn fa-membership__panel-btn">{{ section.settings.panel_button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.button_label != blank and layout != 'split' -%}
+    {%- comment -%} Figma V6 2669:25758: one garnet button centred 32px below both columns. {%- endcomment -%}
+    <div class="fa-container fa-membership__cta" data-fa-reveal="up">
+      <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--primary fa-membership__cta-btn">{{ section.settings.button_label | escape }}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Felice membership",
+  "tag": "div",
+  "class": "fa-membership-section",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "select",
+      "id": "mobile_style",
+      "label": "Mobile style",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "compact", "label": "Compact (Concierge mobile)" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Concierge Care"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text",
+      "default": "<p>Our concierge practice is designed for anyone ready to take a more dedicated, highly personalized approach to their health. Patients receive unmatched access to their practitioner, longer appointments, and access to a suite of resources.</p>"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor (optional)",
+      "info": "Lets other sections jump here, e.g. concierge (link to #concierge). Letters, numbers and hyphens."
+    },
+    {
+      "type": "header",
+      "content": "Includes panel"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add \"Checklist item\" blocks for the lines of the panel. The panel is hidden when it has no title, items or button."
+    },
+    {
+      "type": "text",
+      "id": "panel_title",
+      "label": "Panel title",
+      "default": "Concierge Includes"
+    },
+    {
+      "type": "text",
+      "id": "panel_button_label",
+      "label": "Panel button label",
+      "info": "Leave blank for no button."
+    },
+    {
+      "type": "url",
+      "id": "panel_button_link",
+      "label": "Panel button link",
+      "info": "Blank links to # for now."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "row", "label": "Cards under the text, panel on the right" },
+        { "value": "split", "label": "Text left, cards stacked on the right" }
+      ],
+      "default": "row",
+      "info": "Split: the button sits under the text; the includes panel is not shown."
+    },
+    {
+      "type": "select",
+      "id": "botanical",
+      "label": "Botanical",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "top_left", "label": "Top left (concierge page)" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "corners",
+      "label": "Band corners",
+      "options": [
+        { "value": "diagonal", "label": "Rounded top right and bottom left (design)" },
+        { "value": "all", "label": "All rounded" },
+        { "value": "none", "label": "Square" }
+      ],
+      "default": "diagonal"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button below the columns",
+      "info": "Leave blank for no button."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button below the columns link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "min": 60,
+      "max": 160,
+      "step": 1,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 60,
+      "max": 160,
+      "step": 1,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 60,
+      "info": "Up to 899px. Desktop and tablet use the standard section padding."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#9d7f4e",
+      "info": "Shows under the texture, or alone when no texture is set."
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Replaces the bundled texture."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background texture (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the bundled mobile texture."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled background file",
+      "default": "fa-membership-bg.jpg",
+      "info": "Theme asset used when no background texture is picked. Clear both bundled files for a plain band in the background colour."
+    },
+    {
+      "type": "text",
+      "id": "background_asset_mobile",
+      "label": "Bundled mobile background file",
+      "default": "fa-membership-bg-mobile.jpg",
+      "info": "Theme asset for phones (up to 899px) when no background texture is picked."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Option card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "location", "label": "Location pin" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "video", "label": "Video call (laptop)" },
+            { "value": "none", "label": "None" }
+          ],
+          "default": "location"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon",
+          "info": "Optional. Replaces the icon above; shown at 32 x 32 (24 x 24 on phones)."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "In-home"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "We come to you, within 30 minutes of Culver City."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "info": "Leave blank for no button."
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link",
+          "info": "Blank links to # for now."
+        }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Checklist item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "A comprehensive diagnostic consultation",
+          "info": "Shown with a check mark in the includes panel."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice membership",
+      "settings": {
+        "button_label": "Book concierge"
+      },
+      "blocks": [
+        {
+          "type": "option",
+          "settings": {
+            "icon": "location",
+            "title": "In-home",
+            "text": "We come to you, within 30 minutes of Culver City."
+          }
+        },
+        {
+          "type": "option",
+          "settings": {
+            "icon": "video",
+            "title": "Virtual",
+            "text": "Sessions by video, around your schedule."
+          }
+        },
+        { "type": "item", "settings": { "text": "A comprehensive diagnostic consultation" } },
+        { "type": "item", "settings": { "text": "Ongoing sessions, in-home or virtually" } },
+        { "type": "item", "settings": { "text": "A fully tailored treatment protocol" } },
+        { "type": "item", "settings": { "text": "Priority access to your practitioner (response within 12–24 hours)" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

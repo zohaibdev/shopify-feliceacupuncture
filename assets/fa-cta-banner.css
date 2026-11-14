@@ -1,0 +1,366 @@
+/* Felice CTA banner — Figma 414:763 (desktop), 414:1237 / 414:1239 (mobile); homepage V4 2237:297 / 2264:776 */
+
+.fa-cta-banner {
+  position: relative;
+  overflow: hidden;
+  padding-block: 176px 155px;
+  color: var(--fa-white);
+  background: #4a3b2d;
+}
+
+.fa-cta-banner__media img { object-position: center; }
+
+/* ---------- Botanicals (homepage V3, show_botanicals) ----------
+   Same drawing as the first-visit botanical, from Figma's relativeTransforms: 2612:3389 — 223.6 x 350.2 turned 15deg,
+   80%, centre 93.3px from the left and 6.9px above the band top (rises 205px into the section above);
+   2612:3698 — 271 x 344 frame turned -90deg with the drawing in its left 218.7px (CROP 1.2389), 82%, centre 1299px
+   from the left and 0.65px above the band bottom (spills 109px into the section below). The band clips only
+   horizontally and stacks above its neighbours (z-index 2: a following section may itself be lifted to 1). */
+.fa-cta-banner--botanicals {
+  z-index: 2;
+  overflow: visible;
+  overflow-x: clip;
+}
+
+.fa-cta-banner__botanical--top {
+  top: -182.04px;
+  left: -18.48px;
+  width: 223.6px;
+  height: 350.2px;
+  opacity: 0.8;
+  transform: rotate(15deg);
+}
+
+.fa-cta-banner__botanical--bottom {
+  right: 31.64px;
+  bottom: -171.35px;
+  width: 218.72px;
+  height: 344px;
+  opacity: 0.82;
+  transform: rotate(-90deg);
+}
+
+/* Two classes so Dawn's base.css `div:empty { display: none }` doesn't hide the overlay. */
+.fa-cta-banner .fa-cta-banner__shade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / var(--fa-cta-shade, 0));
+}
+
+.fa-cta-banner__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  text-align: center;
+}
+
+.fa-cta-banner__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  width: 100%;
+}
+
+.fa-cta-banner__title {
+  max-width: 794px; /* Figma 414:769 text box */
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 60px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-cta-banner__text {
+  max-width: 594px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0.01em;
+  text-box: trim-both cap alphabetic;
+}
+
+/* "Tall with wide text" (services v2 2263:2846): 179px above and below, paragraphs across Figma's 914px box,
+   button hugging its label (2263:2855, 210px) instead of the usual 250px minimum. */
+@media screen and (min-width: 1100px) {
+  /* Figma draws the 667px band with the reviews band (2861) overlapping its last 13px, so only 654px is visible:
+     179 top / 166 bottom, and the photo shifted to keep the crop of the full 667px band (cover, centred on 667). */
+  .fa-cta-banner--tall { padding-block: 179px 166px; }
+
+  .fa-cta-banner--tall .fa-cta-banner__media img { object-position: 50% calc(50% + 6.5px); }
+}
+
+/* "Spacious" (homepage V3 3592: heading only, 44px to the button; 210 / 189px = the standard band's 176 / 155 plus
+   34 each, so the band keeps its 592px). Tablet adds the same 34px to its own padding. */
+@media screen and (min-width: 900px) {
+  .fa-cta-banner--spacious { padding-block: 210px 189px; }
+
+  .fa-cta-banner--spacious .fa-cta-banner__inner { gap: 44px; }
+}
+
+@media screen and (min-width: 900px) {
+  .fa-cta-banner--tall .fa-cta-banner__text { max-width: 914px; }
+
+  .fa-cta-banner--tall .fa-cta-banner__button { min-width: 0; }
+}
+
+@media screen and (max-width: 1099px) {
+  .fa-cta-banner { padding-block: 132px 120px; }
+
+  /* Botanicals at 60%, like the other tablet botanicals. */
+  .fa-cta-banner__botanical--top {
+    top: -109.22px;
+    left: -11.09px;
+    width: 134.16px;
+    height: 210.12px;
+  }
+
+  .fa-cta-banner__botanical--bottom {
+    right: 18.98px;
+    bottom: -102.81px;
+    width: 131.23px;
+    height: 206.4px;
+  }
+
+  .fa-cta-banner--tall { padding-block: 132px; } /* symmetric like the v2 tall band */
+
+  .fa-cta-banner--spacious { padding-block: 166px 154px; } /* mobile overrides below */
+
+  .fa-cta-banner__title {
+    max-width: 680px;
+    font-size: 56px;
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  /* Homepage V4 2264:2422 / 2424: content 115px below the band top, button 114px above its bottom. */
+  .fa-cta-banner { padding-block: 115px 114px; }
+
+  .fa-cta-banner__inner { gap: 24px; }
+
+  .fa-cta-banner__copy { gap: 16px; }
+
+  .fa-cta-banner__title {
+    max-width: 347px;
+    font-size: 32px;
+    line-height: 28px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-cta-banner__text {
+    max-width: 351px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0;
+  }
+
+  /* Spacious = homepage mobile V1 2794:1250 (375 x 260): the 107px title + button block 77px below the band top and
+     76px above its bottom, 24px between them. */
+  .fa-cta-banner--spacious { padding-block: 77px 76px; }
+
+  /* Botanicals: only the top one, at the mobile botanical size (106.4px wide, x 0.476). */
+  .fa-cta-banner__botanical--top {
+    top: -86.62px;
+    left: -8.79px;
+    width: 106.4px;
+    height: 166.63px;
+  }
+
+  .fa-cta-banner__botanical--bottom { display: none; }
+
+  /* Services v2 mobile 2265:8299: 105px above and below, text tracked -1% (2265:8306 / 8317). */
+  .fa-cta-banner--tall { padding-block: 105px; }
+
+  .fa-cta-banner--tall .fa-cta-banner__text { letter-spacing: -0.01em; }
+}
+
+/* Below the 375 frame the title needs three lines: balance them instead of leaving "balance." alone. */
+@media screen and (max-width: 359px) {
+  .fa-cta-banner__title { text-wrap: balance; }
+}
+
+/* ---------- "Feature" layout (Our Approach V3 2669:35884, 1440 x 713): 120px above and below, 794px column —
+   characters 56.4 x 124, 34px, title 70 / 60, 26px, subheading (Marisa 28 / 35, -4%, 748 wide) 8px above the
+   text (18 / 30, 732 wide), button 32px below (fixed 222 x 54). ---------- */
+
+.fa-cta-banner__glyph {
+  display: block;
+  width: 56.42px;
+  height: auto;
+}
+
+.fa-cta-banner__subheading {
+  max-width: 748px;
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 35px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 1100px) {
+  .fa-cta-banner--feature { padding-block: 120px; }
+
+  .fa-cta-banner--feature .fa-cta-banner__inner { gap: 34px; }
+
+  .fa-cta-banner--feature .fa-cta-banner__copy { gap: 26px; }
+
+  .fa-cta-banner--feature .fa-cta-banner__subheading + .fa-cta-banner__text { margin-top: -18px; }
+
+  .fa-cta-banner--feature .fa-cta-banner__text {
+    max-width: 732px;
+    letter-spacing: 0;
+    text-box: none;
+  }
+
+  .fa-cta-banner--feature .fa-cta-banner__copy + .fa-cta-banner__buttons { margin-top: -2px; }
+
+  .fa-cta-banner--feature .fa-cta-banner__button {
+    min-width: 222px; /* QA 2026-10-14: Figma 2669:35779 / 2669:28405 draw it 222 wide (fixed), not hugging */
+    padding-inline: 42px;
+  }
+}
+
+/* Button row (one or two buttons, 18px apart). */
+.fa-cta-banner__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* ---------- Layout "Heading, text and two buttons" (blog page V1 2719:19950): 524px band, content 160px below the top
+   and 137px above the bottom; title 70/58 in a 594px box (two lines), 24px, text 16/27 (592), 44px, two 250px buttons.
+   ---------- */
+.fa-cta-banner--buttons .fa-cta-banner__inner { gap: 44px; }
+
+.fa-cta-banner--buttons .fa-cta-banner__copy { gap: 24px; }
+
+.fa-cta-banner--buttons .fa-cta-banner__title {
+  max-width: 594px;
+  line-height: 58px;
+}
+
+.fa-cta-banner--buttons .fa-cta-banner__text {
+  max-width: 592px;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0;
+}
+
+@media screen and (min-width: 1100px) {
+  /* "Move content down" (article page V2 2719:22712 sits 28px lower than the blog page's band) */
+  .fa-cta-banner--buttons { padding-block: calc(160px + var(--fa-cta-offset, 0px)) calc(137px - var(--fa-cta-offset, 0px)); }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-cta-banner--buttons .fa-cta-banner__inner { gap: 32px; }
+  .fa-cta-banner--buttons .fa-cta-banner__title { line-height: inherit; }
+}
+
+/* "Mobile style: Compact" = Our Approach mobile 2821:6541 "What is acupuncture?" (2897–3393): 60px padding; 26 x 57
+   characters, 24px; title 32 / 28 (-4%) in 327px, 20px; subheading 24 / 23 (-4%), 8px, text 14 / 22 (-1%); 32px;
+   169 x 39 "Book now" (42px sides, 14px label -2%). */
+@media screen and (max-width: 899px) {
+  .fa-cta-banner--mobile-compact { padding-block: 60px; }
+
+  .fa-cta-banner--mobile-compact .fa-cta-banner__glyph {
+    width: 26px;
+    height: 57px;
+  }
+
+  .fa-cta-banner--mobile-compact .fa-cta-banner__copy { gap: 20px; }
+
+  .fa-cta-banner--mobile-compact .fa-cta-banner__title {
+    max-width: 327px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-cta-banner--mobile-compact .fa-cta-banner__subheading {
+    font-size: 24px;
+    line-height: 23px;
+  }
+
+  .fa-cta-banner--mobile-compact .fa-cta-banner__subheading + .fa-cta-banner__text { margin-top: -12px; }
+  .fa-cta-banner--mobile-compact .fa-cta-banner__text {
+    letter-spacing: -0.01em;
+    text-box: none; /* Figma's 4 x 22 = 88 box */
+  }
+  .fa-cta-banner--mobile-compact .fa-cta-banner__copy + .fa-cta-banner__buttons { margin-top: 8px; }
+
+  .fa-cta-banner--mobile-compact .fa-cta-banner__button {
+    min-width: 169px; /* Figma's fixed 169 */
+    min-height: 39px;
+    padding-inline: 42px;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Compact + "Buttons" = Blog listing mobile 2860:24040 "Ready to start your care?" (1726-2057): 90px padding; title
+   32 / 28 (-5%), 14px, text 16 / 22 in 299px; 24px; the two buttons side by side (167 x 35, 10px apart, 14px -3%). */
+@media screen and (max-width: 899px) {
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact { padding-block: 90px; }
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__inner { gap: 24px; }
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__copy { gap: 14px; }
+
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__title {
+    max-width: none;
+    line-height: 28px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__text {
+    max-width: 299px;
+    margin-inline: auto;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__copy + .fa-cta-banner__buttons { margin-top: 0; }
+
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__buttons {
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+    max-width: 344px;
+    margin-inline: auto;
+  }
+
+  .fa-cta-banner--buttons.fa-cta-banner--mobile-compact .fa-cta-banner__button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 35px;
+    padding-inline: 12px;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Review 2026-10-21: Figma "Latest pages" spacious banner (Home / Blog / In-Clinic / Concierge) — "Book your first
+   visit" hugs its label with 42px sides: 289 x 54 (the hosted face is a few px narrower, so the width is held). */
+@media screen and (min-width: 900px) {
+  .fa-cta-banner--spacious .fa-cta-banner__button.fa-btn {
+    min-width: 289px;
+    padding-inline: 42px;
+  }
+}
+
+/* Figma "Latest pages" In-Clinic Services (2995:34513) / Blog Listing: the same button with 32px sides, 265 x 54. */
+@media screen and (min-width: 900px) {
+  .fa-cta-banner--spacious.fa-cta-banner--button-narrow .fa-cta-banner__button.fa-btn {
+    min-width: 265px;
+    padding-inline: 32px;
+  }
+}

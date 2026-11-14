@@ -1,0 +1,230 @@
+{%- comment -%}
+  Felice appointments — centred heading + intro and a table of appointments: name, duration, practitioners and a booking
+  link per row (blocks). Figma: Our Team V3 "Who books what" (file B4QcctWXiG9ywP3uRA3coG, 2669:33935).
+{%- endcomment -%}
+
+{{ 'fa-appointments.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign default_id = 'fa-appointments-' | append: section.id
+  assign title_id = 'fa-appointments-title-' | append: section.id
+  assign bg = section.settings.background_asset
+-%}
+{%- liquid
+  assign matrix_on = false
+  if section.settings.mobile_layout == 'matrix' or section.settings.desktop_layout == 'matrix'
+    assign matrix_on = true
+  endif
+-%}
+<section
+  class="fa-section fa-appointments{% if section.settings.mobile_layout == 'matrix' %} fa-appointments--mobile-matrix{% endif %}{% if section.settings.desktop_layout == 'matrix' %} fa-appointments--desktop-matrix{% endif %}"
+  id="{{ section.settings.anchor_id | strip | remove_first: '#' | default: default_id }}"
+  {%- if section.settings.heading != blank %} aria-labelledby="{{ title_id }}"{% endif %}
+>
+  {%- if section.settings.background != blank or bg != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      {%- if section.settings.background != blank -%}
+        {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920', sizes: '100vw', loading: 'lazy', alt: '' }}
+      {%- else -%}
+        <img src="{{ bg | asset_url }}" width="1440" height="1118" loading="lazy" alt="">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="fa-container fa-appointments__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-appointments__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-appointments__title" id="{{ title_id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-appointments__intro">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="fa-appointments__scroll" data-fa-reveal="up">
+        <table class="fa-appointments__table">
+          <thead>
+            <tr>
+              <th scope="col">{{ section.settings.label_name | escape }}</th>
+              <th scope="col">{{ section.settings.label_duration | escape }}</th>
+              <th scope="col">{{ section.settings.label_people | escape }}</th>
+              <th scope="col"><span class="fa-visually-hidden">{{ section.settings.label_book | escape }}</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in section.blocks -%}
+              <tr {{ block.shopify_attributes }}>
+                <th scope="row">{{ block.settings.name | escape }}</th>
+                <td class="fa-appointments__duration">{{ block.settings.duration | escape | newline_to_br }}</td>
+                <td class="fa-appointments__people">{{ block.settings.practitioners | escape | newline_to_br }}</td>
+                <td class="fa-appointments__book">
+                  {%- if block.settings.link_label != blank -%}
+                    {%- assign link = block.settings.link | default: section.settings.default_link -%}
+                    <a href="{{ link | default: '#' }}"{% render 'fa-link-target', url: link %}>
+                      {{- block.settings.link_label | escape }} <span class="fa-arrow-nudge" aria-hidden="true">→</span><span class="fa-visually-hidden"> {{ block.settings.name | escape }}</span>
+                    </a>
+                  {%- endif -%}
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+
+      {%- if matrix_on -%}
+        {%- comment -%}
+          "Practitioner matrix" (Figma Our Team 2995:26395 desktop / 2821:4461 mobile): one column per practitioner
+          (setting "Matrix columns"). Each appointment row: its name (· duration), then per column ● when the column's
+          name is in the row's practitioners, the waitlist label when it is in the row's "Waitlist" field, otherwise
+          ---. The foot row repeats "Book now →" under every practitioner. Desktop: the name in a 520px first column;
+          mobile: the name as a bar over the four cells. An ARIA table (rows of cells), so both layouts read the same.
+        {%- endcomment -%}
+        {%- assign columns = section.settings.matrix_columns | split: ',' -%}
+        <div class="fa-appointments__matrix" role="table" aria-label="{{ section.settings.heading | escape }}" data-fa-reveal="up">
+          <div class="fa-appointments__mrow fa-appointments__mrow--head" role="row">
+            <span class="fa-appointments__mname" role="columnheader">{{ section.settings.label_name | escape }}</span>
+            {%- for col in columns -%}<span class="fa-appointments__mcell" role="columnheader">{{ col | strip | escape }}</span>{%- endfor -%}
+          </div>
+          {%- for block in section.blocks -%}
+            {%- assign people = block.settings.practitioners | replace: '•', '·' | split: '·' -%}
+            {%- assign waitlist = block.settings.waitlist | replace: '•', '·' | split: '·' -%}
+            {%- assign duration = block.settings.duration | strip | newline_to_br | strip_newlines | replace: '<br />', ', ' -%}
+            {%- assign dur_check = duration | remove: '-' | strip -%}
+            <div class="fa-appointments__mrow" role="row" {{ block.shopify_attributes }}>
+              <span class="fa-appointments__mname" role="rowheader">
+                {{- block.settings.name | escape -}}
+                {%- if dur_check != blank -%}{%- unless block.settings.name contains duration %} · {{ duration | escape }}{%- endunless -%}{%- endif -%}
+              </span>
+              {%- for col in columns -%}
+                {%- assign col_name = col | strip -%}
+                {%- assign state = 'none' -%}
+                {%- for p in people -%}{%- assign pn = p | strip -%}{%- if pn == col_name -%}{%- assign state = 'yes' -%}{%- endif -%}{%- endfor -%}
+                {%- for p in waitlist -%}{%- assign pn = p | strip -%}{%- if pn == col_name -%}{%- assign state = 'waitlist' -%}{%- endif -%}{%- endfor -%}
+                <span class="fa-appointments__mcell" role="cell">
+                  {%- case state -%}
+                    {%- when 'yes' -%}<span class="fa-appointments__dot" aria-hidden="true"></span><span class="fa-visually-hidden">{{ col_name | escape }}: available</span>
+                    {%- when 'waitlist' -%}<span class="fa-appointments__waitlist">{{ section.settings.matrix_waitlist_label | escape }}</span>
+                    {%- else -%}<span class="fa-appointments__none" aria-hidden="true">---</span><span class="fa-visually-hidden">{{ col_name | escape }}: not offered</span>
+                  {%- endcase -%}
+                </span>
+              {%- endfor -%}
+            </div>
+          {%- endfor -%}
+          <div class="fa-appointments__mrow fa-appointments__mrow--foot" role="row">
+            <span class="fa-appointments__mname" role="cell"></span>
+            {%- for col in columns -%}
+              <span class="fa-appointments__mcell" role="cell">
+                {%- assign col_name = col | strip -%}
+                {%- assign col_link = section.settings.default_link -%}
+                {%- assign col_lines = section.settings.matrix_column_links | newline_to_br | split: '<br />' -%}
+                {%- for line in col_lines -%}
+                  {%- assign parts = line | split: '|' -%}
+                  {%- assign pname = parts[0] | strip -%}
+                  {%- if pname == col_name and parts[1] != blank -%}{%- assign col_link = parts[1] | strip -%}{%- endif -%}
+                {%- endfor -%}
+                <a href="{{ col_link | default: '#' }}"{% render 'fa-link-target', url: col_link %}>
+                  {{- section.settings.matrix_book_label | escape }} <span class="fa-arrow-nudge" aria-hidden="true">→</span><span class="fa-visually-hidden"> with {{ col | strip | escape }}</span>
+                </a>
+              </span>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice appointments",
+  "tag": "div",
+  "class": "fa-appointments-section",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Intro" },
+    { "type": "text", "id": "label_name", "label": "Column: appointment", "default": "Appointment" },
+    { "type": "text", "id": "label_duration", "label": "Column: duration", "default": "Duration" },
+    { "type": "text", "id": "label_people", "label": "Column: practitioners", "default": "Practitioners" },
+    { "type": "text", "id": "label_book", "label": "Column: booking (screen readers)", "default": "Book" },
+    {
+      "type": "url",
+      "id": "default_link",
+      "label": "Default booking link",
+      "info": "Used by rows without their own link."
+    },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID" },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Layout on desktop",
+      "options": [
+        { "value": "list", "label": "List" },
+        { "value": "matrix", "label": "Practitioner matrix" }
+      ],
+      "default": "list"
+    },
+    { "type": "header", "content": "Mobile" },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Layout on mobile",
+      "options": [
+        { "value": "list", "label": "List (as desktop)" },
+        { "value": "matrix", "label": "Practitioner matrix" }
+      ],
+      "default": "list"
+    },
+    {
+      "type": "text",
+      "id": "matrix_columns",
+      "label": "Matrix columns",
+      "default": "Dr. Felice, Dr. Sam, Caroline, Dr. Sarah",
+      "info": "Comma separated; each must match the names used in the rows' Practitioners field."
+    },
+    { "type": "text", "id": "matrix_waitlist_label", "label": "Matrix waitlist label", "default": "Waitlist" },
+    { "type": "text", "id": "matrix_book_label", "label": "Matrix booking label", "default": "Book now" },
+    { "type": "textarea", "id": "matrix_column_links", "label": "Matrix booking links per column", "info": "One per line: Column name | link. Columns without a line use the default link." },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "background", "label": "Background image" },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Bundled background file",
+      "default": "fa-team-bg.jpg",
+      "info": "Theme asset used when no image is picked. Blank shows the plain colour."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Appointment",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Appointment", "default": "Initial Visit" },
+        { "type": "textarea", "id": "duration", "label": "Duration", "default": "75 min" },
+        { "type": "textarea", "id": "practitioners", "label": "Practitioners", "default": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah" },
+        { "type": "text", "id": "waitlist", "label": "Waitlist", "info": "Practitioners with a waitlist for this appointment (mobile matrix), separated by ·" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Book" },
+        { "type": "url", "id": "link", "label": "Booking link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice appointments",
+      "settings": {
+        "heading": "Appointments by practitioner",
+        "text": "<p>Every appointment we offer, and which of our practitioners you can see for it.</p>"
+      },
+      "blocks": [
+        { "type": "row" },
+        { "type": "row", "settings": { "name": "Follow-up Treatment · 60 min", "duration": "60 min" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

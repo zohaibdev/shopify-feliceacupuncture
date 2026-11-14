@@ -1,0 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "fa_footer": {
+      "type": "fa-footer",
+      "blocks": {
+        "links_explore": {
+          "type": "links",
+          "settings": {
+            "heading": "Explore",
+            "open_mobile": true,
+            "menu": "explore",
+            "links": "Our Approach | /pages/our-approach\nOur Team | /pages/our-team\nOur Services | /pages/services"
+          }
+        },
+        "links_visit": {
+          "type": "links",
+          "settings": {
+            "heading": "Visit",
+            "open_mobile": false,
+            "menu": "visit",
+            "links": "Book your first visit | https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1\nBook in-clinic | https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1\nBook concierge | /pages/concierge"
+          }
+        },
+        "links_learn": {
+          "type": "links",
+          "settings": {
+            "heading": "Education",
+            "open_mobile": false,
+            "menu": "education",
+            "links": "E-courses | /pages/e-courses\nE-books | /pages/e-books\nBlog | /pages/blog"
+          }
+        }
+      },
+      "block_order": [
+        "links_explore",
+        "links_visit",
+        "links_learn"
+      ],
+      "settings": {
+        "logo_layout": "row",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "tiktok_url": "",
+        "show_tiktok": false,
+        "newsletter_enable": true,
+        "newsletter_heading": "Join the TCM Collective",
+        "newsletter_text": "Drop your email, and we'll send you everything you need to know about TCM tips, rituals, and more.",
+        "newsletter_placeholder": "Email address",
+        "newsletter_button_label": "Join now",
+        "nav_label": "Footer",
+        "copyright": "Felice acupuncture ©2023-2026 • culver city",
+        "terms_label": "Terms & Conditions",
+        "terms_link": "/policies/terms-of-service",
+        "privacy_label": "Privacy Policy",
+        "privacy_link": ""
+      }
+    }
+  },
+  "order": [
+    "fa_footer"
+  ]
+}

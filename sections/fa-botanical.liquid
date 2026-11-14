@@ -1,0 +1,46 @@
+{%- comment -%}
+  Felice botanical overlay — a zero-height section placed between two sections: it draws one decorative image
+  across their boundary, on top of both, positioned like the Figma layer (desktop only; no mobile design).
+  Values come straight from Figma's layer: X / Y of its top-left corner on the 1440 frame (Y measured from the
+  boundary, i.e. the top of the next section), its width / height, rotation (Figma's angle, counter-clockwise) and
+  "Flip" for layers with a mirrored transform. Zoom > 100 = an image fill in crop mode (the image scaled up from
+  the bottom-left corner of the box).
+  First used on E-Books V2 (frame 2792:3796: 2792:4285, 2792:4036, 2792:4081).
+{%- endcomment -%}
+
+{%- liquid
+  assign asset = section.settings.asset | strip | default: 'fa-first-visit-botanical.png'
+  assign rotation = section.settings.rotation | default: 0 | times: -1
+-%}
+{{ 'fa-botanical.css' | asset_url | stylesheet_tag }}
+<div class="fa-botanical" aria-hidden="true">
+  <div class="fa-botanical__clip">
+    <div class="fa-botanical__frame">
+      <span
+        class="fa-botanical__item"
+        style="--fa-bot-x: {{ section.settings.x | default: 0 }}px; --fa-bot-y: {{ section.settings.y | default: 0 }}px; --fa-bot-w: {{ section.settings.width | default: 200 }}px; --fa-bot-h: {{ section.settings.height | default: 300 }}px; --fa-bot-opacity: {{ section.settings.opacity | divided_by: 100.0 }}; --fa-bot-rotate: {{ rotation }}deg; --fa-bot-flip: {% if section.settings.flip %}-1{% else %}1{% endif %}; --fa-bot-zoom: {{ section.settings.zoom | default: 100 | divided_by: 100.0 }};"
+      ><img src="{{ asset | asset_url }}" alt="" width="544" height="852" loading="lazy"></span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Felice botanical overlay",
+  "tag": "div",
+  "class": "fa-botanical-section",
+  "settings": [
+    { "type": "paragraph", "content": "Draws a flower across the line between the sections above and below (desktop only). Copy the values from the Figma layer." },
+    { "type": "text", "id": "asset", "label": "Image (bundled file)", "default": "fa-first-visit-botanical.png" },
+    { "type": "number", "id": "x", "label": "X on the 1440 frame (px)", "default": 1200 },
+    { "type": "number", "id": "y", "label": "Y from the top of the next section (px)", "default": -150 },
+    { "type": "number", "id": "width", "label": "Width (px)", "default": 200 },
+    { "type": "number", "id": "height", "label": "Height (px)", "default": 313 },
+    { "type": "number", "id": "rotation", "label": "Rotation (Figma degrees)", "default": 0 },
+    { "type": "checkbox", "id": "flip", "label": "Flip (mirrored layer)", "default": false },
+    { "type": "number", "id": "zoom", "label": "Zoom (%)", "default": 100 },
+    { "type": "range", "id": "opacity", "label": "Opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 80 }
+  ],
+  "presets": [{ "name": "Felice botanical overlay" }]
+}
+{% endschema %}

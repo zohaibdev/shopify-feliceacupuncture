@@ -1,0 +1,851 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ebook": {
+      "type": "fa-signup",
+      "settings": {
+        "layout": "split",
+        "heading": "Gut Health E-book",
+        "text": "<p>Fill this form out to receive the Gut Health E-book, get yours now!</p>",
+        "button_label": "Sign me up",
+        "tags": "newsletter, ebook-gut-health",
+        "success_message": "Thank you! Check your inbox for the e-book.",
+        "email_placeholder": "Email address",
+        "anchor_id": "gut-health-ebook",
+        "fallback_asset": "fa-signup-ebook-cover.jpg",
+        "image_alt": "E-book cover: From Exhausted to Energized by Dr. Felice Chan",
+        "background_asset": "fa-membership-bg.jpg",
+        "show_botanicals": false,
+        "mobile_style": "compact",
+        "heading_h1": true
+      }
+    },
+    "truth": {
+      "type": "fa-feature-cards",
+      "blocks": {
+        "truth_time_tested": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-time-tested-v2.webp",
+            "title": "It's time-tested",
+            "text": "TCM has over 3,000 years of recorded practice.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 232,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-time-tested-mobile-v2.webp"
+          }
+        },
+        "truth_treats_root": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-treats-root-v2.webp",
+            "title": "It treats the root",
+            "text": "We look beyond symptoms to identify the patterns of imbalance underneath them.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 276,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-treats-root-mobile-v2.webp"
+          }
+        },
+        "truth_western_medicine": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-western-medicine-v2.webp",
+            "title": "It works \nwith Western medicine",
+            "text": "We do read labs, and we work with your Western doctors.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 306,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-western-medicine-mobile-v2.webp"
+          }
+        },
+        "truth_whole_system": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-feature-cards-truth-whole-system-v2.webp",
+            "title": "It sees the whole system",
+            "text": "Digestion, nervous system, circulation, inflammation, hormones, and emotional stress are part of one interconnected picture.",
+            "tag": "",
+            "icon_asset": "",
+            "button_label": "",
+            "link": "",
+            "text_width": 306,
+            "text_small_mobile": false,
+            "fallback_asset_mobile": "fa-feature-cards-truth-whole-system-mobile-v2.webp"
+          }
+        }
+      },
+      "block_order": [
+        "truth_time_tested",
+        "truth_treats_root",
+        "truth_western_medicine",
+        "truth_whole_system"
+      ],
+      "settings": {
+        "heading": "The truth about \nTraditional Chinese Medicine",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "anchor_id": "truth",
+        "card_style": "linen",
+        "heading_color": "linen",
+        "heading_width": 882,
+        "heading_line_height": 58,
+        "columns": 4,
+        "padding_mobile": 60,
+        "background_asset": "fa-feature-cards-truth-bg.jpg",
+        "background_asset_mobile": "fa-feature-cards-truth-bg-mobile.jpg",
+        "card_background_asset": "fa-feature-cards-card-bg.jpg",
+        "mobile_layout": "grid"
+      }
+    },
+    "botanical_conditions": {
+      "type": "fa-botanical",
+      "settings": {
+        "asset": "fa-first-visit-botanical.png",
+        "x": 1441,
+        "y": 258,
+        "width": 213,
+        "height": 333,
+        "rotation": 173,
+        "flip": false,
+        "zoom": 100,
+        "opacity": 80
+      }
+    },
+    "conditions": {
+      "type": "fa-conditions",
+      "blocks": {
+        "condition_pain": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-pain.jpg",
+            "shade": 20,
+            "glyph_asset": "fa-conditions-brush-pain.svg",
+            "glyph_height": 60,
+            "glyph_offset": 0,
+            "characters": "止痛",
+            "title": "Pain",
+            "text": "Support for pain, tension, mobility, recovery, and everyday movement.",
+            "text_width": 366,
+            "text_width_mobile": 250,
+            "text_tight": false,
+            "link_label": "Learn more →",
+            "practitioners": "",
+            "book_label": "Book",
+            "link": "/pages/our-team#find-a-practitioner",
+            "anchor": ""
+          }
+        },
+        "condition_anxiety": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-anxiety.jpg",
+            "shade": 20,
+            "glyph_asset": "fa-conditions-brush-anxiety.svg",
+            "glyph_height": 60,
+            "glyph_offset": 0,
+            "characters": "安神",
+            "title": "Anxiety & Stress",
+            "text": "Support for stress, relaxation, nervous system balance, and emotional wellbeing.",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "Learn more →",
+            "practitioners": "",
+            "book_label": "Book",
+            "link": "/pages/our-team#find-a-practitioner",
+            "anchor": ""
+          }
+        },
+        "condition_hormones": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-hormones.jpg",
+            "shade": 20,
+            "glyph_asset": "fa-conditions-brush-hormones.svg",
+            "glyph_height": 60,
+            "glyph_offset": 0,
+            "characters": "调经",
+            "title": "Hormones & Fertility",
+            "text": "Support for stress, relaxation, nervous system balance, and emotional wellbeing.",
+            "text_width": 418,
+            "text_width_mobile": 242,
+            "text_tight": true,
+            "link_label": "Learn more →",
+            "practitioners": "",
+            "book_label": "Book",
+            "link": "/pages/our-team#find-a-practitioner",
+            "anchor": ""
+          }
+        },
+        "condition_gut": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-gut.jpg",
+            "shade": 30,
+            "glyph_asset": "fa-conditions-brush-gut.svg",
+            "glyph_height": 64,
+            "glyph_offset": 0,
+            "characters": "调胃",
+            "title": "Gut Health",
+            "text": "Support for bloating, reflux, SIBO, digestive discomfort, and other digestive concerns.",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "Learn more →",
+            "practitioners": "",
+            "book_label": "Book",
+            "link": "/pages/our-team#find-a-practitioner",
+            "anchor": ""
+          }
+        },
+        "condition_skin": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-skin.jpg",
+            "shade": 20,
+            "glyph_asset": "fa-conditions-brush-skin.svg",
+            "glyph_height": 60,
+            "glyph_offset": 0,
+            "characters": "焕肤",
+            "title": "Skin Rejuvenation",
+            "text": "Support for wrinkles, texture, and circulation.",
+            "text_width": 340,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "Learn more →",
+            "practitioners": "",
+            "book_label": "Book",
+            "link": "/pages/our-team#find-a-practitioner",
+            "anchor": ""
+          }
+        },
+        "condition_sleep": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-sleep.jpg",
+            "shade": 20,
+            "glyph_asset": "fa-conditions-brush-sleep.svg",
+            "glyph_height": 60,
+            "glyph_offset": 0,
+            "characters": "助眠",
+            "title": "Sleep",
+            "text": "Support to calm your nervous system so you feel rested.",
+            "text_width": 345,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "Learn more →",
+            "practitioners": "",
+            "book_label": "Book",
+            "link": "/pages/our-team#find-a-practitioner",
+            "anchor": ""
+          }
+        }
+      },
+      "block_order": [
+        "condition_pain",
+        "condition_anxiety",
+        "condition_hormones",
+        "condition_gut",
+        "condition_skin",
+        "condition_sleep"
+      ],
+      "settings": {
+        "anchor_id": "conditions",
+        "show_botanical": false,
+        "botanical_style": "raised",
+        "card_style": "standard",
+        "tone": "dark",
+        "note": "",
+        "background_asset": "",
+        "padding_top": 109,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "eyebrow": "",
+        "heading": "What brings you in?",
+        "mobile_layout": "grid",
+        "intro_style": "tight",
+        "heading_width": 670,
+        "text": "<p>Start here. Traditional Chinese Medicine (TCM) can treat both acute and ongoing health concerns. At Felice Acupuncture, we create a system of personalized care, which includes acupuncture, cupping, massage, and herbal remedies, to support your healing journey.</p>",
+        "text_width": 670,
+        "text_gap": 24,
+        "text_gap_mobile": 16,
+        "heading_line_height_mobile": 35,
+        "button_label": "Book now",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_anchor": "",
+        "button_style": "primary",
+        "button_compact": true,
+        "button_gap_mobile": 24
+      }
+    },
+    "ready": {
+      "type": "fa-cta-banner",
+      "settings": {
+        "bundled_photo": "treatment",
+        "overlay_opacity": 0,
+        "layout": "buttons",
+        "show_botanicals": false,
+        "glyph_asset": "",
+        "subheading": "",
+        "heading": "Ready to\nstart your care?",
+        "text": "Visit us at our Culver City clinic, or let our practitioners come to you, at home or virtually.",
+        "button_label": "Book in-clinic",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_style": "primary",
+        "content_offset": 0,
+        "button_label_2": "Book concierge",
+        "button_link_2": "/pages/concierge",
+        "mobile_style": "compact"
+      }
+    },
+    "newsletter": {
+      "type": "fa-signup",
+      "settings": {
+        "layout": "inline",
+        "heading": "Not ready to download anything?",
+        "text": "<p>Join the TCM Collective. Drop your email, and we'll send you everything you need to know about TCM tips, rituals, and more.</p>",
+        "button_label": "Sign me up",
+        "tags": "newsletter",
+        "success_message": "Thank you! You're on the list.",
+        "email_placeholder": "Email address",
+        "anchor_id": "newsletter",
+        "fallback_asset": "fa-signup-ebook-cover.jpg",
+        "image_alt": "",
+        "background_asset": "fa-signup-bg-light.jpg",
+        "show_botanicals": false,
+        "mobile_style": "compact"
+      }
+    },
+    "botanical_course": {
+      "type": "fa-botanical",
+      "settings": {
+        "asset": "fa-first-visit-botanical.png",
+        "x": 1147,
+        "y": 215,
+        "width": 249,
+        "height": 397,
+        "rotation": 109,
+        "flip": false,
+        "zoom": 105,
+        "opacity": 82
+      }
+    },
+    "course": {
+      "type": "fa-media-text",
+      "settings": {
+        "anchor_id": "course",
+        "image_position": "left",
+        "fallback_asset": "fa-media-text-course.jpg",
+        "image_alt": "A patient relaxing on the sofa in the Felice Acupuncture clinic",
+        "background_asset": "fa-membership-bg.jpg",
+        "heading": "From Exhausted to Energized",
+        "text": "<p>The complete 5-hour Traditional Chinese Medicine course, with a 75-page workbook written by Dr. Felice and lifetime access.</p>",
+        "button_label": "Enroll now",
+        "button_link": "https://felice-chan.mykajabi.com/offers/pTosH8gc/checkout",
+        "button_label_2": "Learn more",
+        "button_link_2": "/pages/e-courses"
+      }
+    },
+    "testimonials": {
+      "type": "fa-testimonials",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Sabrina Sarmiento",
+            "date": "",
+            "rating": 5,
+            "text": "Dr. Felice is amazing.  Can't say enough good things about her!\nHer acupuncture and cupping sessions are pure healing, gentle, powerful, and full of care.  She’s sweet, compassionate, and incredibly skilled (and STYLISH). Every visit feels like a reset for both body and soul."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Adam Francis",
+            "date": "",
+            "rating": 5,
+            "text": "I'm not sure what I'd do without Sarah at Felice Acupuncture. I've been trying to recover from Long Covid for over a year and recently moved to LA from Seattle which caused a number of flare-ups, and I was without an acupuncturist to help calm things down. Luckily I found Felice Acupuncture and as soon as I met Sarah, I knew I was in good hands. She's been huge in not only helping me get my symptoms under control, but also teaching me about diet and supplement adjustments to help keep my system from breaking down as much. Can't recommend her enough, her calming presence and sense of humour is invaluable if you've been dealing with a chronic condition for a prolonged period of time."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Emily Chapel",
+            "date": "",
+            "rating": 5,
+            "text": "I was slightly skeptical that acupuncture would work for my chronic neck pain but I am SO happy to went to Felice Acupuncture and Wellness. Sam Audette was my provider and he made sure I was comfortable throughout the entire process. I can't say it was an enjoyable experience having needles twitch my aching muscles but wow, it helped so much. After two treatments, my pain is almost resolved. I know there is some science behind acuptuncture but I swear, it's magic."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "linda danh",
+            "date": "",
+            "rating": 5,
+            "text": "I went to Caroline as I was seeking treatment and cupping for back pain and overall muscle recovery. Caroline was very thorough and attentive - her soothing energy made me comfortable, as did the beautiful and calming space. Looking forward to another visit soon!"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "heading": "What people are saying",
+        "text": "<p>Pulled live from Google. 5.0 across 42 reviews, filterable by what the patient came in for.</p>",
+        "show_google": true,
+        "google_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "widget_code": "",
+        "arrow_size": "large",
+        "card_style": "square",
+        "mobile_background_asset": "fa-testimonials-bg-services.jpg",
+        "show_botanical": false,
+        "botanical_style": "standard",
+        "botanical_display": "all",
+        "botanical_overlap": true,
+        "padding_mobile": 60
+      },
+      "disabled": true
+    },
+    "botanical_reviews": {
+      "type": "fa-botanical",
+      "settings": {
+        "asset": "fa-first-visit-botanical.png",
+        "x": 16,
+        "y": 141,
+        "width": 154,
+        "height": 242,
+        "rotation": 15,
+        "flip": true,
+        "zoom": 100,
+        "opacity": 80
+      }
+    },
+    "gallery": {
+      "type": "fa-photo-gallery",
+      "blocks": {
+        "photo_01": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-01-treatment-room.jpg",
+            "alt": "A treatment room with a massage table",
+            "shade": 0
+          }
+        },
+        "photo_02": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-02-fire-cupping.jpg",
+            "alt": "Fire cupping on the upper back",
+            "shade": 0
+          }
+        },
+        "photo_03": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-03-lounge-scrolls.jpg",
+            "alt": "The clinic lounge with hanging scroll paintings",
+            "shade": 0
+          }
+        },
+        "photo_04": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-04-hand-needles.jpg",
+            "alt": "Acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_13": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-05-palo-santo.jpg",
+            "alt": "Palo santo in a clay bowl",
+            "shade": 0
+          }
+        },
+        "photo_06": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-06-spine-needles.jpg",
+            "alt": "Acupuncture needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_07": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-07-room-painting.jpg",
+            "alt": "A treatment room with a landscape painting",
+            "shade": 0
+          }
+        },
+        "photo_08": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-08-tui-na.jpg",
+            "alt": "Tui na massage on the treatment table",
+            "shade": 0
+          }
+        },
+        "photo_09": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-09-moonbow-shelf.jpg",
+            "alt": "Moonbow Skin products on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_10": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-10-neck-needles.jpg",
+            "alt": "Acupuncture needles along the neck and shoulders",
+            "shade": 0
+          }
+        },
+        "photo_11": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-11-artwork.jpg",
+            "alt": "Artwork and dried pampas grass in the clinic",
+            "shade": 0
+          }
+        },
+        "photo_12": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-12-moxa-stick.jpg",
+            "alt": "Moxa warming acupuncture points on the back",
+            "shade": 0
+          }
+        },
+        "photo_05": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-13-sauna.jpg",
+            "alt": "The infrared sauna",
+            "shade": 0
+          }
+        },
+        "photo_14": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-14-heat-lamp.jpg",
+            "alt": "A patient resting under the heat lamp with needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_15": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-15-herb-shelf.jpg",
+            "alt": "Herbal supplements on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_16": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-16-placing-needle.jpg",
+            "alt": "A practitioner placing a needle on the shoulder",
+            "shade": 0
+          }
+        },
+        "photo_17": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-17-shower.jpg",
+            "alt": "The cold plunge shower",
+            "shade": 0
+          }
+        },
+        "photo_18": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-18-needling-hands.jpg",
+            "alt": "A practitioner placing acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_19": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-19-business-card.jpg",
+            "alt": "A Felice Acupuncture business card on a carved wooden Buddha",
+            "shade": 0
+          }
+        },
+        "photo_20": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-20-moxa.jpg",
+            "alt": "Preparing moxa at the clinic",
+            "shade": 0
+          }
+        }
+      },
+      "block_order": [
+        "photo_01",
+        "photo_02",
+        "photo_03",
+        "photo_04",
+        "photo_13",
+        "photo_06",
+        "photo_07",
+        "photo_08",
+        "photo_09",
+        "photo_10",
+        "photo_11",
+        "photo_12",
+        "photo_05",
+        "photo_14",
+        "photo_15",
+        "photo_16",
+        "photo_17",
+        "photo_18",
+        "photo_19",
+        "photo_20"
+      ],
+      "settings": {
+        "layout": "strip",
+        "heading": "",
+        "text": "",
+        "text_width": 460,
+        "review_label": "",
+        "review_link": "",
+        "start": "center",
+        "show_arrows": true,
+        "curved_edges": false,
+        "strip_shape": "square_tight",
+        "row_gap": "32",
+        "loop": true,
+        "autoplay": true,
+        "autoplay_interval": 4,
+        "autoplay_speed": 30,
+        "lightbox": true,
+        "anchor_id": "",
+        "show_social": true,
+        "follow_label": "Follow @feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "follow_position": "center",
+        "background_style": "linen",
+        "botanical": "none",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "mobile_photo_size": "small",
+        "show_arrows_mobile": true
+      }
+    },
+    "posts": {
+      "type": "fa-blog-posts",
+      "blocks": {
+        "post_1": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-hypno-sound.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Sound Therapy",
+            "title": "The Healing Harmony of Hypno-Sound Therapy & Ear Acupuncture",
+            "link": "https://www.feliceacupuncture.com/post/the-healing-harmony-of-hypno-sound-therapy-ear-acupuncture"
+          }
+        },
+        "post_2": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-la-fires.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Respiratory",
+            "title": "Protecting Your Lungs and Health During the LA Fires",
+            "link": "https://www.feliceacupuncture.com/post/protecting-your-lungs-and-health-during-the-la-fires"
+          }
+        },
+        "post_3": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-acne.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Skin",
+            "title": "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective",
+            "link": "https://www.feliceacupuncture.com/post/addressing-acne-holistically-a-traditional-chinese-medicine-tcm-perspective"
+          }
+        }
+      },
+      "block_order": [
+        "post_1",
+        "post_2",
+        "post_3"
+      ],
+      "settings": {
+        "heading": "Chinese medicine, explained",
+        "text": "<p>Practical tips from our practitioners for better energy, sleep, digestion, and calm.</p>",
+        "blog": "blogs",
+        "posts_count": 3,
+        "show_date": true,
+        "show_read_time": true,
+        "show_category": true,
+        "link_label": "Read article →",
+        "button_label": "Explore all blogs",
+        "button_link": "shopify://pages/blog",
+        "anchor_id": "",
+        "padding_bottom": 100,
+        "padding_mobile": 60,
+        "background_asset": "fa-blog-posts-bg.jpg",
+        "background_asset_mobile": "fa-blog-posts-bg-mobile.jpg"
+      }
+    },
+    "trust": {
+      "type": "fa-trust-bar",
+      "blocks": {
+        "trust_patients": {
+          "type": "item",
+          "settings": {
+            "icon": "patients",
+            "icon_color": "linen",
+            "title": "1,000+\nPatients",
+            "text": "Treated at our Culver City clinic"
+          }
+        },
+        "trust_board": {
+          "type": "item",
+          "settings": {
+            "icon": "certified",
+            "icon_color": "linen",
+            "title": "Board-Certified\nPractitioners",
+            "text": "Rooted in Traditional Chinese Medicine"
+          }
+        },
+        "trust_google": {
+          "type": "item",
+          "settings": {
+            "icon": "google",
+            "icon_color": "linen",
+            "title": "5.0 on\nGoogle",
+            "text": "Rated by our patients"
+          }
+        },
+        "trust_care": {
+          "type": "item",
+          "settings": {
+            "icon": "care",
+            "icon_color": "grey",
+            "title": "In Clinic, At\nHome, Online",
+            "text": "Care that fits your life"
+          }
+        }
+      },
+      "block_order": [
+        "trust_patients",
+        "trust_board",
+        "trust_google",
+        "trust_care"
+      ],
+      "settings": {
+        "label": "Why patients trust us"
+      }
+    },
+    "book_visit": {
+      "type": "fa-book-visit",
+      "blocks": {
+        "contact_hours": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "Open 7 days a week, 8 AM to 8 PM",
+            "link": "",
+            "no_underline": false
+          }
+        },
+        "contact_phone": {
+          "type": "contact",
+          "settings": {
+            "icon": "phone",
+            "text": "Call or text to book · +1 (424) 478-0019",
+            "link": "tel:+14244780019",
+            "no_underline": false
+          }
+        },
+        "contact_email": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "info@feliceacupuncture.com",
+            "link": "mailto:info@feliceacupuncture.com",
+            "no_underline": false
+          }
+        },
+        "contact_address": {
+          "type": "contact",
+          "settings": {
+            "icon": "pin",
+            "text": "8526 Washington Blvd, Culver City, CA 90232",
+            "link": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+            "no_underline": true
+          }
+        }
+      },
+      "block_order": [
+        "contact_hours",
+        "contact_phone",
+        "contact_email",
+        "contact_address"
+      ],
+      "settings": {
+        "maps_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "map_address": "8526 Washington Blvd, Culver City, CA 90232",
+        "map_embed_url": "",
+        "map_title": "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City",
+        "eyebrow": "",
+        "heading": "Book your first visit",
+        "text": "Based in Culver City and proudly serving the greater Los Angeles area.",
+        "button_label": "Open in google maps",
+        "button_label_2": "Book now",
+        "button_link_2": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "contact_underline": "links",
+        "map_height_mobile": "page",
+        "show_flower": false,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "ebook",
+    "truth",
+    "botanical_conditions",
+    "conditions",
+    "ready",
+    "newsletter",
+    "botanical_course",
+    "course",
+    "testimonials",
+    "botanical_reviews",
+    "gallery",
+    "posts",
+    "trust",
+    "book_visit"
+  ]
+}

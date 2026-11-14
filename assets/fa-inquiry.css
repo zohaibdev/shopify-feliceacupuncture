@@ -1,0 +1,464 @@
+/*
+  Felice inquiry (sections/fa-inquiry.liquid) — Concierge V1 "Ready to begin?" band 2644:17794, 1440 x 1000.
+  Padding 110 / 50; a 1332px row (space-between): left column 560 (top: title Marisa 50/58 -4% + 32 + intro 20/32;
+  bottom: "Prefer to talk?" Marisa 28 -2% + 18 + links 32 apart (icon + 8 + LCC 24 underlined) + 42 + linen panel
+  r2, padding 24/24/20/32: title Marisa 32 -4% garnet + 23 + steps 14 apart (number Marisa 32 + 12 + LCC 22/1.4
+  clay)); right: form panel 724 wide, #DECEB6 r2, padding 32/24/24, fields 24 apart (rows of two 12 apart, label
+  Marisa 24 -2% moss + 12 + 60px field rgba(239,231,219,.5) r4), 32px, garnet 250px button. Radio labels are set
+  in Libre Caslon Text in Figma (self-hosted below). Step numbers are Marisa Regular in Figma; the hosted Marisa
+  file is Bold only. No mobile frame: stacked below 1100px.
+*/
+
+@font-face {
+  font-family: 'Libre Caslon Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fa-libre-caslon-text-400.woff2') format('woff2');
+}
+
+.fa-inquiry {
+  position: relative;
+  padding-block: 110px;
+  color: var(--fa-linen);
+  background: #6c6644; /* mean of the bundled texture, shown while it loads */
+}
+
+.fa-inquiry__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 48px;
+  max-width: calc(1332px + var(--fa-gutter) * 2);
+}
+
+/* ---------- Left column ---------- */
+
+.fa-inquiry__aside {
+  display: flex;
+  flex: 0 1 560px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-width: 0;
+}
+
+.fa-inquiry__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.fa-inquiry__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-inquiry__text {
+  font-size: 20px;
+  line-height: 32px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-inquiry__text p { margin: 0; }
+.fa-inquiry__text p + p { margin-top: 32px; }
+
+.fa-inquiry__extra {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+}
+
+.fa-inquiry__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.fa-inquiry__contact-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: normal;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.fa-inquiry__links {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-inquiry__links li { display: flex; } /* no line box around the 20px link row */
+
+.fa-inquiry__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  font-size: 24px;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.fa-inquiry__link .fa-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.fa-inquiry__link .fa-icon--phone-solid { width: 18px; height: 18px; }
+
+.fa-inquiry__link span {
+  text-decoration: underline;
+  text-decoration-thickness: 9%;
+  text-underline-offset: 3px;
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-inquiry__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  padding: 24px 24px 20px 32px;
+  border-radius: 2px;
+  background: var(--fa-linen);
+  color: var(--fa-garnet);
+}
+
+.fa-inquiry__steps-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: normal;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.fa-inquiry__step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-inquiry__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.fa-inquiry__step-number {
+  flex: none;
+  font-family: var(--fa-font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: normal;
+}
+
+.fa-inquiry__step-text {
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--fa-clay);
+}
+
+/* ---------- Form ---------- */
+
+.fa-inquiry__panel {
+  flex: 0 1 724px;
+  min-width: 0;
+  padding: 32px 24px 24px;
+  border-radius: 2px;
+  background: #deceb6;
+  color: var(--fa-moss);
+}
+
+.fa-inquiry__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.fa-inquiry__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.fa-inquiry__row {
+  display: flex;
+  gap: 12px;
+}
+
+.fa-inquiry__field {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.fa-inquiry__field--message { gap: 14px; }
+
+.fa-inquiry__label {
+  padding: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 23px; /* Figma's "auto" for Marisa 24 (the fields add up to the 780px panel) */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.fa-inquiry__label--wide { letter-spacing: 0.03em; }
+
+.fa-inquiry__input {
+  width: 100%;
+  height: 60px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 4px;
+  background: rgb(239 231 219 / 0.5);
+  color: var(--fa-moss);
+  font-family: var(--fa-font-body);
+  font-weight: 500;
+  font-size: 18px;
+  box-shadow: none;
+  appearance: none;
+}
+
+.fa-inquiry__input:focus-visible {
+  outline: 2px solid var(--fa-moss);
+  outline-offset: 2px;
+}
+
+.fa-inquiry__textarea {
+  height: 160px;
+  padding-block: 18px;
+  line-height: 24px;
+  resize: vertical;
+}
+
+.fa-inquiry__select { position: relative; }
+
+.fa-inquiry__select select {
+  padding-right: 56px;
+  cursor: pointer;
+}
+
+.fa-inquiry__chevron {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  width: 15px;
+  height: 8px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.fa-inquiry__choices { gap: 16px; }
+
+.fa-inquiry__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 16px; /* a legend is not a flex item, so the fieldset gap does not apply */
+}
+
+.fa-inquiry__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Libre Caslon Text', var(--fa-font-body);
+  font-weight: 400; /* QA 2026-10-14: Figma Regular (inherited 500) */
+  font-size: 17px;
+  line-height: normal;
+  cursor: pointer;
+}
+
+/* Figma radios: 18px circles with a 1.5px moss ring, filled when chosen. */
+.fa-inquiry__option input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid var(--fa-moss);
+  border-radius: 50%;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+.fa-inquiry__option input:checked { background: var(--fa-moss); }
+
+.fa-inquiry__option input:focus-visible {
+  outline: 2px solid var(--fa-moss);
+  outline-offset: 2px;
+}
+
+.fa-inquiry__submit { flex: none; }
+
+.fa-inquiry__status {
+  width: 100%;
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 2px;
+  background: var(--fa-linen);
+  color: var(--fa-moss);
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.fa-inquiry__status--error { color: var(--fa-garnet); }
+.fa-inquiry__status ul { margin: 0; padding-left: 18px; }
+
+/* ---------- Tablet / mobile (no design: stacked) ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-inquiry { padding-block: var(--fa-section-pad); }
+  .fa-inquiry__inner { flex-direction: column; }
+  .fa-inquiry__aside,
+  .fa-inquiry__panel { flex-basis: auto; }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-inquiry__title { font-size: 32px; line-height: 32px; }
+  .fa-inquiry__text { font-size: 16px; line-height: 24px; }
+  .fa-inquiry__contact-title { font-size: 20px; }
+  .fa-inquiry__link { font-size: 18px; }
+  .fa-inquiry__steps { padding: 20px; }
+  .fa-inquiry__steps-title { font-size: 22px; }
+  .fa-inquiry__step-number { font-size: 24px; }
+  .fa-inquiry__step-text { font-size: 17px; }
+  .fa-inquiry__panel { padding: 24px 16px; }
+  .fa-inquiry__row { flex-direction: column; gap: 24px; }
+  .fa-inquiry__label { font-size: 18px; }
+  .fa-inquiry__input { height: 52px; padding-inline: 16px; font-size: 16px; }
+  .fa-inquiry__textarea { height: 140px; }
+}
+
+/* "Mobile style: Compact" = Concierge mobile 2857:23149 "Ready to begin?" (1798-3115): 60px padding; title 32 / 30
+   (-7%), 18px, intro 14 / 20 (-2%); 32px; "Prefer to talk?" (Marisa 20 -2%), 12px, links 16 / 18 18px apart; 24px;
+   steps box (14 / 18 / 16 / 14 padding: title Marisa 20 -6%, 11px, steps 12px apart: number Marisa 19, text 14 / 20);
+   32px; form panel (14 / 12 padding): fields 12px apart, labels Marisa 16 (-2%) 8px above 44px fields (r4), message
+   120 tall, radios in one row (14px dot, 6px, LCC 14); 18px; full-width 46px submit (Marisa 20, -3%). */
+@media screen and (max-width: 899px) {
+  .fa-inquiry--mobile-compact { padding-block: 60px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__inner { gap: 32px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__aside { gap: 32px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__intro { gap: 18px; }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__title {
+    line-height: 30px;
+    letter-spacing: -0.07em;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__text {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__extra { gap: 24px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__contact { gap: 12px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__links { gap: 18px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__link { font-size: 16px; }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__steps {
+    gap: 11px;
+    padding: 14px 18px 16px 14px;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__steps-title {
+    font-size: 20px;
+    letter-spacing: -0.06em;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__step-list { gap: 12px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__step { gap: 10px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__step-number {
+    font-size: 19px;
+    line-height: 18px;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__step-text {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    text-box: trim-both cap alphabetic; /* Figma's 11 / 31px step boxes */
+    color: var(--fa-garnet);
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__panel { padding: 14px 12px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__form { gap: 18px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__fields,
+  .fa-inquiry--mobile-compact .fa-inquiry__row { gap: 12px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__field { gap: 8px; }
+  .fa-inquiry--mobile-compact .fa-inquiry__field--message { gap: 7px; }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__label {
+    font-size: 16px;
+    line-height: 15px; /* one-line labels 15 tall; the two-line message label and the legend 16 / 17 */
+    letter-spacing: -0.02em;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__field--message .fa-inquiry__label,
+  .fa-inquiry--mobile-compact legend.fa-inquiry__label { line-height: 17px; }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__input {
+    height: 44px;
+    padding-inline: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__textarea { height: 120px; }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__options {
+    flex-direction: row;
+    flex-wrap: wrap; /* Figma fits the three on one line; the hosted face is wider, so the last one may wrap */
+    gap: 8px 12px;
+    margin-top: 9px;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__option {
+    gap: 6px;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__option input {
+    width: 14px;
+    height: 14px;
+  }
+
+  .fa-inquiry--mobile-compact .fa-inquiry__submit {
+    width: 100%;
+    min-height: 46px;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+  }
+}

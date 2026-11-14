@@ -1,0 +1,294 @@
+/*
+  Felice blog listing (sections/fa-blog-listing.liquid) — Blog page V1 "Related posts" 2719:19634, 1440 x 1626.
+  Padding 70 / 100, a 1339px column: featured post (linen, r5, 468 tall: photo 700 left, body 56 / 52 padding,
+  meta 18 → title Marisa 42/38 -1% + 14 + excerpt 20/31 (536 wide), 32 → link), then rows of 437px cards 14 apart
+  (rows and the featured post 18 apart): linen r2, photo 240, body 18 / 24 padding, meta + title (Marisa 26/24 -1%)
+  + excerpt (16/23) 8 apart in a 200px block with the link at its foot. Meta LCC 16 -3% moss, capitalised, the
+  category / author in garnet; link Marisa 20 / 1.4 -4% garnet, underlined (7%). Botanical 2719:19701: the
+  first-visit botanical at -100deg, 80%, 8px above the band, cut by the page edge (rendered 163 x 162).
+*/
+
+.fa-blog-listing {
+  position: relative;
+  padding-block: 70px 100px;
+  background: #79704b; /* mean of the bundled texture, shown while it loads */
+}
+
+.fa-blog-listing__botanical {
+  top: -8px;
+  right: 0;
+  z-index: 1;
+  width: 163px;
+  opacity: 0.8;
+}
+
+.fa-blog-listing__inner { max-width: calc(1339px + var(--fa-gutter) * 2); }
+
+.fa-blog-listing__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-blog-listing__item { display: flex; min-width: 0; }
+
+.fa-blog-listing__card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--fa-linen);
+  color: var(--fa-moss);
+}
+
+.fa-blog-listing__media {
+  display: block;
+  height: 240px;
+  background: #b89a66;
+  overflow: hidden;
+}
+
+.fa-blog-listing__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--fa-dur-zoom) var(--fa-ease-out);
+}
+
+.fa-blog-listing__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 236px; /* 18 + the 200px text block + 18 */
+  padding: 18px 24px;
+}
+
+.fa-blog-listing__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fa-blog-listing__meta {
+  margin: 0;
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: -0.03em;
+  text-transform: capitalize;
+}
+
+.fa-blog-listing__accent { color: var(--fa-garnet); }
+
+.fa-blog-listing__title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.fa-blog-listing__title a { color: inherit; text-decoration: none; }
+
+.fa-blog-listing__excerpt {
+  margin: 0;
+  font-size: 16px;
+  line-height: 23px;
+}
+
+.fa-blog-listing__link {
+  align-self: flex-start;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.04em; /* typed case: Marisa draws lower case as small capitals */
+  white-space: pre;
+  color: var(--fa-garnet);
+  text-decoration: underline;
+  text-decoration-thickness: 7%;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Featured post ---------- */
+
+.fa-blog-listing__item--featured { grid-column: 1 / -1; }
+
+.fa-blog-listing__item--featured .fa-blog-listing__card {
+  display: grid;
+  grid-template-columns: minmax(0, 700fr) minmax(0, 639fr);
+  min-height: 468px;
+  border-radius: 5px;
+}
+
+.fa-blog-listing__item--featured .fa-blog-listing__media { height: auto; }
+
+.fa-blog-listing__item--featured .fa-blog-listing__body {
+  justify-content: center;
+  gap: 32px;
+  min-height: 0;
+  padding: 56px 52px;
+}
+
+.fa-blog-listing__item--featured .fa-blog-listing__text { gap: 14px; }
+
+.fa-blog-listing__item--featured .fa-blog-listing__meta { margin-bottom: 4px; } /* 18px to the title */
+
+.fa-blog-listing__item--featured .fa-blog-listing__title {
+  max-width: 536px;
+  font-size: 42px;
+  line-height: 38px;
+}
+
+.fa-blog-listing__item--featured .fa-blog-listing__excerpt {
+  max-width: 536px;
+  font-size: 20px;
+  line-height: 31px;
+}
+
+/* ---------- Pagination / empty ---------- */
+
+.fa-blog-listing__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.fa-blog-listing__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 2px;
+  background: rgb(238 225 209 / 0.2);
+  color: var(--fa-linen);
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.fa-blog-listing__page--current {
+  background: var(--fa-linen);
+  color: var(--fa-garnet);
+}
+
+.fa-blog-listing__empty {
+  margin: 0;
+  color: var(--fa-linen);
+  font-size: 20px;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .fa-blog-listing__card:hover .fa-blog-listing__media img { transform: scale(var(--fa-zoom)); }
+  a.fa-blog-listing__page:hover { background: rgb(238 225 209 / 0.35); }
+}
+
+/* ---------- Tablet / mobile (no design) ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-blog-listing { padding-block: 60px 80px; }
+  .fa-blog-listing__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fa-blog-listing__item--featured .fa-blog-listing__body { padding: 36px 32px; }
+  .fa-blog-listing__item--featured .fa-blog-listing__title { font-size: 32px; line-height: 32px; }
+  .fa-blog-listing__item--featured .fa-blog-listing__excerpt { font-size: 18px; line-height: 27px; }
+}
+
+/* ---------- Mobile = Blog listing mobile 2860:24040 (457-1726) ----------
+   60px padding. Featured post: 351 x 228 linen card, photo 175 wide on the left, 11px, a 163px text column 19px from
+   the top and bottom (meta LCC 9 -5%, title Marisa 17 / 17 -5%, excerpt 12 / 15 -1%, 3-4px apart; link Marisa 14 -4%
+   at the foot). Then 172 x 299 cards, 7px apart across and 8 down: photo 172 x 139, body 11 / 8 / 13 (meta 9 -3%, 8px,
+   title 15 / 13 -3%, 6px, excerpt 11 / 15 -1%; link Marisa 12 -4% at the foot). */
+@media screen and (max-width: 899px) {
+  .fa-blog-listing { padding-block: 60px; }
+  .fa-blog-listing__list { gap: 8px 7px; }
+  .fa-blog-listing__body { min-height: 0; }
+  .fa-blog-listing__botanical { width: 90px; }
+
+  .fa-blog-listing__media { height: 139px; }
+
+  .fa-blog-listing__body {
+    gap: 12px;
+    padding: 11px 8px 13px;
+  }
+
+  .fa-blog-listing__text { gap: 6px; }
+
+  .fa-blog-listing__meta {
+    margin-bottom: 2px;
+    font-size: 9px;
+  }
+
+  .fa-blog-listing__title {
+    font-size: 15px;
+    line-height: 13px;
+    letter-spacing: -0.03em;
+  }
+
+  /* Figma cuts the excerpts with an ellipsis: 2 lines on the cards, 4 on the featured post. */
+  .fa-blog-listing__excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--fa-bl-lines, 2);
+    line-clamp: var(--fa-bl-lines, 2);
+    font-size: 11px;
+    line-height: 15px;
+    letter-spacing: -0.01em;
+  }
+
+  .fa-blog-listing__link { font-size: 12px; }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__card {
+    grid-template-columns: 175px minmax(0, 1fr);
+    column-gap: 11px;
+    min-height: 228px;
+    border-radius: var(--fa-radius);
+  }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__media { height: auto; }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__body {
+    justify-content: space-between;
+    gap: 16px;
+    padding: 19px 5px 19px 0;
+  }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__text { gap: 3px; }
+  .fa-blog-listing__item--featured .fa-blog-listing__meta {
+    margin-bottom: 1px;
+    line-height: 19px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__title {
+    max-width: none;
+    font-size: 17px;
+    line-height: 17px;
+    letter-spacing: -0.05em;
+  }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__excerpt {
+    --fa-bl-lines: 4;
+    max-width: none;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .fa-blog-listing__item--featured .fa-blog-listing__link { font-size: 14px; }
+}

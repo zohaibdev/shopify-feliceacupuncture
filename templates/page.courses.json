@@ -1,0 +1,847 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+    "sections":  {
+                     "hero":  {
+                                  "type":  "fa-hero",
+                                  "settings":  {
+                                                   "layout":  "page",
+                                                   "desktop_photos":  "one",
+                                                   "mobile_photo":  "right",
+                                                   "photo_position":  50,
+                                                   "fallback_left":  "fa-hero-left.jpg",
+                                                   "fallback_right":  "fa-page-hero-courses.jpg",
+                                                   "fallback_mobile":  "",
+                                                   "video_url":  "",
+                                                   "overlay_opacity":  35,
+                                                   "overlay_opacity_mobile":  36,
+                                                   "copy_width":  534,
+                                                   "min_height":  488,
+                                                   "padding_top":  122,
+                                                   "padding_bottom_mobile":  88,
+                                                   "eyebrow":  "",
+                                                   "eyebrow_stars":  5,
+                                                   "show_rating":  false,
+                                                   "stars":  5,
+                                                   "rating_text":  "",
+                                                   "meta_1":  "",
+                                                   "meta_2":  "",
+                                                   "heading":  "From Exhausted to Energized",
+                                                   "text":  "A Traditional Chinese Medicine course by Dr. Felice Chan. Hormone healing with Chinese medicine for exhaustion and fatigue.",
+                                                   "tagline":  "",
+                                                   "button_label_1":  "Enroll now",
+                                                   "button_link_1":  "https://felice-chan.mykajabi.com/offers/pTosH8gc/checkout",
+                                                   "button_label_2":  "",
+                                                   "button_link_2":  "",
+                                                   "button_compact":  false,
+                                                   "mobile_style":  "compact"
+                                               }
+                              },
+                     "included":  {
+                                      "type":  "fa-checklist",
+                                      "blocks":  {
+                                                     "item_1":  {
+                                                                    "type":  "item",
+                                                                    "settings":  {
+                                                                                     "title":  "The complete 5-hour Traditional Chinese Medicine course",
+                                                                                     "text":  "27 video lessons of guided instruction"
+                                                                                 }
+                                                                },
+                                                     "item_2":  {
+                                                                    "type":  "item",
+                                                                    "settings":  {
+                                                                                     "title":  "A 75-page workbook written by Dr. Felice",
+                                                                                     "text":  "With printable worksheets and prompts"
+                                                                                 }
+                                                                },
+                                                     "item_3":  {
+                                                                    "type":  "item",
+                                                                    "settings":  {
+                                                                                     "title":  "Lifetime access",
+                                                                                     "text":  "To all course materials"
+                                                                                 }
+                                                                },
+                                                     "item_4":  {
+                                                                    "type":  "item",
+                                                                    "settings":  {
+                                                                                     "title":  "Downloadable resources",
+                                                                                     "text":  "Recipes, self-practice resources, tongue and meridian maps, food diaries, and herbal charts"
+                                                                                 }
+                                                                }
+                                                 },
+                                      "block_order":  [
+                                                          "item_1",
+                                                          "item_2",
+                                                          "item_3",
+                                                          "item_4"
+                                                      ],
+                                      "settings":  {
+                                                       "anchor_id":  "whats-included",
+                                                       "padding_top":  120,
+                                                       "padding_bottom":  120,
+                                                       "background_asset":  "fa-checklist-bg.jpg",
+                                                       "heading":  "What\u0027s included",
+                                                       "fallback_asset":  "fa-checklist-courses.jpg",
+                                                       "image_alt":  "What\u0027s included: the 5-hour course, the 75-page workbook and lifetime access",
+                                                       "button_label":  "Enroll now",
+                                                       "button_link":  "https://felice-chan.mykajabi.com/offers/pTosH8gc/checkout"
+                                                   }
+                                  },
+                     "modules":  {
+                                     "type":  "fa-modules",
+                                     "blocks":  {
+                                                    "module_1":  {
+                                                                     "type":  "module",
+                                                                     "settings":  {
+                                                                                      "fallback_asset":  "fa-modules-1-v2.webp",
+                                                                                      "image_alt":  "",
+                                                                                      "label":  "Module 01",
+                                                                                      "title":  "Welcome + TCM 101",
+                                                                                      "fallback_asset_mobile":  "fa-modules-1-mobile-v2.webp"
+                                                                                  }
+                                                                 },
+                                                    "module_2":  {
+                                                                     "type":  "module",
+                                                                     "settings":  {
+                                                                                      "fallback_asset":  "fa-modules-2-v2.webp",
+                                                                                      "image_alt":  "",
+                                                                                      "label":  "Module 02",
+                                                                                      "title":  "Acupressure + Acupuncture",
+                                                                                      "fallback_asset_mobile":  "fa-modules-2-mobile-v2.webp"
+                                                                                  }
+                                                                 },
+                                                    "module_3":  {
+                                                                     "type":  "module",
+                                                                     "settings":  {
+                                                                                      "fallback_asset":  "fa-modules-3-v2.webp",
+                                                                                      "image_alt":  "",
+                                                                                      "label":  "Module 03",
+                                                                                      "title":  "Herbal Medicine",
+                                                                                      "fallback_asset_mobile":  "fa-modules-3-mobile-v2.webp"
+                                                                                  }
+                                                                 },
+                                                    "module_4":  {
+                                                                     "type":  "module",
+                                                                     "settings":  {
+                                                                                      "fallback_asset":  "fa-modules-4-v2.webp",
+                                                                                      "image_alt":  "",
+                                                                                      "label":  "Module 04",
+                                                                                      "title":  "Food as Medicine",
+                                                                                      "fallback_asset_mobile":  "fa-modules-4-mobile-v2.webp"
+                                                                                  }
+                                                                 },
+                                                    "module_5":  {
+                                                                     "type":  "module",
+                                                                     "settings":  {
+                                                                                      "fallback_asset":  "fa-modules-5-v2.webp",
+                                                                                      "image_alt":  "",
+                                                                                      "label":  "Module 05",
+                                                                                      "title":  "Lifestyle Practices for Balance",
+                                                                                      "fallback_asset_mobile":  "fa-modules-5-mobile-v2.webp"
+                                                                                  }
+                                                                 }
+                                                },
+                                     "block_order":  [
+                                                         "module_1",
+                                                         "module_2",
+                                                         "module_3",
+                                                         "module_4",
+                                                         "module_5"
+                                                     ],
+                                     "settings":  {
+                                                      "anchor_id":  "curriculum",
+                                                      "background_asset":  "fa-modules-bg.jpg",
+                                                      "card_background_asset":  "fa-checklist-bg.jpg",
+                                                      "heading":  "What you will learn",
+                                                      "text":  "\u003cp\u003eFive modules that follow the four pillars of Traditional Chinese Medicine.\u003c/p\u003e"
+                                                  }
+                                 },
+                     "teacher":  {
+                                     "type":  "fa-profile",
+                                     "settings":  {
+                                                      "anchor_id":  "teacher",
+                                                      "image_position":  "left",
+                                                      "style":  "founder",
+                                                      "padding_top":  120,
+                                                      "padding_bottom":  120,
+                                                      "photo_height":  503,
+                                                      "fallback_asset":  "fa-profile-felice-chan-course.jpg",
+                                                      "image_alt":  "Portrait of Dr. Felice Chan, smiling",
+                                                      "background_asset":  "fa-profile-bg-olive.jpg",
+                                                      "background_asset_mobile":  "fa-profile-bg-mobile.jpg",
+                                                      "heading":  "Meet your teacher",
+                                                      "roles":  "Dr. Felice Chan, L.Ac",
+                                                      "lead":  "",
+                                                      "text":  "\u003cp\u003eRaised in Hong Kong, where Traditional Chinese Medicine was part of daily life, she later studied neuroscience and pre-med at Bowdoin College before earning her Chinese medical doctoral degree at Emperor’s College in Los Angeles.\u003c/p\u003e",
+                                                      "quote":  "“She believes that medicine is not something we take but something we remember.”",
+                                                      "button_label":  "Enroll now",
+                                                      "button_link":  "https://felice-chan.mykajabi.com/offers/pTosH8gc/checkout",
+                                                      "button_label_2":  "Read Dr. Felice\u0027s substack",
+                                                      "button_link_2":  "https://drfelicechan.substack.com/",
+                                                      "note":  "",
+                                                      "mobile_style":  "compact"
+                                                  }
+                                 },
+                     "ready":  {
+                                   "type":  "fa-cta-banner",
+                                   "settings":  {
+                                                    "bundled_photo":  "treatment",
+                                                    "overlay_opacity":  0,
+                                                    "layout":  "buttons",
+                                                    "show_botanicals":  false,
+                                                    "glyph_asset":  "",
+                                                    "subheading":  "",
+                                                    "heading":  "Ready to\nstart your care?",
+                                                    "text":  "Visit us at our Culver City clinic, or let our practitioners come to you, at home or virtually.",
+                                                    "button_label":  "Book in-clinic",
+                                                    "button_link":  "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+                                                    "button_style":  "primary",
+                                                    "content_offset":  0,
+                                                    "button_label_2":  "Book concierge",
+                                                    "button_link_2":  "/pages/concierge",
+                                                    "mobile_style":  "compact"
+                                                }
+                               },
+                     "pillars":  {
+                                     "type":  "fa-feature-cards",
+                                     "blocks":  {
+                                                    "pillar_acupuncture":  {
+                                                                               "type":  "card",
+                                                                               "settings":  {
+                                                                                                "fallback_asset":  "fa-feature-cards-acupuncture.jpg",
+                                                                                                "title":  "Acupuncture",
+                                                                                                "text":  "Restores flow, releases stagnation, and rebalances energy.",
+                                                                                                "tag":  "",
+                                                                                                "icon_asset":  "",
+                                                                                                "button_label":  "",
+                                                                                                "link":  "",
+                                                                                                "text_width":  280,
+                                                                                                "text_small_mobile":  false
+                                                                                            }
+                                                                           },
+                                                    "pillar_herbal":  {
+                                                                          "type":  "card",
+                                                                          "settings":  {
+                                                                                           "fallback_asset":  "fa-feature-cards-herbal-medicine.jpg",
+                                                                                           "title":  "Herbal Medicine",
+                                                                                           "text":  "Nourishes from within using synergistic plant formulas.",
+                                                                                           "tag":  "",
+                                                                                           "icon_asset":  "",
+                                                                                           "button_label":  "",
+                                                                                           "link":  "",
+                                                                                           "text_width":  280,
+                                                                                           "text_small_mobile":  false
+                                                                                       }
+                                                                      },
+                                                    "pillar_food":  {
+                                                                        "type":  "card",
+                                                                        "settings":  {
+                                                                                         "fallback_asset":  "fa-feature-cards-food-as-medicine.jpg",
+                                                                                         "title":  "Food as Medicine",
+                                                                                         "text":  "Aligns diet with nature to support digestion and mood.",
+                                                                                         "tag":  "",
+                                                                                         "icon_asset":  "",
+                                                                                         "button_label":  "",
+                                                                                         "link":  "",
+                                                                                         "text_width":  280,
+                                                                                         "text_small_mobile":  true
+                                                                                     }
+                                                                    },
+                                                    "pillar_lifestyle":  {
+                                                                             "type":  "card",
+                                                                             "settings":  {
+                                                                                              "fallback_asset":  "fa-feature-cards-lifestyle-practices.jpg",
+                                                                                              "title":  "Lifestyle Practices",
+                                                                                              "text":  "Cultivates regulation through rest, ritual, and awareness.",
+                                                                                              "tag":  "",
+                                                                                              "icon_asset":  "",
+                                                                                              "button_label":  "",
+                                                                                              "link":  "",
+                                                                                              "text_width":  268,
+                                                                                              "text_small_mobile":  false
+                                                                                          }
+                                                                         }
+                                                },
+                                     "block_order":  [
+                                                         "pillar_acupuncture",
+                                                         "pillar_herbal",
+                                                         "pillar_food",
+                                                         "pillar_lifestyle"
+                                                     ],
+                                     "settings":  {
+                                                      "heading":  "The Four Pillars of Healing",
+                                                      "text":  "\u003cp\u003eHealing happens when yin and yang are in harmony and life is in balance. \u003cbr\u003eOur work is rooted in four timeless pillars that guide the body back to balance:\u003c/p\u003e",
+                                                      "button_label":  "",
+                                                      "button_link":  "",
+                                                      "anchor_id":  "",
+                                                      "card_style":  "moss_large",
+                                                      "heading_color":  "moss",
+                                                      "heading_width":  810,
+                                                      "heading_line_height":  56,
+                                                      "columns":  4,
+                                                      "padding_mobile":  60,
+                                                      "background_asset":  "fa-feature-cards-pillars-light-bg.jpg",
+                                                      "background_asset_mobile":  "fa-feature-cards-pillars-light-bg.jpg",
+                                                      "card_background_asset":  "fa-feature-cards-card-bg.jpg",
+                                                      "mobile_layout":  "grid"
+                                                  }
+                                 },
+                     "ebook":  {
+                                   "type":  "fa-signup",
+                                   "settings":  {
+                                                    "layout":  "centered",
+                                                    "heading":  "Gut Health E-book",
+                                                    "text":  "\u003cp\u003eFill this form out to receive the Gut Health E-book, get yours now!\u003c/p\u003e",
+                                                    "button_label":  "Sign me up",
+                                                    "tags":  "newsletter, ebook-gut-health",
+                                                    "success_message":  "Thank you! Check your inbox for the e-book.",
+                                                    "email_placeholder":  "Email address",
+                                                    "anchor_id":  "ebook",
+                                                    "fallback_asset":  "fa-signup-ebook-cover.jpg",
+                                                    "image_alt":  "",
+                                                    "background_asset":  "fa-membership-bg.jpg",
+                                                    "show_botanicals":  true,
+                                                    "mobile_style":  "compact"
+                                                }
+                               },
+                     "faq":  {
+                                 "type":  "fa-faq",
+                                 "blocks":  {
+                                                "question_1":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "What happens during my first visit?",
+                                                                                    "answer":  "\u003cp\u003eYour initial visit is 75 minutes. Before your appointment, you\u0027ll complete an intake form. Together, you and your practitioner will review it and talk through your symptoms, followed by a tongue and pulse diagnostic and your first acupuncture treatment. You\u0027ll leave with a personalized treatment plan.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_2":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "Does acupuncture hurt?",
+                                                                                    "answer":  "\u003cp\u003eMost patients find acupuncture surprisingly gentle. You may feel a brief sensation as the needles are placed, followed by warmth, heaviness, tingling, or deep relaxation.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_3":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "How many sessions will I need?",
+                                                                                    "answer":  "\u003cp\u003eIt depends on your goals and history. Your practitioner will recommend a treatment plan after your first visit.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_4":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "When will I see results?",
+                                                                                    "answer":  "\u003cp\u003eMany patients notice a change within the first few sessions; long-standing concerns usually take longer. Your practitioner will review your progress with you at each visit.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_5":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "How will I feel after my first session?",
+                                                                                    "answer":  "\u003cp\u003eMost people feel calm and relaxed, sometimes a little tired. Drink water, rest if you can, and tell your practitioner how you felt at your next visit.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_6":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "What should I wear to my appointment?",
+                                                                                    "answer":  "",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_7":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "How much does a visit cost?",
+                                                                                    "answer":  "\u003cp\u003ePrices depend on the treatment and session length. See our services page for current prices, or contact us with any questions.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_8":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "Do you take insurance?",
+                                                                                    "answer":  "\u003cp\u003ePlease contact us before your visit to discuss insurance and payment options.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_9":  {
+                                                                   "type":  "question",
+                                                                   "settings":  {
+                                                                                    "question":  "Which practitioner should I book?",
+                                                                                    "answer":  "\u003cp\u003eEvery practitioner treats a wide range of concerns. If you\u0027re unsure, contact us and we\u0027ll help you choose the best fit.\u003c/p\u003e",
+                                                                                    "open":  false,
+                                                                                    "open_mobile":  false
+                                                                                }
+                                                               },
+                                                "question_10":  {
+                                                                    "type":  "question",
+                                                                    "settings":  {
+                                                                                     "question":  "Do you offer care at home or virtually?",
+                                                                                     "answer":  "\u003cp\u003eYes. Concierge in-home visits and virtual consultations are available by appointment — contact us to check availability in your area.\u003c/p\u003e",
+                                                                                     "open":  false,
+                                                                                     "open_mobile":  false
+                                                                                 }
+                                                                },
+                                                "question_11":  {
+                                                                    "type":  "question",
+                                                                    "settings":  {
+                                                                                     "question":  "What is your cancellation policy?",
+                                                                                     "answer":  "\u003cp\u003ePlease let us know as early as possible if you need to cancel or reschedule. Contact us for the full policy.\u003c/p\u003e",
+                                                                                     "open":  false,
+                                                                                     "open_mobile":  false
+                                                                                 }
+                                                                }
+                                            },
+                                 "block_order":  [
+                                                     "question_1",
+                                                     "question_2",
+                                                     "question_3",
+                                                     "question_4",
+                                                     "question_5",
+                                                     "question_6",
+                                                     "question_7",
+                                                     "question_8",
+                                                     "question_9",
+                                                     "question_10",
+                                                     "question_11"
+                                                 ],
+                                 "settings":  {
+                                                  "anchor_id":  "faq",
+                                                  "heading":  "Frequently asked questions",
+                                                  "single_open":  true,
+                                                  "faq_schema":  true,
+                                                  "heading_width":  "wide",
+                                                  "answer_size":  "medium",
+                                                  "left_column_count":  5,
+                                                  "background_asset":  "fa-faq-bg-home.jpg",
+                                                  "show_flower":  true,
+                                                  "show_flower_mobile":  false,
+                                                  "flower_position":  "bottom_right",
+                                                  "flower_mobile_size":  "small",
+                                                  "padding_bottom":  130,
+                                                  "padding_mobile":  60
+                                              }
+                             },
+                     "gallery":  {
+                                     "type":  "fa-photo-gallery",
+                                     "blocks":  {
+                                                    "photo_01":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-01-treatment-room.jpg",
+                                                                                      "alt":  "A treatment room with a massage table",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_02":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-02-fire-cupping.jpg",
+                                                                                      "alt":  "Fire cupping on the upper back",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_03":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-03-lounge-scrolls.jpg",
+                                                                                      "alt":  "The clinic lounge with hanging scroll paintings",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_04":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-04-hand-needles.jpg",
+                                                                                      "alt":  "Acupuncture needles in the hand",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_13":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-05-palo-santo.jpg",
+                                                                                      "alt":  "Palo santo in a clay bowl",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_06":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-06-spine-needles.jpg",
+                                                                                      "alt":  "Acupuncture needles along the spine",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_07":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-07-room-painting.jpg",
+                                                                                      "alt":  "A treatment room with a landscape painting",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_08":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-08-tui-na.jpg",
+                                                                                      "alt":  "Tui na massage on the treatment table",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_09":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-09-moonbow-shelf.jpg",
+                                                                                      "alt":  "Moonbow Skin products on the clinic shelf",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_10":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-10-neck-needles.jpg",
+                                                                                      "alt":  "Acupuncture needles along the neck and shoulders",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_11":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-11-artwork.jpg",
+                                                                                      "alt":  "Artwork and dried pampas grass in the clinic",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_12":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-12-moxa-stick.jpg",
+                                                                                      "alt":  "Moxa warming acupuncture points on the back",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_05":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-13-sauna.jpg",
+                                                                                      "alt":  "The infrared sauna",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_14":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-14-heat-lamp.jpg",
+                                                                                      "alt":  "A patient resting under the heat lamp with needles along the spine",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_15":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-15-herb-shelf.jpg",
+                                                                                      "alt":  "Herbal supplements on the clinic shelf",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_16":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-16-placing-needle.jpg",
+                                                                                      "alt":  "A practitioner placing a needle on the shoulder",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_17":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-17-shower.jpg",
+                                                                                      "alt":  "The cold plunge shower",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_18":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-18-needling-hands.jpg",
+                                                                                      "alt":  "A practitioner placing acupuncture needles in the hand",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_19":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-19-business-card.jpg",
+                                                                                      "alt":  "A Felice Acupuncture business card on a carved wooden Buddha",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 },
+                                                    "photo_20":  {
+                                                                     "type":  "photo",
+                                                                     "settings":  {
+                                                                                      "image":  "shopify://shop_images/felice-clinic-20-moxa.jpg",
+                                                                                      "alt":  "Preparing moxa at the clinic",
+                                                                                      "shade":  0
+                                                                                  }
+                                                                 }
+                                                },
+                                     "block_order":  [
+                                                         "photo_01",
+                                                         "photo_02",
+                                                         "photo_03",
+                                                         "photo_04",
+                                                         "photo_13",
+                                                         "photo_06",
+                                                         "photo_07",
+                                                         "photo_08",
+                                                         "photo_09",
+                                                         "photo_10",
+                                                         "photo_11",
+                                                         "photo_12",
+                                                         "photo_05",
+                                                         "photo_14",
+                                                         "photo_15",
+                                                         "photo_16",
+                                                         "photo_17",
+                                                         "photo_18",
+                                                         "photo_19",
+                                                         "photo_20"
+                                                     ],
+                                     "settings":  {
+                                                      "layout":  "strip",
+                                                      "heading":  "",
+                                                      "text":  "",
+                                                      "text_width":  460,
+                                                      "review_label":  "",
+                                                      "review_link":  "",
+                                                      "start":  "center",
+                                                      "show_arrows":  true,
+                                                      "curved_edges":  false,
+                                                      "strip_shape":  "square_tight",
+                                                      "row_gap":  "32",
+                                                      "loop":  true,
+                                                      "autoplay":  true,
+                                                      "autoplay_interval":  4,
+                                                      "autoplay_speed":  30,
+                                                      "lightbox":  true,
+                                                      "anchor_id":  "",
+                                                      "show_social":  true,
+                                                      "follow_label":  "Follow @feliceacupuncture",
+                                                      "instagram_url":  "https://www.instagram.com/feliceacupuncture/",
+                                                      "facebook_url":  "https://www.facebook.com/feliceacupuncture",
+                                                      "follow_position":  "center",
+                                                      "background_style":  "linen",
+                                                      "botanical":  "none",
+                                                      "padding_top":  120,
+                                                      "padding_bottom":  120,
+                                                      "padding_mobile":  60,
+                                                      "mobile_photo_size":  "small",
+                                                      "show_arrows_mobile":  true
+                                                  }
+                                 },
+                     "posts":  {
+                                   "type":  "fa-blog-posts",
+                                   "blocks":  {
+                                                  "post_1":  {
+                                                                 "type":  "post",
+                                                                 "settings":  {
+                                                                                  "fallback_asset":  "fa-blog-posts-hypno-sound.jpg",
+                                                                                  "meta":  "Mar 5, 2025 · 3 min read · Sound Therapy",
+                                                                                  "title":  "The Healing Harmony of Hypno-Sound Therapy \u0026 Ear Acupuncture",
+                                                                                  "link":  "https://www.feliceacupuncture.com/post/the-healing-harmony-of-hypno-sound-therapy-ear-acupuncture"
+                                                                              }
+                                                             },
+                                                  "post_2":  {
+                                                                 "type":  "post",
+                                                                 "settings":  {
+                                                                                  "fallback_asset":  "fa-blog-posts-la-fires.jpg",
+                                                                                  "meta":  "Mar 5, 2025 · 3 min read · Respiratory",
+                                                                                  "title":  "Protecting Your Lungs and Health During the LA Fires",
+                                                                                  "link":  "https://www.feliceacupuncture.com/post/protecting-your-lungs-and-health-during-the-la-fires"
+                                                                              }
+                                                             },
+                                                  "post_3":  {
+                                                                 "type":  "post",
+                                                                 "settings":  {
+                                                                                  "fallback_asset":  "fa-blog-posts-acne.jpg",
+                                                                                  "meta":  "Mar 5, 2025 · 3 min read · Skin",
+                                                                                  "title":  "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective",
+                                                                                  "link":  "https://www.feliceacupuncture.com/post/addressing-acne-holistically-a-traditional-chinese-medicine-tcm-perspective"
+                                                                              }
+                                                             }
+                                              },
+                                   "block_order":  [
+                                                       "post_1",
+                                                       "post_2",
+                                                       "post_3"
+                                                   ],
+                                   "settings":  {
+                                                    "heading":  "Chinese medicine, explained",
+                                                    "text":  "\u003cp\u003ePractical tips from our practitioners for better energy, sleep, digestion, and calm.\u003c/p\u003e",
+                                                    "blog":  "blogs",
+                                                    "posts_count":  3,
+                                                    "show_date":  true,
+                                                    "show_read_time":  true,
+                                                    "show_category":  true,
+                                                    "link_label":  "Read article →",
+                                                    "button_label":  "Explore all blogs",
+                                                    "button_link":  "shopify://pages/blog",
+                                                    "anchor_id":  "",
+                                                    "padding_bottom":  100,
+                                                    "padding_mobile":  60,
+                                                    "background_asset":  "fa-blog-posts-bg.jpg",
+                                                    "background_asset_mobile":  "fa-blog-posts-bg-mobile.jpg"
+                                                }
+                               },
+                     "trust":  {
+                                   "type":  "fa-trust-bar",
+                                   "blocks":  {
+                                                  "trust_patients":  {
+                                                                         "type":  "item",
+                                                                         "settings":  {
+                                                                                          "icon":  "patients",
+                                                                                          "icon_color":  "linen",
+                                                                                          "title":  "1,000+\nPatients",
+                                                                                          "text":  "Treated at our Culver City clinic"
+                                                                                      }
+                                                                     },
+                                                  "trust_board":  {
+                                                                      "type":  "item",
+                                                                      "settings":  {
+                                                                                       "icon":  "certified",
+                                                                                       "icon_color":  "linen",
+                                                                                       "title":  "Board-Certified\nPractitioners",
+                                                                                       "text":  "Rooted in Traditional Chinese Medicine"
+                                                                                   }
+                                                                  },
+                                                  "trust_google":  {
+                                                                       "type":  "item",
+                                                                       "settings":  {
+                                                                                        "icon":  "google",
+                                                                                        "icon_color":  "linen",
+                                                                                        "title":  "5.0 on\nGoogle",
+                                                                                        "text":  "Rated by our patients"
+                                                                                    }
+                                                                   },
+                                                  "trust_care":  {
+                                                                     "type":  "item",
+                                                                     "settings":  {
+                                                                                      "icon":  "care",
+                                                                                      "icon_color":  "grey",
+                                                                                      "title":  "In Clinic, At\nHome, Online",
+                                                                                      "text":  "Care that fits your life"
+                                                                                  }
+                                                                 }
+                                              },
+                                   "block_order":  [
+                                                       "trust_patients",
+                                                       "trust_board",
+                                                       "trust_google",
+                                                       "trust_care"
+                                                   ],
+                                   "settings":  {
+                                                    "label":  "Why patients trust us"
+                                                }
+                               },
+                     "book_visit":  {
+                                        "type":  "fa-book-visit",
+                                        "blocks":  {
+                                                       "contact_hours":  {
+                                                                             "type":  "contact",
+                                                                             "settings":  {
+                                                                                              "icon":  "mail",
+                                                                                              "text":  "Open 7 days a week, 8 AM to 8 PM",
+                                                                                              "link":  "",
+                                                                                              "no_underline":  false
+                                                                                          }
+                                                                         },
+                                                       "contact_phone":  {
+                                                                             "type":  "contact",
+                                                                             "settings":  {
+                                                                                              "icon":  "phone",
+                                                                                              "text":  "Call or text to book · +1 (424) 478-0019",
+                                                                                              "link":  "tel:+14244780019",
+                                                                                              "no_underline":  false
+                                                                                          }
+                                                                         },
+                                                       "contact_email":  {
+                                                                             "type":  "contact",
+                                                                             "settings":  {
+                                                                                              "icon":  "mail",
+                                                                                              "text":  "info@feliceacupuncture.com",
+                                                                                              "link":  "mailto:info@feliceacupuncture.com",
+                                                                                              "no_underline":  false
+                                                                                          }
+                                                                         },
+                                                       "contact_address":  {
+                                                                               "type":  "contact",
+                                                                               "settings":  {
+                                                                                                "icon":  "pin",
+                                                                                                "text":  "8526 Washington Blvd, Culver City, CA 90232",
+                                                                                                "link":  "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+                                                                                                "no_underline":  true
+                                                                                            }
+                                                                           }
+                                                   },
+                                        "block_order":  [
+                                                            "contact_hours",
+                                                            "contact_phone",
+                                                            "contact_email",
+                                                            "contact_address"
+                                                        ],
+                                        "settings":  {
+                                                         "maps_url":  "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+                                                         "map_address":  "8526 Washington Blvd, Culver City, CA 90232",
+                                                         "map_embed_url":  "",
+                                                         "map_title":  "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City",
+                                                         "eyebrow":  "",
+                                                         "heading":  "Book your first visit",
+                                                         "text":  "Based in Culver City and proudly serving the greater Los Angeles area.",
+                                                         "button_label":  "Open in google maps",
+                                                         "button_label_2":  "Book now",
+                                                         "button_link_2":  "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+                                                         "contact_underline":  "links",
+                                                         "map_height_mobile":  "page",
+                                                         "show_flower":  false,
+                                                         "padding_bottom":  0
+                                                     }
+                                    }
+                 },
+    "order":  [
+                  "hero",
+                  "included",
+                  "modules",
+                  "teacher",
+                  "ready",
+                  "pillars",
+                  "ebook",
+                  "faq",
+                  "gallery",
+                  "posts",
+                  "trust",
+                  "book_visit"
+              ]
+}

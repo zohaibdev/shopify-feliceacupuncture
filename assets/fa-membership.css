@@ -1,0 +1,570 @@
+/*
+  Felice membership (sections/fa-membership.liquid) — homepage "Concierge Care", Figma V3 2616:10080 / 2616:10164.
+  Desktop 1440: 674px band, 120px padding, content 1309px wide (x 66) = left column 646 + 32 + panel 631.
+  Left column: heading (title 60/60 cap-trimmed, intro 20/30 untrimmed 635 wide, 24 apart), 36px, two 319 x 254
+  option cards 8 apart (linen, r5, padding 20/28/21/30; icon 32, 24, title 32 + 16 + text 20/32 trimmed, 24, button).
+  Panel: linen, r12, padding 20/24/20/32; title 38/53 + 14 + checklist 26/36 (18 apart), button at the bottom
+  (Figma's 140% line heights render as whole pixels: text boxes 53 / 36 / 72 tall).
+  Band corners: Rectangle 2616:10081 radii 0 / 12 / 0 / 12.
+  Buttons: moss, linen label, 54 high, 32px side padding (hug the label), r2.
+  No mobile frame: tablet and mobile are derived (see the section comment).
+*/
+
+.fa-membership-section {
+  /* Figma's page colour shows in the band's rounded corners. */
+  background: var(--fa-paper);
+}
+
+.fa-membership {
+  --fa-mb-radius: 12px;
+  padding-block: var(--fa-section-pad);
+  background-color: var(--fa-mb-bg, #9d7f4e);
+  color: var(--fa-moss);
+}
+
+.fa-membership--corners-diagonal,
+.fa-membership--corners-diagonal .fa-membership__bg {
+  border-radius: 0 var(--fa-mb-radius) 0 var(--fa-mb-radius);
+}
+
+.fa-membership--corners-all,
+.fa-membership--corners-all .fa-membership__bg {
+  border-radius: var(--fa-mb-radius);
+}
+
+.fa-membership__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 646fr) minmax(0, 631fr);
+  gap: 32px;
+  max-width: calc(1309px + var(--fa-gutter) * 2);
+}
+
+.fa-membership--no-panel .fa-membership__inner {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.fa-membership__main {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  min-width: 0;
+}
+
+/* ---------- Heading ---------- */
+
+.fa-membership__heading {
+  align-items: flex-start;
+  margin-inline: 0;
+  text-align: left;
+}
+
+.fa-membership__title {
+  line-height: 60px;
+  color: var(--fa-linen);
+}
+
+/* Figma 2616:10108: the intro box is not trimmed (3 x 30 = 90px tall), unlike the shared heading text. */
+.fa-membership__intro {
+  max-width: 635px;
+  font-size: 20px;
+  line-height: 30px;
+  color: rgb(255 255 255 / 0.9);
+  text-box: none;
+}
+
+/* ---------- Option cards ---------- */
+
+.fa-membership__options {
+  display: flex;
+  flex-wrap: wrap; /* 3+ cards: a card that would get narrower than 236px moves to the next row */
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fa-membership__option {
+  display: flex;
+  flex: 1 1 236px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  min-width: 0;
+  padding: 20px 28px 28px 30px; /* V6 2669:25734 (V5: 21px bottom, r5, a button at the foot) */
+  border-radius: 2px;
+  background: var(--fa-linen);
+}
+
+.fa-membership__icon {
+  display: block;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  color: var(--fa-moss);
+}
+
+.fa-membership__option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fa-membership__option-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--fa-moss);
+  text-box: trim-both cap alphabetic;
+}
+
+.fa-membership__option-desc {
+  margin: 0;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -0.03em;
+  color: rgb(115 109 70 / 0.8);
+  text-box: trim-both cap alphabetic;
+}
+
+/* No panel: cards keep their designed width instead of stretching across the band. */
+.fa-membership--no-panel .fa-membership__option {
+  flex: 0 1 319px;
+}
+
+/* ---------- Buttons ---------- */
+
+/* Hug the label (Figma: 32px each side, 54 high); a label too long for its card wraps instead of overflowing. */
+.fa-membership__btn {
+  min-width: 0;
+  max-width: 100%;
+  margin-top: auto; /* cards of unequal text keep their buttons on one line */
+  padding-block: 8px;
+  line-height: 1.1;
+  white-space: normal;
+  background: var(--fa-moss);
+  color: var(--fa-linen);
+}
+
+/* Icon drawn from a raster mask (V6 "Video call"): takes the icon colour. */
+.fa-membership__icon--mask {
+  background: currentColor;
+  -webkit-mask: var(--fa-mb-icon) center / contain no-repeat;
+  mask: var(--fa-mb-icon) center / contain no-repeat;
+}
+
+/* ---------- Button below both columns (V6 2669:25758): garnet, linen label, 32px side padding (212 x 54), 32px below
+   the columns ---------- */
+
+.fa-membership__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.fa-membership__cta-btn {
+  min-width: 0;
+  padding-inline: 32px;
+}
+
+/* ---------- Includes panel ---------- */
+
+.fa-membership__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 39px; /* Figma's list-to-button distance; the panel then fills the left column's 434px exactly */
+  min-width: 0;
+  padding: 20px 24px 20px 32px;
+  border-radius: 2px; /* V6 2669:25750 (V5: 12) */
+  background: var(--fa-linen);
+}
+
+.fa-membership__panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fa-membership__panel-title {
+  margin: 0;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 53px; /* Figma 140% = 53.2, rendered as 53 */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fa-garnet);
+}
+
+.fa-membership__list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Figma types "✓  " in front of each line (the wrapped line is indented by hand to the text): a hanging
+   indent of 32px at 26px. The ✓ is a fallback-font glyph that varies by system, so it is drawn instead, traced
+   from the Figma render (20 x 20 at x +2, 8px into the 36px line); em units scale it with the text. */
+.fa-membership__item {
+  position: relative;
+  padding-left: 1.2308em;
+  font-size: 26px;
+  line-height: 36px; /* Figma 140% = 36.4, rendered as 36 (2-line item 72) */
+  color: var(--fa-garnet); /* V6 (V5: moss) */
+}
+
+.fa-membership__check {
+  position: absolute;
+  top: 0.3077em;
+  left: 0.0769em;
+  width: 0.7692em;
+  height: 0.7692em;
+}
+
+.fa-membership__panel-btn {
+  margin-top: 0;
+}
+
+/* Desktop paddings (settings; V6 116 / 109, default 120). */
+@media screen and (min-width: 1100px) {
+  .fa-membership { padding-block: var(--fa-mb-pad-top, 120px) var(--fa-mb-pad-bottom, 120px); }
+}
+
+/* ---------- Small desktop (1100–1279): narrower cards, tighter inset so the buttons fit ---------- */
+
+@media screen and (min-width: 1100px) and (max-width: 1279px) {
+  .fa-membership__option { padding-inline: 20px; }
+}
+
+/* ---------- Tablet (900–1099, not drawn): stacked — heading, cards two-up, panel full width ---------- */
+
+@media screen and (max-width: 1099px) {
+  .fa-membership__inner { grid-template-columns: minmax(0, 1fr); }
+
+  .fa-membership__title { line-height: 44px; }
+}
+
+/* ---------- Mobile (<= 899, derived: no mobile frame) ----------
+   Established mobile patterns: 60px padding (setting), 12px gutters, mobile heading scale (32/29/-7%, intro
+   14/22, 14px gap), mobile buttons 39px / 14px. Cards stay two-up (a third card wraps to a full row); card and
+   panel type scaled like the services cards (titles 20px, text 14px). */
+
+@media screen and (max-width: 899px) {
+  .fa-membership {
+    padding-block: var(--fa-mb-pad-m, 60px);
+  }
+
+  .fa-membership__inner { gap: 24px; }
+
+  .fa-membership__main { gap: 24px; }
+
+  .fa-membership__title { line-height: 29px; }
+
+  .fa-membership__intro {
+    max-width: 363px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .fa-membership__options { flex-wrap: wrap; }
+
+  .fa-membership__option,
+  .fa-membership--no-panel .fa-membership__option {
+    flex: 1 1 calc(50% - 4px);
+    gap: 16px;
+    padding: 16px 12px;
+  }
+
+  .fa-membership__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .fa-membership__option-text { gap: 12px; }
+
+  .fa-membership__option-title { font-size: 20px; }
+
+  .fa-membership__option-desc {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .fa-membership__btn { padding-inline: 16px; }
+
+  .fa-membership__panel {
+    gap: 20px;
+    padding: 20px 16px 20px 20px;
+  }
+
+  .fa-membership__panel-body { gap: 10px; }
+
+  .fa-membership__panel-title {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .fa-membership__list { gap: 12px; }
+
+  .fa-membership__item {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+}
+
+/* Small phones (<= 359): the two-up cards are 144px wide; slimmer button sides keep "Book In-home" on one line. */
+@media screen and (max-width: 359px) {
+  .fa-membership__btn { padding-inline: 8px; }
+}
+
+/* The bundled mobile-only texture (no desktop file set) leaves desktop on the plain background colour (two classes:
+   fa-base.css `.fa-bg img` sets display: block). */
+@media screen and (min-width: 900px) {
+  .fa-membership__bg .fa-membership__bg-mobile-only { display: none; }
+}
+
+/* ---------- Motion ---------- */
+
+@media (hover: hover) {
+  .fa-membership__btn:hover { background: #5f5a39; } /* moss, ~17% darker */
+}
+
+/* A blank line in an option card's text starts a new paragraph (Concierge V1: 26px between trimmed boxes). */
+.fa-membership__option-paras {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* ---------- Layout "Split" (Concierge page V1, Figma 2644:15466 / content 2644:15470) ----------
+   700px band (padding 106 / 122 via the settings), content 1183 centred: text column 695 (title 60/61 -4%, 42px,
+   intro 20/32 linen in two paragraphs 20 apart, 32px, garnet 250px button), 52px, two 436px cards 14px apart
+   (r8, padding 20 / 28 / 26 / 24; icon 32, 24px, title 32 -4%, text 20/27 -4% at 80%). Card 1 linen with moss text,
+   card 2 moss #80764D with linen text (its title-to-text gap 20 and 29px lines, as drawn). Botanical 2644:17659: the
+   rotated first-visit botanical, 82%, 9px over the band above, cut by the page edge (export 137 x 108). */
+.fa-membership__botanical {
+  top: -9px;
+  left: 0;
+  z-index: 1;
+  width: 137px;
+  opacity: 0.82;
+}
+
+.fa-membership--split .fa-membership__inner { max-width: calc(1183px + var(--fa-gutter) * 2); }
+
+.fa-membership--split .fa-membership__heading { gap: 42px; }
+
+.fa-membership--split .fa-membership__title {
+  max-width: 695px;
+  line-height: 61px;
+}
+
+.fa-membership--split .fa-membership__intro {
+  max-width: 695px;
+  line-height: 32px;
+  color: var(--fa-linen);
+}
+
+.fa-membership--split .fa-membership__intro p + p { margin-top: 20px; }
+
+.fa-membership--split .fa-membership__split-btn { margin-top: -10px; }
+
+.fa-membership--split .fa-membership__options {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 14px;
+}
+
+.fa-membership--split .fa-membership__option {
+  flex: none;
+  width: 100%;
+  max-width: 436px;
+  padding: 20px 28px 26px 24px;
+  border-radius: var(--fa-radius); /* QA 2026-10-14: Figma 2644:17605 / 17642 now r2 (was r8) */
+}
+
+.fa-membership--split .fa-membership__option-text { gap: 17px; }
+
+.fa-membership--split .fa-membership__option-desc {
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.fa-membership--split .fa-membership__option:nth-child(even) {
+  background: #80764d;
+  color: var(--fa-linen);
+}
+
+.fa-membership--split .fa-membership__option:nth-child(even) .fa-membership__icon,
+.fa-membership--split .fa-membership__option:nth-child(even) .fa-membership__option-title { color: var(--fa-linen); }
+
+.fa-membership--split .fa-membership__option:nth-child(even) .fa-membership__option-text { gap: 20px; }
+
+.fa-membership--split .fa-membership__option:nth-child(even) .fa-membership__option-desc {
+  line-height: 29px;
+  color: rgb(238 225 209 / 0.8);
+}
+
+@media screen and (min-width: 1100px) {
+  .fa-membership--split .fa-membership__main {
+    display: grid;
+    grid-template-columns: minmax(0, 695fr) minmax(0, 436fr);
+    column-gap: 52px;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-membership--split .fa-membership__heading { gap: 24px; }
+  .fa-membership--split .fa-membership__title { line-height: 29px; }
+  .fa-membership--split .fa-membership__intro { line-height: 24px; }
+  .fa-membership--split .fa-membership__split-btn { margin-top: 0; }
+  .fa-membership--split .fa-membership__option-text,
+  .fa-membership--split .fa-membership__option:nth-child(even) .fa-membership__option-text { gap: 12px; }
+  .fa-membership--split .fa-membership__option-desc,
+  .fa-membership--split .fa-membership__option:nth-child(even) .fa-membership__option-desc { line-height: 22px; }
+  .fa-membership__botanical { width: 90px; }
+}
+
+/* Homepage mobile V1 2794:1690 "Concierge care" (7036–7712): title 32 / 29 (-7%), 18px, intro 14 / 20; 24px; option
+   cards 171 x 133 8px apart (18px padding, icon, 20px, title Marisa 20 -4%, 14px, text 14 / 18 -3%); 8px; the panel
+   (18px padding: title Marisa 24 -2%, 14px, list Libre Caslon 16 / 22 12px apart); 24px; the 212 x 54 button. */
+@media screen and (max-width: 899px) {
+  .fa-membership__heading { gap: 18px; }
+  .fa-membership__title { letter-spacing: -0.07em; }
+
+  .fa-membership__intro {
+    max-width: 351px;
+    line-height: 20px;
+    color: var(--fa-linen); /* QA 2026-10-14: mobile V1 linen at 100% (desktop white 90%) */
+  }
+
+  .fa-membership__options { gap: 8px; }
+  .fa-membership__inner { gap: 8px; } /* option cards → panel */
+  /* Homepage mobile V1 draws the band with square corners. */
+  .fa-membership--corners-diagonal,
+  .fa-membership--corners-diagonal .fa-membership__bg { border-radius: 0; }
+  .fa-membership__cta { margin-top: 24px; }
+
+  .fa-membership__option,
+  .fa-membership--no-panel .fa-membership__option {
+    gap: 20px;
+    padding: 18px;
+  }
+
+  .fa-membership__option-text { gap: 14px; }
+  .fa-membership__option-title { letter-spacing: -0.04em; }
+
+  .fa-membership__option-desc {
+    line-height: 18px;
+    letter-spacing: -0.03em;
+  }
+
+  .fa-membership__panel {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .fa-membership__panel-title {
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-box: trim-both cap alphabetic; /* Figma's 12px title box, 14px above the list (2794:1690 / 2855:16669) */
+  }
+
+  .fa-membership__panel-body { gap: 14px; }
+
+  /* Figma's intro box is cap-trimmed (4 lines = 71): the options sit 191px below the title top. */
+  .fa-membership__intro { text-box: trim-both cap alphabetic; }
+
+  .fa-membership__item {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .fa-membership__cta-btn {
+    min-width: 212px;
+    min-height: 54px;
+    padding-inline: 32px;
+    font-size: 20px;
+  }
+}
+
+/* "Mobile style: Compact" + split = Concierge mobile 2857:23149 intro (457-1283): centred title 32 / 31 (-5%) and
+   paragraphs 14 / 20 (-2%) 18px apart; 24px; the two option cards 8px apart (18px padding, 24px icon, 20px, title
+   Marisa 24 -4%, 14px, text 16 / 24 -4%, the note line 18 / 27 20px below); 24px; the 165 x 39 button centred under
+   the cards (desktop keeps it in the text column). */
+@media screen and (max-width: 899px) {
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__heading { display: contents; }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__options {
+    order: 1;
+    gap: 8px;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__split-btn {
+    order: 2;
+    align-self: center;
+    min-width: 0;
+    min-height: 39px;
+    padding-inline: 12px;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__title {
+    line-height: 31px;
+    letter-spacing: -0.05em;
+    text-align: center;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__intro {
+    margin-top: -6px; /* 18px under the title */
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__intro p + p { margin-top: 18px; }
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__intro p { text-box: trim-both cap alphabetic; } /* Figma's 71 / 91 boxes */
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option {
+    max-width: none;
+    gap: 20px;
+    padding: 18px;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option-text,
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option:nth-child(even) .fa-membership__option-text { gap: 14px; }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option-title {
+    font-size: 24px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option-desc,
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option:nth-child(even) .fa-membership__option-desc {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+  }
+
+  .fa-membership--split.fa-membership--mobile-compact .fa-membership__option-desc + .fa-membership__option-desc {
+    margin-top: -7px; /* 20px between the cap-trimmed lines */
+    font-size: 18px;
+    line-height: 27px;
+  }
+}

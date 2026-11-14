@@ -1,0 +1,289 @@
+/* Felice appointments — Our Team V3 "Who books what" (2669:33935, 1440 x 1118): padding 120 / 120; heading 848 wide
+   (title 60 / 58, intro 16 / 27, moss, 24 apart), 30px; table 1172 wide (2px moss rim, radius 12): header row 57 tall
+   (moss, labels Marisa 22 uppercase linen), rows 55 tall alternating #EFE7DB at 80% / #DECEB6; columns 414 / 180 / 405
+   / 122 with 16px between, cells padded 18 / 24 (practitioners 34 on the left). Appointment Marisa 19, duration
+   Marisa 20 -3%, practitioners Marisa 18 uppercase -3% (moss), "Book →" Marisa 20 -3% garnet.
+   No mobile frame: below 900px the table scrolls sideways inside the gutter. */
+
+.fa-appointments {
+  position: relative;
+  overflow-x: clip;
+  padding-block: 120px;
+  color: var(--fa-moss);
+  background: #dfd2bf; /* mean of the bundled texture */
+}
+
+.fa-appointments__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.fa-appointments__heading { max-width: 848px; }
+
+.fa-appointments .fa-heading__title { line-height: 58px; }
+
+.fa-appointments__intro {
+  font-size: 16px;
+  line-height: 27px;
+}
+
+.fa-appointments__scroll {
+  width: min(1172px, 100%);
+  overflow-x: auto;
+  border: 2px solid var(--fa-moss);
+  border-radius: var(--fa-radius); /* QA 2026-10-14: Figma 2669:33510 "Table" r2 (was 12) */
+}
+
+.fa-appointments__table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  text-align: left;
+}
+
+.fa-appointments__table th,
+.fa-appointments__table td {
+  padding: 18px 24px;
+  border: 0;
+  line-height: 19px;
+  vertical-align: middle;
+}
+
+.fa-appointments__table thead th:nth-child(1) { width: calc(414px + 16px); }
+
+.fa-appointments__table thead th:nth-child(2) { width: calc(180px + 16px); }
+
+.fa-appointments__table thead th:nth-child(3) { width: calc(405px + 17px); }
+
+.fa-appointments__table thead th {
+  background: var(--fa-moss);
+  color: var(--fa-linen);
+  font-size: 22px;
+  line-height: 21px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.fa-appointments__table tbody tr:nth-child(odd) { background: rgb(239 231 219 / 0.8); }
+
+.fa-appointments__table tbody tr:nth-child(even) { background: #decdb6; }
+
+.fa-appointments__table tbody th {
+  font-size: 19px;
+  line-height: 19px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.fa-appointments__table thead th:nth-child(2),
+.fa-appointments__duration { text-align: center; }
+
+.fa-appointments__duration {
+  white-space: nowrap; /* Figma lets "Follow-up 45 min" run into the cell padding */
+  font-size: 20px;
+  line-height: 19px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.fa-appointments__table .fa-appointments__people {
+  padding-left: 34px;
+  font-size: 18px;
+  line-height: 17px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.fa-appointments__book { text-align: center; }
+
+.fa-appointments__book a {
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--fa-garnet);
+}
+
+.fa-appointments__book a:focus-visible {
+  outline: 2px solid var(--fa-garnet);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .fa-appointments__book a:hover .fa-arrow-nudge { transform: translateX(var(--fa-nudge)); }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-appointments { padding-block: 60px; }
+
+  .fa-appointments .fa-heading__title { line-height: 29px; }
+
+  .fa-appointments__intro { font-size: 14px; line-height: 22px; }
+}
+
+/* ---------- "Practitioner matrix" ----------
+   Desktop (Figma Our Team 2995:26395, 6652–7525): 1172px frame, 2px moss rim inside, r2. Rows: a 520px name column and
+   four 150px practitioner columns, 12.5px apart. Head 57 tall, moss, Marisa Bold 22 uppercase linen ("Appointment"
+   left with 24px padding, names centred); appointment rows 58 tall alternating #EFE7DB at 80% / #DECEB6: name Marisa
+   Bold 19 uppercase moss (24px in), ● (13px disc) / --- (LCC 16 #80764D) / "Waitlist" Marisa Bold 19, centred; foot
+   58 tall #DECEB6 with "Book now →" (Marisa Bold 18 -6%, the arrow 20 -3%, 3px) garnet under every practitioner.
+   Mobile (2821:4461, 6961–8207): 351px, 1px rim, r5; head 45 tall (names Marisa Bold 13.2, no name column); each
+   appointment a 29px #DECEB6 bar (Marisa Bold 14 -5%, centred, 8 / 14 padding) over a 42px row of four cells (11px
+   disc / --- LCC 13 / "Waitlist" Marisa Bold 11.4), groups alternating #EFE7DB 80% / #ECE3D5; foot 42 tall,
+   "Book now →" Marisa Bold 10 -6% garnet, underlined. */
+.fa-appointments__matrix { display: none; }
+
+.fa-appointments__mrow { display: grid; align-items: center; }
+
+.fa-appointments__mcell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.fa-appointments__dot {
+  display: inline-block;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.fa-appointments__none {
+  font-family: var(--fa-font-body);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.fa-appointments__waitlist,
+.fa-appointments__mrow--head,
+.fa-appointments__mname,
+.fa-appointments__mrow--foot a {
+  font-family: var(--fa-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fa-appointments__mrow--foot a {
+  color: var(--fa-garnet);
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 900px) {
+  .fa-appointments--desktop-matrix .fa-appointments__scroll { display: none; }
+
+  .fa-appointments--desktop-matrix .fa-appointments__matrix {
+    display: block;
+    width: min(1172px, 100%);
+    overflow: hidden;
+    border: 2px solid var(--fa-moss);
+    border-radius: var(--fa-radius);
+    color: var(--fa-moss);
+  }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow {
+    grid-template-columns: minmax(0, 520fr) repeat(4, minmax(0, 150fr));
+    column-gap: 12.5px;
+    min-height: 58px;
+    background: rgb(239 231 219 / 0.8);
+  }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow:nth-child(odd) { background: #deceb6; }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow--head {
+    min-height: 57px;
+    background: var(--fa-moss);
+    color: var(--fa-linen);
+    font-size: 22px;
+    line-height: 21px;
+  }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow--head.fa-appointments__mrow { background: var(--fa-moss); }
+  .fa-appointments--desktop-matrix .fa-appointments__mrow--foot.fa-appointments__mrow { background: #deceb6; }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mname {
+    padding: 18px 12px 18px 24px; /* the longest name (Virtual Wellness, 482px in Figma) stays on one line */
+    font-size: 19px;
+    line-height: 18px;
+  }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow--head .fa-appointments__mname { font-size: 22px; line-height: 21px; }
+
+  .fa-appointments--desktop-matrix .fa-appointments__dot { width: 13px; height: 13px; }
+  .fa-appointments--desktop-matrix .fa-appointments__none { font-size: 16px; color: #80764d; }
+  .fa-appointments--desktop-matrix .fa-appointments__waitlist { font-size: 19px; line-height: 18px; }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow--foot a {
+    font-size: 18px;
+    letter-spacing: -0.06em;
+    text-decoration: none;
+  }
+
+  .fa-appointments--desktop-matrix .fa-appointments__mrow--foot .fa-arrow-nudge {
+    margin-left: 3px;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .fa-appointments--mobile-matrix .fa-appointments__scroll { display: none; }
+
+  .fa-appointments--mobile-matrix .fa-appointments__matrix {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--fa-moss);
+    border-radius: 5px;
+    color: var(--fa-moss);
+  }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mrow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mname {
+    grid-column: 1 / -1;
+    padding: 8px 14px;
+    background: #deceb6;
+    font-size: 14px;
+    line-height: 13px;
+    letter-spacing: -0.05em;
+    text-align: center;
+  }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mcell {
+    height: 42px;
+    background: rgb(239 231 219 / 0.8);
+  }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mrow:nth-child(odd) .fa-appointments__mcell { background: #ece3d5; }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mrow--head .fa-appointments__mname,
+  .fa-appointments--mobile-matrix .fa-appointments__mrow--foot .fa-appointments__mname { display: none; }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mrow--head .fa-appointments__mcell {
+    height: 45px;
+    background: var(--fa-moss);
+    color: var(--fa-linen);
+    font-size: 13.2px;
+    line-height: 1;
+  }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mrow--foot .fa-appointments__mcell { background: #deceb6; }
+
+  .fa-appointments--mobile-matrix .fa-appointments__dot { width: 11px; height: 11px; }
+  .fa-appointments--mobile-matrix .fa-appointments__none { font-size: 13px; }
+  .fa-appointments--mobile-matrix .fa-appointments__waitlist { font-size: 11.4px; line-height: 1; }
+
+  .fa-appointments--mobile-matrix .fa-appointments__mrow--foot a {
+    font-size: 11px;
+    letter-spacing: -0.06em;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}

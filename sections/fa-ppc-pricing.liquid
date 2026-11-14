@@ -1,0 +1,115 @@
+{%- comment -%}
+  PPC Landing Page pricing card (Figma 3014:4054 band 3559–4320 / 3031:4731 3719–4473): centred heading + intro over
+  a two-part card: the offer panel (textured, badge, offer name, price with "Regular" and the struck regular price,
+  a note and a linen button) and the "What's included" list with a "Regular pricing" footer. Stacked on phones.
+  Styles: assets/fa-ppc.css.
+{%- endcomment -%}
+{{ 'fa-ppc.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.background_asset
+  assign included = section.settings.included | newline_to_br | split: '<br />'
+  assign regular = section.settings.regular_items | newline_to_br | split: '<br />'
+-%}
+
+<section class="fa-section fa-ppc-pricing"{% if section.settings.heading != blank %} aria-labelledby="fa-ppc-pricing-title-{{ section.id }}"{% endif %} style="--fa-ppc-panel-bg: url('{{ 'fa-texture-header.jpg' | asset_url }}'); --fa-ppc-strip-bg: url('{{ 'fa-ppc-hero-bg.webp' | asset_url }}');">
+  {%- if section.settings.background != blank or bg != blank -%}
+    <div class="fa-bg" aria-hidden="true">
+      {%- if section.settings.background != blank -%}
+        {{ section.settings.background | image_url: width: 2880 | image_tag: widths: '750, 1440, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+      {%- else -%}
+        <img src="{{ bg | asset_url }}" width="1438" height="761" loading="lazy" alt="">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="fa-container fa-ppc-pricing__inner">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-ppc-pricing__heading">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title fa-ppc-pricing__title" id="fa-ppc-pricing-title-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="fa-heading__text fa-ppc-pricing__intro">{{ section.settings.text }}</div>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="fa-ppc-pricing__card">
+      <div class="fa-ppc-pricing__offer">
+        <div class="fa-ppc-pricing__offer-head">
+          {%- if section.settings.badge != blank -%}<span class="fa-ppc-badge fa-ppc-badge--light">{{ section.settings.badge | escape }}</span>{%- endif -%}
+          {%- if section.settings.offer_title != blank -%}<h3 class="fa-ppc-pricing__offer-title">{{ section.settings.offer_title | escape }}</h3>{%- endif -%}
+          {%- if section.settings.price != blank -%}
+            <p class="fa-ppc-pricing__price">
+              <span class="fa-ppc-pricing__now">{{ section.settings.price | escape }}</span>
+              {%- if section.settings.price_was != blank -%}
+                <span class="fa-ppc-pricing__regular">
+                  {%- if section.settings.price_note != blank -%}<span class="fa-ppc-pricing__note">{{ section.settings.price_note | escape }}</span>{%- endif -%}
+                  <s class="fa-ppc-pricing__was"><span class="fa-visually-hidden">Regular price </span>{{ section.settings.price_was | escape }}</s>
+                </span>
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        </div>
+        <div class="fa-ppc-pricing__offer-foot">
+          {%- if section.settings.offer_text != blank -%}<p class="fa-ppc-pricing__offer-text">{{ section.settings.offer_text | escape }}</p>{%- endif -%}
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link | default: '#' }}"{% render 'fa-link-target', url: section.settings.button_link %} class="fa-btn fa-btn--light fa-ppc-pricing__button">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="fa-ppc-pricing__details">
+        <div class="fa-ppc-pricing__included">
+          {%- if section.settings.included_title != blank -%}<h3 class="fa-ppc-pricing__included-title">{{ section.settings.included_title | escape }}</h3>{%- endif -%}
+          <ul class="fa-ppc-pricing__list" role="list">
+            {%- for item in included -%}
+              {%- assign item_text = item | strip -%}
+              {%- if item_text != blank -%}<li>{{ item_text | escape }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+        {%- if section.settings.regular_title != blank or section.settings.regular_items != blank -%}
+          <div class="fa-ppc-pricing__regular-box">
+            {%- if section.settings.regular_title != blank -%}<p class="fa-ppc-pricing__regular-title">{{ section.settings.regular_title | escape }}</p>{%- endif -%}
+            <ul class="fa-ppc-pricing__regular-list" role="list">
+              {%- for item in regular -%}
+                {%- assign item_text = item | strip -%}
+                {%- if item_text != blank -%}<li>{{ item_text | escape }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PPC pricing",
+  "tag": "div",
+  "class": "fa-ppc-pricing-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your $150 first visit" },
+    { "type": "richtext", "id": "text", "label": "Intro" },
+    { "type": "header", "content": "Offer panel" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Save $100" },
+    { "type": "text", "id": "offer_title", "label": "Offer name", "default": "New patient first visit" },
+    { "type": "text", "id": "price", "label": "Offer price", "default": "$150" },
+    { "type": "text", "id": "price_note", "label": "Label above the regular price", "default": "Regular" },
+    { "type": "text", "id": "price_was", "label": "Regular price (struck through)", "default": "$250" },
+    { "type": "text", "id": "offer_text", "label": "Note", "default": "75-minute initial visit" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Claim my $150 first visit" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "What's included" },
+    { "type": "text", "id": "included_title", "label": "Title", "default": "What's included" },
+    { "type": "textarea", "id": "included", "label": "Items", "info": "One per line." },
+    { "type": "text", "id": "regular_title", "label": "Footer title", "default": "Regular pricing" },
+    { "type": "textarea", "id": "regular_items", "label": "Footer items", "info": "One per line." },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "background", "label": "Background image" },
+    { "type": "text", "id": "background_asset", "label": "Bundled background file", "default": "fa-ppc-pricing-bg.webp" }
+  ],
+  "presets": [{ "name": "PPC pricing" }]
+}
+{% endschema %}

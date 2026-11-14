@@ -1,0 +1,26 @@
+{%- comment -%}
+  Outputs ` target="_blank" rel="noopener noreferrer"` for a link to another site, so external links open in a new tab while
+  store pages, same-page anchors, tel: and mailto: stay in the current tab.
+  Usage: <a href="{{ url }}"{% render 'fa-link-target', url: url %}>
+  External = an absolute http(s) / protocol-relative URL whose host is not this store's (request.host), so links to
+  the client's current site become same-tab automatically once that domain points at the store.
+{%- endcomment -%}
+{%- liquid
+  assign fa_url = url | strip | downcase
+  assign fa_scheme = fa_url | slice: 0, 7
+  assign fa_scheme_s = fa_url | slice: 0, 8
+  assign fa_proto_rel = fa_url | slice: 0, 2
+  assign fa_external = false
+  if fa_scheme == 'http://' or fa_scheme_s == 'https://' or fa_proto_rel == '//'
+    assign fa_external = true
+    if request.host != blank
+      assign fa_host = request.host | downcase
+      assign fa_host_a = '//' | append: fa_host | append: '/'
+      assign fa_url_slash = fa_url | append: '/'
+      if fa_url_slash contains fa_host_a
+        assign fa_external = false
+      endif
+    endif
+  endif
+-%}
+{%- if fa_external %} target="_blank" rel="noopener noreferrer"{% endif -%}

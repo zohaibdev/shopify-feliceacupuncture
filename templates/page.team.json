@@ -1,0 +1,1273 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "fa-hero",
+      "settings": {
+        "layout": "page",
+        "desktop_photos": "one",
+        "mobile_photo": "right",
+        "photo_position": 0,
+        "fallback_left": "fa-hero-left.jpg",
+        "fallback_right": "fa-page-hero-team.jpg",
+        "fallback_mobile": "fa-page-hero-team.jpg",
+        "video_url": "",
+        "overlay_opacity": 35,
+        "overlay_opacity_mobile": 36,
+        "copy_width": 698,
+        "min_height": 527,
+        "padding_top": 116,
+        "padding_bottom_mobile": 74,
+        "eyebrow": "Culver City's 5.0-Rated Acupuncture Clinic",
+        "eyebrow_stars": 5,
+        "show_rating": true,
+        "stars": 5,
+        "rating_text": "4.9 stars",
+        "meta_1": "Traditional Chinese Medicine",
+        "meta_2": "Culver City",
+        "heading": "Your Care Team",
+        "text": "Our practitioners offer diverse specialties and treatment styles rooted in TCM. We focus on understanding the deeper patterns that affect your well-being, rather than just treating your symptoms.",
+        "tagline": "Four licensed practitioners, one system of care: in our Culver City clinic, at your home, or virtually.",
+        "button_label_1": "Book in-clinic",
+        "button_link_1": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_label_2": "Book concierge",
+        "button_link_2": "/pages/concierge",
+        "button_compact": false,
+        "mobile_style": "compact"
+      }
+    },
+    "profile_felice": {
+      "type": "fa-profile",
+      "settings": {
+        "anchor_id": "felice",
+        "image_position": "left",
+        "style": "team",
+        "padding_top": 120,
+        "padding_bottom": 16,
+        "photo_height": 633,
+        "fallback_asset": "fa-profile-felice-chan-team.jpg",
+        "image_alt": "Portrait of Dr. Felice Chan",
+        "background_asset": "fa-profile-bg-olive.jpg",
+        "background_asset_mobile": "fa-profile-bg-mobile.jpg",
+        "heading": "Dr. Felice Chan, L.Ac",
+        "roles": "Nervous system regulation, digestive support, hormonal balance",
+        "lead": "",
+        "text": "<p>Dr. Felice is a licensed and board-certified acupuncturist and clinical herbalist. Her passion for medicine started as a kid, when she grew up in Hong Kong learning the effectiveness of at-home Chinese herbal remedies.</p><p>Felice has a background in neuroscience and understands the importance of the mind-body connection. Her approach emphasizes balancing and holistic techniques to resolve health concerns.</p>",
+        "quote": "Gut Health · Nervous System Imbalance · Mental Health · Women’s Health · Pain Management · Chronic Inflammation · Cosmetic Acupuncture",
+        "button_label": "Join the waitlist",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/staff_member/1",
+        "button_label_2": "Dr. Felice’s Substack",
+        "button_link_2": "https://drfelicechan.substack.com/",
+        "note": "Books online (existing patients): Follow up treatment · Cupping Follow Up · Cupping · Contrast Therapy",
+        "mobile_style": "compact"
+      }
+    },
+    "profile_sam": {
+      "type": "fa-profile",
+      "settings": {
+        "anchor_id": "sam",
+        "image_position": "right",
+        "style": "team",
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "photo_height": 633,
+        "fallback_asset": "fa-profile-sam-audette-team.jpg",
+        "image_alt": "Portrait of Dr. Sam Audette",
+        "background_asset": "fa-profile-bg-olive.jpg",
+        "background_asset_mobile": "fa-profile-bg-mobile.jpg",
+        "heading": "Dr. Sam Audette, L.Ac",
+        "roles": "Immune and auto-immune support, pain management, sports medicine",
+        "lead": "",
+        "text": "<p>Dr. Sam is a second generation, board-certified acupuncturist and clinical herbalist from Boston, MA. He also specializes in Japanese palpation-based diagnosis and musculoskeletal trigger point therapy.</p><p>He has a passion for natural approaches to restore health and achieve optimum function of the body, mind and spirit using Chinese herbal medicine, nutrition, lifestyle and supplementation. He focuses on nervous system health, sports medicine, pain management and autoimmune conditions.</p>",
+        "quote": "Nervous System Health · Sports Medicine · Pain Management · Immune + Autoimmune Support · Nutrition Support · Cosmetic Acupuncture",
+        "button_label": "Book with Dr. Sam",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/staff_member/2",
+        "button_label_2": "Read Dr. Sam's Blogs",
+        "button_link_2": "https://samuelaudetteacupuncture.com/blog",
+        "note": "",
+        "mobile_style": "compact"
+      }
+    },
+    "profile_caroline": {
+      "type": "fa-profile",
+      "settings": {
+        "anchor_id": "caroline",
+        "image_position": "left",
+        "style": "team",
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "photo_height": 633,
+        "fallback_asset": "fa-profile-caroline-kirk-team.jpg",
+        "image_alt": "Portrait of Caroline Kirk",
+        "background_asset": "fa-profile-bg-olive.jpg",
+        "background_asset_mobile": "fa-profile-bg-mobile.jpg",
+        "heading": "Caroline Kirk, L.Ac",
+        "roles": "Women's health, hormonal balance, fertility support",
+        "lead": "",
+        "text": "<p>Caroline Kirk is a licensed acupuncturist and herbalist. Her path into Chinese medicine was shaped by her own healing journey, after years of chronic migraines and recurring back and neck pain, she experienced firsthand the transformative impact of acupuncture and herbal medicine.</p><p>Rooted in Chinese medicine and informed by a modern understanding of physiology, Caroline takes an individualized approach, looking beyond symptoms to uncover the deeper patterns driving imbalance. She frequently supports patients with concerns such as irregular cycles, PCOS, fertility support, post–birth control transitions, and stress-related hormonal disruptions.</p>",
+        "quote": "Hormonal Imbalance · Menstrual Irregularity · Mental Health · Fertility Support · Pain Management · Digestive Disorders · Cosmetic Acupuncture",
+        "button_label": "Book with Caroline",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/staff_member/4",
+        "button_label_2": "Read Caroline's Substack",
+        "button_link_2": "https://substack.com/@carolinekirklac",
+        "note": "Books online (existing patients): Follow up treatment · Cupping Follow Up · Cupping · Contrast Therapy",
+        "mobile_style": "compact"
+      }
+    },
+    "profile_sarah": {
+      "type": "fa-profile",
+      "settings": {
+        "anchor_id": "sarah",
+        "image_position": "right",
+        "style": "team",
+        "padding_top": 16,
+        "padding_bottom": 120,
+        "photo_height": 633,
+        "fallback_asset": "fa-profile-sarah-viducic-team.jpg",
+        "image_alt": "Portrait of Dr. Sarah Viducic",
+        "background_asset": "fa-profile-bg-olive.jpg",
+        "background_asset_mobile": "fa-profile-bg-mobile.jpg",
+        "heading": "Dr. Sarah Viducic",
+        "roles": "Menstrual and gynecological health, hormonal balance, fertility support",
+        "lead": "",
+        "text": "<p>Dr. Sarah Viducic is a board-certified acupuncturist and clinical herbalist known for her precise, results-driven approach and ability to quickly identify underlying patterns in the body. Her integrative style blends Traditional Chinese Medicine with modern, clinical strategy. She believes effective healing begins with deeply listening, to both the patient and the body, allowing her to create highly targeted, individualized treatment plans.</p><p>She specializes in sports medicine, hormonal health, fertility and ART support, pain management, and nervous system regulation, supporting patients experiencing stress, anxiety, and burnout. Her treatments are multi-modal in order to create measurable, lasting change.</p>",
+        "quote": "Menstrual Irregularity · Gynecological Conditions · Hormonal Imbalance · Fertility Support · Nutrition Support · Cosmetic Acupuncture",
+        "button_label": "Book with Dr. Sarah",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/staff_member/3",
+        "button_label_2": "Read Dr. Sarah's Substack",
+        "button_link_2": "https://drsarahviducic.substack.com/",
+        "note": "",
+        "mobile_style": "compact"
+      }
+    },
+    "practitioners": {
+      "type": "fa-conditions",
+      "blocks": {
+        "pain": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-pain.jpg",
+            "shade": 10,
+            "glyph_asset": "",
+            "glyph_height": 84,
+            "glyph_offset": 0,
+            "characters": "",
+            "title": "Pain",
+            "text": "",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "",
+            "practitioners": "Dr. Sam Audette | https://feliceacupuncture.janeapp.com/#/staff_member/2\nCaroline Kirk | https://feliceacupuncture.janeapp.com/#/staff_member/4\nDr. Sarah Viducic | https://feliceacupuncture.janeapp.com/#/staff_member/3",
+            "book_label": "Book",
+            "link": "",
+            "anchor": ""
+          }
+        },
+        "anxiety": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-anxiety.jpg",
+            "shade": 10,
+            "glyph_asset": "",
+            "glyph_height": 84,
+            "glyph_offset": 0,
+            "characters": "",
+            "title": "Anxiety & Stress",
+            "text": "",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "",
+            "practitioners": "Dr. Sam Audette | https://feliceacupuncture.janeapp.com/#/staff_member/2\nCaroline Kirk | https://feliceacupuncture.janeapp.com/#/staff_member/4\nDr. Sarah Viducic | https://feliceacupuncture.janeapp.com/#/staff_member/3",
+            "book_label": "Book",
+            "link": "",
+            "anchor": ""
+          }
+        },
+        "hormones": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-hormones.jpg",
+            "shade": 10,
+            "glyph_asset": "",
+            "glyph_height": 84,
+            "glyph_offset": 0,
+            "characters": "",
+            "title": "Hormones & Fertility",
+            "text": "",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "",
+            "practitioners": "Caroline Kirk | https://feliceacupuncture.janeapp.com/#/staff_member/4\nDr. Sarah Viducic | https://feliceacupuncture.janeapp.com/#/staff_member/3",
+            "book_label": "Book",
+            "link": "",
+            "anchor": ""
+          }
+        },
+        "gut": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-gut.jpg",
+            "shade": 10,
+            "glyph_asset": "",
+            "glyph_height": 84,
+            "glyph_offset": 0,
+            "characters": "",
+            "title": "Gut Health",
+            "text": "",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "",
+            "practitioners": "Caroline Kirk | https://feliceacupuncture.janeapp.com/#/staff_member/4",
+            "book_label": "Book",
+            "link": "",
+            "anchor": ""
+          }
+        },
+        "skin": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-skin.jpg",
+            "shade": 10,
+            "glyph_asset": "",
+            "glyph_height": 84,
+            "glyph_offset": 0,
+            "characters": "",
+            "title": "Skin Rejuvenation",
+            "text": "",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "",
+            "practitioners": "Dr. Sam Audette | https://feliceacupuncture.janeapp.com/#/staff_member/2\nCaroline Kirk | https://feliceacupuncture.janeapp.com/#/staff_member/4\nDr. Sarah Viducic | https://feliceacupuncture.janeapp.com/#/staff_member/3",
+            "book_label": "Book",
+            "link": "",
+            "anchor": ""
+          }
+        },
+        "immune": {
+          "type": "condition",
+          "settings": {
+            "fallback_asset": "fa-conditions-sleep.jpg",
+            "shade": 10,
+            "glyph_asset": "",
+            "glyph_height": 84,
+            "glyph_offset": 0,
+            "characters": "",
+            "title": "Immune & Autoimmune",
+            "text": "",
+            "text_width": 366,
+            "text_width_mobile": 226,
+            "text_tight": false,
+            "link_label": "",
+            "practitioners": "Dr. Sam Audette | https://feliceacupuncture.janeapp.com/#/staff_member/2\nCaroline Kirk | https://feliceacupuncture.janeapp.com/#/staff_member/4",
+            "book_label": "Book",
+            "link": "",
+            "anchor": ""
+          }
+        }
+      },
+      "block_order": [
+        "pain",
+        "anxiety",
+        "hormones",
+        "gut",
+        "skin",
+        "immune"
+      ],
+      "settings": {
+        "anchor_id": "find-a-practitioner",
+        "show_botanical": false,
+        "botanical_style": "standard",
+        "card_style": "booking",
+        "tone": "light",
+        "note": "<p>Still not sure? <a href=\"tel:+14244780019\">Call or text us at (424) 478-0019</a> and we will help you choose.</p>",
+        "background_asset": "fa-conditions-team-bg.jpg",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "eyebrow": "",
+        "heading": "Find the right practitioner",
+        "mobile_layout": "grid",
+        "intro_style": "large",
+        "heading_width": 790,
+        "text": "<p>Start with what brings you in. Each practitioner listed below has it as one of their specialties.</p>",
+        "text_width": 670,
+        "text_gap": 24,
+        "text_gap_mobile": 14,
+        "heading_line_height_mobile": 30,
+        "button_label": "",
+        "button_link": "",
+        "button_anchor": "",
+        "button_style": "light",
+        "button_compact": false,
+        "button_gap_mobile": 16
+      }
+    },
+    "first_visit": {
+      "type": "fa-first-visit",
+      "blocks": {
+        "step_consultation": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-consultation.jpg",
+            "alt": "A practitioner standing beside a patient resting on a treatment table",
+            "number": "1",
+            "tag": "Before Your Appointment",
+            "title": "Consultation",
+            "duration_1": "20 Minutes",
+            "text_1": "Complete the intake form. This helps us better understand your medical history and allows us to act as your detective, identifying where to start our focus and treatment.",
+            "duration_2": "",
+            "text_2": ""
+          }
+        },
+        "step_treatment": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-treatment.jpg",
+            "alt": "A practitioner placing a fine acupuncture needle in a patient’s wrist",
+            "number": "2",
+            "tag": "During Your Appointment",
+            "title": "Treatment",
+            "duration_1": "30 Minutes",
+            "text_1": "Together, we review your intake form and talk through symptoms. Your practitioner will complete a tongue and pulse diagnostic.",
+            "duration_2": "45 Minutes",
+            "text_2": "Your practitioner will complete an initial acupuncture treatment based on your conversation and intake form."
+          }
+        },
+        "step_restoration": {
+          "type": "step",
+          "settings": {
+            "fallback_asset": "fa-first-visit-restoration.jpg",
+            "alt": "A woman sipping tea from a small porcelain cup",
+            "number": "3",
+            "tag": "After Your Appointment",
+            "title": "Restoration",
+            "duration_1": "Ongoing",
+            "text_1": "You'll leave with a personalized treatment plan, which may also include herbs and dietary recommendations that support your unique needs.",
+            "duration_2": "",
+            "text_2": "Drink lots of water, and eat nourishing foods, as your body begins its healing journey!"
+          }
+        }
+      },
+      "block_order": [
+        "step_consultation",
+        "step_treatment",
+        "step_restoration"
+      ],
+      "settings": {
+        "mobile_layout": "stack",
+        "anchor_id": "first-visit",
+        "show_botanical": true,
+        "botanical_style": "corners",
+        "botanical_display": "all",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "eyebrow": "",
+        "heading": "What to expect\nfor your first visit",
+        "heading_width": 668,
+        "text": "<p>Your 75-minute initial consultation gives us time to understand your health history, identify patterns beneath the symptoms, and begin personalized care.</p>",
+        "text_width": 560,
+        "text_gap_mobile": 16,
+        "card_text_layout": "even",
+        "card_style": "paper",
+        "button_label": "Book your first visit",
+        "button_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "button_compact": true
+      }
+    },
+    "testimonials": {
+      "type": "fa-testimonials",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Sabrina Sarmiento",
+            "date": "",
+            "rating": 5,
+            "text": "Dr. Felice is amazing.  Can't say enough good things about her!\nHer acupuncture and cupping sessions are pure healing, gentle, powerful, and full of care.  She’s sweet, compassionate, and incredibly skilled (and STYLISH). Every visit feels like a reset for both body and soul."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Adam Francis",
+            "date": "",
+            "rating": 5,
+            "text": "I'm not sure what I'd do without Sarah at Felice Acupuncture. I've been trying to recover from Long Covid for over a year and recently moved to LA from Seattle which caused a number of flare-ups, and I was without an acupuncturist to help calm things down. Luckily I found Felice Acupuncture and as soon as I met Sarah, I knew I was in good hands. She's been huge in not only helping me get my symptoms under control, but also teaching me about diet and supplement adjustments to help keep my system from breaking down as much. Can't recommend her enough, her calming presence and sense of humour is invaluable if you've been dealing with a chronic condition for a prolonged period of time."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "Emily Chapel",
+            "date": "",
+            "rating": 5,
+            "text": "I was slightly skeptical that acupuncture would work for my chronic neck pain but I am SO happy to went to Felice Acupuncture and Wellness. Sam Audette was my provider and he made sure I was comfortable throughout the entire process. I can't say it was an enjoyable experience having needles twitch my aching muscles but wow, it helped so much. After two treatments, my pain is almost resolved. I know there is some science behind acuptuncture but I swear, it's magic."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "fallback_asset": "",
+            "name": "linda danh",
+            "date": "",
+            "rating": 5,
+            "text": "I went to Caroline as I was seeking treatment and cupping for back pain and overall muscle recovery. Caroline was very thorough and attentive - her soothing energy made me comfortable, as did the beautiful and calming space. Looking forward to another visit soon!"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "heading": "What people are saying",
+        "text": "<p>Pulled live from Google. 5.0 across 42 reviews, filterable by what the patient came in for.</p>",
+        "show_google": true,
+        "google_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "widget_code": "",
+        "arrow_size": "large",
+        "card_style": "square",
+        "mobile_background_asset": "fa-testimonials-bg-services.jpg",
+        "show_botanical": false,
+        "botanical_style": "standard",
+        "botanical_display": "all",
+        "botanical_overlap": true,
+        "padding_mobile": 60
+      },
+      "disabled": true
+    },
+    "appointments": {
+      "type": "fa-appointments",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "name": "Initial Visit",
+            "duration": "75 min",
+            "practitioners": "Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+            "waitlist": "Dr. Felice"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "name": "Follow-up Treatment · 60 min",
+            "duration": "60 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/2"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "name": "Cosmetic Acupuncture",
+            "duration": "60 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/7"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "name": "Cupping",
+            "duration": "45 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/2/treatment/29"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "name": "Cupping New Patient",
+            "duration": "Initial 45 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/2/treatment/6"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "name": "Cupping",
+            "duration": "Follow-up 45 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/2/treatment/4"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "name": "Contrast Therapy",
+            "duration": "- - -",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/3/treatment/9"
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "name": "Balancing Japanese Acupressure Massage",
+            "duration": "60 min",
+            "practitioners": "Dr. Sam",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/staff_member/2"
+          }
+        },
+        "row_9": {
+          "type": "row",
+          "settings": {
+            "name": "Community Ear Acupuncture",
+            "duration": "75 min",
+            "practitioners": "Dr. Sam",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/28"
+          }
+        },
+        "row_10": {
+          "type": "row",
+          "settings": {
+            "name": "Virtual Wellness",
+            "duration": "45 min initial\n30 min follow-up",
+            "practitioners": "Dr. Felice • Dr. Sarah",
+            "link_label": "Book",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/2/treatment/25"
+          }
+        },
+        "row_11": {
+          "type": "row",
+          "settings": {
+            "name": "Virtual Tongue Reading",
+            "duration": "20 min",
+            "practitioners": "Dr. Sarah",
+            "link_label": "Book",
+            "link": "mailto:info@feliceacupuncture.com?subject=Virtual%20Tongue%20Reading"
+          }
+        },
+        "row_12": {
+          "type": "row",
+          "settings": {
+            "name": "10-Minute Consultation (video)",
+            "duration": "10 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "mailto:info@feliceacupuncture.com?subject=10-Minute%20Consultation"
+          }
+        },
+        "row_13": {
+          "type": "row",
+          "settings": {
+            "name": "House Call Acupuncture",
+            "duration": "90 min",
+            "practitioners": "Dr. Felice • Dr. Sam • Caroline • Dr. Sarah",
+            "link_label": "Book",
+            "link": "/pages/concierge#inquiry"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9",
+        "row_10",
+        "row_11",
+        "row_12",
+        "row_13"
+      ],
+      "settings": {
+        "heading": "Appointments by practitioner",
+        "text": "<p>Every appointment we offer, and which of our practitioners you can see for it.</p>",
+        "label_name": "Appointment",
+        "label_duration": "Duration",
+        "label_people": "Practitioners",
+        "label_book": "Book",
+        "default_link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "matrix_column_links": "Dr. Felice | https://feliceacupuncture.janeapp.com/#/staff_member/1\nDr. Sam | https://feliceacupuncture.janeapp.com/#/staff_member/2\nCaroline | https://feliceacupuncture.janeapp.com/#/staff_member/4\nDr. Sarah | https://feliceacupuncture.janeapp.com/#/staff_member/3",
+        "anchor_id": "appointments",
+        "background_asset": "fa-team-bg.jpg",
+        "mobile_layout": "matrix",
+        "desktop_layout": "matrix"
+      }
+    },
+    "more_ways": {
+      "type": "fa-feature-cards",
+      "blocks": {
+        "consultation": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "",
+            "title": "10-Minute Consultation",
+            "text": "A short video call with one of our practitioners.",
+            "tag": "Video · 10 min · all practitioners",
+            "icon_asset": "fa-feature-cards-icon-consultation.png",
+            "button_label": "Book now",
+            "link": "mailto:info@feliceacupuncture.com?subject=10-Minute%20Consultation",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "wellness": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "",
+            "title": "Virtual Wellness",
+            "text": "We'll review your health history, conduct a detailed intake, and suggest options like herbal therapies and lifestyle tips. Note that acupuncture is not available for virtual sessions.",
+            "tag": "Video · 45 min initial, 30 min follow-up · Dr. Felice, Dr. Sarah",
+            "icon_asset": "fa-feature-cards-icon-wellness.png",
+            "button_label": "Book now",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/2/treatment/25",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "tongue": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "",
+            "title": "Virtual Tongue Reading",
+            "text": "Send 2 to 3 clear tongue photos before your appointment, then join a short video call with Dr. Sarah.",
+            "tag": "Video · 20 min · Dr. Sarah",
+            "icon_asset": "fa-feature-cards-icon-tongue.png",
+            "button_label": "Book now",
+            "link": "mailto:info@feliceacupuncture.com?subject=Virtual%20Tongue%20Reading",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "house_call": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "",
+            "title": "House Call Acupuncture",
+            "text": "We come to you, within a 30-minute distance from Culver City, CA.",
+            "tag": "At your home · 90 min · all practitioners",
+            "icon_asset": "fa-feature-cards-icon-house-call.svg",
+            "button_label": "Book now",
+            "link": "/pages/concierge#inquiry",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "ear": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "",
+            "title": "Community Ear Acupuncture",
+            "text": "Ear acupuncture in a community setting with Dr. Sam.",
+            "tag": "In clinic · Dr. Sam",
+            "icon_asset": "fa-feature-cards-icon-ear.png",
+            "button_label": "Book now",
+            "link": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/28",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        },
+        "acupressure": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "",
+            "title": "Balancing Japanese Acupressure Massage",
+            "text": "Dr. Sam specializes in Japanese palpation-based diagnosis and musculoskeletal trigger point therapy.",
+            "tag": "In clinic · 60 min · Dr. Sam",
+            "icon_asset": "fa-feature-cards-icon-acupressure.png",
+            "button_label": "Book now",
+            "link": "https://feliceacupuncture.janeapp.com/#/staff_member/2",
+            "text_width": 274,
+            "text_small_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "consultation",
+        "wellness",
+        "tongue",
+        "house_call",
+        "ear",
+        "acupressure"
+      ],
+      "settings": {
+        "heading": "More ways \nto start your care",
+        "text": "<p>From a 10-minute video call to a 90-minute house call, choose the appointment that fits your schedule.</p>",
+        "button_label": "",
+        "button_link": "",
+        "anchor_id": "more-ways",
+        "card_style": "moss_icon",
+        "heading_color": "moss",
+        "heading_width": 750,
+        "heading_line_height": 52,
+        "columns": 3,
+        "padding_mobile": 60,
+        "background_asset": "fa-glyph-columns-bg.jpg",
+        "background_asset_mobile": "fa-photo-gallery-bg-mobile.jpg",
+        "card_background_asset": "fa-feature-cards-card-bg.jpg",
+        "mobile_layout": "grid"
+      }
+    },
+    "faq": {
+      "type": "fa-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What happens during my first visit?",
+            "answer": "<p>Your initial visit is 75 minutes. Before your appointment, you'll complete an intake form. Together, you and your practitioner will review it and talk through your symptoms, followed by a tongue and pulse diagnostic and your first acupuncture treatment. You'll leave with a personalized treatment plan.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Does acupuncture hurt?",
+            "answer": "<p>Most patients find acupuncture surprisingly gentle. You may feel a brief sensation as the needles are placed, followed by warmth, heaviness, tingling, or deep relaxation.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How many sessions will I need?",
+            "answer": "<p>It depends on your goals and history. Your practitioner will recommend a treatment plan after your first visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "<p>Many patients notice a change within the first few sessions; long-standing concerns usually take longer. Your practitioner will review your progress with you at each visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How will I feel after my first session?",
+            "answer": "<p>Most people feel calm and relaxed, sometimes a little tired. Drink water, rest if you can, and tell your practitioner how you felt at your next visit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What should I wear to my appointment?",
+            "answer": "",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "How much does a visit cost?",
+            "answer": "<p>Prices depend on the treatment and session length. See our services page for current prices, or contact us with any questions.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Do you take insurance?",
+            "answer": "<p>Please contact us before your visit to discuss insurance and payment options.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Which practitioner should I book?",
+            "answer": "<p>Every practitioner treats a wide range of concerns. If you're unsure, contact us and we'll help you choose the best fit.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_10": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer care at home or virtually?",
+            "answer": "<p>Yes. Concierge in-home visits and virtual consultations are available by appointment — contact us to check availability in your area.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "What is your cancellation policy?",
+            "answer": "<p>Please let us know as early as possible if you need to cancel or reschedule. Contact us for the full policy.</p>",
+            "open": false,
+            "open_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9",
+        "question_10",
+        "question_11"
+      ],
+      "settings": {
+        "anchor_id": "faq",
+        "heading": "Frequently asked questions",
+        "single_open": true,
+        "faq_schema": true,
+        "heading_width": "wide",
+        "answer_size": "medium",
+        "left_column_count": 5,
+        "background_asset": "fa-faq-bg-home.jpg",
+        "show_flower": true,
+        "show_flower_mobile": true,
+        "flower_position": "bottom_left",
+        "flower_mobile_size": "small",
+        "padding_bottom": 130,
+        "padding_mobile": 60
+      }
+    },
+    "gallery": {
+      "type": "fa-photo-gallery",
+      "blocks": {
+        "photo_01": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-01-treatment-room.jpg",
+            "alt": "A treatment room with a massage table",
+            "shade": 0
+          }
+        },
+        "photo_02": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-02-fire-cupping.jpg",
+            "alt": "Fire cupping on the upper back",
+            "shade": 0
+          }
+        },
+        "photo_03": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-03-lounge-scrolls.jpg",
+            "alt": "The clinic lounge with hanging scroll paintings",
+            "shade": 0
+          }
+        },
+        "photo_04": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-04-hand-needles.jpg",
+            "alt": "Acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_13": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-05-palo-santo.jpg",
+            "alt": "Palo santo in a clay bowl",
+            "shade": 0
+          }
+        },
+        "photo_06": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-06-spine-needles.jpg",
+            "alt": "Acupuncture needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_07": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-07-room-painting.jpg",
+            "alt": "A treatment room with a landscape painting",
+            "shade": 0
+          }
+        },
+        "photo_08": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-08-tui-na.jpg",
+            "alt": "Tui na massage on the treatment table",
+            "shade": 0
+          }
+        },
+        "photo_09": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-09-moonbow-shelf.jpg",
+            "alt": "Moonbow Skin products on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_10": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-10-neck-needles.jpg",
+            "alt": "Acupuncture needles along the neck and shoulders",
+            "shade": 0
+          }
+        },
+        "photo_11": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-11-artwork.jpg",
+            "alt": "Artwork and dried pampas grass in the clinic",
+            "shade": 0
+          }
+        },
+        "photo_12": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-12-moxa-stick.jpg",
+            "alt": "Moxa warming acupuncture points on the back",
+            "shade": 0
+          }
+        },
+        "photo_05": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-13-sauna.jpg",
+            "alt": "The infrared sauna",
+            "shade": 0
+          }
+        },
+        "photo_14": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-14-heat-lamp.jpg",
+            "alt": "A patient resting under the heat lamp with needles along the spine",
+            "shade": 0
+          }
+        },
+        "photo_15": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-15-herb-shelf.jpg",
+            "alt": "Herbal supplements on the clinic shelf",
+            "shade": 0
+          }
+        },
+        "photo_16": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-16-placing-needle.jpg",
+            "alt": "A practitioner placing a needle on the shoulder",
+            "shade": 0
+          }
+        },
+        "photo_17": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-17-shower.jpg",
+            "alt": "The cold plunge shower",
+            "shade": 0
+          }
+        },
+        "photo_18": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-18-needling-hands.jpg",
+            "alt": "A practitioner placing acupuncture needles in the hand",
+            "shade": 0
+          }
+        },
+        "photo_19": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-19-business-card.jpg",
+            "alt": "A Felice Acupuncture business card on a carved wooden Buddha",
+            "shade": 0
+          }
+        },
+        "photo_20": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/felice-clinic-20-moxa.jpg",
+            "alt": "Preparing moxa at the clinic",
+            "shade": 0
+          }
+        }
+      },
+      "block_order": [
+        "photo_01",
+        "photo_02",
+        "photo_03",
+        "photo_04",
+        "photo_13",
+        "photo_06",
+        "photo_07",
+        "photo_08",
+        "photo_09",
+        "photo_10",
+        "photo_11",
+        "photo_12",
+        "photo_05",
+        "photo_14",
+        "photo_15",
+        "photo_16",
+        "photo_17",
+        "photo_18",
+        "photo_19",
+        "photo_20"
+      ],
+      "settings": {
+        "layout": "strip",
+        "heading": "",
+        "text": "",
+        "text_width": 460,
+        "review_label": "",
+        "review_link": "https://g.co/kgs/mxocT19",
+        "start": "center",
+        "show_arrows": true,
+        "curved_edges": false,
+        "strip_shape": "square_tight",
+        "row_gap": "32",
+        "loop": true,
+        "autoplay": true,
+        "autoplay_interval": 4,
+        "autoplay_speed": 30,
+        "lightbox": true,
+        "anchor_id": "",
+        "show_social": true,
+        "follow_label": "Follow @feliceacupuncture",
+        "instagram_url": "https://www.instagram.com/feliceacupuncture/",
+        "facebook_url": "https://www.facebook.com/feliceacupuncture",
+        "follow_position": "center",
+        "background_style": "linen",
+        "botanical": "none",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "mobile_photo_size": "small",
+        "show_arrows_mobile": true
+      }
+    },
+    "posts": {
+      "type": "fa-blog-posts",
+      "blocks": {
+        "post_1": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-hypno-sound.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Sound Therapy",
+            "title": "The Healing Harmony of Hypno-Sound Therapy & Ear Acupuncture",
+            "link": "https://www.feliceacupuncture.com/post/the-healing-harmony-of-hypno-sound-therapy-ear-acupuncture"
+          }
+        },
+        "post_2": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-la-fires.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Respiratory",
+            "title": "Protecting Your Lungs and Health During the LA Fires",
+            "link": "https://www.feliceacupuncture.com/post/protecting-your-lungs-and-health-during-the-la-fires"
+          }
+        },
+        "post_3": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "fa-blog-posts-acne.jpg",
+            "meta": "Mar 5, 2025 · 3 min read · Skin",
+            "title": "Addressing Acne Holistically: A Traditional Chinese Medicine (TCM) Perspective",
+            "link": "https://www.feliceacupuncture.com/post/addressing-acne-holistically-a-traditional-chinese-medicine-tcm-perspective"
+          }
+        }
+      },
+      "block_order": [
+        "post_1",
+        "post_2",
+        "post_3"
+      ],
+      "settings": {
+        "heading": "Chinese medicine, explained",
+        "text": "<p>Practical tips from our practitioners for better energy, sleep, digestion, and calm.</p>",
+        "blog": "blogs",
+        "posts_count": 3,
+        "show_date": true,
+        "show_read_time": true,
+        "show_category": true,
+        "link_label": "Read article →",
+        "button_label": "Explore all blogs",
+        "button_link": "shopify://blogs/blogs",
+        "anchor_id": "",
+        "padding_bottom": 120,
+        "padding_mobile": 60,
+        "background_asset": "fa-blog-posts-bg.jpg",
+        "background_asset_mobile": "fa-blog-posts-bg-mobile.jpg"
+      }
+    },
+    "trust": {
+      "type": "fa-trust-bar",
+      "blocks": {
+        "trust_patients": {
+          "type": "item",
+          "settings": {
+            "icon": "patients",
+            "icon_color": "linen",
+            "title": "1,000+\nPatients",
+            "text": "Treated at our Culver City clinic"
+          }
+        },
+        "trust_board": {
+          "type": "item",
+          "settings": {
+            "icon": "certified",
+            "icon_color": "linen",
+            "title": "Board-Certified\nPractitioners",
+            "text": "Rooted in Traditional Chinese Medicine"
+          }
+        },
+        "trust_google": {
+          "type": "item",
+          "settings": {
+            "icon": "google",
+            "icon_color": "linen",
+            "title": "5.0 on\nGoogle",
+            "text": "Rated by our patients"
+          }
+        },
+        "trust_care": {
+          "type": "item",
+          "settings": {
+            "icon": "care",
+            "icon_color": "grey",
+            "title": "In Clinic, At\nHome, Online",
+            "text": "Care that fits your life"
+          }
+        }
+      },
+      "block_order": [
+        "trust_patients",
+        "trust_board",
+        "trust_google",
+        "trust_care"
+      ],
+      "settings": {
+        "label": "Why patients trust us"
+      }
+    },
+    "book_visit": {
+      "type": "fa-book-visit",
+      "blocks": {
+        "contact_hours": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "Open 7 days a week, 8 AM to 8 PM",
+            "link": "",
+            "no_underline": false
+          }
+        },
+        "contact_phone": {
+          "type": "contact",
+          "settings": {
+            "icon": "phone",
+            "text": "Call or text to book · +1 (424) 478-0019",
+            "link": "tel:+14244780019",
+            "no_underline": false
+          }
+        },
+        "contact_email": {
+          "type": "contact",
+          "settings": {
+            "icon": "mail",
+            "text": "info@feliceacupuncture.com",
+            "link": "mailto:info@feliceacupuncture.com",
+            "no_underline": false
+          }
+        },
+        "contact_address": {
+          "type": "contact",
+          "settings": {
+            "icon": "pin",
+            "text": "8526 Washington Blvd, Culver City, CA 90232",
+            "link": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+            "no_underline": true
+          }
+        }
+      },
+      "block_order": [
+        "contact_hours",
+        "contact_phone",
+        "contact_email",
+        "contact_address"
+      ],
+      "settings": {
+        "maps_url": "https://maps.app.goo.gl/RF9weZgD2BE3JN898",
+        "map_address": "8526 Washington Blvd, Culver City, CA 90232",
+        "map_embed_url": "",
+        "map_title": "Map of Felice Acupuncture, 8526 Washington Blvd, Culver City",
+        "eyebrow": "",
+        "heading": "Book your first visit",
+        "text": "Based in Culver City and proudly serving the greater Los Angeles area.",
+        "button_label": "Open in google maps",
+        "button_label_2": "Book now",
+        "button_link_2": "https://feliceacupuncture.janeapp.com/#/discipline/1/treatment/1",
+        "contact_underline": "links",
+        "map_height_mobile": "page",
+        "show_flower": false,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "profile_felice",
+    "profile_sam",
+    "profile_caroline",
+    "profile_sarah",
+    "practitioners",
+    "first_visit",
+    "testimonials",
+    "appointments",
+    "more_ways",
+    "faq",
+    "gallery",
+    "posts",
+    "trust",
+    "book_visit"
+  ]
+}

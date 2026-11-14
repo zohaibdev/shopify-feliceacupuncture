@@ -1,0 +1,265 @@
+{%- comment -%}
+  Felice link gallery — centred heading + intro over a texture, then a full-bleed row of tall photo cards, each with
+  a garnet label bar (title + circled arrow) overlapping the bottom of the photo. The row is a native scroll-snap
+  carousel (assets/fa-link-gallery.js): it starts centred on the middle card, as drawn, with the outer cards cut by
+  the screen edges; swipe / trackpad / Shift+wheel / mouse drag / arrow keys (focus the row) move it. No arrows are
+  drawn in Figma, so none are rendered. Mobile (<= 899): 304 x 398 cards that snap to the centre.
+  Photo alt: the picked image's alt text, else the label; on a linked card only the image's own alt text (the label
+  already names the link, so it isn't read twice).
+  Figma (file B4Qc…, "Our Approach" v1 2275:19513): desktop 2267:16180 band 4111–4930 (background 2274:18831,
+  content 2274:18833); mobile 2305:4556 band 4013–4710 (background 2305:4796, heading 2305:4798, cards 2305:4802).
+{%- endcomment -%}
+{{ 'fa-link-gallery.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fa-link-gallery.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign heading = section.settings.heading
+  assign start = section.settings.start | default: 'center'
+  assign track_label = heading
+  if track_label == blank
+    assign track_label = 'general.slider.name' | t
+  endif
+-%}
+<section
+  class="fa-section fa-section--pad fa-link-gallery"
+  id="fa-link-gallery-{{ section.id }}"
+  {% if heading != blank %}aria-labelledby="fa-link-gallery-title-{{ section.id }}"{% endif %}
+  style="--fa-lg-text-w: {{ section.settings.text_width | default: 775 }}px; --fa-lg-title-w-m: {{ section.settings.heading_width_mobile | default: 259 }}px; --fa-lg-pad-m: {{ section.settings.padding_mobile | default: 60 }}px;"
+>
+  <div class="fa-bg" aria-hidden="true">
+    {%- comment -%}
+      Bundled texture = Figma's tan botanical paper (2274:18831 / mobile crop 2305:4796). A picked desktop image is
+      used on mobile too unless a mobile image is picked.
+    {%- endcomment -%}
+    <picture>
+      {%- if section.settings.background_mobile != blank -%}
+        <source media="(max-width: 899px)" srcset="{{ section.settings.background_mobile | image_url: width: 750 }} 750w, {{ section.settings.background_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+      {%- elsif section.settings.background == blank -%}
+        <source media="(max-width: 899px)" srcset="{{ 'fa-link-gallery-bg-mobile.jpg' | asset_url }}" width="750" height="1394">
+      {%- endif -%}
+      {%- if section.settings.background != blank -%}
+        {{ section.settings.background | image_url: width: 1920 | image_tag: widths: '750, 1100, 1440, 1920, 2880', sizes: '100vw', loading: 'lazy', alt: '' }}
+      {%- else -%}
+        <img src="{{ 'fa-link-gallery-bg.jpg' | asset_url }}" srcset="{{ 'fa-link-gallery-bg.jpg' | asset_url }} 1440w, {{ 'fa-link-gallery-bg-2x.jpg' | asset_url }} 2880w" sizes="100vw" width="1440" height="819" loading="lazy" alt="">
+      {%- endif -%}
+    </picture>
+  </div>
+
+  {%- if heading != blank or section.settings.text != blank -%}
+    <div class="fa-container">
+      <div class="fa-heading fa-link-gallery__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if heading != blank -%}
+          <h2 class="fa-heading__title fa-link-gallery__title" id="fa-link-gallery-title-{{ section.id }}">{{ heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text fa-link-gallery__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <fa-link-gallery class="fa-link-gallery__carousel" data-start="{{ start }}" data-fa-reveal="up">
+      <div class="fa-link-gallery__track" data-track tabindex="0" role="region" aria-label="{{ track_label | escape }}">
+        <ul class="fa-link-gallery__list" role="list">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign title = block.settings.title | escape
+              assign link = block.settings.link
+              assign card_tag = 'div'
+              assign default_alt = title
+              if link != blank
+                assign card_tag = 'a'
+                if title != blank
+                  assign default_alt = ''
+                endif
+              endif
+            -%}
+            <li class="fa-link-gallery__item" {{ block.shopify_attributes }}>
+              <{{ card_tag }}
+                class="fa-link-gallery__card"
+                {% if link != blank %}href="{{ link }}"{% render 'fa-link-target', url: link %} draggable="false"{% endif %}
+              >
+                <div class="fa-link-gallery__media fa-media">
+                  {%- if block.settings.image != blank -%}
+                    {%- liquid
+                      assign image_alt = block.settings.image.alt | escape | default: default_alt
+                      assign focal = block.settings.image.presentation.focal_point | default: 'center'
+                      assign focal_style = '--fa-lg-focal: ' | append: focal
+                    -%}
+                    {{ block.settings.image | image_url: width: 978 | image_tag: widths: '304, 326, 608, 652, 978', sizes: '(max-width: 899px) 304px, 326px', loading: 'lazy', alt: image_alt, style: focal_style, draggable: 'false' }}
+                  {%- elsif block.settings.fallback_asset != blank -%}
+                    <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ default_alt }}" width="652" height="856" loading="lazy" draggable="false">
+                  {%- endif -%}
+                </div>
+                {%- if title != blank -%}
+                  <span class="fa-link-gallery__bar">
+                    <span class="fa-link-gallery__label">{{ title }}</span>
+                    <span class="fa-link-gallery__arrow" aria-hidden="true">{% render 'fa-icon', icon: 'chevron' %}</span>
+                  </span>
+                {%- endif -%}
+              </{{ card_tag }}>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </fa-link-gallery>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Felice link gallery",
+  "tag": "div",
+  "class": "fa-link-gallery-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What the evidence says"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text",
+      "default": "<p>“Acupuncture can treat both acute and chronic issues, pain relief, reproductive health, mental health, neurological health, digestive health, respiratory health, cardiovascular health, and much more.”</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Intro width (desktop)",
+      "min": 500,
+      "max": 1000,
+      "step": 5,
+      "unit": "px",
+      "default": 775,
+      "info": "Maximum line length of the intro on screens 900px and wider."
+    },
+    {
+      "type": "range",
+      "id": "heading_width_mobile",
+      "label": "Heading width (mobile)",
+      "min": 250,
+      "max": 350,
+      "step": 1,
+      "unit": "px",
+      "default": 259,
+      "info": "Up to 899px. Sets where the heading wraps (the design breaks it after \"the\")."
+    },
+    {
+      "type": "select",
+      "id": "start",
+      "label": "Card row starts at",
+      "options": [
+        { "value": "center", "label": "Middle card (centred)" },
+        { "value": "start", "label": "First card" }
+      ],
+      "default": "center",
+      "info": "When the cards don't all fit on screen. Visitors can swipe, drag or use the arrow keys to see the rest."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background texture",
+      "info": "Optional. Uses the bundled tan botanical texture when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_mobile",
+      "label": "Background texture (mobile)",
+      "info": "Optional, screens up to 899px. Without it, mobile uses the desktop image you picked, or the bundled mobile texture."
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 60,
+      "info": "Up to 899px. Desktop uses the standard section spacing (120px)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Shown at 326 x 428 (mobile 304 x 398), portrait 3:4. Set a focal point to control the crop."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no photo is selected."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label",
+          "default": "Mental health",
+          "info": "Shown in the garnet bar at the bottom of the card. Leave empty to hide the bar."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional. The whole card links here; without a link the card is not clickable."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice link gallery",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-link-gallery-reproductive-health.jpg",
+            "title": "Reproductive health"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-link-gallery-pain.jpg",
+            "title": "Pain"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-link-gallery-mental-health.jpg",
+            "title": "Mental health"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-link-gallery-digestive-health.jpg",
+            "title": "Digestive health"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "fa-link-gallery-respiratory-health.jpg",
+            "title": "Respiratory health"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

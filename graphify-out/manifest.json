@@ -1,0 +1,2930 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1790695226.1499171,
+    "seen": 1791976097.5628316,
+    "ast_hash": "a3f8789c9c2010300b18ea9e6e2189db",
+    "semantic_hash": "a3f8789c9c2010300b18ea9e6e2189db"
+  },
+  ".claude/settings.json": {
+    "mtime": 1791972596.1719575,
+    "seen": 1791976097.5628386,
+    "ast_hash": "211831b5cbd1702a3804162aad38d0fc",
+    "semantic_hash": "211831b5cbd1702a3804162aad38d0fc"
+  },
+  ".claude/skills/figma-sync/scripts/band-dump.js": {
+    "mtime": 1791911970.8326333,
+    "seen": 1791976097.5628424,
+    "ast_hash": "a10222b1185162a86cc25af12ceaf2e9",
+    "semantic_hash": "a10222b1185162a86cc25af12ceaf2e9"
+  },
+  ".claude/skills/figma-sync/scripts/qa-text.mjs": {
+    "mtime": 1791916818.874291,
+    "seen": 1791976097.5628445,
+    "ast_hash": "435c02aeead196e8dac96c86243a2068",
+    "semantic_hash": "435c02aeead196e8dac96c86243a2068"
+  },
+  ".claude/skills/figma-sync/scripts/rowdiff.py": {
+    "mtime": 1791911970.8775249,
+    "seen": 1791976097.5628471,
+    "ast_hash": "9490dbca71dc9f0ff2ffd909af9f02c6",
+    "semantic_hash": "9490dbca71dc9f0ff2ffd909af9f02c6"
+  },
+  ".claude/skills/figma-sync/scripts/sbs.py": {
+    "mtime": 1791911970.8326333,
+    "seen": 1791976097.5628495,
+    "ast_hash": "86b640e1ef2c4ca191ec6d7e5d36c30d",
+    "semantic_hash": "86b640e1ef2c4ca191ec6d7e5d36c30d"
+  },
+  ".claude/skills/figma-sync/scripts/secdiff.py": {
+    "mtime": 1791911976.6218984,
+    "seen": 1791976097.5628517,
+    "ast_hash": "b510d1bb13271e9f8d39e6bf7cad0cf6",
+    "semantic_hash": "b510d1bb13271e9f8d39e6bf7cad0cf6"
+  },
+  ".claude/skills/figma-sync/scripts/text-dump.js": {
+    "mtime": 1791916575.3776426,
+    "seen": 1791976097.5628533,
+    "ast_hash": "023954af5ce67514264f4b7d8124cf0f",
+    "semantic_hash": "023954af5ce67514264f4b7d8124cf0f"
+  },
+  "assets/animations.js": {
+    "mtime": 1790690206.3415732,
+    "seen": 1791976097.5628555,
+    "ast_hash": "f4257a19eb1d120e5b0d710e85d8a5b2",
+    "semantic_hash": "f4257a19eb1d120e5b0d710e85d8a5b2"
+  },
+  "assets/cart-disclosure-modal.js": {
+    "mtime": 1790690206.3466797,
+    "seen": 1791976097.5628574,
+    "ast_hash": "13b3c1b73c3d4bbf47718180a3cd37d6",
+    "semantic_hash": "13b3c1b73c3d4bbf47718180a3cd37d6"
+  },
+  "assets/cart-disclosure-tooltip.js": {
+    "mtime": 1790690206.3466797,
+    "seen": 1791976097.5628595,
+    "ast_hash": "22a72ed05fc5bb5e95506aef80e79450",
+    "semantic_hash": "22a72ed05fc5bb5e95506aef80e79450"
+  },
+  "assets/cart-drawer.js": {
+    "mtime": 1790690206.3466797,
+    "seen": 1791976097.5628612,
+    "ast_hash": "856219113a210bd885867a1f04e2998f",
+    "semantic_hash": "856219113a210bd885867a1f04e2998f"
+  },
+  "assets/cart-notification.js": {
+    "mtime": 1790690206.3466797,
+    "seen": 1791976097.562863,
+    "ast_hash": "493129c503e15137f46a10de6a6ae9ea",
+    "semantic_hash": "493129c503e15137f46a10de6a6ae9ea"
+  },
+  "assets/cart.js": {
+    "mtime": 1790690206.3477414,
+    "seen": 1791976097.5628653,
+    "ast_hash": "067ed2e1f88b21068e8a9c67f76c1a7d",
+    "semantic_hash": "067ed2e1f88b21068e8a9c67f76c1a7d"
+  },
+  "assets/constants.js": {
+    "mtime": 1790690206.3666863,
+    "seen": 1791976097.5628672,
+    "ast_hash": "1f9fbfb00e90d309115198100029eb74",
+    "semantic_hash": "1f9fbfb00e90d309115198100029eb74"
+  },
+  "assets/customer.js": {
+    "mtime": 1790690206.3666863,
+    "seen": 1791976097.5628693,
+    "ast_hash": "98fbac22e38fecdc715443845e497815",
+    "semantic_hash": "98fbac22e38fecdc715443845e497815"
+  },
+  "assets/details-disclosure.js": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791976097.5628707,
+    "ast_hash": "8fec4ad4fe5c5b767d4627a91fe42ccd",
+    "semantic_hash": "8fec4ad4fe5c5b767d4627a91fe42ccd"
+  },
+  "assets/details-modal.js": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791976097.5628726,
+    "ast_hash": "098465ba842e1b1d4458d294031fde4b",
+    "semantic_hash": "098465ba842e1b1d4458d294031fde4b"
+  },
+  "assets/disclosures.js": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791976097.5628743,
+    "ast_hash": "c81abbee4f96e7a4a39175f7ac02c82c",
+    "semantic_hash": "c81abbee4f96e7a4a39175f7ac02c82c"
+  },
+  "assets/fa-faq.js": {
+    "mtime": 1790770240.0001857,
+    "seen": 1791976097.5628765,
+    "ast_hash": "ab9d118a2b4f2c6b550a60e371b9eddf",
+    "semantic_hash": "ab9d118a2b4f2c6b550a60e371b9eddf"
+  },
+  "assets/fa-link-gallery.js": {
+    "mtime": 1790946050.0232642,
+    "seen": 1791976097.562878,
+    "ast_hash": "423e3d1d7da7d080bcc14645ff8a8e28",
+    "semantic_hash": "423e3d1d7da7d080bcc14645ff8a8e28"
+  },
+  "assets/fa-motion.js": {
+    "mtime": 1791826205.9371483,
+    "seen": 1791976097.5628798,
+    "ast_hash": "6df851710de78fc99cc30b801fc435f4",
+    "semantic_hash": "6df851710de78fc99cc30b801fc435f4"
+  },
+  "assets/fa-photo-gallery.js": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.153867,
+    "ast_hash": "5f0976624ff10c245311a43d9a2cd3ba",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials.js": {
+    "mtime": 1791928782.593014,
+    "seen": 1791976097.5628834,
+    "ast_hash": "f41047494792bdd14e69b84ddef5f251",
+    "semantic_hash": "f41047494792bdd14e69b84ddef5f251"
+  },
+  "assets/facets.js": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791976097.562885,
+    "ast_hash": "15e5f6ad722891e3ad9dccca7cac4faa",
+    "semantic_hash": "15e5f6ad722891e3ad9dccca7cac4faa"
+  },
+  "assets/global.js": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791976097.562887,
+    "ast_hash": "1fe77227fac8ab63a36b090722441aa0",
+    "semantic_hash": "1fe77227fac8ab63a36b090722441aa0"
+  },
+  "assets/localization-form.js": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791976097.5628886,
+    "ast_hash": "61b20eddcabc904f2bf54a4b327ad4a6",
+    "semantic_hash": "61b20eddcabc904f2bf54a4b327ad4a6"
+  },
+  "assets/magnify.js": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791976097.5628905,
+    "ast_hash": "63a0b729648db05c21789f0753a8f51d",
+    "semantic_hash": "63a0b729648db05c21789f0753a8f51d"
+  },
+  "assets/main-search.js": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791976097.5628922,
+    "ast_hash": "cc3339a1f8960777d246f899cd5bb2eb",
+    "semantic_hash": "cc3339a1f8960777d246f899cd5bb2eb"
+  },
+  "assets/media-gallery.js": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791976097.562894,
+    "ast_hash": "e5709a400b4be7fd0527079fc698e52e",
+    "semantic_hash": "e5709a400b4be7fd0527079fc698e52e"
+  },
+  "assets/password-modal.js": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791976097.5628958,
+    "ast_hash": "aa4c4c0a0ba04707104b6998dbd9d4d0",
+    "semantic_hash": "aa4c4c0a0ba04707104b6998dbd9d4d0"
+  },
+  "assets/pickup-availability.js": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791976097.5628977,
+    "ast_hash": "2e0182c4cf49ce7272a9e0af83ec6981",
+    "semantic_hash": "2e0182c4cf49ce7272a9e0af83ec6981"
+  },
+  "assets/predictive-search.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5628998,
+    "ast_hash": "59d4c73a7c1fdd28600c6f5b00f86592",
+    "semantic_hash": "59d4c73a7c1fdd28600c6f5b00f86592"
+  },
+  "assets/price-per-item.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629015,
+    "ast_hash": "9354efcd9fd11f4467b05f4568002d07",
+    "semantic_hash": "9354efcd9fd11f4467b05f4568002d07"
+  },
+  "assets/product-form.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629034,
+    "ast_hash": "6902a1ab19575a55ed967f8ccc24c23d",
+    "semantic_hash": "6902a1ab19575a55ed967f8ccc24c23d"
+  },
+  "assets/product-info.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.562905,
+    "ast_hash": "bbfa4e3c5d1f73496c2048bd0878ed51",
+    "semantic_hash": "bbfa4e3c5d1f73496c2048bd0878ed51"
+  },
+  "assets/product-modal.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.562907,
+    "ast_hash": "afade2c873219795095fb5a6c713e81e",
+    "semantic_hash": "afade2c873219795095fb5a6c713e81e"
+  },
+  "assets/product-model.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629086,
+    "ast_hash": "5a65086050b89c99d1f6169400430870",
+    "semantic_hash": "5a65086050b89c99d1f6169400430870"
+  },
+  "assets/pubsub.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629108,
+    "ast_hash": "8248464217500d0e0d68f4571f0d4dc3",
+    "semantic_hash": "8248464217500d0e0d68f4571f0d4dc3"
+  },
+  "assets/quantity-popover.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629122,
+    "ast_hash": "bf458d23a960ae21c7a1e56439d19a05",
+    "semantic_hash": "bf458d23a960ae21c7a1e56439d19a05"
+  },
+  "assets/quick-add-bulk.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629141,
+    "ast_hash": "9e00eae587454550259c62dc3ec30629",
+    "semantic_hash": "9e00eae587454550259c62dc3ec30629"
+  },
+  "assets/quick-add.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629158,
+    "ast_hash": "c56febddffd5da8c7e07c90a36b05d8a",
+    "semantic_hash": "c56febddffd5da8c7e07c90a36b05d8a"
+  },
+  "assets/quick-order-list.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629177,
+    "ast_hash": "3c0d2bf40bfa9c874c8b5649c555d8a7",
+    "semantic_hash": "3c0d2bf40bfa9c874c8b5649c555d8a7"
+  },
+  "assets/recipient-form.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629194,
+    "ast_hash": "f07e60312bcddee4557452e314b411d9",
+    "semantic_hash": "f07e60312bcddee4557452e314b411d9"
+  },
+  "assets/search-form.js": {
+    "mtime": 1790690209.4914246,
+    "seen": 1791976097.5629213,
+    "ast_hash": "6cee10ce22bf873d19c678ce122a11e8",
+    "semantic_hash": "6cee10ce22bf873d19c678ce122a11e8"
+  },
+  "assets/share.js": {
+    "mtime": 1790690209.4924314,
+    "seen": 1791976097.5629232,
+    "ast_hash": "1c9859b510ac48f1c64e39dd54942eec",
+    "semantic_hash": "1c9859b510ac48f1c64e39dd54942eec"
+  },
+  "assets/show-more.js": {
+    "mtime": 1790690209.4924314,
+    "seen": 1791976097.562925,
+    "ast_hash": "fa013d1fb1c796f27c6d200a192d0a96",
+    "semantic_hash": "fa013d1fb1c796f27c6d200a192d0a96"
+  },
+  "assets/standard-actions-override.js": {
+    "mtime": 1790690209.4924314,
+    "seen": 1791976097.5629268,
+    "ast_hash": "dc75b736c614c696aacc60938eb8c848",
+    "semantic_hash": "dc75b736c614c696aacc60938eb8c848"
+  },
+  "assets/theme-editor.js": {
+    "mtime": 1790690209.4924314,
+    "seen": 1791976097.5629287,
+    "ast_hash": "83d2d36c4591be909f0d466b1cfd22ee",
+    "semantic_hash": "83d2d36c4591be909f0d466b1cfd22ee"
+  },
+  "config/settings_data.json": {
+    "mtime": 1792683385.9337645,
+    "seen": 1792684909.9544008,
+    "ast_hash": "29c0da19bea4e7b27079b5c8b8a7a122",
+    "semantic_hash": ""
+  },
+  "config/settings_schema.json": {
+    "mtime": 1792669798.943199,
+    "seen": 1792669818.915499,
+    "ast_hash": "da11b9a10956c9296e8512295071390c",
+    "semantic_hash": ""
+  },
+  "locales/bg.json": {
+    "mtime": 1790690209.5165117,
+    "seen": 1791976097.562934,
+    "ast_hash": "0ec4e7831288d4752be85c86a7e19f0f",
+    "semantic_hash": "0ec4e7831288d4752be85c86a7e19f0f"
+  },
+  "locales/cs.json": {
+    "mtime": 1790690209.4955347,
+    "seen": 1791976097.5629358,
+    "ast_hash": "ff446941c5aa5fbf2c587b67dcedab69",
+    "semantic_hash": "ff446941c5aa5fbf2c587b67dcedab69"
+  },
+  "locales/cs.schema.json": {
+    "mtime": 1790690209.5165117,
+    "seen": 1791976097.5629375,
+    "ast_hash": "594cf108d6791981f2e95ddeb7e621ae",
+    "semantic_hash": "594cf108d6791981f2e95ddeb7e621ae"
+  },
+  "locales/da.json": {
+    "mtime": 1790690209.5165117,
+    "seen": 1791976097.5629396,
+    "ast_hash": "b67127837171ea3b293b19d386042bc3",
+    "semantic_hash": "b67127837171ea3b293b19d386042bc3"
+  },
+  "locales/da.schema.json": {
+    "mtime": 1790690209.517722,
+    "seen": 1791976097.5629416,
+    "ast_hash": "ba7af1d5c58c7c59713625d67762608b",
+    "semantic_hash": "ba7af1d5c58c7c59713625d67762608b"
+  },
+  "locales/de.json": {
+    "mtime": 1790690209.517722,
+    "seen": 1791976097.5629432,
+    "ast_hash": "562e5b0cc7f1d685b87a3fb88b7692ea",
+    "semantic_hash": "562e5b0cc7f1d685b87a3fb88b7692ea"
+  },
+  "locales/de.schema.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629451,
+    "ast_hash": "682a9ce2a8a1e6cba143036e11cb0736",
+    "semantic_hash": "682a9ce2a8a1e6cba143036e11cb0736"
+  },
+  "locales/el.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629468,
+    "ast_hash": "f8e0011550cce951d7dd5ad86356f72d",
+    "semantic_hash": "f8e0011550cce951d7dd5ad86356f72d"
+  },
+  "locales/en.default.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629487,
+    "ast_hash": "9465447706acdc8965522114a55e227a",
+    "semantic_hash": "9465447706acdc8965522114a55e227a"
+  },
+  "locales/en.default.schema.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629504,
+    "ast_hash": "4daacabc235ac3d13f64930ecb660acd",
+    "semantic_hash": "4daacabc235ac3d13f64930ecb660acd"
+  },
+  "locales/es.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629523,
+    "ast_hash": "1c26b44b8e5d1d8344b8b201c3742c4f",
+    "semantic_hash": "1c26b44b8e5d1d8344b8b201c3742c4f"
+  },
+  "locales/es.schema.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.562954,
+    "ast_hash": "9c2bfb12b36f5a97bb0b5c3ddf595e94",
+    "semantic_hash": "9c2bfb12b36f5a97bb0b5c3ddf595e94"
+  },
+  "locales/fi.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629556,
+    "ast_hash": "342aed99122a4559310e2678268760ff",
+    "semantic_hash": "342aed99122a4559310e2678268760ff"
+  },
+  "locales/fi.schema.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629573,
+    "ast_hash": "fdebe810222d520038ab302877d90683",
+    "semantic_hash": "fdebe810222d520038ab302877d90683"
+  },
+  "locales/fr.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629592,
+    "ast_hash": "df8b054d7402c3df4cb4ea7a8a1d86b2",
+    "semantic_hash": "df8b054d7402c3df4cb4ea7a8a1d86b2"
+  },
+  "locales/fr.schema.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629609,
+    "ast_hash": "9c1265732970a56d07c176f6582f4932",
+    "semantic_hash": "9c1265732970a56d07c176f6582f4932"
+  },
+  "locales/hr.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629625,
+    "ast_hash": "fc4eeed970252db8b312d67181b9b648",
+    "semantic_hash": "fc4eeed970252db8b312d67181b9b648"
+  },
+  "locales/hu.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.5629644,
+    "ast_hash": "61864226b62adbc84d04eb024599ddfc",
+    "semantic_hash": "61864226b62adbc84d04eb024599ddfc"
+  },
+  "locales/id.json": {
+    "mtime": 1790690211.069567,
+    "seen": 1791976097.562966,
+    "ast_hash": "e470aeb2f12aaca7d5cc089481025404",
+    "semantic_hash": "e470aeb2f12aaca7d5cc089481025404"
+  },
+  "locales/it.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629678,
+    "ast_hash": "516107f917e1897d3c087e15b9068584",
+    "semantic_hash": "516107f917e1897d3c087e15b9068584"
+  },
+  "locales/it.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629694,
+    "ast_hash": "25d63a38298b2cecac1515da3e0cbd97",
+    "semantic_hash": "25d63a38298b2cecac1515da3e0cbd97"
+  },
+  "locales/ja.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629709,
+    "ast_hash": "9600f8cc14391439090047c3623e41d7",
+    "semantic_hash": "9600f8cc14391439090047c3623e41d7"
+  },
+  "locales/ja.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629728,
+    "ast_hash": "d86340685cbe80f2b95ffe92e25a853c",
+    "semantic_hash": "d86340685cbe80f2b95ffe92e25a853c"
+  },
+  "locales/ko.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629745,
+    "ast_hash": "300b0030164fc380d0ae29610677ec4a",
+    "semantic_hash": "300b0030164fc380d0ae29610677ec4a"
+  },
+  "locales/ko.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629764,
+    "ast_hash": "1f798882456db7995f8772ccaafae7da",
+    "semantic_hash": "1f798882456db7995f8772ccaafae7da"
+  },
+  "locales/lt.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.562978,
+    "ast_hash": "b2d8858e9eaa31af0818d11b4bc01fda",
+    "semantic_hash": "b2d8858e9eaa31af0818d11b4bc01fda"
+  },
+  "locales/nb.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629797,
+    "ast_hash": "9aceced1329dbc6072813f4c6c212c07",
+    "semantic_hash": "9aceced1329dbc6072813f4c6c212c07"
+  },
+  "locales/nb.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629811,
+    "ast_hash": "17a02844115f40518517bf81f8efc5a6",
+    "semantic_hash": "17a02844115f40518517bf81f8efc5a6"
+  },
+  "locales/nl.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629828,
+    "ast_hash": "bf72883f5112d98b281ec58bc0d47815",
+    "semantic_hash": "bf72883f5112d98b281ec58bc0d47815"
+  },
+  "locales/nl.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629847,
+    "ast_hash": "4e2c67ec1e12ecbb326048706033f0fc",
+    "semantic_hash": "4e2c67ec1e12ecbb326048706033f0fc"
+  },
+  "locales/pl.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629861,
+    "ast_hash": "7ff1accb53315a1ba30e38674ed9a805",
+    "semantic_hash": "7ff1accb53315a1ba30e38674ed9a805"
+  },
+  "locales/pl.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.562988,
+    "ast_hash": "34402ec388946b69db2ff0fa4ddb2511",
+    "semantic_hash": "34402ec388946b69db2ff0fa4ddb2511"
+  },
+  "locales/pt-BR.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629897,
+    "ast_hash": "d9eff0d9747ac2b22b3c716000fa67a6",
+    "semantic_hash": "d9eff0d9747ac2b22b3c716000fa67a6"
+  },
+  "locales/pt-BR.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629914,
+    "ast_hash": "5b0b21cc9bf73bc9b63d968f9366e82d",
+    "semantic_hash": "5b0b21cc9bf73bc9b63d968f9366e82d"
+  },
+  "locales/pt-PT.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629928,
+    "ast_hash": "137b4ee6cf54b5576ae60649a0b4488e",
+    "semantic_hash": "137b4ee6cf54b5576ae60649a0b4488e"
+  },
+  "locales/pt-PT.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629947,
+    "ast_hash": "d260b62f1db96baa71fd8406a521b38a",
+    "semantic_hash": "d260b62f1db96baa71fd8406a521b38a"
+  },
+  "locales/ro.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629961,
+    "ast_hash": "3b08d773926d0e6086d7ed4372c9d378",
+    "semantic_hash": "3b08d773926d0e6086d7ed4372c9d378"
+  },
+  "locales/ru.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.562998,
+    "ast_hash": "8748fe19fea39b19959b5610945389c1",
+    "semantic_hash": "8748fe19fea39b19959b5610945389c1"
+  },
+  "locales/sk.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5629995,
+    "ast_hash": "0d2e588794e9beb0d062ba8717d5c8c7",
+    "semantic_hash": "0d2e588794e9beb0d062ba8717d5c8c7"
+  },
+  "locales/sl.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630014,
+    "ast_hash": "421e331fcd766437898e312c85425770",
+    "semantic_hash": "421e331fcd766437898e312c85425770"
+  },
+  "locales/sv.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630028,
+    "ast_hash": "ab45c6c2bc9f92b0c3ae20b0b2c9ac5b",
+    "semantic_hash": "ab45c6c2bc9f92b0c3ae20b0b2c9ac5b"
+  },
+  "locales/sv.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630047,
+    "ast_hash": "7c73581e44e258c3775f74462cb71632",
+    "semantic_hash": "7c73581e44e258c3775f74462cb71632"
+  },
+  "locales/th.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630062,
+    "ast_hash": "9e12bf9c5f4feaf52c193e795ec35e6c",
+    "semantic_hash": "9e12bf9c5f4feaf52c193e795ec35e6c"
+  },
+  "locales/th.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.563008,
+    "ast_hash": "e5c24a67ae00fec3108a754086687dac",
+    "semantic_hash": "e5c24a67ae00fec3108a754086687dac"
+  },
+  "locales/tr.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630097,
+    "ast_hash": "acb9d9ba80852cff4d5b1aa68bacdd66",
+    "semantic_hash": "acb9d9ba80852cff4d5b1aa68bacdd66"
+  },
+  "locales/tr.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630114,
+    "ast_hash": "a4570d6a8fa656938013ada256b6e588",
+    "semantic_hash": "a4570d6a8fa656938013ada256b6e588"
+  },
+  "locales/vi.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.563013,
+    "ast_hash": "5daf8aa8a47349e063adf912c4413316",
+    "semantic_hash": "5daf8aa8a47349e063adf912c4413316"
+  },
+  "locales/zh-CN.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630147,
+    "ast_hash": "567c0627b67e08bd1fb7afb173e3ddfa",
+    "semantic_hash": "567c0627b67e08bd1fb7afb173e3ddfa"
+  },
+  "locales/zh-CN.schema.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.5630164,
+    "ast_hash": "15c561b8b620f6c635cba2a312f45c2b",
+    "semantic_hash": "15c561b8b620f6c635cba2a312f45c2b"
+  },
+  "locales/zh-TW.json": {
+    "mtime": 1790690211.0705643,
+    "seen": 1791976097.563018,
+    "ast_hash": "94fe417714494adef3b8a2a3cb03970b",
+    "semantic_hash": "94fe417714494adef3b8a2a3cb03970b"
+  },
+  "locales/zh-TW.schema.json": {
+    "mtime": 1790690211.0718093,
+    "seen": 1791976097.5630198,
+    "ast_hash": "59a83fe7c0a0c463aa0e482fa3eec9c5",
+    "semantic_hash": "59a83fe7c0a0c463aa0e482fa3eec9c5"
+  },
+  "sections/footer-group.json": {
+    "mtime": 1792595451.4442403,
+    "seen": 1792595599.749145,
+    "ast_hash": "67f19b03420bfa3a2bf6aba50470f857",
+    "semantic_hash": ""
+  },
+  "sections/header-group.json": {
+    "mtime": 1792595451.4442403,
+    "seen": 1792595599.7491474,
+    "ast_hash": "0f3c51047ea5b5e95ba88310921144f2",
+    "semantic_hash": ""
+  },
+  "templates/404.json": {
+    "mtime": 1790690212.6374524,
+    "seen": 1791976097.563025,
+    "ast_hash": "89d83883280d39ce31ae3b251e85fde2",
+    "semantic_hash": "89d83883280d39ce31ae3b251e85fde2"
+  },
+  "templates/article.json": {
+    "mtime": 1792683385.9337645,
+    "seen": 1792684909.9545121,
+    "ast_hash": "917f0407d3bd66ba7253d32f9595dbae",
+    "semantic_hash": ""
+  },
+  "templates/blog.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.5630286,
+    "ast_hash": "f7ac686e4047fac3e182ab5e319ada81",
+    "semantic_hash": "f7ac686e4047fac3e182ab5e319ada81"
+  },
+  "templates/cart.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.56303,
+    "ast_hash": "eb93c1fe17876bdbd62bff928e204d76",
+    "semantic_hash": "eb93c1fe17876bdbd62bff928e204d76"
+  },
+  "templates/collection.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.563032,
+    "ast_hash": "5ba41c004ab0939d2f312ece45904d0c",
+    "semantic_hash": "5ba41c004ab0939d2f312ece45904d0c"
+  },
+  "templates/index.json": {
+    "mtime": 1792683745.0457225,
+    "seen": 1792684909.9545197,
+    "ast_hash": "e2bf7efca21d5db1e14544344fc5db4e",
+    "semantic_hash": ""
+  },
+  "templates/list-collections.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.5630352,
+    "ast_hash": "582d0710bd2d1a1410b323b6df69fc9b",
+    "semantic_hash": "582d0710bd2d1a1410b323b6df69fc9b"
+  },
+  "templates/page.approach.json": {
+    "mtime": 1792666131.159567,
+    "seen": 1792666684.1963232,
+    "ast_hash": "3e9feec5d9578169d39f52de2cc15f5a",
+    "semantic_hash": ""
+  },
+  "templates/page.contact.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.5630388,
+    "ast_hash": "249e94619527045773a583d2712c9821",
+    "semantic_hash": "249e94619527045773a583d2712c9821"
+  },
+  "templates/page.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.5630405,
+    "ast_hash": "11ce841573db94115f9668521de64793",
+    "semantic_hash": "11ce841573db94115f9668521de64793"
+  },
+  "templates/page.team.json": {
+    "mtime": 1792667008.602856,
+    "seen": 1792668431.6542926,
+    "ast_hash": "95a68451b5f78155e691f51cba33ca99",
+    "semantic_hash": ""
+  },
+  "templates/product.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.5630457,
+    "ast_hash": "d333f194a6db92ff6c37665e3416f8ff",
+    "semantic_hash": "d333f194a6db92ff6c37665e3416f8ff"
+  },
+  "templates/search.json": {
+    "mtime": 1790690212.639452,
+    "seen": 1791976097.5630474,
+    "ast_hash": "297a05ae042e8de6433ce2f379c69d3c",
+    "semantic_hash": "297a05ae042e8de6433ce2f379c69d3c"
+  },
+  ".claude/skills/figma-sync/SKILL.md": {
+    "mtime": 1792516308.1380196,
+    "seen": 1792524840.6731317,
+    "ast_hash": "6890ea22a4634471b41f38faafe47fec",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1791376061.6768925,
+    "seen": 1791976097.563051,
+    "ast_hash": "2ee4d8bd2f4ed75f49b22d14fb3ea352",
+    "semantic_hash": "2ee4d8bd2f4ed75f49b22d14fb3ea352"
+  },
+  "CLAUDE.md": {
+    "mtime": 1791972596.1719575,
+    "seen": 1791976097.563053,
+    "ast_hash": "67d88e9d0760c3ba54c75dfd9551c1c5",
+    "semantic_hash": "67d88e9d0760c3ba54c75dfd9551c1c5"
+  },
+  "context.md": {
+    "mtime": 1791996746.902983,
+    "seen": 1791997647.9365878,
+    "ast_hash": "f74811ec4c7b1f958fb4693cfea5550e",
+    "semantic_hash": ""
+  },
+  "assets/email-signup-banner-background-mobile.svg": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791975909.7324297,
+    "ast_hash": "a4f9d1956e089e1fb38e72f22450c04b",
+    "semantic_hash": ""
+  },
+  "assets/email-signup-banner-background.svg": {
+    "mtime": 1790690207.2809064,
+    "seen": 1791975909.7324312,
+    "ast_hash": "5daac32aa50aaa79891998204bd3554c",
+    "semantic_hash": ""
+  },
+  "assets/fa-blog-posts-acne.jpg": {
+    "mtime": 1791822912.5534408,
+    "seen": 1791975909.7324326,
+    "ast_hash": "5ee239fd6f7fb116e7eb831bd41d7e38",
+    "semantic_hash": ""
+  },
+  "assets/fa-blog-posts-bg-mobile.jpg": {
+    "mtime": 1791822912.234277,
+    "seen": 1791975909.732434,
+    "ast_hash": "f7c97cfa26d70fc641e7b561c8a1fbc4",
+    "semantic_hash": ""
+  },
+  "assets/fa-blog-posts-bg.jpg": {
+    "mtime": 1791822911.9701378,
+    "seen": 1791975909.7324352,
+    "ast_hash": "6a34a021d852feca454cfc6dfbddce7b",
+    "semantic_hash": ""
+  },
+  "assets/fa-blog-posts-hypno-sound.jpg": {
+    "mtime": 1791822912.29327,
+    "seen": 1791975909.7324367,
+    "ast_hash": "e7f232a175e85530fbcd9bfb3fb9ec1c",
+    "semantic_hash": ""
+  },
+  "assets/fa-blog-posts-la-fires.jpg": {
+    "mtime": 1791822912.3142378,
+    "seen": 1791975909.732438,
+    "ast_hash": "107a2c7ed50664b417208257b606089f",
+    "semantic_hash": ""
+  },
+  "assets/fa-book-visit-bg-mobile.jpg": {
+    "mtime": 1790697536.5951197,
+    "seen": 1791975909.7324393,
+    "ast_hash": "dbf8efdbc57cc316bb6b57c9c1998b0f",
+    "semantic_hash": ""
+  },
+  "assets/fa-book-visit-bg.jpg": {
+    "mtime": 1790697535.7402804,
+    "seen": 1791975909.732441,
+    "ast_hash": "43fe065e6da31bf26bd94485fed40ac3",
+    "semantic_hash": ""
+  },
+  "assets/fa-comparison-bg-mobile.jpg": {
+    "mtime": 1790943746.0932505,
+    "seen": 1791975909.7324421,
+    "ast_hash": "b2bbdf64f5649d23408972c17ffd27cd",
+    "semantic_hash": ""
+  },
+  "assets/fa-comparison-bg.jpg": {
+    "mtime": 1790943746.0382805,
+    "seen": 1791975909.7324436,
+    "ast_hash": "171bdad52290fc37e5ecea1004a723f1",
+    "semantic_hash": ""
+  },
+  "assets/fa-comparison-chinese-medicine.jpg": {
+    "mtime": 1790943746.1143453,
+    "seen": 1791975909.732445,
+    "ast_hash": "8267d0a0c647b1e048c711f802cfd79c",
+    "semantic_hash": ""
+  },
+  "assets/fa-comparison-neuroscience.jpg": {
+    "mtime": 1790943746.130316,
+    "seen": 1791975909.7324464,
+    "ast_hash": "204e5ea5e9da57fa0c70d36bf8e78c20",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-anxiety.jpg": {
+    "mtime": 1790696248.2069507,
+    "seen": 1791975909.7324479,
+    "ast_hash": "b5039b5ad877dbc001e03a8bd94a66a5",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-bg-2x.jpg": {
+    "mtime": 1790704236.7968917,
+    "seen": 1791975909.7324493,
+    "ast_hash": "79c561ec250afdf1f55c42d192155c6c",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-bg.jpg": {
+    "mtime": 1790704236.7622511,
+    "seen": 1791975909.7324505,
+    "ast_hash": "8243142afc9f295c0283482f15963daf",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-botanical.png": {
+    "mtime": 1790696260.0662873,
+    "seen": 1791975909.732452,
+    "ast_hash": "3cc3ac2d49f508a8e058626a789fddb6",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-brush-anxiety.svg": {
+    "mtime": 1791912511.9493473,
+    "seen": 1791975909.7324533,
+    "ast_hash": "d3391809e637f51aadf940cc1f66130d",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-brush-gut.svg": {
+    "mtime": 1791912512.0882897,
+    "seen": 1791975909.7324545,
+    "ast_hash": "554198ac08e472f53f75fc7ee7b46757",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-brush-hormones.svg": {
+    "mtime": 1791912512.0241258,
+    "seen": 1791975909.7324562,
+    "ast_hash": "8f335cb525378ad34ee803714a8da63d",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-brush-pain.svg": {
+    "mtime": 1791912511.8783019,
+    "seen": 1791975909.7324574,
+    "ast_hash": "bfb9f2405687b3df7377fe189e059817",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-brush-skin.svg": {
+    "mtime": 1791912512.174465,
+    "seen": 1791975909.7324588,
+    "ast_hash": "05fbeec7b2217ac2af973ccb621ed2cd",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-brush-sleep.svg": {
+    "mtime": 1791912512.243338,
+    "seen": 1791975909.73246,
+    "ast_hash": "064159c54c7e284fa20039a6fb111c66",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-chars-anxiety.svg": {
+    "mtime": 1790853875.8777437,
+    "seen": 1791975909.7324615,
+    "ast_hash": "5158ba6a954d65cf5c51bd6e00b53332",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-chars-gut.svg": {
+    "mtime": 1790853875.883698,
+    "seen": 1791975909.732463,
+    "ast_hash": "abcfcdd71593b871ddccf4c4185880df",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-chars-hormones.svg": {
+    "mtime": 1790853875.887862,
+    "seen": 1791975909.732464,
+    "ast_hash": "3961467402e4dbdc765bfab6268f68f6",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-chars-pain.svg": {
+    "mtime": 1790853875.8938005,
+    "seen": 1791975909.7324655,
+    "ast_hash": "095bceef28c0785f1fedb8b7124992d0",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-chars-skin.svg": {
+    "mtime": 1790853875.8938005,
+    "seen": 1791975909.7324667,
+    "ast_hash": "aa6f5d9afdbaa470a9afed23bdd81718",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-chars-sleep.svg": {
+    "mtime": 1790853875.9011357,
+    "seen": 1791975909.7324681,
+    "ast_hash": "07ce5ec7bd99be61020a71fd4979144d",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-gut.jpg": {
+    "mtime": 1790696248.7481568,
+    "seen": 1791975909.7324696,
+    "ast_hash": "c3fc32f013dca7860fd11a6e7474a91a",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-hormones.jpg": {
+    "mtime": 1790696248.2461855,
+    "seen": 1791975909.7324708,
+    "ast_hash": "79dc562038a09821170064c43940c911",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-pain.jpg": {
+    "mtime": 1790696248.1919665,
+    "seen": 1791975909.7324724,
+    "ast_hash": "a0315368fb8bc084401e23185b8ca94e",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-skin.jpg": {
+    "mtime": 1790696248.8302305,
+    "seen": 1791975909.7324739,
+    "ast_hash": "e25b94690b31fb5eca578322c074291a",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-sleep.jpg": {
+    "mtime": 1790857185.955938,
+    "seen": 1791975909.732475,
+    "ast_hash": "d6fdcf02db3e2cde531de5c2ebc1f94c",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-team-bg.jpg": {
+    "mtime": 1791915578.2491152,
+    "seen": 1791975909.7324765,
+    "ast_hash": "104c81e171fa6809a635d3d8f97b7d7d",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-type-anxiety.svg": {
+    "mtime": 1791822732.7764628,
+    "seen": 1791975909.732478,
+    "ast_hash": "4679c2b16af64f861d2f80714a01e804",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-type-gut.svg": {
+    "mtime": 1791822798.183892,
+    "seen": 1791975909.7324793,
+    "ast_hash": "541c7652b97ca0dd75d7df5807b43d4f",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-type-hormones.svg": {
+    "mtime": 1791822732.843955,
+    "seen": 1791975909.7324805,
+    "ast_hash": "ccc2e1b42c365eb30742c639fe3ca44f",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-type-pain.svg": {
+    "mtime": 1791822732.7043257,
+    "seen": 1791975909.7324817,
+    "ast_hash": "e4e36fbd71359a455d24dba17b60e186",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-type-skin.svg": {
+    "mtime": 1791822798.2752807,
+    "seen": 1791975909.7324831,
+    "ast_hash": "9bd7e5c20b7cdb026cdc1faffa37a7fd",
+    "semantic_hash": ""
+  },
+  "assets/fa-conditions-type-sleep.svg": {
+    "mtime": 1791822798.3553255,
+    "seen": 1791975909.7324846,
+    "ast_hash": "2365e95b2e1fae80018c61679a8fc1fb",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-acupuncture.jpg": {
+    "mtime": 1791914624.4903076,
+    "seen": 1791975909.7324858,
+    "ast_hash": "58a1a9701eddd702ea24d25767111ed9",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-bg-2x.jpg": {
+    "mtime": 1792666131.145232,
+    "seen": 1792666684.1965754,
+    "ast_hash": "daf630c45c2d0cb7efdeda57d9c57fcb",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-bg-mobile.jpg": {
+    "mtime": 1792666131.145232,
+    "seen": 1792666684.1965783,
+    "ast_hash": "cc2ce9eb50277a6f5395ecd53e4231ae",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-bg.jpg": {
+    "mtime": 1792666131.145232,
+    "seen": 1792666684.1965806,
+    "ast_hash": "7cd1b40229951cdb987c18fdee7c44f0",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-concierge-2x.jpg": {
+    "mtime": 1790783556.3312657,
+    "seen": 1791975909.7324915,
+    "ast_hash": "0f40ea6795b774e55309f50eeb29e52e",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-concierge-mobile.jpg": {
+    "mtime": 1790852699.390235,
+    "seen": 1791975909.7324927,
+    "ast_hash": "16ae355bbff730cbadcadab6952a96ea",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-concierge-wide.jpg": {
+    "mtime": 1790858077.9577534,
+    "seen": 1791975909.732494,
+    "ast_hash": "1c87bdb1f5ed2c9646ca75eaa1c9b190",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-concierge.jpg": {
+    "mtime": 1790783556.3919709,
+    "seen": 1791975909.7324955,
+    "ast_hash": "1a18e9cd710bf8ecfaf9f51a52510cca",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-glyph-acupuncture.svg": {
+    "mtime": 1791914935.3212929,
+    "seen": 1791975909.7324984,
+    "ast_hash": "b788277c1f364616e7782ea345d2518b",
+    "semantic_hash": ""
+  },
+  "assets/fa-eyebrow-seal.png": {
+    "mtime": 1790782060.1333249,
+    "seen": 1791975909.7324996,
+    "ast_hash": "b87a2a1e30280c7d4be78e665259f99d",
+    "semantic_hash": ""
+  },
+  "assets/fa-faq-bg-home.jpg": {
+    "mtime": 1791822981.4303658,
+    "seen": 1791975909.732501,
+    "ast_hash": "fc8f23e308482e324f084aabc00a36ac",
+    "semantic_hash": ""
+  },
+  "assets/fa-faq-bg-mobile.jpg": {
+    "mtime": 1790696873.4185302,
+    "seen": 1791975909.7325025,
+    "ast_hash": "81e63b33fda1bf63bffa5eb42a7c59e6",
+    "semantic_hash": ""
+  },
+  "assets/fa-faq-bg.jpg": {
+    "mtime": 1790696873.0736618,
+    "seen": 1791975909.732504,
+    "ast_hash": "acff1a7b4848f3e2deecc847242fa6c2",
+    "semantic_hash": ""
+  },
+  "assets/fa-faq-flower-bottom.png": {
+    "mtime": 1791822981.3985786,
+    "seen": 1791975909.732505,
+    "ast_hash": "8cefe6b434991cec549ee6e012f3ca0e",
+    "semantic_hash": ""
+  },
+  "assets/fa-faq-flower.png": {
+    "mtime": 1790696910.4920783,
+    "seen": 1791975909.7325063,
+    "ast_hash": "677ffd072fc53f13f49d75dfd570d7d4",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-acupuncture.jpg": {
+    "mtime": 1790943759.180518,
+    "seen": 1791975909.7325077,
+    "ast_hash": "2561af2c05baac2e62f1da779e3b96e8",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-bg-mobile.jpg": {
+    "mtime": 1790943759.052002,
+    "seen": 1791975909.732509,
+    "ast_hash": "f4c2949961885491c6cc1d1a8805effe",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-bg.jpg": {
+    "mtime": 1790943759.0205314,
+    "seen": 1791975909.7325106,
+    "ast_hash": "6e5ac4e3d9e97a2a649e200bd743a54c",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-card-bg.jpg": {
+    "mtime": 1790943759.180518,
+    "seen": 1791975909.7325118,
+    "ast_hash": "9666aea6f77c23b1b7f5cd70f1839d48",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-food-as-medicine.jpg": {
+    "mtime": 1790946079.341676,
+    "seen": 1791975909.732513,
+    "ast_hash": "ad62423b1c3d2ff674041fe8b425f7bb",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-herbal-medicine.jpg": {
+    "mtime": 1790943759.2071266,
+    "seen": 1791975909.7325144,
+    "ast_hash": "e2c0978d8a7ac68715b29c3b642d894c",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-icon-acupressure.png": {
+    "mtime": 1791915578.7284696,
+    "seen": 1791975909.7325158,
+    "ast_hash": "6987f3b864e138dbbb6410e82a0c833f",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-icon-consultation.png": {
+    "mtime": 1791915578.7082102,
+    "seen": 1791975909.732517,
+    "ast_hash": "2bded64abccebbdc093b0b72f3979361",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-icon-ear.png": {
+    "mtime": 1791915578.7245138,
+    "seen": 1791975909.7325184,
+    "ast_hash": "838ce2504f64deea5f9fa69bd49fe4c8",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-icon-house-call.svg": {
+    "mtime": 1791915578.729513,
+    "seen": 1791975909.7325196,
+    "ast_hash": "0c6be340af140dbe150703fda0b399f5",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-icon-tongue.png": {
+    "mtime": 1791915578.719206,
+    "seen": 1791975909.7325213,
+    "ast_hash": "4f723aa5a10eedc464ca31b86daf4a46",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-icon-wellness.png": {
+    "mtime": 1791915578.7143526,
+    "seen": 1791975909.7325225,
+    "ast_hash": "ca9772adbbea745231e1c8d498e62045",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-lifestyle-practices.jpg": {
+    "mtime": 1790943759.2614431,
+    "seen": 1791975909.732524,
+    "ast_hash": "2cb5d58b5358a0340d18873f6c31331e",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-pillars-bg.jpg": {
+    "mtime": 1791914624.4548864,
+    "seen": 1791975909.7325253,
+    "ast_hash": "cf07b3770a7dbd1647a6fff297a27c45",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-science-blood-flow.jpg": {
+    "mtime": 1791914624.5744405,
+    "seen": 1791975909.7325265,
+    "ast_hash": "b2c96e62508909e1fa56d8cfb8bfae25",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-science-immune-system.jpg": {
+    "mtime": 1791914624.5894618,
+    "seen": 1791975909.7325282,
+    "ast_hash": "d56b74af3cfb32f9365bb2d29cdbbb63",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-science-muscle-tension.jpg": {
+    "mtime": 1791914624.594416,
+    "seen": 1791975909.7325294,
+    "ast_hash": "a1e3d246cdeb5230fa7b04ffc9266ee7",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-science-nervous-system.jpg": {
+    "mtime": 1791914624.5844789,
+    "seen": 1791975909.7325306,
+    "ast_hash": "2cf3b449120322d3a5346241199a5ae3",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-bg-mobile.jpg": {
+    "mtime": 1791822877.9307153,
+    "seen": 1791975909.732532,
+    "ast_hash": "6c89071bb692fd635ddf726e3c9f04d0",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-bg.jpg": {
+    "mtime": 1791822866.4057899,
+    "seen": 1791975909.7325335,
+    "ast_hash": "6c53181d0c42fac9ee43b831afc11d61",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-photo.jpg": {
+    "mtime": 1791822866.4328268,
+    "seen": 1791975909.732535,
+    "ast_hash": "4316d514fc35e3b78f5cbe56676e4d09",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-time-tested.jpg": {
+    "mtime": 1791912711.899723,
+    "seen": 1791975909.732536,
+    "ast_hash": "496c284c254330779dda9f63d876f215",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-treats-root.jpg": {
+    "mtime": 1791912711.9066324,
+    "seen": 1791975909.7325375,
+    "ast_hash": "78d80087bbb473e67f824401a15ac188",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-western-medicine.jpg": {
+    "mtime": 1791912711.9147387,
+    "seen": 1791975909.732539,
+    "ast_hash": "3fde055fc10b53bae00dab2f6e1608e7",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-whole-system.jpg": {
+    "mtime": 1791912711.935075,
+    "seen": 1791975909.7325401,
+    "ast_hash": "cad3e640fbde3f9bfe4b1c4dc663a773",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-badge.jpg": {
+    "mtime": 1790696249.248099,
+    "seen": 1791975909.7325418,
+    "ast_hash": "2afdce21bb3f25c74e894464e6f7e60b",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-bg-mobile.jpg": {
+    "mtime": 1790696249.1327786,
+    "seen": 1791975909.732543,
+    "ast_hash": "97d7e2b74c21d6fd89e41ab4af91431b",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-bg.jpg": {
+    "mtime": 1790696249.0140624,
+    "seen": 1791975909.7325442,
+    "ast_hash": "bf8bc8d6e78981d01b203984d2ef669a",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-botanical.png": {
+    "mtime": 1790696260.091214,
+    "seen": 1791975909.7325456,
+    "ast_hash": "1ac7afe969d58fdbb22c5b34f6d2fad6",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-consultation.jpg": {
+    "mtime": 1790696249.304571,
+    "seen": 1791975909.732547,
+    "ast_hash": "2552ca279c3a45237698ba38de18cb71",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-paper.jpg": {
+    "mtime": 1790696249.1939685,
+    "seen": 1791975909.7325482,
+    "ast_hash": "cf99bfc53a3814718dbdf59b991a189e",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-restoration.jpg": {
+    "mtime": 1790696249.433143,
+    "seen": 1791975909.7325497,
+    "ast_hash": "831eeaadcfc643929036d2c55d7a9eda",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-treatment.jpg": {
+    "mtime": 1790696249.3647034,
+    "seen": 1791975909.7325509,
+    "ast_hash": "548b9be5869df784af7c3d2514bca480",
+    "semantic_hash": ""
+  },
+  "assets/fa-footer-bg-mobile.jpg": {
+    "mtime": 1790699995.799774,
+    "seen": 1791975909.7325525,
+    "ast_hash": "2a7daae7b6ce48d1932949dad5ea9fd2",
+    "semantic_hash": ""
+  },
+  "assets/fa-footer-bg.jpg": {
+    "mtime": 1790697535.7503192,
+    "seen": 1791975909.7325537,
+    "ast_hash": "6297415256d02edac51ba665ad112ba3",
+    "semantic_hash": ""
+  },
+  "assets/fa-footer-logo-row.png": {
+    "mtime": 1791822712.2722826,
+    "seen": 1791975909.732555,
+    "ast_hash": "0c95b7dcd030a0e7824eedfeb9ad5632",
+    "semantic_hash": ""
+  },
+  "assets/fa-footer-logo.png": {
+    "mtime": 1790696874.5293047,
+    "seen": 1791975909.7325563,
+    "ast_hash": "eb9aaefcfed23a87e686195298794844",
+    "semantic_hash": ""
+  },
+  "assets/fa-glyph-columns-bg.jpg": {
+    "mtime": 1791914624.415358,
+    "seen": 1791975909.7325578,
+    "ast_hash": "0670642143a8f9a5a6d49e068b5a2b9f",
+    "semantic_hash": ""
+  },
+  "assets/fa-glyph-columns-jing.png": {
+    "mtime": 1791914640.5139647,
+    "seen": 1791975909.7325592,
+    "ast_hash": "1875858633b0a506545b7844981c10dd",
+    "semantic_hash": ""
+  },
+  "assets/fa-glyph-columns-qi.png": {
+    "mtime": 1791914640.5241013,
+    "seen": 1791975909.7325604,
+    "ast_hash": "ebaaf3cfe3a0ae0769475f39961aa2ac",
+    "semantic_hash": ""
+  },
+  "assets/fa-glyph-columns-shen.png": {
+    "mtime": 1791914640.5339303,
+    "seen": 1791975909.7325618,
+    "ast_hash": "8faad555f364458c3c23084817392e38",
+    "semantic_hash": ""
+  },
+  "assets/fa-header-dropdown-bg.jpg": {
+    "mtime": 1791798863.7866423,
+    "seen": 1791975909.7325633,
+    "ast_hash": "0fc4d453033c2cb1dcd50ed587c19fbf",
+    "semantic_hash": ""
+  },
+  "assets/fa-header-menu-bg.jpg": {
+    "mtime": 1791797470.1255915,
+    "seen": 1791975909.7325644,
+    "ast_hash": "b319c73dc0750496ddc8403819be6947",
+    "semantic_hash": ""
+  },
+  "assets/fa-hero-grain.png": {
+    "mtime": 1790699786.1829252,
+    "seen": 1791975909.7325656,
+    "ast_hash": "0147403e791f61eb3ee3abf99486bfb1",
+    "semantic_hash": ""
+  },
+  "assets/fa-hero-left.jpg": {
+    "mtime": 1790699659.7437305,
+    "seen": 1791975909.7325673,
+    "ast_hash": "01916e4493a300344b553f3258551de5",
+    "semantic_hash": ""
+  },
+  "assets/fa-hero-right.jpg": {
+    "mtime": 1790699659.8184133,
+    "seen": 1791975909.7325685,
+    "ast_hash": "c49624f7ee28105c9de8fcb272a8d401",
+    "semantic_hash": ""
+  },
+  "assets/fa-illustrated-cards-bg-mobile.jpg": {
+    "mtime": 1790943719.0514963,
+    "seen": 1791975909.73257,
+    "ast_hash": "6d7782c3860461b11367608f71ed162c",
+    "semantic_hash": ""
+  },
+  "assets/fa-illustrated-cards-bg.jpg": {
+    "mtime": 1790943718.8397481,
+    "seen": 1791975909.7325711,
+    "ast_hash": "3f8ab45cc1e8e38ae2eac374537c96e7",
+    "semantic_hash": ""
+  },
+  "assets/fa-illustrated-cards-five-elements.jpg": {
+    "mtime": 1790943719.2063854,
+    "seen": 1791975909.7325723,
+    "ast_hash": "7cd9de3ab0b3b4de9e5c3b809a494bc3",
+    "semantic_hash": ""
+  },
+  "assets/fa-illustrated-cards-three-treasures.jpg": {
+    "mtime": 1790943719.2811167,
+    "seen": 1791975909.7325737,
+    "ast_hash": "37178900d14b7716958b0895e03eb256",
+    "semantic_hash": ""
+  },
+  "assets/fa-illustrated-cards-yin-yang.jpg": {
+    "mtime": 1790943719.1263633,
+    "seen": 1791975909.732575,
+    "ast_hash": "b36c21b232118443a597da22ee8bdfa5",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-bg-2x.jpg": {
+    "mtime": 1790943729.8651848,
+    "seen": 1791975909.7325766,
+    "ast_hash": "298d1960a50cf82d25d1757b6a877edf",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-bg-mobile.jpg": {
+    "mtime": 1790943729.950105,
+    "seen": 1791975909.7325778,
+    "ast_hash": "61689df2a9a34dab17a9d73d647a6cb9",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-bg.jpg": {
+    "mtime": 1790943729.9423337,
+    "seen": 1791975909.732579,
+    "ast_hash": "5be193385988fbab7dd702a0ca2bb387",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-digestive-health.jpg": {
+    "mtime": 1790943719.0034268,
+    "seen": 1791975909.7325804,
+    "ast_hash": "f2e6c4b34413355d00ac0646a5af7177",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-mental-health.jpg": {
+    "mtime": 1790943718.9343195,
+    "seen": 1791975909.7325819,
+    "ast_hash": "9c0a96ae80808c92c328fbfaf79b3a81",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-pain.jpg": {
+    "mtime": 1790943718.9108882,
+    "seen": 1791975909.7325833,
+    "ast_hash": "7174c26c15071a0ecec3e3a7a3597e79",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-reproductive-health.jpg": {
+    "mtime": 1790943718.8397481,
+    "seen": 1791975909.7325845,
+    "ast_hash": "e6a32e2ae7555f0e1138199288746833",
+    "semantic_hash": ""
+  },
+  "assets/fa-link-gallery-respiratory-health.jpg": {
+    "mtime": 1790943719.0704257,
+    "seen": 1791975909.7325857,
+    "ast_hash": "e9e0f6327b346a750dd68ae5c6524337",
+    "semantic_hash": ""
+  },
+  "assets/fa-logo.png": {
+    "mtime": 1790694793.5484228,
+    "seen": 1791975909.7325873,
+    "ast_hash": "b595358fe1332d603c1bc7faa5646ccf",
+    "semantic_hash": ""
+  },
+  "assets/fa-membership-bg-2x.jpg": {
+    "mtime": 1791822646.189637,
+    "seen": 1791975909.7325885,
+    "ast_hash": "45479223db79d0a1b7595277f2b5744a",
+    "semantic_hash": ""
+  },
+  "assets/fa-membership-bg-mobile.jpg": {
+    "mtime": 1791822646.2796483,
+    "seen": 1791975909.7325897,
+    "ast_hash": "1357e596ff2952e66e4c85c0753e0fcc",
+    "semantic_hash": ""
+  },
+  "assets/fa-membership-bg.jpg": {
+    "mtime": 1791822646.264615,
+    "seen": 1791975909.7325914,
+    "ast_hash": "fc83f5f048915cc70759f51c3a8279ea",
+    "semantic_hash": ""
+  },
+  "assets/fa-membership-icon-video.png": {
+    "mtime": 1791913367.0871117,
+    "seen": 1791975909.7325926,
+    "ast_hash": "f79b357d257c9ad8ae61c888da8b78f6",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-approach-mobile.jpg": {
+    "mtime": 1792666131.145232,
+    "seen": 1792666684.196875,
+    "ast_hash": "e9ab4a5fa3a056318be3dfbf13e96ce6",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-approach.jpg": {
+    "mtime": 1792666131.159567,
+    "seen": 1792666684.1968794,
+    "ast_hash": "95071cef04ad0826f1d5c64e10203349",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-services-left.jpg": {
+    "mtime": 1792666131.159567,
+    "seen": 1792666684.1968896,
+    "ast_hash": "42ac4697bbe49ddac793560aefd17651",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-services-right.jpg": {
+    "mtime": 1790857186.0459287,
+    "seen": 1791975909.732598,
+    "ast_hash": "9058d582bc45e1ce76e0d572bfcc434b",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-team.jpg": {
+    "mtime": 1791915578.1840067,
+    "seen": 1791975909.7325995,
+    "ast_hash": "ade650b1667278916d9ce06b79f9b242",
+    "semantic_hash": ""
+  },
+  "assets/fa-photo-gallery-bg-mobile.jpg": {
+    "mtime": 1791822805.9532259,
+    "seen": 1791975909.7326012,
+    "ast_hash": "644ab725dc3b0813903337ed7e104be0",
+    "semantic_hash": ""
+  },
+  "assets/fa-photo-gallery-bg.jpg": {
+    "mtime": 1791822805.8741372,
+    "seen": 1791975909.7326024,
+    "ast_hash": "32e68b08e66feadb3264c193da121355",
+    "semantic_hash": ""
+  },
+  "assets/fa-photo-gallery-clinic.jpg": {
+    "mtime": 1791822806.1833527,
+    "seen": 1791975909.7326105,
+    "ast_hash": "b7acbceb3d1c8193173658e4ac4c6519",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-bg-2x.jpg": {
+    "mtime": 1790943714.3479242,
+    "seen": 1791975909.7326202,
+    "ast_hash": "670932455d038d5d68f6e07a265a00bc",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-bg-mobile.jpg": {
+    "mtime": 1790943714.439869,
+    "seen": 1791975909.732622,
+    "ast_hash": "acf9242a90445164fcea71d13efae9ea",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-bg-olive.jpg": {
+    "mtime": 1791914624.5251725,
+    "seen": 1791975909.7326236,
+    "ast_hash": "eeeca767ec5f98f49a0c980bcc4da31e",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-bg.jpg": {
+    "mtime": 1790943714.4187312,
+    "seen": 1791975909.732625,
+    "ast_hash": "eaf611e0684879afd068185924599da8",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-caroline-kirk-team.jpg": {
+    "mtime": 1791915578.3594956,
+    "seen": 1791975909.7326262,
+    "ast_hash": "a8120d47def2ad34234ed83211e545ba",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-felice-chan-team.jpg": {
+    "mtime": 1791915578.2840197,
+    "seen": 1791975909.7326276,
+    "ast_hash": "1c60f7ce3b5b7bee2671b47896a6f7dc",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-felice-chan.jpg": {
+    "mtime": 1790943714.2709754,
+    "seen": 1791975909.732629,
+    "ast_hash": "94309126b18e7d386fb0e38eed088438",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-sam-audette-team.jpg": {
+    "mtime": 1791915578.3225732,
+    "seen": 1791975909.7326305,
+    "ast_hash": "b71d8c58411ed6111dd1a36b2f788e15",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-sarah-viducic-team.jpg": {
+    "mtime": 1791915578.3961668,
+    "seen": 1791975909.732632,
+    "ast_hash": "7a4b4fb448bf901789fc510b65b2dab9",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-acupuncture.jpg": {
+    "mtime": 1790696365.8861938,
+    "seen": 1791975909.732633,
+    "ast_hash": "38c638c3b5adeead3e0d91b4265c3129",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-bg-mobile.jpg": {
+    "mtime": 1790696365.5914557,
+    "seen": 1791975909.7326345,
+    "ast_hash": "48e8ab014fd2e4da92528d98c8925c81",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-bg.jpg": {
+    "mtime": 1790696365.5498369,
+    "seen": 1791975909.732636,
+    "ast_hash": "208f9a34b9c3a94c225cd70c9791507a",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-card-bg.jpg": {
+    "mtime": 1790696365.8359709,
+    "seen": 1791975909.7326372,
+    "ast_hash": "c12c5591e4301c7e48ef7a6e5251a54e",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-contrast-therapy.jpg": {
+    "mtime": 1790696366.062557,
+    "seen": 1791975909.7326388,
+    "ast_hash": "224454d2da325dc6f00783629194b92c",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-cosmetic-acupuncture.jpg": {
+    "mtime": 1790696365.921228,
+    "seen": 1791975909.7326403,
+    "ast_hash": "5c7b8facd843da07c3cce29fa0e0a60a",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-cupping.jpg": {
+    "mtime": 1790696365.9613874,
+    "seen": 1791975909.7326415,
+    "ast_hash": "de9a17080d3380b160e02115b4e6bf2d",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-flower.png": {
+    "mtime": 1790696375.5203104,
+    "seen": 1791975909.732643,
+    "ast_hash": "eb71d1e0668e107b2db6e946cc8260fc",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-herbal-wellness-shelf.jpg": {
+    "mtime": 1791912872.3479433,
+    "seen": 1791975909.7326443,
+    "ast_hash": "9696244921eec4d9de1c59a50f41fd87",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-herbal-wellness.jpg": {
+    "mtime": 1790696366.101283,
+    "seen": 1791975909.7326458,
+    "ast_hash": "b5a8932e4a5316654c29e21a9e90c422",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-menu-bg.jpg": {
+    "mtime": 1790782711.7138062,
+    "seen": 1791975909.732647,
+    "ast_hash": "826090ab94991bd90f8c5c22777a18c1",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-menu-contrast-therapy.jpg": {
+    "mtime": 1790857186.1260226,
+    "seen": 1791975909.7326484,
+    "ast_hash": "8cca3de2137a29b761cc4ef8b4e31178",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-menu-cosmetic-acupuncture.jpg": {
+    "mtime": 1790857186.2257907,
+    "seen": 1791975909.7326498,
+    "ast_hash": "fd96da41f72921a61feccd9216d9c8d3",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-menu-cupping.jpg": {
+    "mtime": 1790782711.5150247,
+    "seen": 1791975909.7326512,
+    "ast_hash": "60d6c6711b50f843b53bd80c873582bc",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-menu-herbal-wellness.jpg": {
+    "mtime": 1790782711.5339775,
+    "seen": 1791975909.732653,
+    "ast_hash": "e30316414822b69fbf0f8c0dbd824142",
+    "semantic_hash": ""
+  },
+  "assets/fa-services-tui-na.jpg": {
+    "mtime": 1790696366.0126214,
+    "seen": 1791975909.7326553,
+    "ast_hash": "c016fe6299bb1f23eda50c0b9cdc8ac1",
+    "semantic_hash": ""
+  },
+  "assets/fa-steps-bg-mobile.jpg": {
+    "mtime": 1790943832.590406,
+    "seen": 1791975909.732657,
+    "ast_hash": "16c19d9e4d2ae0bb48d9763b77588407",
+    "semantic_hash": ""
+  },
+  "assets/fa-steps-bg.jpg": {
+    "mtime": 1790943832.565895,
+    "seen": 1791975909.7326581,
+    "ast_hash": "90e61027ec87b4427128bb1e6973e199",
+    "semantic_hash": ""
+  },
+  "assets/fa-steps-book-a-session.jpg": {
+    "mtime": 1790943832.4309053,
+    "seen": 1791975909.7326598,
+    "ast_hash": "755eaeb1d3c64aef8eacd780ce359b02",
+    "semantic_hash": ""
+  },
+  "assets/fa-steps-find-your-condition.jpg": {
+    "mtime": 1790943832.4355388,
+    "seen": 1791975909.732661,
+    "ast_hash": "8488cb8577b1b810a898b84b874dce8c",
+    "semantic_hash": ""
+  },
+  "assets/fa-steps-learn-it-yourself.jpg": {
+    "mtime": 1790943832.4205472,
+    "seen": 1791975909.7326624,
+    "ast_hash": "780da3dc5cf83cad68fe32fa6f428c0a",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-bg-care.jpg": {
+    "mtime": 1791822765.6650913,
+    "seen": 1791975909.7326639,
+    "ast_hash": "dcea4c2c7fe837568e96d50a8fea7152",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-bg-mobile.jpg": {
+    "mtime": 1790696244.552097,
+    "seen": 1791975909.7326653,
+    "ast_hash": "70c7c5c477ba98675ed6d4c1cc235e8f",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-bg.jpg": {
+    "mtime": 1790696244.481525,
+    "seen": 1791975909.7326667,
+    "ast_hash": "4962942032d8e580eaf0b56415a7d64c",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-caroline-kirk.jpg": {
+    "mtime": 1790696246.871287,
+    "seen": 1791975909.7326682,
+    "ast_hash": "e9ffabf7968f1a3058a37620c553ea44",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-felice-chan.jpg": {
+    "mtime": 1790696246.1753156,
+    "seen": 1791975909.7326694,
+    "ast_hash": "fffd37c7ce2f1df5080e01aa0e0ba831",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-flower.png": {
+    "mtime": 1790696287.4502032,
+    "seen": 1791975909.7326708,
+    "ast_hash": "a2b65835814f635d25de39ee9836b708",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-sam-audette.jpg": {
+    "mtime": 1790696246.7231996,
+    "seen": 1791975909.7326722,
+    "ast_hash": "eb54f297c40493271eb6aace2dc24b50",
+    "semantic_hash": ""
+  },
+  "assets/fa-team-sarah-viducic.jpg": {
+    "mtime": 1790696246.3261652,
+    "seen": 1791975909.7326736,
+    "ast_hash": "1d6a58afe91a2470bf3fd885875baa23",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials-avatar-1.jpg": {
+    "mtime": 1790696246.906136,
+    "seen": 1791975909.7326748,
+    "ast_hash": "6495235a2e517147fb55b1613cf086d1",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials-avatar-2.jpg": {
+    "mtime": 1790696246.9394472,
+    "seen": 1791975909.7326763,
+    "ast_hash": "2859fa075463bb4335a05f3542121d12",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials-bg-mobile.jpg": {
+    "mtime": 1790696244.8625746,
+    "seen": 1791975909.7326777,
+    "ast_hash": "ea78afbe995358a1f51bf3d8723a2b78",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials-bg-services.jpg": {
+    "mtime": 1790785440.404457,
+    "seen": 1791975909.7326791,
+    "ast_hash": "64b38448ff996a3d1690fbc740c54607",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials-bg.jpg": {
+    "mtime": 1790696244.67916,
+    "seen": 1791975909.7326806,
+    "ast_hash": "76e61b6eb640244ce06ab9987917479d",
+    "semantic_hash": ""
+  },
+  "assets/fa-testimonials-flower.png": {
+    "mtime": 1790696287.4848135,
+    "seen": 1791975909.7326818,
+    "ast_hash": "0bd86723cb6952fa9e64f288ea34802e",
+    "semantic_hash": ""
+  },
+  "assets/fa-texture-header.jpg": {
+    "mtime": 1790694793.3787346,
+    "seen": 1791975909.732683,
+    "ast_hash": "0b67b2fa4265244a92b50ef8330b2dce",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-acupuncture-mobile.jpg": {
+    "mtime": 1790854800.2032566,
+    "seen": 1791975909.7326846,
+    "ast_hash": "cc9a8bd8c272dbd2c3bf0c1513701ab6",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-acupuncture.jpg": {
+    "mtime": 1791975721.982193,
+    "seen": 1791975909.7326858,
+    "ast_hash": "88d1d34eea2561c26c8c747d2b5194a2",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-bg-mobile.jpg": {
+    "mtime": 1790853259.7930193,
+    "seen": 1791975909.7326875,
+    "ast_hash": "bcaa5a1550ae123855673727d5582fde",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-bg.jpg": {
+    "mtime": 1790782787.5124004,
+    "seen": 1791975909.7326887,
+    "ast_hash": "fab0f64ccba360f386b8b81c2db3c9fd",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-contrast-therapy-mobile.jpg": {
+    "mtime": 1790854800.3039978,
+    "seen": 1791975909.7326899,
+    "ast_hash": "8e0f99a6c9fba0718441fe22a30212f6",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-contrast-therapy.jpg": {
+    "mtime": 1791975408.041466,
+    "seen": 1791975909.7326915,
+    "ast_hash": "119a7c7305a5fd1bb4923bbdbe6cca39",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-cosmetic-acupuncture-mobile.jpg": {
+    "mtime": 1790854800.2466853,
+    "seen": 1791975909.7326927,
+    "ast_hash": "37e89c6e25b29d742ee74572031b775a",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-cosmetic-acupuncture.jpg": {
+    "mtime": 1791975407.9515433,
+    "seen": 1791975909.732694,
+    "ast_hash": "dddab50bdd05b44ec4db68a7930ce88f",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-cupping-mobile.jpg": {
+    "mtime": 1790854800.270822,
+    "seen": 1791975909.7326956,
+    "ast_hash": "df56572785f622b34a7e39dfaea7c854",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-cupping.jpg": {
+    "mtime": 1791975407.982208,
+    "seen": 1791975909.7326968,
+    "ast_hash": "9889be3db551d4e285b0f36db2a3d00c",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-glyph-acupuncture.png": {
+    "mtime": 1790782787.5356097,
+    "seen": 1791975909.7326984,
+    "ast_hash": "453a81449ebf861ad6df33a4e822010c",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-glyph-contrast-therapy.png": {
+    "mtime": 1790782787.5505862,
+    "seen": 1791975909.7326996,
+    "ast_hash": "137eebb9c566ac8c95ab7d4da05c84a2",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-glyph-cosmetic-acupuncture.png": {
+    "mtime": 1790856892.0911791,
+    "seen": 1791975909.7327008,
+    "ast_hash": "0a761f5f2e6446e8ce980beafc7937bb",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-glyph-cupping.png": {
+    "mtime": 1790782787.564875,
+    "seen": 1791975909.7327023,
+    "ast_hash": "8566055cba42a5fe67c29b41d0326125",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-glyph-herbal-wellness.png": {
+    "mtime": 1790782787.571875,
+    "seen": 1791975909.7327037,
+    "ast_hash": "ef371cd12245109609a4b125e146f0d3",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-glyph-tui-na-massage.png": {
+    "mtime": 1790782787.5778768,
+    "seen": 1791975909.732705,
+    "ast_hash": "b38e7caa2fff175db0c7d51171eecbad",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-herbal-wellness-mobile.jpg": {
+    "mtime": 1790854800.3229358,
+    "seen": 1791975909.7327063,
+    "ast_hash": "8bfaecc2823036dfd7c6f11b406917cc",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-herbal-wellness.jpg": {
+    "mtime": 1791975408.071427,
+    "seen": 1791975909.7327075,
+    "ast_hash": "05da530c8ec47b7d0886b974cf070353",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-tui-na-massage-mobile.jpg": {
+    "mtime": 1790854800.282956,
+    "seen": 1791975909.7327092,
+    "ast_hash": "8954a8eb429a2bc11dcfca64ad93da90",
+    "semantic_hash": ""
+  },
+  "assets/fa-treatments-tui-na-massage.jpg": {
+    "mtime": 1791975408.01148,
+    "seen": 1791975909.7327104,
+    "ast_hash": "e7b12df19a255bcc2529176e95a30d1e",
+    "semantic_hash": ""
+  },
+  "assets/fa-trust-bar-icon-care.png": {
+    "mtime": 1791913468.6081972,
+    "seen": 1791975909.732712,
+    "ast_hash": "e33dbbb4b849b875eaf6b785f251c58f",
+    "semantic_hash": ""
+  },
+  "assets/fa-trust-bar-icon-certified.png": {
+    "mtime": 1791913468.597731,
+    "seen": 1791975909.7327132,
+    "ast_hash": "4bceb0f49690934e3bf8f66c3b575519",
+    "semantic_hash": ""
+  },
+  "assets/fa-trust-bar-icon-google.png": {
+    "mtime": 1791913468.602832,
+    "seen": 1791975909.7327144,
+    "ast_hash": "f723cd79f9a16416371fa6cdca8ed927",
+    "semantic_hash": ""
+  },
+  "assets/fa-trust-bar-icon-patients.png": {
+    "mtime": 1791913468.5913444,
+    "seen": 1791975909.732716,
+    "ast_hash": "ce82cd9035815b62a95d2c6a578ce20f",
+    "semantic_hash": ""
+  },
+  "assets/icon-3d-model.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327173,
+    "ast_hash": "7282dd50922ffd62569f170d409e64f3",
+    "semantic_hash": ""
+  },
+  "assets/icon-account.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327187,
+    "ast_hash": "2f9b308e02d87208ad8ceaddaaa67a98",
+    "semantic_hash": ""
+  },
+  "assets/icon-apple.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327201,
+    "ast_hash": "dedd9879af96ee334728ed7d17bbec7d",
+    "semantic_hash": ""
+  },
+  "assets/icon-arrow.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327213,
+    "ast_hash": "9d3f120bb1698f5118f1bd2bdaaa87c9",
+    "semantic_hash": ""
+  },
+  "assets/icon-banana.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327228,
+    "ast_hash": "8fc21c25e7b87d493e754ee9787cb9b3",
+    "semantic_hash": ""
+  },
+  "assets/icon-bottle.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327242,
+    "ast_hash": "da204484fa2b8796dbc4b4f041e6dd3c",
+    "semantic_hash": ""
+  },
+  "assets/icon-box.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327256,
+    "ast_hash": "11290b27b5a2fc76328fde421c7f211c",
+    "semantic_hash": ""
+  },
+  "assets/icon-caret.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327268,
+    "ast_hash": "6e1428be79f9c32416d2aa3808b18a00",
+    "semantic_hash": ""
+  },
+  "assets/icon-carrot.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327282,
+    "ast_hash": "648ad9720ddd915f2665b778cb3a7742",
+    "semantic_hash": ""
+  },
+  "assets/icon-cart-empty.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327297,
+    "ast_hash": "651b31bd627d5255fe8dc1908c31ac0b",
+    "semantic_hash": ""
+  },
+  "assets/icon-cart.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327309,
+    "ast_hash": "d5c35b08c353201320fa10c4da791065",
+    "semantic_hash": ""
+  },
+  "assets/icon-chat-bubble.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327442,
+    "ast_hash": "1b09bc1594b77573650ba23d63a9903d",
+    "semantic_hash": ""
+  },
+  "assets/icon-check-mark.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327456,
+    "ast_hash": "175a86baa1f3f58c5d4e1948490290d2",
+    "semantic_hash": ""
+  },
+  "assets/icon-checkmark.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.732747,
+    "ast_hash": "886d012aaaefc916ba1fd5f38735c225",
+    "semantic_hash": ""
+  },
+  "assets/icon-clipboard.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327483,
+    "ast_hash": "4f125047462f209877f648ec15b5fa78",
+    "semantic_hash": ""
+  },
+  "assets/icon-close-small.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.73275,
+    "ast_hash": "1a5b2c80d83fb9a0d1b4658ad860ba97",
+    "semantic_hash": ""
+  },
+  "assets/icon-close.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327511,
+    "ast_hash": "0b5d3e7a52a86f50f45ad09546a06c30",
+    "semantic_hash": ""
+  },
+  "assets/icon-copy.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327523,
+    "ast_hash": "2821beafbb1e74c067e982edee8ac17c",
+    "semantic_hash": ""
+  },
+  "assets/icon-dairy-free.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327538,
+    "ast_hash": "26700441e75ec9f1b431bc68ecdcd3bc",
+    "semantic_hash": ""
+  },
+  "assets/icon-dairy.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327552,
+    "ast_hash": "8521fe4e2c6df4a012560f06c6502afc",
+    "semantic_hash": ""
+  },
+  "assets/icon-discount.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327564,
+    "ast_hash": "da7904df6aa39422d233ee3e0d150bd3",
+    "semantic_hash": ""
+  },
+  "assets/icon-dryer.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.732758,
+    "ast_hash": "decf35d3e44d75f9611f31ba81f8baa9",
+    "semantic_hash": ""
+  },
+  "assets/icon-error.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327592,
+    "ast_hash": "82d65365434af55390200102b1880c89",
+    "semantic_hash": ""
+  },
+  "assets/icon-eye.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327607,
+    "ast_hash": "a744d951b559ad54bcf79a3cf0c8fbbb",
+    "semantic_hash": ""
+  },
+  "assets/icon-facebook.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.732762,
+    "ast_hash": "49086437196683c19dd750fac683e92c",
+    "semantic_hash": ""
+  },
+  "assets/icon-filter.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327633,
+    "ast_hash": "8eb350515531a4334d3878609fe6289e",
+    "semantic_hash": ""
+  },
+  "assets/icon-fire.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327647,
+    "ast_hash": "a478e0e1950469b03bfa30343f02ae01",
+    "semantic_hash": ""
+  },
+  "assets/icon-gluten-free.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327662,
+    "ast_hash": "47e745a218ebbed6271e8a8144516a0c",
+    "semantic_hash": ""
+  },
+  "assets/icon-hamburger.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327676,
+    "ast_hash": "b7ad06cd6faa9c99c3a6925e858869f3",
+    "semantic_hash": ""
+  },
+  "assets/icon-heart.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327688,
+    "ast_hash": "5426fc8b14f3e71da6c191b0cb6a891f",
+    "semantic_hash": ""
+  },
+  "assets/icon-info.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327702,
+    "ast_hash": "386fb44dd473d8b9c2026d5dd113b253",
+    "semantic_hash": ""
+  },
+  "assets/icon-instagram.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327716,
+    "ast_hash": "a081fd8854765f92c4bac0466f098f3e",
+    "semantic_hash": ""
+  },
+  "assets/icon-inventory-status.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.732773,
+    "ast_hash": "ab5f41e5b4caf54916109c7960c83e3c",
+    "semantic_hash": ""
+  },
+  "assets/icon-iron.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327745,
+    "ast_hash": "8d2c0833b990928082473b969db17869",
+    "semantic_hash": ""
+  },
+  "assets/icon-leaf.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327757,
+    "ast_hash": "e6c669388efe6773be06cb7075266f3e",
+    "semantic_hash": ""
+  },
+  "assets/icon-leather.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.732777,
+    "ast_hash": "aeefca7b60a1d87505875c6a758e114b",
+    "semantic_hash": ""
+  },
+  "assets/icon-lightning-bolt.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327785,
+    "ast_hash": "83dfc3f03ab0e49c700e0ae06b5f36b2",
+    "semantic_hash": ""
+  },
+  "assets/icon-lipstick.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327797,
+    "ast_hash": "981930bf8bcc2f9483553c56ff47cf37",
+    "semantic_hash": ""
+  },
+  "assets/icon-lock.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327812,
+    "ast_hash": "2ce216f684f67bc026ffb22c26e3e57e",
+    "semantic_hash": ""
+  },
+  "assets/icon-map-pin.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327826,
+    "ast_hash": "b0079ed616aa5421f92ea4071beffa94",
+    "semantic_hash": ""
+  },
+  "assets/icon-minus.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327838,
+    "ast_hash": "c7ca9b4bbb66463817e27551742dc4c0",
+    "semantic_hash": ""
+  },
+  "assets/icon-nut-free.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327852,
+    "ast_hash": "b7bf485ea305866bdb99a4e49f002316",
+    "semantic_hash": ""
+  },
+  "assets/icon-padlock.svg": {
+    "mtime": 1790690207.2814238,
+    "seen": 1791975909.7327864,
+    "ast_hash": "394bc35f3333903f6cb247191a195dc4",
+    "semantic_hash": ""
+  },
+  "assets/icon-pants.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732788,
+    "ast_hash": "db3bbb361c5c0f152fdd3e5fe0ae2c33",
+    "semantic_hash": ""
+  },
+  "assets/icon-pause.svg": {
+    "mtime": 1790690208.0562932,
+    "seen": 1791975909.7327893,
+    "ast_hash": "536865dcaefe874981c1d7c640c8915b",
+    "semantic_hash": ""
+  },
+  "assets/icon-paw-print.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7327905,
+    "ast_hash": "9297a6c506cc06a81ee3a26de065b63b",
+    "semantic_hash": ""
+  },
+  "assets/icon-pepper.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7327921,
+    "ast_hash": "ccef53e98b432fcd90daae5d3653b3ee",
+    "semantic_hash": ""
+  },
+  "assets/icon-perfume.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7327933,
+    "ast_hash": "a786a398ef3974a463b005259d0b7cd6",
+    "semantic_hash": ""
+  },
+  "assets/icon-pinterest.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7327948,
+    "ast_hash": "403010859b2a37804d1f666b81e96cd5",
+    "semantic_hash": ""
+  },
+  "assets/icon-plane.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7327962,
+    "ast_hash": "fbe34fd1afb6459ae1faa7118e8c978e",
+    "semantic_hash": ""
+  },
+  "assets/icon-plant.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7327974,
+    "ast_hash": "d1ba6a1edb4f4e5956c13a491f00cc6f",
+    "semantic_hash": ""
+  },
+  "assets/icon-play.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732799,
+    "ast_hash": "3f859ed84d1edd6f0575f53547714324",
+    "semantic_hash": ""
+  },
+  "assets/icon-plus.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328005,
+    "ast_hash": "3584b5ecd34549fd7d902fc3c61b99ec",
+    "semantic_hash": ""
+  },
+  "assets/icon-price-tag.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328017,
+    "ast_hash": "691646617a9e7661b13d4fa438dfbc82",
+    "semantic_hash": ""
+  },
+  "assets/icon-question-mark.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732803,
+    "ast_hash": "bf28b2d36a204b353abc3a86ed64d467",
+    "semantic_hash": ""
+  },
+  "assets/icon-recycle.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328045,
+    "ast_hash": "4962dfcceca4af6b29e4bb9337f58b6c",
+    "semantic_hash": ""
+  },
+  "assets/icon-remove.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732806,
+    "ast_hash": "7daab8a96a79eb7468d664470639f409",
+    "semantic_hash": ""
+  },
+  "assets/icon-reset.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328072,
+    "ast_hash": "dfec50b3842e36797df375ebfc65a86e",
+    "semantic_hash": ""
+  },
+  "assets/icon-return.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328084,
+    "ast_hash": "be01984d037cfacc622557a5bb4837e4",
+    "semantic_hash": ""
+  },
+  "assets/icon-ruler.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.73281,
+    "ast_hash": "981391c5c253aac54c30f05926d9161e",
+    "semantic_hash": ""
+  },
+  "assets/icon-search.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328112,
+    "ast_hash": "51b119957412db63413c522a369e793d",
+    "semantic_hash": ""
+  },
+  "assets/icon-serving-dish.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328126,
+    "ast_hash": "8c4e4121c00982fa7c8d9b4bbd63a0eb",
+    "semantic_hash": ""
+  },
+  "assets/icon-share.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328138,
+    "ast_hash": "5cead8156b42094c4ce79d626f876356",
+    "semantic_hash": ""
+  },
+  "assets/icon-shirt.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328153,
+    "ast_hash": "b2aadec09bd58270ed2bca82aa962b09",
+    "semantic_hash": ""
+  },
+  "assets/icon-shoe.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328167,
+    "ast_hash": "27d725b8dbde810e6b773c843e8de190",
+    "semantic_hash": ""
+  },
+  "assets/icon-shopify.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732818,
+    "ast_hash": "3e711088a4e6f1b15399320df2b33b62",
+    "semantic_hash": ""
+  },
+  "assets/icon-silhouette.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328193,
+    "ast_hash": "ff1c11ceb35f5410cf05aad0fc5228fb",
+    "semantic_hash": ""
+  },
+  "assets/icon-snapchat.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328207,
+    "ast_hash": "5b54a79d6b91fb35e07759c996411d86",
+    "semantic_hash": ""
+  },
+  "assets/icon-snowflake.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732822,
+    "ast_hash": "754d4908ac7acbd09383ff449999d46c",
+    "semantic_hash": ""
+  },
+  "assets/icon-star.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328236,
+    "ast_hash": "25ea0dc98e30f6b7a4638730ea28c01e",
+    "semantic_hash": ""
+  },
+  "assets/icon-stopwatch.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328248,
+    "ast_hash": "7a1af799bc719951ac457a3eb4ea67a2",
+    "semantic_hash": ""
+  },
+  "assets/icon-success.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.732826,
+    "ast_hash": "e8d14d28e84d455b65b250782ef336e9",
+    "semantic_hash": ""
+  },
+  "assets/icon-tick.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328274,
+    "ast_hash": "7ea37ae7528c42c38ea12b18cb566d94",
+    "semantic_hash": ""
+  },
+  "assets/icon-tiktok.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328286,
+    "ast_hash": "de619afa8e3665f8e9d55d0b26a6a5e7",
+    "semantic_hash": ""
+  },
+  "assets/icon-truck.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328303,
+    "ast_hash": "38bc1df387c8432784d3948d14c42b02",
+    "semantic_hash": ""
+  },
+  "assets/icon-tumblr.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328315,
+    "ast_hash": "e3cb2ec2536d3443432f68c88abf6d26",
+    "semantic_hash": ""
+  },
+  "assets/icon-twitter.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.7328327,
+    "ast_hash": "78d33a77bb23da71e44807cffd5cbb0c",
+    "semantic_hash": ""
+  },
+  "assets/icon-unavailable.svg": {
+    "mtime": 1790690208.056873,
+    "seen": 1791975909.7328343,
+    "ast_hash": "c17808b617e16ad53e79ff9dfe83bd95",
+    "semantic_hash": ""
+  },
+  "assets/icon-vimeo.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.7328355,
+    "ast_hash": "4c5f6e77c96d22a4ee919f650b3ef63e",
+    "semantic_hash": ""
+  },
+  "assets/icon-warning.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.732837,
+    "ast_hash": "ef29d51730e2cdf32c1e3e0d02437084",
+    "semantic_hash": ""
+  },
+  "assets/icon-washing.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.7328382,
+    "ast_hash": "871ce71897cb91a511b287d07cd4d133",
+    "semantic_hash": ""
+  },
+  "assets/icon-youtube.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.7328396,
+    "ast_hash": "75ba70ddabc67ecbcb0292b1978e708b",
+    "semantic_hash": ""
+  },
+  "assets/icon-zoom.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.732841,
+    "ast_hash": "1867343115fb87cbd22d6209423ca694",
+    "semantic_hash": ""
+  },
+  "assets/loading-spinner.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.7328422,
+    "ast_hash": "b0b56a8deb0667171d2c7e3dfb71263b",
+    "semantic_hash": ""
+  },
+  "assets/mask-arch.svg": {
+    "mtime": 1790690208.0578809,
+    "seen": 1791975909.7328436,
+    "ast_hash": "646639dda8ef8467152a878508c02a42",
+    "semantic_hash": ""
+  },
+  "assets/sparkle.gif": {
+    "mtime": 1790690209.4924314,
+    "seen": 1791975909.7328448,
+    "ast_hash": "7adcd48a3cc215a81fabd9dafb919507",
+    "semantic_hash": ""
+  },
+  "assets/square.svg": {
+    "mtime": 1790690209.4924314,
+    "seen": 1791975909.7328463,
+    "ast_hash": "4921912749635b38f9b2893de6a5c532",
+    "semantic_hash": ""
+  },
+  "templates/page.concierge.json": {
+    "mtime": 1792683745.050897,
+    "seen": 1792684909.9545305,
+    "ast_hash": "2a4b0b075dfdbab9d8e655de8cea76fa",
+    "semantic_hash": ""
+  },
+  "assets/fa-concierge-botanical-left.png": {
+    "mtime": 1791978013.119564,
+    "seen": 1791978222.4140406,
+    "ast_hash": "cc595d9f63f8667958aa5861786dc924",
+    "semantic_hash": ""
+  },
+  "assets/fa-concierge-botanical-right.png": {
+    "mtime": 1791978052.8790398,
+    "seen": 1791978222.414043,
+    "ast_hash": "7a50a8251ef3c5bfccc83c186a19c996",
+    "semantic_hash": ""
+  },
+  "assets/fa-concierge-expect-ongoing.jpg": {
+    "mtime": 1791977722.1122074,
+    "seen": 1791978222.4140446,
+    "ast_hash": "ef0b71a5cc22655b6301b1646756609f",
+    "semantic_hash": ""
+  },
+  "assets/fa-concierge-expect-reach-out.jpg": {
+    "mtime": 1791977720.4257352,
+    "seen": 1791978222.4140465,
+    "ast_hash": "71bc7b4dc43b3fe84691d3a9d9f8e658",
+    "semantic_hash": ""
+  },
+  "assets/fa-first-visit-moss-card.jpg": {
+    "mtime": 1791977902.0535128,
+    "seen": 1791978222.4142108,
+    "ast_hash": "a5532fd789c933d2241ac195ecdc65da",
+    "semantic_hash": ""
+  },
+  "assets/fa-glyph-columns-check.png": {
+    "mtime": 1791977436.9246607,
+    "seen": 1791978222.4142318,
+    "ast_hash": "72e20457b143f1660756c36dd17e47d8",
+    "semantic_hash": ""
+  },
+  "assets/fa-inquiry-bg.jpg": {
+    "mtime": 1791977035.549729,
+    "seen": 1791978222.414263,
+    "ast_hash": "69ce1b179a26ec804161ef1f835e170d",
+    "semantic_hash": ""
+  },
+  "templates/page.blogs.json": {
+    "mtime": 1792684095.6509857,
+    "seen": 1792684909.954526,
+    "ast_hash": "09cca56b26612f45f45168077d5c6a67",
+    "semantic_hash": ""
+  },
+  "assets/fa-blog-listing-botanical.png": {
+    "mtime": 1791979696.4492407,
+    "seen": 1791979950.4343796,
+    "ast_hash": "569daa438b352a9785541432b823bc70",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-treatment-2x.jpg": {
+    "mtime": 1791979663.7465477,
+    "seen": 1791979950.4344833,
+    "ast_hash": "94f8595022052503fb93314340dee0e3",
+    "semantic_hash": ""
+  },
+  "assets/fa-cta-banner-treatment.jpg": {
+    "mtime": 1791979663.794169,
+    "seen": 1791979950.4344845,
+    "ast_hash": "daeaba45d364e33da78915ed4401c2ab",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-blog-left.jpg": {
+    "mtime": 1791979663.64117,
+    "seen": 1791979950.434628,
+    "ast_hash": "6ed3d0f0bcb8dc85d925e3a917e2b80d",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-blog-right.jpg": {
+    "mtime": 1791979663.5762563,
+    "seen": 1791979950.4346297,
+    "ast_hash": "84b45274720bcb597de2a219f36d13f4",
+    "semantic_hash": ""
+  },
+  "assets/fa-article-share-copy.png": {
+    "mtime": 1791981208.5340052,
+    "seen": 1791981601.9587655,
+    "ast_hash": "e7aa2f1aed2abdcef4bfd988df683540",
+    "semantic_hash": ""
+  },
+  "assets/fa-article-share-facebook.png": {
+    "mtime": 1791981208.4439256,
+    "seen": 1791981601.9587674,
+    "ast_hash": "ac5f19dc878c2e867227364f83221d08",
+    "semantic_hash": ""
+  },
+  "assets/fa-article-share-linkedin.png": {
+    "mtime": 1791981208.498969,
+    "seen": 1791981601.9587693,
+    "ast_hash": "d404173b4e82abac11b123fb32d4c158",
+    "semantic_hash": ""
+  },
+  "assets/fa-article-share-x.png": {
+    "mtime": 1791981208.4738872,
+    "seen": 1791981601.9587712,
+    "ast_hash": "c876e3f1be91f19db4d3aa41339ebcd6",
+    "semantic_hash": ""
+  },
+  ".claude/skills/figma-sync/scripts/dom-extract.mjs": {
+    "mtime": 1791997192.3684921,
+    "seen": 1791997647.9363525,
+    "ast_hash": "f4938298ef8672217bbfc1266a60611c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/figma-sync/scripts/qa-dump.js": {
+    "mtime": 1791983327.2966416,
+    "seen": 1791995869.517609,
+    "ast_hash": "884de6aaa534b05ed079437fdc71ee64",
+    "semantic_hash": "884de6aaa534b05ed079437fdc71ee64"
+  },
+  ".claude/skills/figma-sync/scripts/qa-figma-match.js": {
+    "mtime": 1791984014.0216937,
+    "seen": 1791995869.5176122,
+    "ast_hash": "6e0c04a9294feeb00005bb2c6a331a7f",
+    "semantic_hash": "6e0c04a9294feeb00005bb2c6a331a7f"
+  },
+  "qa/MAP.md": {
+    "mtime": 1791997623.8150282,
+    "seen": 1791997647.9365916,
+    "ast_hash": "183215660bc4994021a45528b2f04a94",
+    "semantic_hash": ""
+  },
+  "qa/REPORT.md": {
+    "mtime": 1792595613.0867677,
+    "seen": 1792596449.7312284,
+    "ast_hash": "10a4a0f8c6f9325cb404a6e701c9a701",
+    "semantic_hash": ""
+  },
+  "qa/LINKS.md": {
+    "mtime": 1791997895.373562,
+    "seen": 1791997900.1914217,
+    "ast_hash": "28e234f26af6ae4ffb6bf8dc9e171d74",
+    "semantic_hash": ""
+  },
+  "templates/page.courses.json": {
+    "mtime": 1792683385.9337645,
+    "seen": 1792684909.9545348,
+    "ast_hash": "a42a42161b972adcfe521e5ace81d9ea",
+    "semantic_hash": ""
+  },
+  "assets/fa-checklist-bg.jpg": {
+    "mtime": 1791993296.628961,
+    "seen": 1791994599.160946,
+    "ast_hash": "c55ff2bcdb228b1b366cdc8757864791",
+    "semantic_hash": ""
+  },
+  "assets/fa-checklist-courses.jpg": {
+    "mtime": 1791993296.575145,
+    "seen": 1791994599.1609478,
+    "ast_hash": "978e085e05eacfa6a9e5b7d4444d0092",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-pillars-light-bg.jpg": {
+    "mtime": 1791993296.7136977,
+    "seen": 1791994599.1612992,
+    "ast_hash": "a6d5f0802d2623458fc7f3488d3139d9",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-1.jpg": {
+    "mtime": 1791993296.738911,
+    "seen": 1791994599.1614814,
+    "ast_hash": "d6dfc6bef7cca33b75dab740db212a3a",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-2.jpg": {
+    "mtime": 1791993296.7539437,
+    "seen": 1791994599.1614842,
+    "ast_hash": "5561a257f99ee353c298e814c948f34c",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-3.jpg": {
+    "mtime": 1791993296.7539437,
+    "seen": 1791994599.161487,
+    "ast_hash": "63950152dd998827bf9bfb6c75af67ec",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-5.jpg": {
+    "mtime": 1791993296.803034,
+    "seen": 1791994599.1614897,
+    "ast_hash": "801d48da0cf90d5896fc187f445a33e7",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-bg.jpg": {
+    "mtime": 1791993296.6765635,
+    "seen": 1791994599.161492,
+    "ast_hash": "f6229fcb4cd3d3192fe7b9f7e25349c4",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-courses.jpg": {
+    "mtime": 1791993296.4797208,
+    "seen": 1791994599.161508,
+    "ast_hash": "2f98ed6ffd29a0118c9efe101e08e633",
+    "semantic_hash": ""
+  },
+  "assets/fa-profile-felice-chan-course.jpg": {
+    "mtime": 1791993296.8582294,
+    "seen": 1791994599.1615782,
+    "ast_hash": "3098dd9fa6b2d8b6192e9eacddb3d921",
+    "semantic_hash": ""
+  },
+  "templates/page.books.json": {
+    "mtime": 1792666131.159567,
+    "seen": 1792666684.196329,
+    "ast_hash": "d8cfd70939dda55e38490a5076320202",
+    "semantic_hash": ""
+  },
+  "assets/fa-media-text-course.jpg": {
+    "mtime": 1791994920.2723353,
+    "seen": 1791995214.1197093,
+    "ast_hash": "5d2f696c41533eab08f0a5a90de87b2b",
+    "semantic_hash": ""
+  },
+  "assets/fa-signup-bg-light.jpg": {
+    "mtime": 1791994920.1936524,
+    "seen": 1791995214.1198177,
+    "ast_hash": "5c992343939d39fe2522d78619b01ca2",
+    "semantic_hash": ""
+  },
+  "assets/fa-signup-ebook-cover.jpg": {
+    "mtime": 1791994920.239297,
+    "seen": 1791995214.1198194,
+    "ast_hash": "e578449c6eab92020457db0fdadade69",
+    "semantic_hash": ""
+  },
+  "assets/fa-header-wordmark.png": {
+    "mtime": 1791996120.1251576,
+    "seen": 1791996731.4072824,
+    "ast_hash": "6a0596a891ce0f6a920bd4961624e2f8",
+    "semantic_hash": ""
+  },
+  ".claude/skills/figma-sync/scripts/qa-text-cmp.py": {
+    "mtime": 1791997612.101055,
+    "seen": 1791997647.9363601,
+    "ast_hash": "091a3caa42a92fdc130ccdd5b52adc11",
+    "semantic_hash": ""
+  },
+  "templates/page.in-clinic-services.json": {
+    "mtime": 1792684095.6660213,
+    "seen": 1792684909.9545374,
+    "ast_hash": "dd54f2b2a1b44872470dc6eefbe93e8a",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-time-tested-mobile-v2.webp": {
+    "mtime": 1792176581.6259587,
+    "seen": 1792176797.7554555,
+    "ast_hash": "e6d86749732ff83ecff0cb68e984e952",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-time-tested-v2.webp": {
+    "mtime": 1792176581.5828643,
+    "seen": 1792176797.7554572,
+    "ast_hash": "f6c11126bfdcf658cd6620c98123e42a",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-treats-root-mobile-v2.webp": {
+    "mtime": 1792176581.7392356,
+    "seen": 1792176797.7554612,
+    "ast_hash": "ebcbd01579b38610006da453e186fd1e",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-treats-root-v2.webp": {
+    "mtime": 1792176581.7028577,
+    "seen": 1792176797.755463,
+    "ast_hash": "3496229df1533071804be81e5f5a7cfa",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-western-medicine-mobile-v2.webp": {
+    "mtime": 1792176581.886171,
+    "seen": 1792176797.7554662,
+    "ast_hash": "a814d3fc0e133e0c5e95ea31753ec885",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-western-medicine-v2.webp": {
+    "mtime": 1792176581.82889,
+    "seen": 1792176797.755468,
+    "ast_hash": "d84022768e8cd8e0aa865fb8fb2ad96c",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-whole-system-mobile-v2.webp": {
+    "mtime": 1792176582.0938008,
+    "seen": 1792176797.755471,
+    "ast_hash": "5ad36aa93678780042d1d4902451e9fe",
+    "semantic_hash": ""
+  },
+  "assets/fa-feature-cards-truth-whole-system-v2.webp": {
+    "mtime": 1792176582.040653,
+    "seen": 1792176797.7554727,
+    "ast_hash": "4cec426af40f473985a9fec8f19adada",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-1-mobile-v2.webp": {
+    "mtime": 1792176580.8732195,
+    "seen": 1792176797.755564,
+    "ast_hash": "3982a92e94fc511376c64009e5b979a8",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-1-v2.webp": {
+    "mtime": 1792176580.7493222,
+    "seen": 1792176797.755566,
+    "ast_hash": "3d3511c17be249815c9f7caa03ec820a",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-2-mobile-v2.webp": {
+    "mtime": 1792176581.0434175,
+    "seen": 1792176797.7555692,
+    "ast_hash": "6f76411321562e2e367b165e8dd306cb",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-2-v2.webp": {
+    "mtime": 1792176580.990082,
+    "seen": 1792176797.755571,
+    "ast_hash": "953c2cc9b86afe8ef4a43e6bc7b7523c",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-3-mobile-v2.webp": {
+    "mtime": 1792176581.178016,
+    "seen": 1792176797.7555745,
+    "ast_hash": "698f6711f8a34557d44bf4db004302d2",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-3-v2.webp": {
+    "mtime": 1792176581.1089687,
+    "seen": 1792176797.7555764,
+    "ast_hash": "52cda9366a3b96321d96daa550be00ae",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-4-mobile-v2.webp": {
+    "mtime": 1792176581.3101914,
+    "seen": 1792176797.75558,
+    "ast_hash": "ebbbecb1e7a95758513ec86b89976d0c",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-4-v2.webp": {
+    "mtime": 1792176581.2430432,
+    "seen": 1792176797.7555811,
+    "ast_hash": "f38e4aa3f80df3d0907273b248046247",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-5-mobile-v2.webp": {
+    "mtime": 1792176581.5032728,
+    "seen": 1792176797.7555828,
+    "ast_hash": "f0d2c6e10b07dac2e862294dc52027cb",
+    "semantic_hash": ""
+  },
+  "assets/fa-modules-5-v2.webp": {
+    "mtime": 1792176581.4150171,
+    "seen": 1792176797.755584,
+    "ast_hash": "a9c5daa3eefed7de262edd6fefec4f4f",
+    "semantic_hash": ""
+  },
+  "sections/ppc-header-group.json": {
+    "mtime": 1792600078.266364,
+    "seen": 1792666684.196299,
+    "ast_hash": "f19df32f7b51781c1e68fdfdafd55213",
+    "semantic_hash": ""
+  },
+  "templates/page.ppc.json": {
+    "mtime": 1792600078.2628696,
+    "seen": 1792666684.1963484,
+    "ast_hash": "bed6ad4885b080a6240416885eaa08c7",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-banner-bg-mobile.webp": {
+    "mtime": 1792515413.380586,
+    "seen": 1792515694.4097402,
+    "ast_hash": "98d68a4defc495b6a2ccaf7e6190ec41",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-banner-bg.webp": {
+    "mtime": 1792515413.212769,
+    "seen": 1792515694.4097419,
+    "ast_hash": "c679c9b3b207dab19245b9396d24fe6c",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-flower-left.webp": {
+    "mtime": 1792515413.4017735,
+    "seen": 1792515694.4097433,
+    "ast_hash": "6bcbe128c8058ab7712cae6d0b8abb29",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-flower-right.webp": {
+    "mtime": 1792515413.4229343,
+    "seen": 1792515694.409745,
+    "ast_hash": "10d943fdb6c9731b1b6312a2d67575d9",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-hero-bg-mobile.webp": {
+    "mtime": 1792515411.221802,
+    "seen": 1792515694.4097464,
+    "ast_hash": "2e11d6775dcd97add428cfe42b6cf325",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-hero-bg.webp": {
+    "mtime": 1792515411.0819135,
+    "seen": 1792515694.4097476,
+    "ast_hash": "6788325026ba13ff63a92d6ab2b05dd2",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-hero-photo-mobile.webp": {
+    "mtime": 1792515411.512642,
+    "seen": 1792515694.409749,
+    "ast_hash": "bfaed12011d2ee177e9ee2d4c41f59d7",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-hero-photo.webp": {
+    "mtime": 1792515411.4225483,
+    "seen": 1792515694.4097507,
+    "ast_hash": "57b70733d2696d93e3a059a98957a9b6",
+    "semantic_hash": ""
+  },
+  "assets/fa-ppc-pricing-bg.webp": {
+    "mtime": 1792515412.1425014,
+    "seen": 1792515694.4097526,
+    "ast_hash": "5b92659cd48cbcb8adb203230478c12b",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-01.jpg": {
+    "mtime": 1792578598.9706514,
+    "seen": 1792579409.1541004,
+    "ast_hash": "23dd2029a0c245227a4b626ebe1ee7c4",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-02.jpg": {
+    "mtime": 1792578598.9706514,
+    "seen": 1792579409.1541026,
+    "ast_hash": "dbcb2549b2346aa2c486208254feb540",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-03.jpg": {
+    "mtime": 1792578598.9716513,
+    "seen": 1792579409.154104,
+    "ast_hash": "264ba1a31e971aa3705048938f84906e",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-04.jpg": {
+    "mtime": 1792578598.9706514,
+    "seen": 1792579409.1541054,
+    "ast_hash": "1ab081589c0d32c1ac209c3573df8fdd",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-05.jpg": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.1541069,
+    "ast_hash": "c5b456922d7e00bf06b0adcbda727c2c",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-06.jpg": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.1541085,
+    "ast_hash": "f918076c42958b9484ecdf62abfbac53",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-07.jpg": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.1541102,
+    "ast_hash": "4bbd01f0514120021c209ece2576844e",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-08.jpg": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.1541119,
+    "ast_hash": "f45c7a4ecf69b10cea8e0858eb90370d",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-09.jpg": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.154113,
+    "ast_hash": "f2a8effb47a7c29bc865351630092364",
+    "semantic_hash": ""
+  },
+  "assets/fa-clinic-video-10.jpg": {
+    "mtime": 1792578598.9722576,
+    "seen": 1792579409.1541145,
+    "ast_hash": "908dcd20e46441962524cb680dca7deb",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-approach-left.jpg": {
+    "mtime": 1792666131.145232,
+    "seen": 1792666684.1968722,
+    "ast_hash": "b04125c273e08483fd0620b08963cd2e",
+    "semantic_hash": ""
+  },
+  "assets/fa-page-hero-approach-right.jpg": {
+    "mtime": 1792666131.159567,
+    "seen": 1792666684.196877,
+    "ast_hash": "8d12b8fa1977f0511edd02872bca6e83",
+    "semantic_hash": ""
+  }
+}

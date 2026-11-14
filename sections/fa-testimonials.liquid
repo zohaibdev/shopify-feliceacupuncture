@@ -1,0 +1,341 @@
+{%- comment -%}
+  Felice testimonials — "What people are saying": moss textured band, heading and a
+  scroll-snap carousel of review cards with prev/next buttons (assets/fa-testimonials.js).
+  Live Google reviews: theme setting "Featurable widget ID" (Felice group) → the script refills the cards from
+  the free Featurable API; the review blocks below are the fallback (no ID, offline, API error).
+  Figma: desktop 414:257 (band 414:258, content 414:260), botanical 414:873;
+  mobile 414:1006 (background), 414:1360 (cards 414:1361, arrow 414:1460).
+  Services page v2 (file B4Qc…, 2263:2286 / 2264:6705): homepage layout and texture; botanical_style 'small'
+  (2263:3019 / 2264:7059, also drawn on mobile), a 60px mobile padding and the stronger foliage texture on mobile
+  only (band 2264:7058 = fa-testimonials-bg-services.jpg cover-fitted; desktop 2263:2861 = the homepage texture).
+  Our Approach page (2275:19391 / 2305:4848): homepage copy and desktop texture, no desktop botanical; on mobile the
+  services texture and botanical (2305:4850), drawn under the section above (cut at the band top): botanical_display
+  'mobile', botanical_overlap off.
+  Homepage V4 (B4Qc…, 2237:297 / 2264:776): mobile band 2264:2515 also draws the services foliage texture
+  (mobile_background_asset = fa-testimonials-bg-services.jpg) and 60px mobile padding.
+  Homepage V5 (B4Qc…, 2612:3081 in 2612:3077): same band; 38.3px arrows (arrow_size 'large', 2612:3177 / 2615:10073)
+  and no botanical of its own (the flower at the top right of the band, 2612:3700, belongs to the team section).
+  Reviews are static blocks; showing live Google reviews would need a reviews app.
+{%- endcomment -%}
+{{ 'fa-testimonials.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fa-testimonials.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign botanical_style = section.settings.botanical_style | default: 'standard'
+  assign botanical_display = section.settings.botanical_display | default: 'all'
+-%}
+<section
+  class="fa-section fa-section--pad fa-testimonials{% if section.settings.show_botanical and section.settings.botanical_overlap == false %} fa-testimonials--botanical-inside{% endif %}{% if section.settings.arrow_size == 'large' %} fa-testimonials--arrows-large{% endif %}{% if section.settings.card_style == 'square' %} fa-testimonials--cards-square{% endif %}"
+  id="fa-testimonials-{{ section.id }}"
+  {% if section.settings.heading != blank %}aria-labelledby="fa-testimonials-title-{{ section.id }}"{% endif %}
+  style="--fa-tm-pad-mobile: {{ section.settings.padding_mobile | default: 50 }}px;"
+>
+  <div class="fa-bg" aria-hidden="true">
+    <picture>
+      {%- if section.settings.mobile_background_asset != blank -%}
+        {%- comment -%} Cover-fitted, so the size is only a hint (fa-testimonials-bg-services.jpg is 1440 x 677). {%- endcomment -%}
+        <source media="(max-width: 899px)" srcset="{{ section.settings.mobile_background_asset | asset_url }}" width="1440" height="677">
+      {%- else -%}
+        <source media="(max-width: 899px)" srcset="{{ 'fa-testimonials-bg-mobile.jpg' | asset_url }}" width="750" height="806">
+      {%- endif -%}
+      <img src="{{ 'fa-testimonials-bg.jpg' | asset_url }}" alt="" width="1440" height="634" loading="lazy">
+    </picture>
+  </div>
+
+  {%- if section.settings.show_botanical -%}
+    <img class="fa-deco fa-testimonials__flower{% if botanical_style == 'small' %} fa-testimonials__flower--small{% endif %}{% if botanical_display != 'all' %} fa-testimonials__flower--{{ botanical_display }}-only{% endif %}" src="{{ 'fa-testimonials-flower.png' | asset_url }}" alt="" aria-hidden="true" width="883" height="707" loading="lazy">
+  {%- endif -%}
+
+  <div class="fa-container">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="fa-heading fa-testimonials__heading" data-fa-reveal="up" data-fa-reveal-stagger>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fa-heading__title" id="fa-testimonials-title-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="fa-heading__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign has_widget = false
+      if section.settings.widget_code != blank
+        assign has_widget = true
+      endif
+      for block in section.blocks
+        if block.type == '@app'
+          assign has_widget = true
+        endif
+      endfor
+    -%}
+
+    {%- if has_widget -%}
+      {%- comment -%} A live Google reviews widget (embed code or app block) replaces the static review cards. {%- endcomment -%}
+      <div class="fa-testimonials__widget" data-fa-reveal="up">
+        {{ section.settings.widget_code }}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- elsif section.blocks.size > 0 -%}
+      <fa-testimonials-carousel class="fa-testimonials__carousel" data-fa-reveal="up"{% if settings.fa_reviews_widget_id != blank %} data-reviews-widget="{{ settings.fa_reviews_widget_id | strip | escape }}"{% endif %}>
+        <div class="fa-testimonials__track" id="fa-testimonials-track-{{ section.id }}" data-track tabindex="0" role="region" aria-label="{{ section.settings.heading | default: 'Reviews' | escape }}">
+          <ul class="fa-testimonials__list" role="list">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign rating = block.settings.rating | plus: 0
+                assign name = block.settings.name | escape
+              -%}
+              <li class="fa-testimonials__item" {{ block.shopify_attributes }}>
+                <article class="fa-testimonials__card">
+                  <div class="fa-testimonials__user">
+                    <div class="fa-testimonials__avatar fa-media">
+                      {%- if block.settings.avatar != blank -%}
+                        {{ block.settings.avatar | image_url: width: 96 | image_tag: widths: '48, 72, 96', sizes: '48px', loading: 'lazy', alt: '' }}
+                      {%- elsif block.settings.fallback_asset != blank -%}
+                        <img src="{{ block.settings.fallback_asset | asset_url }}" alt="" width="96" height="96" loading="lazy">
+                      {%- elsif name != blank -%}
+                        <span class="fa-testimonials__initial" aria-hidden="true">{{ block.settings.name | strip | slice: 0 | upcase }}</span>
+                      {%- endif -%}
+                    </div>
+                    <div class="fa-testimonials__meta">
+                      {%- if name != blank -%}<h3 class="fa-testimonials__name">{{ name }}</h3>{%- endif -%}
+                      {%- if block.settings.date != blank -%}<p class="fa-testimonials__date">{{ block.settings.date | escape }}</p>{%- endif -%}
+                    </div>
+                    {%- if section.settings.show_google -%}
+                      {%- if section.settings.google_url != blank -%}
+                        <a class="fa-testimonials__source" href="{{ section.settings.google_url }}" target="_blank" rel="noopener noreferrer" aria-label="Read {{ name }}'s review on Google">{% render 'fa-icons-testimonials', icon: 'google' %}</a>
+                      {%- else -%}
+                        <span class="fa-testimonials__source" role="img" aria-label="Google review">{% render 'fa-icons-testimonials', icon: 'google' %}</span>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </div>
+
+                  {%- if rating > 0 or block.settings.text != blank -%}
+                    <div class="fa-testimonials__body">
+                    {%- if rating > 0 -%}
+                      <div class="fa-testimonials__rating" role="img" aria-label="{{ rating }} out of 5 stars">
+                        {%- for i in (1..5) -%}
+                          <span class="fa-testimonials__star{% if i > rating %} fa-testimonials__star--empty{% endif %}">{% render 'fa-icons-testimonials', icon: 'star' %}</span>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.text != blank -%}
+                      <div class="fa-testimonials__text">
+                        <p>{{ block.settings.text | escape | newline_to_br }}</p>
+                      </div>
+                    {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </article>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <button type="button" class="fa-testimonials__arrow fa-testimonials__arrow--prev" data-prev aria-controls="fa-testimonials-track-{{ section.id }}" aria-label="Previous reviews">
+          {% render 'fa-icon', icon: 'chevron' %}
+        </button>
+        <button type="button" class="fa-testimonials__arrow fa-testimonials__arrow--next" data-next aria-controls="fa-testimonials-track-{{ section.id }}" aria-label="Next reviews">
+          {% render 'fa-icon', icon: 'chevron' %}
+        </button>
+      </fa-testimonials-carousel>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Felice testimonials",
+  "tag": "div",
+  "class": "fa-testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What people are saying"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pulled live from Google. 5.0 across 42 reviews, filterable by what the patient came in for.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_google",
+      "label": "Show Google logo on reviews",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "google_url",
+      "label": "Google reviews link",
+      "info": "The Google logo on each review links here."
+    },
+    {
+      "type": "html",
+      "id": "widget_code",
+      "label": "Google reviews widget code",
+      "info": "Optional. Paste a live Google reviews widget embed (e.g. Elfsight, Trustindex) to replace the review cards. A reviews app block does the same."
+    },
+    {
+      "type": "select",
+      "id": "arrow_size",
+      "label": "Carousel arrow size",
+      "options": [
+        { "value": "standard", "label": "Standard (32px)" },
+        { "value": "large", "label": "Large (38px)" }
+      ],
+      "default": "standard",
+      "info": "Desktop and tablet. Mobile arrows are 32px."
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Review card style",
+      "options": [
+        { "value": "rounded", "label": "Rounded corners, garnet stars" },
+        { "value": "square", "label": "Square corners, clay stars" }
+      ],
+      "default": "rounded",
+      "info": "Desktop and tablet. Square is the homepage V6 design."
+    },
+    {
+      "type": "text",
+      "id": "mobile_background_asset",
+      "label": "Bundled mobile background file",
+      "info": "Theme asset used as the mobile background texture (cover-fitted). Blank uses the standard mobile texture."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_botanical",
+      "label": "Show botanical illustration",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "botanical_style",
+      "label": "Botanical style",
+      "options": [
+        { "value": "standard", "label": "Large (small on mobile)" },
+        { "value": "small", "label": "Small" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "botanical_display",
+      "label": "Show botanical on",
+      "options": [
+        { "value": "all", "label": "All screen sizes" },
+        { "value": "desktop", "label": "Desktop and tablet only" },
+        { "value": "mobile", "label": "Mobile only" }
+      ],
+      "default": "all",
+      "info": "Mobile = screens up to 899px wide."
+    },
+    {
+      "type": "checkbox",
+      "id": "botanical_overlap",
+      "label": "Let the botanical rise into the section above",
+      "info": "Turn off to cut it at the top edge of this section.",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Top and bottom padding (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Reviewer photo",
+          "info": "Shown as a 48px circle."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Bundled image file",
+          "info": "Theme asset used when no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Sophia Mart"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "January 25, 2024"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review",
+          "default": "Dr. Felice is fantastic! Her acupuncture and cupping sessions are healing, gentle, and effective. She's compassionate, skilled, and stylish. Every visit feels like a refreshing reset for body and soul."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Felice testimonials",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": { "fallback_asset": "fa-testimonials-avatar-1.jpg", "name": "Sophia Mart", "date": "January 25, 2024" }
+        },
+        {
+          "type": "review",
+          "settings": { "fallback_asset": "fa-testimonials-avatar-2.jpg", "name": "Michael Lee", "date": "December 10, 2023" }
+        },
+        {
+          "type": "review",
+          "settings": { "fallback_asset": "fa-testimonials-avatar-1.jpg", "name": "Sophia Mart", "date": "January 25, 2024" }
+        },
+        {
+          "type": "review",
+          "settings": { "fallback_asset": "fa-testimonials-avatar-2.jpg", "name": "Michael Lee", "date": "December 10, 2023" }
+        },
+        {
+          "type": "review",
+          "settings": { "fallback_asset": "fa-testimonials-avatar-1.jpg", "name": "Sophia Mart", "date": "January 25, 2024" }
+        },
+        {
+          "type": "review",
+          "settings": { "fallback_asset": "fa-testimonials-avatar-2.jpg", "name": "Michael Lee", "date": "December 10, 2023" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
